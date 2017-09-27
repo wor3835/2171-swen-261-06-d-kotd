@@ -14,6 +14,8 @@ microframework.
 
 - George-Edward Pinal
 
+- William Raffaelle
+
 ## Prerequisites
 
 - Java 8
