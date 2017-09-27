@@ -10,6 +10,7 @@ microframework.
 
 - Kerri Zalba
 
+- Robert Kurdziel
 
 ## Prerequisites
 
