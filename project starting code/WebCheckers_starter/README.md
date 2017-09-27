@@ -8,7 +8,7 @@ microframework.
 
 - AJ Nagshima
 
--
+- George-Edward Pinal
 
 
 ## Prerequisites
