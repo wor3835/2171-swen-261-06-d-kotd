@@ -10,6 +10,8 @@ microframework.
 
 - Kerri Zalba
 
+- George-Edward Pinal
+
 
 ## Prerequisites
 
