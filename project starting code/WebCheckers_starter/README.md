@@ -12,6 +12,8 @@ microframework.
 
 - Robert Kurdziel
 
+- George-Edward Pinal
+
 ## Prerequisites
 
 - Java 8
