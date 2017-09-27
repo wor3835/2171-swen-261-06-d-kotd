@@ -8,7 +8,7 @@ microframework.
 
 - AJ Nagshima
 
--
+- Kerri Zalba
 
 
 ## Prerequisites
