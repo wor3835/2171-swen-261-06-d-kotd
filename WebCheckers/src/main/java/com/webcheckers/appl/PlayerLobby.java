@@ -1,6 +1,6 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model;
+import com.webcheckers.model.Player;
 
 import java.util.ArrayList;
 /**
@@ -10,7 +10,7 @@ public class PlayerLobby {
     ArrayList<Player> playerList = new ArrayList<Player>();
 
     public Player playerSignin(){
-        
+        return new Player();
     }
 
     public void add(Player player){

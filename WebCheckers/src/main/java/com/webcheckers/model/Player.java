@@ -6,4 +6,6 @@ package com.webcheckers.model;
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */
 public class Player {
+    public Player()
+    {}
 }
