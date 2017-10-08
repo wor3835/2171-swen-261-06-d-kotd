@@ -12,7 +12,6 @@
     
     <div class="navigation">
           <a href="/">my home</a>
-          <a href="/signin">signin</a>
     </div>
     
     <div class="body">
@@ -20,8 +19,12 @@
       <br/><br/>
       <#if currentPlayer??>
             <a href="/signout">sign out [${currentPlayer.name}]</a>
+            <br/>
+            <u>Players Online<u/>
       <#else>
             <a href="/signin">sign in</a>
+            <br/>
+            <u>Players Online<u/>
       </#if>
     </div>
     
