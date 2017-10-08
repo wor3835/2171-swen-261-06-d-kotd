@@ -17,6 +17,9 @@
 
     <div class="body">
       <p>Please sign-in if you already have an existing account</p>
+      <br/>
+      UserName: <input type="text" name="username"><br/>
+      <button type="button">Enter</button>
     </div>
 
   </div>
