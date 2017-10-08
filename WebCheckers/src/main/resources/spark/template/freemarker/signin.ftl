@@ -11,7 +11,8 @@
     <h1>Sign-In</h1>
 
     <div class="navigation">
-      <a href="/">my signin</a>
+          <a href="/">my home</a>
+          <a href="/">signin</a>
     </div>
     <div class="body">
       <p>Please sign-in if you already have an existing account</p>
