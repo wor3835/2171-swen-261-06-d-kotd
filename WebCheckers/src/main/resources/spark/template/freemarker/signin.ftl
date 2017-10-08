@@ -12,7 +12,7 @@
 
     <div class="navigation">
           <a href="/">my home</a>
-          <a href="/">signin</a>
+          <a href="/signin">signin</a>
     </div>
     <div class="body">
       <p>Please sign-in if you already have an existing account</p>
