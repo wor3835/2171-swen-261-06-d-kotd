@@ -23,7 +23,7 @@ public class PostSignInRoute implements Route {
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
 
-    PostSignInRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+    public PostSignInRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         Objects.requireNonNull(playerLobby, "templateEngine must not be null");
@@ -50,12 +50,12 @@ public class PostSignInRoute implements Route {
 
         playerLobby.playerSignin(name);
 
-        // goes back to home page
+        // goes back to sign in page
 
         LOG.finer("PostSignInRoute is invoked.");
         //
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome" + name);
-        return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+        vm.put("title", "Welcome " + name);
+        return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
     }
 }
