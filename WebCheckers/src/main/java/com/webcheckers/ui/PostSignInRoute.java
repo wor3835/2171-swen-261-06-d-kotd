@@ -19,9 +19,19 @@ public class PostSignInRoute implements Route {
 
     static final String NAME = "myName";
 
-    private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
+
+    PostSignInRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+        // validation
+        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
+        Objects.requireNonNull(playerLobby, "templateEngine must not be null");
+        //
+        this.templateEngine = templateEngine;
+        this.playerLobby = playerLobby;
+        LOG.config("PostSignInRoute is initialized.");
+    }
 
     /**
      * Render the WebCheckers SignIn page.
@@ -36,26 +46,16 @@ public class PostSignInRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) {
-        //final Session session = request.session();
         final String name = request.queryParams(NAME);
 
-        Player player = playerLobby.playerSignin(name); // sign in and store player
+        playerLobby.playerSignin(name);
 
-        LOG.finer("GetHomeRoute is invoked.");
+        // goes back to home page
+
+        LOG.finer("PostSignInRoute is invoked.");
         //
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome! " + name);
+        vm.put("title", "Welcome" + name);
         return templateEngine.render(new ModelAndView(vm , "home.ftl"));
-    }
-
-    public PostSignInRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
-        // validation
-        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-        //
-        this.templateEngine = templateEngine;
-        //
-        LOG.config("PostSignInRoute is initialized.");
-
-        this.playerLobby = playerLobby;
     }
 }
