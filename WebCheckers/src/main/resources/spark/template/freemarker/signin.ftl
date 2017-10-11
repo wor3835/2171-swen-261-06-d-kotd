@@ -15,11 +15,13 @@
     </div>
 
     <div class="body">
+    <form action="/signin" method="POST">
       <p>Please sign-in if you already have an existing account</p>
       <br/>
-      User Name: <input type="text" name="username">
+      User Name: <input name = "username" />
       <br/>
-      <button type="button">Enter</button>
+      <button type="submit">Enter</button>
+    </form>
     </div>
 
   </div>

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class PostSignInRoute implements Route {
 
-    static final String NAME = "myName";
+    static final String NAME = "username";
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private final TemplateEngine templateEngine;
