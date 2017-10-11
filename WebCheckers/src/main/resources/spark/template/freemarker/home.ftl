@@ -19,13 +19,11 @@
       <br/><br/>
       <#if currentPlayer??>
             <a href="/signout">sign out [${currentPlayer.name}]</a>
-            <br/>
-            <u>Players Online<u/>
       <#else>
             <a href="/signin">sign in</a>
-            <br/>
-            <u>Players Online<u/>
       </#if>
+      <b/>
+      <u>Players Online<u/>
     </div>
     
   </div>
