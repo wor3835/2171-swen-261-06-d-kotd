@@ -13,9 +13,15 @@ public class Player {
 
     public String getName(){return name;}
 
+    @Override
     public boolean equals(Object o){
         if(!(o instanceof Player))
             return false;
-        return ((Player)o).getName().equals(getName());
+        return ((Player)o).getName().equals(this.getName());
+    }
+
+    @Override
+    public int hashCode(){
+        return this.getName().hashCode();
     }
 }
