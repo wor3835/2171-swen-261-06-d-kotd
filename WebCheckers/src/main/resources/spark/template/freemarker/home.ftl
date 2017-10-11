@@ -22,7 +22,7 @@
       <#else>
             <a href="/signin">sign in</a>
       </#if>
-      <b/>
+      <br/>
       <u>Players Online<u/>
     </div>
     
