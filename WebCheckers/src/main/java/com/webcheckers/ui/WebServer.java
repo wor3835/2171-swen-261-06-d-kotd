@@ -58,6 +58,8 @@ public class WebServer {
 
   public static final String SIGN_URL = "/signin";
 
+  public static final String SIGN_OUT_URL = "/signout";
+
   //
   // Attributes
   //
@@ -149,6 +151,9 @@ public class WebServer {
     get(SIGN_URL, new GetSignInRoute(templateEngine));
 
     post(SIGN_URL,  new PostSignInRoute(templateEngine, playerLobby));
+
+    // Shows the Checkers game Home page.
+    get(SIGN_OUT_URL, new GetSignOutRoute(templateEngine));
 
     //
     LOG.config("WebServer is initialized.");
