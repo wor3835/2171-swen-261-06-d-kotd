@@ -47,15 +47,22 @@ public class PostSignInRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         final String name = request.queryParams(NAME);
+        if(name.matches("[A-Za-z0-9]*")) {
+            playerLobby.playerSignin(name);
 
-        playerLobby.playerSignin(name);
+            // goes back to sign in page
 
-        // goes back to sign in page
+
+            //
+            Map<String, Object> vm = new HashMap<>();
+            vm.put("title", "Welcome " + name);
+            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        }
 
         LOG.finer("PostSignInRoute is invoked.");
-        //
+
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome " + name);
-        return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
+        vm.put("title", "Sign in to Play!");
+        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
 }
