@@ -21,4 +21,18 @@ public class PlayerLobby {
         return playerList.size();
     }
 
+    public Player removePlayer(Player p){
+        int i = 0;
+        for(i = 0; i < playerList.size(); i++){
+            if(playerList.get(i).equals(p)){
+                playerList.remove(i);
+                break;
+            }
+        }
+        if(i == playerList.size())
+            return null;
+        else
+            return p;
+    }
+
 }

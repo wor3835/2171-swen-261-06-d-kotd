@@ -13,4 +13,9 @@ public class Player {
 
     public String getName(){return name;}
 
+    public boolean equals(Object o){
+        if(!(o instanceof Player))
+            return false;
+        return ((Player)o).getName().equals(getName());
+    }
 }
