@@ -22,6 +22,7 @@ public class GetSignInRoute implements Route {
     private final TemplateEngine templateEngine;
 
     static final String PLAYER_NAME_USED_ATTR = "playerExists";
+    static final String VIEW_NAME = "signin.ftl";
 
     /**
      * Create the Spark Route (UI controller) for the
@@ -56,7 +57,7 @@ public class GetSignInRoute implements Route {
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign in to play!");
-        return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
+        return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
     }
 
 }

@@ -61,12 +61,12 @@ public class PostSignInRoute implements Route {
             vm.put("title", "Welcome " + name);
             LOG.finer("Player " +p.getName()+" signed in");
             vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, true);
-            return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+            return templateEngine.render(new ModelAndView(vm, GetHomeRoute.VIEW_NAME));
         }
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign in to Play!");
         vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
-        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
     }
 }
