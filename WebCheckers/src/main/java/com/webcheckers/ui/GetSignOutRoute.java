@@ -1,6 +1,6 @@
 package com.webcheckers.ui;
 
-<<<<<<< HEAD
+import spark.TemplateEngine;<<<<<<< HEAD
 =======
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
