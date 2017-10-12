@@ -21,6 +21,8 @@ public class GetSignInRoute implements Route {
 
     private final TemplateEngine templateEngine;
 
+    static final String PLAYER_NAME_USED_ATTR = "playerExists";
+
     /**
      * Create the Spark Route (UI controller) for the
      * {@code GET /signing} HTTP request.
