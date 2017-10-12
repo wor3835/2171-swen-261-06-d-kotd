@@ -35,4 +35,12 @@ public class PlayerLobby {
             return p;
     }
 
+    public boolean contains(Player p){
+        for(int i = 0; i < playerList.size(); i++){
+            if(playerList.get(i).equals(p))
+                return true;
+        }
+        return false;
+    }
+
 }

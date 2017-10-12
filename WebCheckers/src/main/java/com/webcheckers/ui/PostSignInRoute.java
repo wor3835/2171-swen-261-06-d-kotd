@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class PostSignInRoute implements Route {
 
-    static final String NAME = "myName";
+    static final String NAME = "username";
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private final TemplateEngine templateEngine;
@@ -48,14 +48,25 @@ public class PostSignInRoute implements Route {
     public Object handle(Request request, Response response) {
         final String name = request.queryParams(NAME);
 
-        playerLobby.playerSignin(name);
-
-        // goes back to sign in page
-
         LOG.finer("PostSignInRoute is invoked.");
-        //
+        Player p = new Player(name);
+        if(name.matches("[A-Za-z0-9]*") && !playerLobby.contains(p)) {
+            playerLobby.add(p);
+
+            // goes back to sign in page
+
+
+            //
+            Map<String, Object> vm = new HashMap<>();
+            vm.put("title", "Welcome " + name);
+            LOG.finer("Player " +p.getName()+" signed in");
+            vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, true);
+            return templateEngine.render(new ModelAndView(vm, GetHomeRoute.VIEW_NAME));
+        }
+
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome " + name);
-        return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
+        vm.put("title", "Sign in to Play!");
+        vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
+        return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
     }
 }
