@@ -15,6 +15,7 @@ import spark.TemplateEngine;
  * The UI Controller to GET the SignIn page.
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  */
 public class GetSignInRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());

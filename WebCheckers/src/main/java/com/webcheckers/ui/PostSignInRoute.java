@@ -16,6 +16,7 @@ import static spark.Spark.halt;
  * The {@code POST /guess} route handler.
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  */
 public class PostSignInRoute implements Route {
 

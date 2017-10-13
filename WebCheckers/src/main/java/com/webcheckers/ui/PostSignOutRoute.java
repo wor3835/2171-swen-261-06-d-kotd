@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import static spark.Spark.halt;
 /**
  * Created by kzalb on 10/13/2017.
+ * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  */
 public class PostSignOutRoute implements Route {
     static final String NAME = "username";
