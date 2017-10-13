@@ -3,11 +3,13 @@ package com.webcheckers.ui;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.*;
+import static spark.Spark.halt;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
+
 
 /**
  * Created by wor3835 on 10/11/2017.
@@ -45,11 +47,13 @@ public class GetSignOutRoute implements Route {
     public Object handle(Request request, Response response) {
         final Session session = request.session();
         LOG.finer("GetSignOutRoute is invoked.");
-        //
-        Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Sign out to exit");
+
+        playerLobby.removePlayer(session.attribute(GetHomeRoute.PLAYER_KEY));
+        
         session.invalidate();
-        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        response.redirect(WebServer.HOME_URL);
+        halt();
+        return null;
 
     }
 }

@@ -9,16 +9,7 @@ package com.webcheckers.model;
 public class Player {
     private String name;
     public Player(String name) {
-        this.name = name;
-    }
-
-    public Player(){}
-
-    public boolean hasName(){
-        if (name != null)
-            return true;
-        return false;
-    }
+        this.name = name;}
 
     public void setName(String name)
     {
