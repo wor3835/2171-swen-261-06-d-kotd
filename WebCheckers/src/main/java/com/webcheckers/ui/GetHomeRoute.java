@@ -73,10 +73,8 @@ public class GetHomeRoute implements Route {
     if(httpSession.attribute(PLAYER_KEY)!=null)
       vm.put(CUR_PLAYER_ATTR, httpSession.attribute(PLAYER_KEY));
 
-    if(httpSession.attribute(PLAYER_LOBBY_KEY)==null) {
-      httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
-      vm.put(PLAYER_LOBBY_KEY, playerLobby);
-    }
+    httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
+    vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
 
 
     LOG.finer("GetHomeRoute is invoked.");

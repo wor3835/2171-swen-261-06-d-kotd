@@ -27,7 +27,7 @@
                   <br/>
                   List of Players
             <#else>
-            ${playerLobby.getPlayerCount}
+            ${playerLobby.getPlayerCount()}
             </#if>
     </div>
     
