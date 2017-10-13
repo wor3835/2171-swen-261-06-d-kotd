@@ -22,7 +22,13 @@
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
       <br/><br/>
-      <u>Players Online<u/>
+      <u>Players Online: <u/>
+      <#if currentPlayer??>
+                  <br/>
+                  List of Players
+            <#else>
+
+            </#if>
     </div>
     
   </div>
