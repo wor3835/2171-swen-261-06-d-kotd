@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.*;
@@ -11,28 +12,24 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import static spark.Spark.halt;
-
 /**
- * The {@code POST /guess} route handler.
- *
- * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * Created by kzalb on 10/13/2017.
  */
-public class PostSignInRoute implements Route {
-
+public class PostSignOutRoute implements Route {
     static final String NAME = "username";
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
 
-    public PostSignInRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+    public PostSignOutRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         Objects.requireNonNull(playerLobby, "templateEngine must not be null");
         //
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
-        LOG.config("PostSignInRoute is initialized.");
+        LOG.config("PostSignOutRoute is initialized.");
     }
 
     /**
@@ -52,27 +49,25 @@ public class PostSignInRoute implements Route {
 
 
 
-        LOG.finer("PostSignInRoute is invoked.");
-        if(name.matches("[A-Za-z0-9]*") && !playerLobby.contains(name)) {
+        LOG.finer("PostSignOutRoute is invoked.");
+        if(name.matches("[A-Za-z0-9]*") && playerLobby.contains(name)) {
 
             // goes back to sign in page
             final Session session = request.session();
+            final Player player = session.attribute(GetHomeRoute.PLAYER_KEY);
+            player.setName(name);
+            playerLobby.removePlayer(player);
 
-            final Player player = playerLobby.playerSignin(name);
-            session.attribute(GetHomeRoute.PLAYER_KEY, player);
             //
-            LOG.finer("Player " +player.getName()+" signed in");
+            LOG.finer("Player " +player.getName()+" signed out");
             response.redirect(WebServer.HOME_URL);
             halt();
             return null;
         }
 
         Map<String, Object> vm = new HashMap<>();
-        if (playerLobby.contains(name) || !name.matches("[A-Za-z0-9]*")){
-            vm.put("error", "Failed to sign in, try another name");
-        }
-        vm.put("title", "Sign in to Play!");
-        vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
-        return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
+        vm.put("title", "Sign out to end game");
+        vm.put(GetSignOutRoute.PLAYER_NAME_USED_ATTR, false);
+        return templateEngine.render(new ModelAndView(vm, GetSignOutRoute.VIEW_NAME));
     }
 }

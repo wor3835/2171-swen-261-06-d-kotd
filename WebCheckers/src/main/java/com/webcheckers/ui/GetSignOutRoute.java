@@ -19,6 +19,7 @@ public class GetSignOutRoute implements Route {
     private final PlayerLobby playerLobby;
     //private final Player player;
 
+    static final String PLAYER_NAME_USED_ATTR = "playerExists";
     static final String VIEW_NAME = "signin.ftl";
 
     public GetSignOutRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
