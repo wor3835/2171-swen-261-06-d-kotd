@@ -42,10 +42,12 @@ public class GetSignOutRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) {
+        final Session session = request.session();
         LOG.finer("GetSignOutRoute is invoked.");
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign out to exit");
+        session.invalidate();
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
 
     }

@@ -62,6 +62,7 @@ public class PostSignOutRoute implements Route {
             LOG.finer("Player " +player.getName()+" signed out");
             response.redirect(WebServer.HOME_URL);
             halt();
+            session.invalidate();
             return null;
         }
 
