@@ -48,12 +48,12 @@ public class PlayerLobby {
         return false;
     }
 
-    public Player[] getPlayersExcept(Player player){
-        Player players[] = new Player[playerList.size()-1];
+    public String getPlayersExcept(Player player){
+        String players = " ";
         int i = 0;
         for(Player p: playerList){
             if(!p.equals(player)){
-                players[i] = p;
+                players += p;
                 i++;
             }
         }
