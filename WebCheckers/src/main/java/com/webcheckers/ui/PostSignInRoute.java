@@ -54,7 +54,7 @@ public class PostSignInRoute implements Route {
 
 
         LOG.finer("PostSignInRoute is invoked.");
-        if(!name.matches("[A-Za-z0-9]*"))
+        if(!name.matches("[A-Za-z0-9]*") && name.length() > 0)
         {
             Map<String, Object> vm = new HashMap<>();
             vm.put("error", "Name must be alphanumeric, try another name");
