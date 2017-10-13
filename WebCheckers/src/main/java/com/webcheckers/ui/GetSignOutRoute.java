@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by wor3835 on 10/11/2017.
+ * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  */
 public class GetSignOutRoute implements Route {
 
