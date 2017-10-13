@@ -53,8 +53,22 @@ public class PostSignInRoute implements Route {
 
 
         LOG.finer("PostSignInRoute is invoked.");
-        if(name.matches("[A-Za-z0-9]*") && !playerLobby.contains(name)) {
-
+        if(!name.matches("[A-Za-z0-9]*"))
+        {
+            Map<String, Object> vm = new HashMap<>();
+            vm.put("error", "Name must be alphanumeric, try another name");
+            vm.put("title", "Sign in to Play!");
+            vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
+            return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
+        }
+        else if(playerLobby.contains(name)){
+            Map<String, Object> vm = new HashMap<>();
+            vm.put("error", "Name taken, try another name");
+            vm.put("title", "Sign in to Play!");
+            vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
+            return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
+        }
+        else{
             // goes back to sign in page
             final Session session = request.session();
 
@@ -66,13 +80,5 @@ public class PostSignInRoute implements Route {
             halt();
             return null;
         }
-
-        Map<String, Object> vm = new HashMap<>();
-        if (playerLobby.contains(name) || !name.matches("[A-Za-z0-9]*")){
-            vm.put("error", "Failed to sign in, try another name");
-        }
-        vm.put("title", "Sign in to Play!");
-        vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
-        return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
     }
 }
