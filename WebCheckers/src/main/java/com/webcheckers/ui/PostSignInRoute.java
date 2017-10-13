@@ -69,6 +69,9 @@ public class PostSignInRoute implements Route {
         }
 
         Map<String, Object> vm = new HashMap<>();
+        if (playerLobby.contains(name) || !name.matches("[A-Za-z0-9]*")){
+            vm.put("error", "Failed to sign in, try another name");
+        }
         vm.put("title", "Sign in to Play!");
         vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
         return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));

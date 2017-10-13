@@ -18,6 +18,7 @@
     <div class="body">
         <form action="/signin" method="POST">
             <p>Please sign-in if you already have an existing account</p>
+            <i><font color=red>${error}</font></i>
             <br/>
             User Name: <input name = "username"/>
             <br/>

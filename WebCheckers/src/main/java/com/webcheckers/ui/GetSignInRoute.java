@@ -57,6 +57,7 @@ public class GetSignInRoute implements Route {
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign in to play!");
+        vm.put("error", " ");
         return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
     }
 
