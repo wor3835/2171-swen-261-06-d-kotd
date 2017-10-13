@@ -50,19 +50,19 @@ public class PostSignInRoute implements Route {
     public Object handle(Request request, Response response) {
         final String name = request.queryParams(NAME);
 
+
+
         LOG.finer("PostSignInRoute is invoked.");
-        Player p = new Player(name);
-        if(name.matches("[A-Za-z0-9]*") && !playerLobby.contains(p)) {
-            playerLobby.add(p);
+        if(name.matches("[A-Za-z0-9]*") && !playerLobby.contains(name)) {
 
             // goes back to sign in page
-
+            final Session session = request.session();
+            final Player player = session.attribute(GetHomeRoute.PLAYER_KEY);
+            player.setName(name);
+            playerLobby.add(player);
 
             //
-            Map<String, Object> vm = new HashMap<>();
-            vm.put("title", "Welcome " + name);
-            LOG.finer("Player " +p.getName()+" signed in");
-            vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, true);
+            LOG.finer("Player " +player.getName()+" signed in");
             response.redirect(WebServer.HOME_URL);
             halt();
             return null;

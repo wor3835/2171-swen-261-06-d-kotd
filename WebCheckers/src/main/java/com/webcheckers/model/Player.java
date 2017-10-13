@@ -13,13 +13,18 @@ public class Player {
 
     public Player(){}
 
+    public boolean hasName(){
+        if (name != null)
+            return true;
+        return false;
+    }
+
     public void setName(String name)
     {
         if(this.name == null)
             this.name = name;
         else
             throw new RuntimeException("Player already has name");
-
     }
 
     public String getName(){return name;}
