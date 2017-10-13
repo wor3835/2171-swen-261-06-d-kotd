@@ -26,6 +26,9 @@ public class GetHomeRoute implements Route {
 
   static final String VIEW_NAME = "home.ftl";
   static final String PLAYER_KEY = "player";
+
+  static final String CUR_PLAYER_ATTR = "currentPlayer";
+
   /**
    * Create the Spark Route (UI controller) for the
    * {@code GET /} HTTP request.
@@ -57,14 +60,19 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     final Session httpSession = request.session();
 
+    Map<String, Object> vm = new HashMap<>();
+    vm.put("title", "Welcome!");
+
     if(httpSession.isNew()){
       httpSession.attribute(PLAYER_KEY, new Player());
     }
+    Player player = httpSession.attribute(PLAYER_KEY);
+    if(player.hasName())
+      vm.put(CUR_PLAYER_ATTR, player);
 
     LOG.finer("GetHomeRoute is invoked.");
     //
-    Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }
 
