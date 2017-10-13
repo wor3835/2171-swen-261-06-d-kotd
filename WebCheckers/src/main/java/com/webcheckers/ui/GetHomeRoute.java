@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -23,11 +24,14 @@ public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private final TemplateEngine templateEngine;
+  private final PlayerLobby playerLobby;
 
   static final String VIEW_NAME = "home.ftl";
   static final String PLAYER_KEY = "player";
+  static final String PLAYER_LOBBY_KEY = "playerLobby";
 
   static final String CUR_PLAYER_ATTR = "currentPlayer";
+
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -36,11 +40,12 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine) {
+  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
+    this.playerLobby = playerLobby;
     //
     LOG.config("GetHomeRoute is initialized.");
   }
