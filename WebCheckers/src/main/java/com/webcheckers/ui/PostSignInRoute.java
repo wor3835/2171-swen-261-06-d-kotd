@@ -57,10 +57,9 @@ public class PostSignInRoute implements Route {
 
             // goes back to sign in page
             final Session session = request.session();
-            final Player player = session.attribute(GetHomeRoute.PLAYER_KEY);
-            player.setName(name);
-            playerLobby.add(player);
 
+            final Player player = playerLobby.playerSignin(name);
+            session.attribute(GetHomeRoute.PLAYER_KEY, player);
             //
             LOG.finer("Player " +player.getName()+" signed in");
             response.redirect(WebServer.HOME_URL);
