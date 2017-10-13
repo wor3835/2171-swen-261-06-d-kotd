@@ -10,6 +10,9 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
+import spark.Session;
+
+import com.webcheckers.model.Player;
 
 /**
  * The UI Controller to GET the Home page.
@@ -22,6 +25,7 @@ public class GetHomeRoute implements Route {
   private final TemplateEngine templateEngine;
 
   static final String VIEW_NAME = "home.ftl";
+  static final String PLAYER_KEY = "player";
   /**
    * Create the Spark Route (UI controller) for the
    * {@code GET /} HTTP request.
@@ -51,6 +55,12 @@ public class GetHomeRoute implements Route {
    */
   @Override
   public Object handle(Request request, Response response) {
+    final Session httpSession = request.session();
+
+    if(httpSession.isNew()){
+      httpSession.attribute(PLAYER_KEY, new Player());
+    }
+
     LOG.finer("GetHomeRoute is invoked.");
     //
     Map<String, Object> vm = new HashMap<>();

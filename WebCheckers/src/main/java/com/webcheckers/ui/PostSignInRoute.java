@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import static spark.Spark.halt;
+
 /**
  * The {@code POST /guess} route handler.
  *
@@ -61,7 +63,9 @@ public class PostSignInRoute implements Route {
             vm.put("title", "Welcome " + name);
             LOG.finer("Player " +p.getName()+" signed in");
             vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, true);
-            return templateEngine.render(new ModelAndView(vm, GetHomeRoute.VIEW_NAME));
+            response.redirect(WebServer.HOME_URL);
+            halt();
+            return null;
         }
 
         Map<String, Object> vm = new HashMap<>();

@@ -6,9 +6,20 @@ package com.webcheckers.model;
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */
 public class Player {
-    String name;
+    private String name;
     public Player(String name) {
         this.name = name;
+    }
+
+    public Player(){}
+
+    public void setName(String name)
+    {
+        if(this.name == null)
+            this.name = name;
+        else
+            throw new RuntimeException("Player already has name");
+
     }
 
     public String getName(){return name;}

@@ -67,6 +67,7 @@ public class WebServer {
   private final TemplateEngine templateEngine;
   private final Gson gson;
   private final PlayerLobby playerLobby;
+  //private final Player player;
 
   //
   // Constructor
@@ -153,7 +154,7 @@ public class WebServer {
     post(SIGN_URL,  new PostSignInRoute(templateEngine, playerLobby));
 
     // Shows the Checkers game Home page.
-    get(SIGN_OUT_URL, new GetSignOutRoute(templateEngine));
+    get(SIGN_OUT_URL, new GetSignOutRoute(templateEngine, playerLobby));
 
     //
     LOG.config("WebServer is initialized.");
