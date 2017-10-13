@@ -12,6 +12,7 @@ public class PlayerLobby {
     ArrayList<Player> playerList = new ArrayList<Player>();
 
     public Player playerSignin(String name){
+
         Player p = new Player(name);
         playerList.add(p);
         return p;
