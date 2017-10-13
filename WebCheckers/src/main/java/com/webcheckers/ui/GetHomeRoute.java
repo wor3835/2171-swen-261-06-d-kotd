@@ -65,11 +65,16 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     final Session httpSession = request.session();
 
+
+
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
 
     if(httpSession.attribute(PLAYER_KEY)!=null)
       vm.put(CUR_PLAYER_ATTR, httpSession.attribute(PLAYER_KEY));
+    if(httpSession.attribute(PLAYER_LOBBY_KEY)==null)
+      httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
+
 
     LOG.finer("GetHomeRoute is invoked.");
     //

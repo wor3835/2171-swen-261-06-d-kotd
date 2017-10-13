@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by arthu on 10/8/2017.
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class PlayerLobby {
     ArrayList<Player> playerList = new ArrayList<Player>();
