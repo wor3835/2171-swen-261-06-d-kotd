@@ -35,9 +35,9 @@ public class PlayerLobby {
             return p;
     }
 
-    public boolean contains(Player p){
+    public boolean contains(String s){
         for(int i = 0; i < playerList.size(); i++){
-            if(playerList.get(i).equals(p))
+            if(playerList.get(i).getName().equals(s))
                 return true;
         }
         return false;
