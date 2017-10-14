@@ -53,7 +53,7 @@ public class PlayerLobby {
         int i = 0;
         for(Player p: playerList){
             if(!p.equals(player)){
-                players += p.getName() + " ";
+                players += "<a href='/game'>" + p.getName() + "</a>" + "\n";
                 i++;
             }
         }
