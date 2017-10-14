@@ -10,6 +10,8 @@ package com.webcheckers.model;
 public class Player {
     private boolean inGame = false;
     private String name;
+    private Game game;
+
     public Player(String name) {
         this.name = name;}
 
@@ -27,11 +29,9 @@ public class Player {
         return this.inGame;
     }
 
-    public void switchInGame(){
-        if (this.inGame == true)
-            this.inGame = false;
-        else
-            this.inGame = true;
+    public void assignGame(Game game){
+        this.game = game;
+        inGame = true;
     }
 
     @Override
