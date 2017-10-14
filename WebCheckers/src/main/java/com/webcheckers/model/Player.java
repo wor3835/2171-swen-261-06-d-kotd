@@ -27,7 +27,7 @@ public class Player {
         return this.inGame;
     }
 
-    public void setInGame(){
+    public void switchInGame(){
         if (this.inGame == true)
             this.inGame = false;
         else
