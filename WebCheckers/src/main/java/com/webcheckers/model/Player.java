@@ -8,12 +8,14 @@ package com.webcheckers.model;
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class Player {
-    private boolean inGame = false;
+    private boolean inGame;
     private String name;
     private Game game;
 
     public Player(String name) {
-        this.name = name;}
+        this.name = name;
+        this.inGame = false;
+    }
 
     public void setName(String name)
     {
