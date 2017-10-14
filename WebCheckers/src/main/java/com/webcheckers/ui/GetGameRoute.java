@@ -67,8 +67,6 @@ public class GetGameRoute implements Route {
     public Object handle(Request request, Response response) {
         final Session httpSession = request.session();
 
-
-
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
 

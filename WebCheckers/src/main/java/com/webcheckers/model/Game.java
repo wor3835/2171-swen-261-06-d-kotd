@@ -13,10 +13,16 @@ public class Game {
     Player p2;
     List<Player> spectators = new ArrayList<>();
 
-    public Game(Player p1, Player p2){
+    public boolean Game(Player p1, Player p2){
+        if(p2.isInGame()) {
+            return false;
+        }
         this.p1 = p1;
         this.p2 = p2;
         p1.assignGame(this);
         p2.assignGame(this);
+        p1.isInGame();
+        p2.isInGame();
+        return true;
     }
 }
