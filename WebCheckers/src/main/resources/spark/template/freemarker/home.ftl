@@ -26,7 +26,7 @@
       <#if currentPlayer??>
                   <br/>
                   List of Players:
-                  ${playerLobby.getPlayersExcept(currentPlayer)}
+                  <p id = "player" onclick ="" >${playerLobby.getPlayersExcept(currentPlayer)}</p>
             <#else>
             ${playerLobby.getPlayerCount()}
             </#if>
