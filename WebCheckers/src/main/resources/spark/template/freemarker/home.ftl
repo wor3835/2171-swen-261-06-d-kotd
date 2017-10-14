@@ -25,7 +25,8 @@
       <u>Players Online: <u/>
       <#if currentPlayer??>
                   <br/>
-                  List of Players
+                  List of Players:
+                  ${playerLobby.getPlayersExcept(currentPlayer)}
             <#else>
             ${playerLobby.getPlayerCount()}
             </#if>

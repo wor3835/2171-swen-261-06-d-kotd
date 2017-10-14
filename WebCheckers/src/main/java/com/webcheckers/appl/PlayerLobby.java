@@ -53,7 +53,7 @@ public class PlayerLobby {
         int i = 0;
         for(Player p: playerList){
             if(!p.equals(player)){
-                players += p;
+                players += p.getName() + " ";
                 i++;
             }
         }
