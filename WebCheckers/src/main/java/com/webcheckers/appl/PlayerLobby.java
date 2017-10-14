@@ -40,6 +40,14 @@ public class PlayerLobby {
             return p;
     }
 
+    public Player pullByHashCode(int hashCode){
+        for(int i = 0; i < playerList.size(); i++){
+            if(playerList.get(i).hashCode() == hashCode)
+                return playerList.get(i);
+        }
+        throw new RuntimeException("No Player found with hashcode: "+hashCode);
+    }
+
     public boolean contains(String s){
         for(int i = 0; i < playerList.size(); i++){
             if(playerList.get(i).getName().equals(s))
