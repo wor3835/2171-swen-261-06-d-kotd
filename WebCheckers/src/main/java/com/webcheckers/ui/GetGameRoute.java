@@ -38,11 +38,11 @@ public class GetGameRoute implements Route {
     static final String WHITE_PLAYER = "whitePlayer";
     static final String ACTIVE_COLOR = "activeColor";
 
-    public enum ViewMode {
+    private enum ViewMode {
         PLAY, SPECTATOR, REPLAY
     }
 
-    public enum activeColor {
+    private enum activeColor {
         RED, WHITE
     }
 
@@ -91,6 +91,15 @@ public class GetGameRoute implements Route {
             httpSession.attribute(BOARD_VIEW_KEY, new BoardView());
         }
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
+
+        httpSession.attribute(VIEW_MODE, ViewMode.PLAY);
+        vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
+
+        httpSession.attribute(CUR_PLAYER_ATTR, RED_PLAYER);
+        vm.put(CUR_PLAYER_ATTR, httpSession.attribute(CUR_PLAYER_ATTR));
+
+        httpSession.attribute(ACTIVE_COLOR, activeColor.RED);
+        vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
 
         /*
         httpSession.attribute(PLAYER_KEY);
