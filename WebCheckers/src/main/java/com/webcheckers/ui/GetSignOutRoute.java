@@ -49,7 +49,7 @@ public class GetSignOutRoute implements Route {
         final Session session = request.session();
         LOG.finer("GetSignOutRoute is invoked.");
 
-        playerLobby.removePlayer(session.attribute(GetHomeRoute.PLAYER_KEY));
+        playerLobby.removePlayer(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         
         session.invalidate();
         response.redirect(WebServer.HOME_URL);

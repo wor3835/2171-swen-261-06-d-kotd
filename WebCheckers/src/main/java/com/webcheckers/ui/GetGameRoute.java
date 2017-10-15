@@ -28,11 +28,8 @@ public class GetGameRoute implements Route {
     private final PlayerLobby playerLobby;
 
     static final String VIEW_NAME = "game.ftl";
-    static final String PLAYER_KEY = "player";
-    static final String PLAYER_LOBBY_KEY = "playerLobby";
     static final String BOARD_VIEW_KEY = "board";
 
-    static final String CUR_PLAYER_ATTR = "currentPlayer"; // person viewing this page
     static final String VIEW_MODE = "viewMode"; // mode of the Game View
     static final String RED_PLAYER = "redPlayer";
     static final String WHITE_PLAYER = "whitePlayer";
@@ -81,10 +78,10 @@ public class GetGameRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
 
-        vm.put(CUR_PLAYER_ATTR, httpSession.attribute(PLAYER_KEY));
+        vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 
-        httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
-        vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
+        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
+        vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
         if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
             httpSession.attribute(BOARD_VIEW_KEY, new BoardView());
@@ -94,7 +91,7 @@ public class GetGameRoute implements Route {
         httpSession.attribute(VIEW_MODE, ViewMode.PLAY);
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
 
-        httpSession.attribute(RED_PLAYER, httpSession.attribute(PLAYER_KEY));
+        httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         vm.put(RED_PLAYER, httpSession.attribute(RED_PLAYER));
 
         httpSession.attribute(ACTIVE_COLOR, activeColor.RED);

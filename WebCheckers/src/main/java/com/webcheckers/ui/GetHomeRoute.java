@@ -27,7 +27,6 @@ public class GetHomeRoute implements Route {
   private final PlayerLobby playerLobby;
 
   static final String VIEW_NAME = "home.ftl";
-  static final String PLAYER_KEY = "player";
   static final String PLAYER_LOBBY_KEY = "playerLobby";
 
   static final String CUR_PLAYER_ATTR = "currentPlayer";
@@ -70,8 +69,8 @@ public class GetHomeRoute implements Route {
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
 
-    if(httpSession.attribute(PLAYER_KEY)!=null)
-      vm.put(CUR_PLAYER_ATTR, httpSession.attribute(PLAYER_KEY));
+    if(httpSession.attribute(CUR_PLAYER_ATTR)!=null)
+      vm.put(CUR_PLAYER_ATTR, httpSession.attribute(CUR_PLAYER_ATTR));
 
     httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
     vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
