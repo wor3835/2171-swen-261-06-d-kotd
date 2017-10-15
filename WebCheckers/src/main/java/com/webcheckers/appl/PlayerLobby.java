@@ -58,18 +58,6 @@ public class PlayerLobby {
         return false;
     }
 
-    public String getPlayersExcept(Player player){
-        String players = " ";
-        int i = 0;
-        for(Player p: playerList){
-            if(!p.equals(player)){
-                players += "<a href='/game'>" + p.getName() + "</a>" + "\n";
-                i++;
-            }
-        }
-        return players;
-    }
-
     public Iterator<Player> iterator(){
         return playerList.iterator();
     }

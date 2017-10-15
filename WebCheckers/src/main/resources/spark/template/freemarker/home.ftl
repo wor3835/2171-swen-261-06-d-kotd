@@ -22,18 +22,17 @@
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
       <br/><br/>
-      <u>Players Online: <u/>
+
       <#if currentPlayer??>
+                  <u>List of Players:<u/>
                   <br/>
-                  List of Players:
-                  <p id = "player" onclick ="" >${playerLobby.getPlayersExcept(currentPlayer)}</p>
                   <#list playerLobby.iterator() as player>
                      <#if !player.equals(currentPlayer)>
-                        player: ${player.getName()}
+                        ${player.toString()}
                      </#if>
                   </#list>
             <#else>
-            ${playerLobby.getPlayerCount()}
+               <u>Players Online: ${playerLobby.getPlayerCount()}<u/>
             </#if>
     </div>
     
