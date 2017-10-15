@@ -48,4 +48,8 @@ public class Player {
         return this.getName().hashCode();
     }
 
+    @Override
+    public String toString(){
+        return "<a href='/game' id=\'"+hashCode()+"\'>" +getName() + "</a>" + "\n";
+    }
 }
