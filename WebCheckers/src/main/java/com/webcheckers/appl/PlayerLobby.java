@@ -3,6 +3,8 @@ package com.webcheckers.appl;
 import com.webcheckers.model.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Created by arthu on 10/8/2017.
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
@@ -66,6 +68,10 @@ public class PlayerLobby {
             }
         }
         return players;
+    }
+
+    public Iterator<Player> iterator(){
+        return playerList.iterator();
     }
 
 }

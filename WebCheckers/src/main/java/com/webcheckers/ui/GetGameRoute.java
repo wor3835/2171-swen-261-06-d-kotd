@@ -26,7 +26,6 @@ public class GetGameRoute implements Route {
 
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
-    private final BoardView boardView;
 
     static final String VIEW_NAME = "game.ftl";
     static final String PLAYER_KEY = "player";
@@ -45,13 +44,12 @@ public class GetGameRoute implements Route {
      * @param templateEngine
      *   the HTML template rendering engine
      */
-    public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, BoardView boardView) {
+    public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         //
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
-        this.boardView = boardView;
         //
         LOG.config("GetGameRoute is initialized.");
     }
@@ -80,7 +78,9 @@ public class GetGameRoute implements Route {
         httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
         vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
 
-        httpSession.attribute(BOARD_VIEW_KEY, boardView);
+        if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
+            httpSession.attribute(BOARD_VIEW_KEY, new BoardView());
+        }
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
         /*
