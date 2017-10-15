@@ -71,7 +71,6 @@ public class WebServer {
   private final TemplateEngine templateEngine;
   private final Gson gson;
   private final PlayerLobby playerLobby;
-  private final BoardView boardView;
   //private final Player player;
 
   //
@@ -89,7 +88,7 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby playerLobby, final BoardView boardView) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby playerLobby) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
@@ -97,7 +96,6 @@ public class WebServer {
     this.templateEngine = templateEngine;
     this.gson = gson;
     this.playerLobby = playerLobby;
-    this.boardView = boardView;
   }
 
   //
@@ -163,7 +161,7 @@ public class WebServer {
     get(SIGN_OUT_URL, new GetSignOutRoute(templateEngine, playerLobby));
 
     // Shows the game page
-    get(GAME_URL, new GetGameRoute(templateEngine, playerLobby, boardView));
+    get(GAME_URL, new GetGameRoute(templateEngine, playerLobby));
 
     //
     LOG.config("WebServer is initialized.");

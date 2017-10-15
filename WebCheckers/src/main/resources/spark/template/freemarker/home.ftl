@@ -27,6 +27,11 @@
                   <br/>
                   List of Players:
                   <p id = "player" onclick ="" >${playerLobby.getPlayersExcept(currentPlayer)}</p>
+                  <#list playerLobby.iterator() as player>
+                     <#if !player.equals(currentPlayer)>
+                        player: ${player.getName()}
+                     </#if>
+                  </#list>
             <#else>
             ${playerLobby.getPlayerCount()}
             </#if>
