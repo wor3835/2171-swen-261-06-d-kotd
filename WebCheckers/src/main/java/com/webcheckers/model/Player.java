@@ -36,6 +36,10 @@ public class Player {
         inGame = true;
     }
 
+    public void leaveGame(){
+        this.inGame = false;
+    }
+
     @Override
     public boolean equals(Object o){
         if(!(o instanceof Player))
