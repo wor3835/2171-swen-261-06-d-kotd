@@ -95,22 +95,11 @@ public class GetGameRoute implements Route {
         httpSession.attribute(VIEW_MODE, ViewMode.PLAY);
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
 
-        httpSession.attribute(CUR_PLAYER_ATTR, RED_PLAYER);
-        vm.put(CUR_PLAYER_ATTR, httpSession.attribute(CUR_PLAYER_ATTR));
+        httpSession.attribute(RED_PLAYER, httpSession.attribute(CUR_PLAYER_ATTR));
+        //vm.put(CUR_PLAYER_ATTR, httpSession.attribute(CUR_PLAYER_ATTR));
 
         httpSession.attribute(ACTIVE_COLOR, activeColor.RED);
         vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
-
-        /*
-        httpSession.attribute(PLAYER_KEY);
-        vm.put(CUR_PLAYER_ATTR, httpSession.attribute(RED_PLAYER));
-
-        httpSession.attribute(PLAYER_KEY);
-        vm.put(CUR_PLAYER_ATTR, httpSession.attribute(ACTIVE_COLOR));
-
-        httpSession.attribute(PLAYER_KEY);
-        vm.put(ACTIVE_COLOR, httpSession.attribute(WHITE_PLAYER));
-        */
 
         LOG.finer("GetGameRoute is invoked.");
         //
