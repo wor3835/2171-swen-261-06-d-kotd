@@ -31,12 +31,21 @@ public class GetGameRoute implements Route {
     static final String VIEW_NAME = "game.ftl";
     static final String PLAYER_KEY = "player";
     static final String PLAYER_LOBBY_KEY = "playerLobby";
-    static final String BOARD_VIEW_KEY = "boardView";
+    static final String BOARD_VIEW_KEY = "board";
 
-    static final String CUR_PLAYER_ATTR = "currentPlayer";
+    static final String CUR_PLAYER_ATTR = "currentPlayer"; // person viewing this page
+    static final String VIEW_MODE = "viewMode"; // mode of the Game View
     static final String RED_PLAYER = "redPlayer";
     static final String WHITE_PLAYER = "whitePlayer";
     static final String ACTIVE_COLOR = "activeColor";
+
+    public enum ViewMode {
+        PLAY, SPECTATOR, REPLAY
+    }
+
+    public enum activeColor {
+        RED, WHITE
+    }
 
     /**
      * Create the Spark Route (UI controller) for the
