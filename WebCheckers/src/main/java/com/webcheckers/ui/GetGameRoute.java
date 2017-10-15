@@ -81,8 +81,7 @@ public class GetGameRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
 
-        if(httpSession.attribute(PLAYER_KEY)!=null)
-            vm.put(CUR_PLAYER_ATTR, httpSession.attribute(PLAYER_KEY));
+        vm.put(CUR_PLAYER_ATTR, httpSession.attribute(PLAYER_KEY));
 
         httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
         vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
@@ -95,8 +94,8 @@ public class GetGameRoute implements Route {
         httpSession.attribute(VIEW_MODE, ViewMode.PLAY);
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
 
-        httpSession.attribute(RED_PLAYER, httpSession.attribute(CUR_PLAYER_ATTR));
-        //vm.put(CUR_PLAYER_ATTR, httpSession.attribute(CUR_PLAYER_ATTR));
+        httpSession.attribute(RED_PLAYER, httpSession.attribute(PLAYER_KEY));
+        vm.put(RED_PLAYER, httpSession.attribute(RED_PLAYER));
 
         httpSession.attribute(ACTIVE_COLOR, activeColor.RED);
         vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));

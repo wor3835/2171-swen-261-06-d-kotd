@@ -54,6 +54,6 @@ public class Player {
 
     @Override
     public String toString(){
-        return "<a href='/game' id=\'"+hashCode()+"\'>" +getName() + "</a>" + "\n";
+        return "<a href='/game' onclick=\"playerLobby.pullByHashCode("+hashCode()+")\">" +getName() + "</a>" + "\n";
     }
 }
