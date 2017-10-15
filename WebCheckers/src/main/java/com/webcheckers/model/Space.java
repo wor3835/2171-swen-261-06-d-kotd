@@ -6,10 +6,12 @@ package com.webcheckers.model;
 public class Space{
 
     private int cellIdx;
+    private boolean validSpace;
 
-    public Space(int cellIdx)
+    public Space(int cellIdx, boolean valid)
     {
         this.cellIdx = cellIdx;
+        this.validSpace = valid;
     }
 
     public int getCellIdx()
@@ -19,11 +21,11 @@ public class Space{
 
     public boolean isValid()
     {
-
+        return validSpace;
     }
 
     public Piece getPiece()
     {
-
+        return null;
     }
 }
