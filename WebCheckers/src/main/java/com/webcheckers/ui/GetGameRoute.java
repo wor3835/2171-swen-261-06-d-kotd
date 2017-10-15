@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.BoardView;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -25,10 +26,12 @@ public class GetGameRoute implements Route {
 
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
+    private final BoardView boardView;
 
     static final String VIEW_NAME = "game.ftl";
     static final String PLAYER_KEY = "player";
     static final String PLAYER_LOBBY_KEY = "playerLobby";
+    static final String BOARD_VIEW_KEY = "boardView";
 
     static final String CUR_PLAYER_ATTR = "currentPlayer";
     static final String RED_PLAYER = "redPlayer";
@@ -42,12 +45,13 @@ public class GetGameRoute implements Route {
      * @param templateEngine
      *   the HTML template rendering engine
      */
-    public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+    public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, BoardView boardView) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         //
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
+        this.boardView = boardView;
         //
         LOG.config("GetGameRoute is initialized.");
     }
@@ -75,6 +79,9 @@ public class GetGameRoute implements Route {
 
         httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
         vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
+
+        httpSession.attribute(BOARD_VIEW_KEY, boardView);
+        vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
         /*
         httpSession.attribute(PLAYER_KEY);
