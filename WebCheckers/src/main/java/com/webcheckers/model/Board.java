@@ -5,12 +5,21 @@ package com.webcheckers.model;
  */
 public class Board {
 
+    /**
+     * Creates the board
+     */
     Piece board[][] = new Piece[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
 
+    /**
+     * Constructor for the board
+     */
     public Board(){
         initialize();
     }
 
+    /**
+     * Initializes the board
+     */
     private void initialize(){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
@@ -31,6 +40,12 @@ public class Board {
 
     }
 
+    /**
+     * Checks to see if a piece is on the board
+     * @param i
+     * @param j
+     * @return true or false if the piece is on the board
+     */
     public boolean hasPiece(int i, int j){
         return board[i][j] != null ? true : false;
     }
