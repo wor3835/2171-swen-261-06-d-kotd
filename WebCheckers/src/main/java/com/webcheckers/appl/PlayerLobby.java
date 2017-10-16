@@ -12,6 +12,7 @@ import java.util.Iterator;
  */
 public class PlayerLobby {
     ArrayList<Player> playerList = new ArrayList<Player>();
+    int a;
 
     public Player playerSignin(String name){
 
