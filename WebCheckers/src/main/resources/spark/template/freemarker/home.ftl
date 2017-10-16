@@ -31,8 +31,6 @@
                      <#if !player.equals(currentPlayer)>
                         <a href='/game' name='opponent' >${player.getName()}</a>
                         </br>
-                        ${player.toString()}
-                        </br>
                         </form>
                      </#if>
                   </#list>
