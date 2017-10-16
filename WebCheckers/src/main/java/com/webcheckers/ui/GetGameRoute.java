@@ -35,6 +35,8 @@ public class GetGameRoute implements Route {
     static final String WHITE_PLAYER = "whitePlayer";
     static final String ACTIVE_COLOR = "activeColor";
 
+    static final String OPPONENT_ATTR = "opponent";
+
     private enum ViewMode {
         PLAY, SPECTATOR, REPLAY
     }
@@ -88,23 +90,14 @@ public class GetGameRoute implements Route {
         }
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
-        httpSession.attribute(VIEW_MODE, ViewMode.PLAY);
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
 
-        httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         vm.put(RED_PLAYER, httpSession.attribute(RED_PLAYER));
 
-        httpSession.attribute(WHITE_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
-        /*if(!((Player)httpSession.attribute(WHITE_PLAYER)).isInGame()) {
-            httpSession.attribute(WHITE_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
-            vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
-        } else {
-            LOG.finer("Player selected is already in a game.");
-            response.redirect(WebServer.HOME_URL);
-        }*/
 
-        httpSession.attribute(ACTIVE_COLOR, activeColor.RED);
+        vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
+        
         vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
 
         LOG.finer("GetGameRoute is invoked.");

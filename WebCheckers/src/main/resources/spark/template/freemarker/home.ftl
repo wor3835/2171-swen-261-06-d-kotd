@@ -26,12 +26,16 @@
       <#if currentPlayer??>
                   <u>List of Players:<u/>
                   <br/>
-                  <form>
+
                   <#list playerLobby.iterator() as player>
                      <#if !player.equals(currentPlayer)>
-                        <a href='/game' name='opponent' >${player.getName()}</a>
+                     <form action="/start" method="POST">
+                        <button type="submit" name="opponent" value="${player.getName()}">
+                            Challenge ${player.getName()}
+                        </button>
+
                         </br>
-                        </form>
+                     </form>
                      </#if>
                   </#list>
             <#else>

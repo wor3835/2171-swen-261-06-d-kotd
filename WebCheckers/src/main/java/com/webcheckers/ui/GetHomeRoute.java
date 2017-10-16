@@ -76,6 +76,8 @@ public class GetHomeRoute implements Route {
     vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
 
 
+
+
     LOG.finer("GetHomeRoute is invoked.");
     //
 

@@ -63,7 +63,7 @@ public class WebServer {
 
   public static final String GAME_URL = "/game";
 
-
+  public static final String START_URL = "/start";
   //
   // Attributes
   //
@@ -162,6 +162,8 @@ public class WebServer {
 
     // Shows the game page
     get(GAME_URL, new GetGameRoute(templateEngine, playerLobby));
+
+    post(START_URL, new PostStartRoute(templateEngine, playerLobby));
 
     //
     LOG.config("WebServer is initialized.");
