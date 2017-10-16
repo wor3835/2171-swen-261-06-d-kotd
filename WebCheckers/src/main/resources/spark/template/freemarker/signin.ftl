@@ -22,7 +22,7 @@
             <br/>
             User Name: <input name = "username"/>
             <br/>
-            <button type="submit">Enter</button>
+            <button type="submit" style=border-radius:4px>Enter</button>
         </form>
 
     </div>
