@@ -26,9 +26,13 @@
       <#if currentPlayer??>
                   <u>List of Players:<u/>
                   <br/>
+                  <form>
+                  <input type = "radio">
                   <#list playerLobby.iterator() as player>
                      <#if !player.equals(currentPlayer)>
                         ${player.toString()}
+                        </br>
+                        </form>
                      </#if>
                   </#list>
             <#else>
