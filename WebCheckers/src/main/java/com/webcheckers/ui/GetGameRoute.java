@@ -94,8 +94,13 @@ public class GetGameRoute implements Route {
         httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         vm.put(RED_PLAYER, httpSession.attribute(RED_PLAYER));
 
-        httpSession.attribute(WHITE_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
-        vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
+        if(!((Player)httpSession.attribute(WHITE_PLAYER)).isInGame()) {
+            httpSession.attribute(WHITE_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
+            vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
+        } else {
+            LOG.finer("Player selected is already in a game.");
+            response.redirect(WebServer.HOME_URL);
+        }
 
         httpSession.attribute(ACTIVE_COLOR, activeColor.RED);
         vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
