@@ -7,12 +7,12 @@ package com.webcheckers.model;
  */
 public class Piece {
 
-    private enum Type{
+    static enum Type{
         SINGLE,
         KING
     }
 
-    private enum Color{
+    static enum Color{
         RED,
         WHITE
     }

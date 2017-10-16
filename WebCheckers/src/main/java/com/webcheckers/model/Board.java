@@ -12,7 +12,13 @@ public class Board {
     }
 
     private void initialize(){
-
+        for(int i = 5; i < BoardView.BOARD_LENGTH; i++){
+            for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
+                if((i+j)%2==1){
+                    board[i][j] = new Piece(Piece.Color.RED, Piece.Type.SINGLE);
+                }
+            }
+        }
     }
 
     public boolean hasPiece(int i, int j){

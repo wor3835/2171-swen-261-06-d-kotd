@@ -7,11 +7,13 @@ public class Space{
 
     private int cellIdx;
     private boolean validSpace;
+    private Piece piece;
 
-    public Space(int cellIdx, boolean valid)
+    public Space(int cellIdx, boolean valid, Piece piece)
     {
         this.cellIdx = cellIdx;
         this.validSpace = valid;
+        this.piece = piece;
     }
 
     public int getCellIdx()
@@ -26,6 +28,6 @@ public class Space{
 
     public Piece getPiece()
     {
-        return null;
+        return piece;
     }
 }

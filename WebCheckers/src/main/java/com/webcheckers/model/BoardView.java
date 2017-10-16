@@ -10,11 +10,12 @@ import java.util.List;
 public class BoardView {
     static final int BOARD_LENGTH = 8;
 
+    private Board board = new Board();
 
     public Iterator<Row> iterator(){
         List<Row> rows = new ArrayList<>();
         for(int i = 0; i < BOARD_LENGTH; i++)
-            rows.add(new Row(i));
+            rows.add(new Row(i, board));
         return rows.iterator();
     }
 }
