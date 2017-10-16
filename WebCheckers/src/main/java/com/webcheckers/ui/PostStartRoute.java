@@ -90,6 +90,7 @@ public class PostStartRoute implements Route {
             opponent.setInGame();
         } else {
             LOG.finer("Player selected is already in a game.");
+            httpSession.attribute("err", "Player selected is already in a game, choose another player.");
             response.redirect(WebServer.HOME_URL);
             halt();
             return null;

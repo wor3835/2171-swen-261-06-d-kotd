@@ -21,6 +21,7 @@
     
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
+      <i><font color=red>${error}</font></i>
       <br/><br/>
 
       <#if currentPlayer??>
