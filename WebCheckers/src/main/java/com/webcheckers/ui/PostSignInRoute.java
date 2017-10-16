@@ -21,12 +21,20 @@ import static spark.Spark.halt;
  */
 public class PostSignInRoute implements Route {
 
+    /**
+     * Global variables to keep track of the players, routes, and templates
+     */
     static final String NAME = "username";
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
 
+    /**
+     * Creates the route
+     * @param templateEngine
+     * @param playerLobby
+     */
     public PostSignInRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");

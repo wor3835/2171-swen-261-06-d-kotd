@@ -26,6 +26,10 @@ import static spark.Spark.halt;
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */
 public class PostStartRoute implements Route {
+
+    /**
+     * Global variables to keep track of the players, routes, and templates
+     */
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     private final TemplateEngine templateEngine;
@@ -49,6 +53,11 @@ public class PostStartRoute implements Route {
         RED, WHITE
     }
 
+    /**
+     * Creates the route
+     * @param templateEngine
+     * @param playerLobby
+     */
     public PostStartRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -59,6 +68,13 @@ public class PostStartRoute implements Route {
         LOG.config("PostStartRoute is initialized.");
     }
 
+    /**
+     * Handles the route request and response
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();
 

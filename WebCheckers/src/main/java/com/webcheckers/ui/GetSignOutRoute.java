@@ -18,6 +18,9 @@ import java.util.logging.Logger;
  */
 public class GetSignOutRoute implements Route {
 
+    /**
+     * Global variables to keep track of the players, routes, and templates
+     */
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
@@ -26,6 +29,11 @@ public class GetSignOutRoute implements Route {
     static final String PLAYER_NAME_USED_ATTR = "playerExists";
     static final String VIEW_NAME = "signin.ftl";
 
+    /**
+     * Creates the route
+     * @param templateEngine
+     * @param playerLobby
+     */
     public GetSignOutRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
