@@ -27,9 +27,10 @@
                   <u>List of Players:<u/>
                   <br/>
                   <form>
-                  <input type = "radio">
                   <#list playerLobby.iterator() as player>
                      <#if !player.equals(currentPlayer)>
+                        <a href='/game' name='opponent' >${player.getName()}</a>
+                        </br>
                         ${player.toString()}
                         </br>
                         </form>
