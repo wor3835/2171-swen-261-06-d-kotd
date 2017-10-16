@@ -36,6 +36,11 @@ public class Player {
         inGame = true;
     }
 
+    public void setInGame()
+    {
+        this.inGame = true;
+    }
+
     public void leaveGame(){
         this.inGame = false;
     }

@@ -16,6 +16,8 @@ import spark.Session;
 
 import com.webcheckers.model.Player;
 
+import javax.swing.*;
+
 import static spark.Spark.halt;
 
 /**
@@ -85,6 +87,7 @@ public class PostStartRoute implements Route {
         if(!opponent.isInGame()) {
             httpSession.attribute(WHITE_PLAYER, opponent);
             vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
+            opponent.setInGame();
         } else {
             LOG.finer("Player selected is already in a game.");
             response.redirect(WebServer.HOME_URL);
