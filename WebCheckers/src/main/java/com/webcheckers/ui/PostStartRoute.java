@@ -100,7 +100,8 @@ public class PostStartRoute implements Route {
 
         LOG.finer("GetGameRoute is invoked.");
         //
-
+        if (httpSession.attribute("err") != null)
+            httpSession.removeAttribute("err");
         response.redirect(WebServer.GAME_URL);
         halt();
         return null;
