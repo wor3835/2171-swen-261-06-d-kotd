@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
@@ -25,6 +26,7 @@ public class GetHomeRoute implements Route {
 
   private final TemplateEngine templateEngine;
   private final PlayerLobby playerLobby;
+  private final GameLobby gameLobby;
 
   static final String VIEW_NAME = "home.ftl";
   static final String PLAYER_LOBBY_KEY = "playerLobby";
@@ -39,12 +41,13 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
     this.playerLobby = playerLobby;
+    this.gameLobby = gameLobby;
     //
     LOG.config("GetHomeRoute is initialized.");
   }
@@ -75,7 +78,10 @@ public class GetHomeRoute implements Route {
     httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
     vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
 
+    if(gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR)))
+    {
 
+    }
 
 
     LOG.finer("GetHomeRoute is invoked.");

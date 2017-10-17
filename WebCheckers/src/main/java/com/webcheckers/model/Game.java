@@ -25,4 +25,13 @@ public class Game {
         p2.isInGame();
         return true;
     }
+
+    public Player getP1()
+    {
+        return p1;
+    }
+
+    public Player getP2(){
+        return p2;
+    }
 }
