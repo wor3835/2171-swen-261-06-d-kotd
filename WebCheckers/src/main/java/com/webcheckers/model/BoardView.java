@@ -10,8 +10,13 @@ import java.util.List;
  */
 public class BoardView {
     static final int BOARD_LENGTH = 8;
+    private final Piece.Color color;
+    private Board board;
 
-    private Board board = new Board();
+    public BoardView(Piece.Color color){
+        this.color = color;
+        board = new Board(color);
+    }
 
     /**
      * Adds rows to board.

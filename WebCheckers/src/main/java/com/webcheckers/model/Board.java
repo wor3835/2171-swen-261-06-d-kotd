@@ -9,11 +9,19 @@ public class Board {
      * Creates the board
      */
     Piece board[][] = new Piece[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
+    private final Piece.Color playerColor, opponentColor;
+
 
     /**
      * Constructor for the board
      */
-    public Board(){
+    public Board(Piece.Color color)
+    {
+        playerColor = color;
+        if(color == Piece.Color.RED)
+            opponentColor = Piece.Color.WHITE;
+        else
+            opponentColor = Piece.Color.RED;
         initialize();
     }
 
@@ -24,7 +32,7 @@ public class Board {
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1){
-                    board[i][j] = new Piece(Piece.Color.WHITE, Piece.Type.SINGLE);
+                    board[i][j] = new Piece(opponentColor, Piece.Type.SINGLE);
                 }
             }
         }
@@ -32,7 +40,7 @@ public class Board {
         for(int i = 5; i < BoardView.BOARD_LENGTH; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1){
-                    board[i][j] = new Piece(Piece.Color.RED, Piece.Type.SINGLE);
+                    board[i][j] = new Piece(playerColor, Piece.Type.SINGLE);
                 }
             }
         }

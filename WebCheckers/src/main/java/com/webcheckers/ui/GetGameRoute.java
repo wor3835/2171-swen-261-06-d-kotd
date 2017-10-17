@@ -44,11 +44,13 @@ public class GetGameRoute implements Route {
 
     static final String OPPONENT_ATTR = "opponent";
 
-    private enum ViewMode {
+    static final String GAME_ATTR = "game";
+
+    enum ViewMode {
         PLAY, SPECTATOR, REPLAY
     }
 
-    private enum activeColor {
+    enum activeColor {
         RED, WHITE
     }
 
@@ -93,9 +95,9 @@ public class GetGameRoute implements Route {
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
         vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
-        if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
+        /*if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
             httpSession.attribute(BOARD_VIEW_KEY, new BoardView());
-        }
+        }*/
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));

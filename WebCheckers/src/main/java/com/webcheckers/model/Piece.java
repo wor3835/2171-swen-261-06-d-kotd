@@ -11,7 +11,7 @@ public class Piece {
     /**
      * Describes if piece is single or king
      */
-    static enum Type{
+    public static enum Type{
         SINGLE,
         KING
     }
@@ -19,7 +19,7 @@ public class Piece {
     /**
      * Describes piece color
      */
-    static enum Color{
+    public static enum Color{
         RED,
         WHITE
     }

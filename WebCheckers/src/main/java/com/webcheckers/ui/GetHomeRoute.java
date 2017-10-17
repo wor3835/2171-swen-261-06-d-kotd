@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.BoardView;
+import com.webcheckers.model.Game;
+import com.webcheckers.model.Piece;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -15,6 +18,8 @@ import spark.TemplateEngine;
 import spark.Session;
 
 import com.webcheckers.model.Player;
+
+import static spark.Spark.halt;
 
 /**
  * The UI Controller to GET the Home page.
@@ -85,9 +90,35 @@ public class GetHomeRoute implements Route {
     httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
     vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
 
-    if(gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR)))
+    if(gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR))!=null)
     {
+      Game game = gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR));
+      vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 
+      httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
+      vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
+
+      if(httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY)==null) {
+        httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, new BoardView(Piece.Color.WHITE));
+      }
+      vm.put(GetGameRoute.BOARD_VIEW_KEY, httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY));
+
+      httpSession.attribute(GetGameRoute.VIEW_MODE, GetGameRoute.ViewMode.PLAY);
+      vm.put(GetGameRoute.VIEW_MODE, httpSession.attribute(GetGameRoute.VIEW_MODE));
+
+      httpSession.attribute(GetGameRoute.ACTIVE_COLOR, GetGameRoute.activeColor.RED);
+      vm.put(GetGameRoute.ACTIVE_COLOR, httpSession.attribute(GetGameRoute.ACTIVE_COLOR));
+
+      httpSession.attribute(GetGameRoute.RED_PLAYER, game.getP1());
+      vm.put(GetGameRoute.RED_PLAYER, httpSession.attribute(GetGameRoute.RED_PLAYER));
+
+      httpSession.attribute(GetGameRoute.WHITE_PLAYER, httpSession.attribute(CUR_PLAYER_ATTR));
+      vm.put(GetGameRoute.WHITE_PLAYER, httpSession.attribute(GetGameRoute.WHITE_PLAYER));
+
+      httpSession.attribute(GetGameRoute.GAME_ATTR, game);
+      response.redirect(WebServer.GAME_URL);
+      halt();
+        return null;
     }
 
 

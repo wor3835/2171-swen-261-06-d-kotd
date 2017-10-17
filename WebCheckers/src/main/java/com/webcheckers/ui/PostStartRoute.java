@@ -9,6 +9,7 @@ import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Game;
+import com.webcheckers.model.Piece;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -56,16 +57,7 @@ public class PostStartRoute implements Route {
         RED, WHITE
     }
 
-<<<<<<< HEAD
     public PostStartRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
-=======
-    /**
-     * Creates the route
-     * @param templateEngine
-     * @param playerLobby
-     */
-    public PostStartRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
->>>>>>> 33388b2202ad2f975df03d3655be38b645998f21
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         //
@@ -94,7 +86,7 @@ public class PostStartRoute implements Route {
         vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
         if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
-            httpSession.attribute(BOARD_VIEW_KEY, new BoardView());
+            httpSession.attribute(BOARD_VIEW_KEY, new BoardView(Piece.Color.RED));
         }
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
@@ -111,7 +103,10 @@ public class PostStartRoute implements Route {
         if(!opponent.isInGame()) {
             httpSession.attribute(WHITE_PLAYER, opponent);
             vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
-            opponent.setInGame();
+            Game game = new Game();
+            game.Game(httpSession.attribute(RED_PLAYER), httpSession.attribute(WHITE_PLAYER));
+            httpSession.attribute(GetGameRoute.GAME_ATTR, game);
+            gameLobby.addGame(game);
         } else {
             LOG.finer("Player selected is already in a game.");
             httpSession.attribute("err", "Player selected is already in a game, choose another player.");
