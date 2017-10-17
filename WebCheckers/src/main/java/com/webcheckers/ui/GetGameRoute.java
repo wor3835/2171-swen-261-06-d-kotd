@@ -24,6 +24,10 @@ import com.webcheckers.model.Player;
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */
 public class GetGameRoute implements Route {
+
+    /**
+     * Global variables to keep track of the players, routes, and templates
+     */
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     private final TemplateEngine templateEngine;

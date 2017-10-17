@@ -19,6 +19,10 @@ import spark.TemplateEngine;
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class GetSignInRoute implements Route {
+
+    /**
+     * Global variables to keep track of the players, routes, and templates
+     */
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
     private final TemplateEngine templateEngine;

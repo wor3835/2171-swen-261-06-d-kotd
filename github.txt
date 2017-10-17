@@ -1,0 +1,63 @@
+commit efac9e40c39cb1dfa408d8a67ebd4eca804a3a40
+Author: wor3835 <wor3835@rit.edu>
+Date:   Wed Sep 27 12:09:46 2017 -0400
+
+    William Raffaelle added his name
+
+commit 91a42c6ee70dec0116bfdb60810355fe06c26ebc
+Author: AJ Nagashima <ajn3687@g.rit.edu>
+Date:   Wed Sep 27 09:27:11 2017 -0400
+
+    Forgot to add files
+
+commit 98344d0f689309fb59c41030485b80a0dbcf053c
+Author: AJ Nagashima <ajn3687@g.rit.edu>
+Date:   Wed Sep 27 09:23:46 2017 -0400
+
+    Removed nested subdirectories and created one "WebCheckers" instead
+    
+    /
+
+commit bd258813175fa4ac1694aaf02a988629bbeaa70d
+Merge: 718e542 222b2e9
+Author: Bobby <rwk8144@rit.edu>
+Date:   Wed Sep 27 08:55:04 2017 -0400
+
+    Initial commit
+
+commit 718e5422a18c2c96d3d9e54accb5441fa97ad764
+Author: Bobby <rwk8144@rit.edu>
+Date:   Wed Sep 27 08:52:25 2017 -0400
+
+    Initial commit
+
+commit 222b2e93f20f1f34602f9ba5b9a87e2678295a89
+Author: George-Edward Pinal <gep2494@cs.rit.edu>
+Date:   Wed Sep 27 08:49:59 2017 -0400
+
+    Added name to README.ml
+
+commit 02f2a4130bdd3a04baf5ba783fc6fb8d39ff3b85
+Merge: 28f2faf b200b9d
+Author: George-Edward Pinal <gep2494@cs.rit.edu>
+Date:   Wed Sep 27 08:49:21 2017 -0400
+
+    Merge branch 'master' of https://github.com/somthing8wierd/2171-swen-261-06-d-kotd
+
+commit 28f2faf4c077c775fa5ea6af3f3d08f4e04a8c1d
+Author: George-Edward Pinal <gep2494@cs.rit.edu>
+Date:   Wed Sep 27 08:47:56 2017 -0400
+
+    Added name to README.ml
+
+commit b200b9d22d84a5cccf7e90fdf2cef666d1830318
+Author: kzalb <kcz3966@g.rit.edu>
+Date:   Wed Sep 27 08:45:03 2017 -0400
+
+    Kerri added name
+
+commit d73768d9a18f24d4911140dbebdffdd717404ed2
+Author: AJ Nagashima <ajn3687@g.rit.edu>
+Date:   Wed Sep 27 08:39:45 2017 -0400
+
+    AJ Nagashima added name

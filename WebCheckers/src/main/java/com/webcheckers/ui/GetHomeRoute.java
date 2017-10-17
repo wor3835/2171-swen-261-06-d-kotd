@@ -22,6 +22,10 @@ import com.webcheckers.model.Player;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetHomeRoute implements Route {
+
+  /**
+   * Global variables to keep track of the players, routes, and templates
+   */
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private final TemplateEngine templateEngine;
@@ -71,6 +75,9 @@ public class GetHomeRoute implements Route {
 
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
+    vm.put("error", " ");
+    if (httpSession.attribute("err") != null && httpSession.attribute("err").equals("Player selected is already in a game, choose another player."))
+      vm.put("error", "Player selected is already in a game, please choose another player or wait until they have finished their game.");
 
     if(httpSession.attribute(CUR_PLAYER_ATTR)!=null)
       vm.put(CUR_PLAYER_ATTR, httpSession.attribute(CUR_PLAYER_ATTR));
