@@ -40,7 +40,7 @@ public class Space{
     }
 
     /**
-     * @return game piece on space 
+     * @return game piece on space
      */
     public Piece getPiece()
     {
