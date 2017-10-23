@@ -26,7 +26,7 @@
 
       <#if currentPlayer??>
                   <u>List of Players:<u/>
-                  <br/><br/>
+                  </br>
 
                   <#list playerLobby.iterator() as player>
                      <#if !player.equals(currentPlayer)>
