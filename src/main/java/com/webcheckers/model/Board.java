@@ -8,7 +8,7 @@ public class Board {
     /**
      * Creates the board
      */
-    Piece board[][] = new Piece[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
+    Space board[][] = new Space[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
     private final Piece.Color playerColor, opponentColor;
 
 
@@ -32,7 +32,7 @@ public class Board {
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1){
-                    board[i][j] = new Piece(opponentColor, Piece.Type.SINGLE);
+                    board[i][j] = new Space(j, false, new Piece(playerColor, Piece.Type.SINGLE));
                 }
             }
         }
@@ -40,7 +40,7 @@ public class Board {
         for(int i = 5; i < BoardView.BOARD_LENGTH; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1){
-                    board[i][j] = new Piece(playerColor, Piece.Type.SINGLE);
+                    board[i][j] = new Space(j, false, new Piece(playerColor, Piece.Type.SINGLE));
                 }
             }
         }
