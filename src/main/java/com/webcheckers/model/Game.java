@@ -13,9 +13,15 @@ public class Game {
     /**
      * Variables to keep track of the players and the list of spectators
      */
+
+    //The player who initiated the game
     Player p1;
+    //The player who got challenged to a game
     Player p2;
-    List<Player> spectators = new ArrayList<>();
+    //A list of spectators for a game
+    List<Player> spectators;
+    //A list move moves that houses all the moves in a game
+    List<Move> movesList = new ArrayList<>();
 
     /**
      * Assigns the players to the game

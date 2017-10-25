@@ -57,14 +57,44 @@ public class WebServer {
    * The URL pattern to request the Home page.
    */
   public static final String HOME_URL = "/";
-
+  /**
+   * The URL pattern to request the Signin page.
+   */
   public static final String SIGN_URL = "/signin";
-
+  /**
+   * The URL pattern to request the Signout page.
+   */
   public static final String SIGN_OUT_URL = "/signout";
-
+  /**
+   * The URL pattern to request the Game page.
+   */
   public static final String GAME_URL = "/game";
-
+  /**
+   * The URL pattern to request the Start page.
+   */
   public static final String START_URL = "/start";
+  /**
+   * The URL pattern to request the CheckTurn page.
+   */
+  public static final String CHECKTURN_URL = "/checkturn";
+  /**
+   * The URL pattern to request the ValidateMove page.
+   */
+  public static final String VALID_URL = "/validateMove";
+  /**
+   * The URL pattern to request the SubmitTurn page.
+   */
+  public static final String SUBMIT_URL = "/submitTurn";
+  /**
+   * The URL pattern to request the BackupMove page.
+   */
+  public static final String BACKUP_URL = "/backupMove";
+  /**
+   * The URL pattern to request the Resign page.
+   */
+  public static final String RESIGN_URL = "/resignGame";
+
+
   //
   // Attributes
   //
@@ -169,6 +199,7 @@ public class WebServer {
 
     post(START_URL, new PostStartRoute(templateEngine, playerLobby, gameLobby));
 
+    //FIXME: add posts for an subsequent route classes specified by URL's
     //
     LOG.config("WebServer is initialized.");
   }
