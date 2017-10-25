@@ -32,7 +32,7 @@
                      <#if !player.equals(currentPlayer)>
                      <form action="/start" method="POST">
                         <button type="submit" name="opponent" value="${player.getName()}" style=border-radius:4px>
-                            Challenge: ${player.getName()}
+                            ${player.getName()}
                         </button>
 
                         </br>
