@@ -19,20 +19,20 @@ public class MasterEnum {
     }
 
     //GetGameRoute enums
-    enum getGameViewMode {
+    public enum getGameViewMode {
         PLAY, SPECTATOR, REPLAY
     }
 
-    enum getGameActiveColor {
+    public enum getGameActiveColor {
         RED, WHITE
     }
 
     //PostStartRoute enums
-    private enum startViewMode {
+    public enum startViewMode {
         PLAY, SPECTATOR, REPLAY
     }
 
-    private enum startActiveColor {
+    public enum startActiveColor {
         RED, WHITE
     }
 
