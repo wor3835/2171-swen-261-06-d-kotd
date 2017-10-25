@@ -32,7 +32,7 @@ public class Board {
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1){
-                    board[i][j] = new Space(j, false, new Piece(playerColor, Piece.Type.SINGLE));
+                    board[i][j] = new Space(j, false, new Piece(opponentColor, Piece.Type.SINGLE));
                 }
             }
         }
@@ -46,6 +46,18 @@ public class Board {
         }
 
 
+    }
+
+
+    /**
+     * Gets the piece at a specified space
+     * @param i
+     * @param j
+     * @return
+     */
+    public Piece getPieceAt(int i, int j)
+    {
+        return board[i][j].getPiece();
     }
 
     /**

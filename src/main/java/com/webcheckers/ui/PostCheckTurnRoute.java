@@ -19,7 +19,8 @@ public class PostCheckTurnRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        "true" = response.body();
+        String  val ="true";
+        val = response.body();
         return null;
     }
 }
