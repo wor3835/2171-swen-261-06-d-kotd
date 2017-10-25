@@ -22,30 +22,24 @@ public class Board {
             opponentColor = Piece.Color.WHITE;
         else
             opponentColor = Piece.Color.RED;
-        initialize();
+        init();
     }
 
     /**
      * Initializes the board
      */
-    private void initialize(){
-        for(int i = 0; i < 3; i++){
+    private void init(){
+        for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
-                if((i+j)%2==1){
+                if((i+j)%2==1 && i < 3){
                     board[i][j] = new Space(j, false, new Piece(opponentColor, Piece.Type.SINGLE));
-                }
-            }
-        }
-
-        for(int i = 5; i < BoardView.BOARD_LENGTH; i++){
-            for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
-                if((i+j)%2==1){
+                } else if ((i+j)%2==1 && i >= 5) {
                     board[i][j] = new Space(j, false, new Piece(playerColor, Piece.Type.SINGLE));
+                } else {
+                    board[i][j] = new Space(j, false, null);
                 }
             }
         }
-
-
     }
 
 
