@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.MasterEnum;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,10 +12,10 @@ import java.util.List;
  */
 public class BoardView {
     static final int BOARD_LENGTH = 8;
-    private final Piece.Color color;
+    private final MasterEnum.Color color;
     private Board board;
 
-    public BoardView(Piece.Color color){
+    public BoardView(MasterEnum.Color color){
         this.color = color;
         board = new Board(color);
     }
