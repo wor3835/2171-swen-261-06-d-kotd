@@ -46,14 +46,6 @@ public class GetGameRoute implements Route {
 
     static final String GAME_ATTR = "game";
 
-    enum ViewMode {
-        PLAY, SPECTATOR, REPLAY
-    }
-
-    enum activeColor {
-        RED, WHITE
-    }
-
     /**
      * Create the Spark Route (UI controller) for the
      * {@code GET /} HTTP request.

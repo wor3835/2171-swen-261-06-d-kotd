@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.MasterEnum;
+
 /**
  * Created by arthu on 10/15/2017.
  */
@@ -9,19 +11,19 @@ public class Board {
      * Creates the board
      */
     Space board[][] = new Space[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
-    private final Piece.Color playerColor, opponentColor;
+    private final MasterEnum.Color playerColor, opponentColor;
 
 
     /**
      * Constructor for the board
      */
-    public Board(Piece.Color color)
+    public Board(MasterEnum.Color color)
     {
         playerColor = color;
-        if(color == Piece.Color.RED)
-            opponentColor = Piece.Color.WHITE;
+        if(color == MasterEnum.Color.RED)
+            opponentColor = MasterEnum.Color.WHITE;
         else
-            opponentColor = Piece.Color.RED;
+            opponentColor = MasterEnum.Color.RED;
         init();
     }
 
@@ -32,9 +34,9 @@ public class Board {
         for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1 && i < 3){
-                    board[i][j] = new Space(j, false, new Piece(opponentColor, Piece.Type.SINGLE));
+                    board[i][j] = new Space(j, false, new Piece(opponentColor, MasterEnum.PieceType.SINGLE));
                 } else if ((i+j)%2==1 && i >= 5) {
-                    board[i][j] = new Space(j, false, new Piece(playerColor, Piece.Type.SINGLE));
+                    board[i][j] = new Space(j, false, new Piece(playerColor, MasterEnum.PieceType.SINGLE));
                 } else {
                     board[i][j] = new Space(j, false, null);
                 }

@@ -6,10 +6,10 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameLobby;
+import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Game;
-import com.webcheckers.model.Piece;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -49,14 +49,6 @@ public class PostStartRoute implements Route {
 
     static final String OPPONENT_ATTR = "opponent";
 
-    private enum ViewMode {
-        PLAY, SPECTATOR, REPLAY
-    }
-
-    private enum activeColor {
-        RED, WHITE
-    }
-
     public PostStartRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -86,14 +78,14 @@ public class PostStartRoute implements Route {
         vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
         if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
-            httpSession.attribute(BOARD_VIEW_KEY, new BoardView(Piece.Color.RED));
+            httpSession.attribute(BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.RED));
         }
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
-        httpSession.attribute(VIEW_MODE, ViewMode.PLAY);
+        httpSession.attribute(VIEW_MODE, MasterEnum.ViewMode.PLAY);
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
 
-        httpSession.attribute(ACTIVE_COLOR, activeColor.RED);
+        httpSession.attribute(ACTIVE_COLOR, MasterEnum.Color.RED);
         vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
 
         httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));

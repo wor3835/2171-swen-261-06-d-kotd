@@ -5,36 +5,24 @@ package com.webcheckers.appl;
  */
 public class MasterEnum {
     //Message enum
-    public enum messageType {info, error}
+    public enum MessageType {
+        info,
+        error
+    }
 
     //Piece enums
-    public static enum pieceType{
+    public enum PieceType{
         SINGLE,
         KING
     }
 
-    public static enum pieceColor{
+    public enum Color{
         RED,
         WHITE
     }
 
-    //GetGameRoute enums
-    public enum getGameViewMode {
+    //View enums
+    public enum ViewMode {
         PLAY, SPECTATOR, REPLAY
     }
-
-    public enum getGameActiveColor {
-        RED, WHITE
-    }
-
-    //PostStartRoute enums
-    public enum startViewMode {
-        PLAY, SPECTATOR, REPLAY
-    }
-
-    public enum startActiveColor {
-        RED, WHITE
-    }
-
-
 }

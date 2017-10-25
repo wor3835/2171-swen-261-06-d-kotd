@@ -1,6 +1,7 @@
 package com.webcheckers.model;
 
 
+import com.webcheckers.appl.MasterEnum;
 
 /**
  * Created by kzalb on 10/15/2017.
@@ -8,49 +9,33 @@ package com.webcheckers.model;
  */
 public class Piece {
 
-    /**
-     * Describes if piece is single or king
-     */
-    public static enum Type{
-        SINGLE,
-        KING
-    }
-
-    /**
-     * Describes piece color
-     */
-    public static enum Color{
-        RED,
-        WHITE
-    }
-
-    private Type eType;
-    private Color eColor;
+    private MasterEnum.PieceType type;
+    private MasterEnum.Color color;
 
     /**
      * Sets color and type of piece
      * @param color red or black
      * @param type normal or king
      */
-    public Piece(Color color, Type type)
+    public Piece(MasterEnum.Color color, MasterEnum.PieceType type)
     {
-        this.eType = type;
-        this.eColor = color;
+        this.type = type;
+        this.color = color;
     }
 
     /**
      * @return type of piece
      */
-    public Type getType()
+    public MasterEnum.PieceType getType()
     {
-        return eType;
+        return type;
     }
 
     /**
      * @return color of piece
      */
-    public Color getColor()
+    public MasterEnum.Color getColor()
     {
-        return eColor;
+        return color;
     }
 }

@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameLobby;
+import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Game;
@@ -99,14 +100,14 @@ public class GetHomeRoute implements Route {
       vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
       if(httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY)==null) {
-        httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, new BoardView(Piece.Color.WHITE));
+        httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.WHITE));
       }
       vm.put(GetGameRoute.BOARD_VIEW_KEY, httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY));
 
-      httpSession.attribute(GetGameRoute.VIEW_MODE, GetGameRoute.ViewMode.PLAY);
+      httpSession.attribute(GetGameRoute.VIEW_MODE, MasterEnum.ViewMode.PLAY);
       vm.put(GetGameRoute.VIEW_MODE, httpSession.attribute(GetGameRoute.VIEW_MODE));
 
-      httpSession.attribute(GetGameRoute.ACTIVE_COLOR, GetGameRoute.activeColor.RED);
+      httpSession.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
       vm.put(GetGameRoute.ACTIVE_COLOR, httpSession.attribute(GetGameRoute.ACTIVE_COLOR));
 
       httpSession.attribute(GetGameRoute.RED_PLAYER, game.getP1());

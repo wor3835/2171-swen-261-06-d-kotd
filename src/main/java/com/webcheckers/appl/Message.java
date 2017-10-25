@@ -5,10 +5,9 @@ package com.webcheckers.appl;
  */
 public class Message {
     private String text;
-    private enum Type {info, error}
-    private Type type;
+    private MasterEnum.MessageType type;
 
-    public Message(String text, Type type){
+    public Message(String text, MasterEnum.MessageType type){
         this.text = text;
         this.type = type;
     }
@@ -17,7 +16,7 @@ public class Message {
         return null;
     }
 
-    public Type getType(){
+    public MasterEnum.MessageType getType(){
         return type;
     }
 
