@@ -11,11 +11,11 @@ import java.util.List;
 public class BoardView {
     static final int BOARD_LENGTH = 8;
     private final Piece.Color color;
-    private Board board;
+    private Board BOARD;
 
     public BoardView(Piece.Color color){
         this.color = color;
-        board = new Board(color);
+        BOARD = new Board(color);
     }
 
     /**
@@ -25,7 +25,7 @@ public class BoardView {
     public Iterator<Row> iterator(){
         List<Row> rows = new ArrayList<>();
         for(int i = 0; i < BOARD_LENGTH; i++)
-            rows.add(new Row(i, board));
+            rows.add(new Row(i, BOARD));
         return rows.iterator();
     }
 }

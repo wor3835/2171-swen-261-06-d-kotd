@@ -12,7 +12,7 @@ public class Row {
 
     private int index;
 
-    private Board board;
+    private final Board BOARD;
 
     /**
      * Sets row in board.
@@ -22,7 +22,7 @@ public class Row {
     public Row(int index, Board board)
     {
         this.index = index;
-        this.board = board;
+        this.BOARD = board;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Row {
     public Iterator<Space> iterator(){
         List<Space> spaces = new ArrayList<>();
         for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
-            spaces.add(new Space(i, (i+index)%2 == 1 ? true : false, board.board[index][i].getPiece()));
+            spaces.add(BOARD.board[index][i]);
         }
         return spaces.iterator();
     }
