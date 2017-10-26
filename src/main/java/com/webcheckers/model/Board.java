@@ -29,6 +29,8 @@ public class Board {
         init();
     }
 
+    public void makeMove() {}
+
     /**
      * Initializes the board
      */
