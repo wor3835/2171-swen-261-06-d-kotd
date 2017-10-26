@@ -44,19 +44,16 @@ public class PostSignInRouteTest {
     private Player player;
     private TemplateEngine engine;
     private PlayerLobby playerLobby;
-    private GameLobby gameLobby;
-    private Game game;
     private Request request;
     private Session session;
 
     @Before
     public void setup() {
+        //set up mock objects
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
         engine = mock(TemplateEngine.class);
-
-        gameLobby = new GameLobby();
 
         playerLobby = mock(PlayerLobby.class);
 
