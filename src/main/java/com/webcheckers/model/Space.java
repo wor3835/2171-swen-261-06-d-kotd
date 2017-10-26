@@ -1,7 +1,6 @@
 package com.webcheckers.model;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by kzalb on 10/15/2017.
@@ -12,7 +11,7 @@ public class Space{
     private int cellIdx;
     private boolean validSpace;
     private Piece piece;
-
+    
 
 
     /**
