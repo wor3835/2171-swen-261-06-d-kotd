@@ -1,5 +1,8 @@
 package com.webcheckers.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kzalb on 10/15/2017.
  * Represents a space on the board
@@ -9,6 +12,8 @@ public class Space{
     private int cellIdx;
     private boolean validSpace;
     private Piece piece;
+
+
 
     /**
      * Physical space on the game board

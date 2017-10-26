@@ -3,6 +3,8 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.MasterEnum;
 
+import java.util.ArrayList;
+
 /**
  * Created by kzalb on 10/15/2017.
  * Represents a piece that goes on game space.
@@ -38,4 +40,6 @@ public abstract class Piece {
     {
         return color;
     }
+
+    abstract ArrayList<Move> validMoves();
 }

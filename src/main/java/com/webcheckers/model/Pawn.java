@@ -2,6 +2,8 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.MasterEnum;
 
+import java.util.ArrayList;
+
 /**
  * Created by Bobby on 10/25/2017.
  */
@@ -14,5 +16,9 @@ public class Pawn extends Piece{
      */
     public Pawn(MasterEnum.Color color, MasterEnum.PieceType type) {
         super(color, type);
+    }
+
+    public ArrayList<Move> validMoves(){
+        return null;
     }
 }
