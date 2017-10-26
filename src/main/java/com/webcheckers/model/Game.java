@@ -39,8 +39,6 @@ public class Game {
         this.p2 = p2;
         p1.assignGame(this);
         p2.assignGame(this);
-        p1.isInGame();
-        p2.isInGame();
         return true;
     }
 
