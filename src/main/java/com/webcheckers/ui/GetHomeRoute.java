@@ -93,30 +93,29 @@ public class GetHomeRoute implements Route {
 
     if(gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR))!=null)
     {
+      //Get the game that the current player was just assigned to
       Game game = gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR));
-      vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 
-      httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
-      vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
+      //Create a board based on the current gameboard
+      BoardView boardView = new BoardView(MasterEnum.Color.WHITE, game.getB2());
+      httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, boardView);
 
-      if(httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY)==null) {
-        httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.WHITE, game.getB2()));
-      }
-      vm.put(GetGameRoute.BOARD_VIEW_KEY, httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY));
-
+      //The view mode of the current player (autoAssigned to PLAY)
       httpSession.attribute(GetGameRoute.VIEW_MODE, MasterEnum.ViewMode.PLAY);
-      vm.put(GetGameRoute.VIEW_MODE, httpSession.attribute(GetGameRoute.VIEW_MODE));
 
+      //Assign the active color to Red to start game
       httpSession.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
-      vm.put(GetGameRoute.ACTIVE_COLOR, httpSession.attribute(GetGameRoute.ACTIVE_COLOR));
 
+      //assign the red player (player 1)
       httpSession.attribute(GetGameRoute.RED_PLAYER, game.getP1());
-      vm.put(GetGameRoute.RED_PLAYER, httpSession.attribute(GetGameRoute.RED_PLAYER));
 
+      //assign the white player (current player)
       httpSession.attribute(GetGameRoute.WHITE_PLAYER, httpSession.attribute(CUR_PLAYER_ATTR));
-      vm.put(GetGameRoute.WHITE_PLAYER, httpSession.attribute(GetGameRoute.WHITE_PLAYER));
 
+      //assign the game
       httpSession.attribute(GetGameRoute.GAME_ATTR, game);
+
+      //redirect
       response.redirect(WebServer.GAME_URL);
       halt();
         return null;
