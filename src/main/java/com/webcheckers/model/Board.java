@@ -38,7 +38,7 @@ public class Board {
                 } else if ((i+j)%2==1 && i >= 5) {
                     board[i][j] = new Space(j, false, new Pawn(playerColor, MasterEnum.PieceType.SINGLE));
                 } else {
-                    board[i][j] = new Space(j, false, null);
+                    board[i][j] = new Space(j, (i+j)%2==1? true: false, null);
                 }
             }
         }
