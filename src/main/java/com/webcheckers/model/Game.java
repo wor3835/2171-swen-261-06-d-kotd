@@ -59,4 +59,8 @@ public class Game {
     public Board getB1() {return b1;}
 
     public Board getB2() {return b2;}
+
+    public void addMove(Move m) {
+        movesList.add(m);
+    }
 }
