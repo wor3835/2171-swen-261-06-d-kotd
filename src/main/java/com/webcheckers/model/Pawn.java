@@ -16,9 +16,6 @@ public class Pawn extends Piece{
      */
     public Pawn(MasterEnum.Color color, MasterEnum.PieceType type) {
         super(color, type);
-    }
-
-    public ArrayList<Move> validMoves(){
-        return null;
+        range = 1;
     }
 }

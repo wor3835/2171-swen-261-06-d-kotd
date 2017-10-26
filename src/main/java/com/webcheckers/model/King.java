@@ -18,9 +18,6 @@ public class King extends Piece {
      */
     public King(MasterEnum.Color color, MasterEnum.PieceType type) {
         super(color, type);
-    }
-
-    public ArrayList<Move> validMoves(){
-        return null;
+        range = 7;
     }
 }
