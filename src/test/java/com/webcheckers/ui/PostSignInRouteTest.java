@@ -1,7 +1,10 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
+
 import spark.*;
 
 import java.util.HashMap;
@@ -39,27 +42,34 @@ public class PostSignInRouteTest {
 
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
-    private TemplateEngine templateEngine;
+    private TemplateEngine engine;
     private PlayerLobby playerLobby;
+    private GameLobby gameLobby;
+    private Game game;
     private Request request;
-    private Response response;
     private Session session;
 
     @Before
     public void setup() {
-        templateEngine = mock(TemplateEngine.class);
-        playerLobby = mock(PlayerLobby.class);
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
-        CuT = new PostSignInRoute(templateEngine, playerLobby);
+        engine = mock(TemplateEngine.class);
+
+        gameLobby = new GameLobby();
+
+        playerLobby = mock(PlayerLobby.class);
+
+        // create a unique CuT for each test
+        CuT = new PostSignInRoute(engine, playerLobby);
     }
 
     @Test
     public void invalid_name_1(){
+        final Response response = mock(Response.class);
         when(request.queryParams(eq(PostSignInRoute.NAME))).thenReturn(INVALID_NAME);
         final MyModelAndView myModelView = new MyModelAndView();
-        when(templateEngine.render(any(MyModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+        when(engine.render(any(MyModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
         CuT.handle(request, response);
 
@@ -70,7 +80,7 @@ public class PostSignInRouteTest {
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Name must be alphanumeric, try another name", vm.get("error"));
-        //assertEquals(Boolean.FALSE, vm.get(GetSignInRoute.PLAYER_NAME_USED_ATTR));
+        assertEquals(Boolean.FALSE, vm.get(GetSignInRoute.PLAYER_NAME_USED_ATTR));
         //   * test view name
         assertEquals(GetSignInRoute.VIEW_NAME, myModelView.viewName);
     }
