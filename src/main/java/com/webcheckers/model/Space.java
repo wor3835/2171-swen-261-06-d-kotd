@@ -16,7 +16,6 @@ public class Space{
     private Piece piece;
 
 
-
     /**
      * Physical space on the game board
      * @param cellIdx id of cell
@@ -61,7 +60,7 @@ public class Space{
             if (curr.getType().equals(MasterEnum.PieceType.SINGLE)) {
                 if(row - 1 > 0 && col + 1 < BoardView.BOARD_LENGTH) {
                     if(!(b.hasPiece(row, col))) {
-                        m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1));
+                        m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
                     }
                 }
             }

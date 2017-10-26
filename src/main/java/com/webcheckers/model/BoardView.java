@@ -20,6 +20,13 @@ public class BoardView {
         board = new Board(color);
     }
 
+    public BoardView(MasterEnum.Color color, Board board){
+        this.color = color;
+        this.board = board;
+    }
+
+    public Board getBoard() {return board;}
+
     /**
      * Adds rows to board.
      * @return iterator

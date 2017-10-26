@@ -100,7 +100,7 @@ public class GetHomeRoute implements Route {
       vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
       if(httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY)==null) {
-        httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.WHITE));
+        httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.WHITE, game.getB2()));
       }
       vm.put(GetGameRoute.BOARD_VIEW_KEY, httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY));
 

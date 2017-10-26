@@ -40,7 +40,7 @@ public class Board {
                 } else if ((i+j)%2==1 && i >= 5) {
                     board[i][j] = new Space(j, false, new Pawn(playerColor));
                 } else {
-                    board[i][j] = new Space(j, (i+j)%2==1? true: false, null);
+                    board[i][j] = new Space(j, (i+j)%2==1, null);
                 }
             }
         }
@@ -64,6 +64,6 @@ public class Board {
      * @return true or false if the piece is on the board
      */
     public boolean hasPiece(int i, int j){
-        return board[i][j] != null ? true : false;
+        return board[i][j] != null;
     }
 }
