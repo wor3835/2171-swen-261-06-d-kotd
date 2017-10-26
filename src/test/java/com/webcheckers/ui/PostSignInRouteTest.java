@@ -7,18 +7,17 @@ import com.webcheckers.model.Player;
 
 import spark.*;
 
+import static org.junit.Assert.*;
+import static spark.Spark.exception;
+import static spark.Spark.halt;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import static spark.Spark.halt;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -42,6 +41,7 @@ public class PostSignInRouteTest {
 
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
+    private Player player;
     private TemplateEngine engine;
     private PlayerLobby playerLobby;
     private GameLobby gameLobby;
@@ -64,12 +64,13 @@ public class PostSignInRouteTest {
         CuT = new PostSignInRoute(engine, playerLobby);
     }
 
+    //Tests for a name containing an invalid character
     @Test
-    public void invalid_name_1(){
+    public void invalid_name(){
         final Response response = mock(Response.class);
         when(request.queryParams(eq(PostSignInRoute.NAME))).thenReturn(INVALID_NAME);
         final MyModelAndView myModelView = new MyModelAndView();
-        when(engine.render(any(MyModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
         CuT.handle(request, response);
 
@@ -83,5 +84,48 @@ public class PostSignInRouteTest {
         assertEquals(Boolean.FALSE, vm.get(GetSignInRoute.PLAYER_NAME_USED_ATTR));
         //   * test view name
         assertEquals(GetSignInRoute.VIEW_NAME, myModelView.viewName);
+    }
+
+    //Tests for a name containing nothing
+    @Test
+    public void empty_name(){
+        final Response response = mock(Response.class);
+        when(request.queryParams(eq(PostSignInRoute.NAME))).thenReturn(EMPTY_NAME);
+
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        CuT.handle(request, response);
+
+        final Object model = myModelView.model;
+        assertNotNull(model);
+        assertTrue(model instanceof Map);
+        //   * model contains all necessary View-Model data
+        @SuppressWarnings("unchecked")
+        final Map<String, Object> vm = (Map<String, Object>) model;
+        assertEquals("Name must not be empty", vm.get("error"));
+        assertEquals(Boolean.FALSE, vm.get(GetSignInRoute.PLAYER_NAME_USED_ATTR));
+        //   * test view name
+        assertEquals(GetSignInRoute.VIEW_NAME, myModelView.viewName);
+    }
+
+    //Tests for a valid name
+    @Test
+    public void valid_name(){
+        final Response response = mock(Response.class);
+        when(playerLobby.playerSignin(VALID_NAME)).thenReturn(new Player(VALID_NAME));
+        when(request.queryParams(eq(PostSignInRoute.NAME))).thenReturn(VALID_NAME);
+
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        CuT.handle(request, response);
+
+        final Object model = myModelView.model;
+        //model is null because a valid name causes a redirect to home, nothing is returned to MyModelView
+        assertNull(model);
+        //   * model cannot contain anything because it is null
+
+        assertEquals(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR), player);
     }
 }

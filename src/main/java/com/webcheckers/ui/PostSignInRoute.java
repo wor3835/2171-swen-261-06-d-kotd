@@ -71,6 +71,13 @@ public class PostSignInRoute implements Route {
             vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
             return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
         }
+        else if(name.length() == 0){
+            Map<String, Object> vm = new HashMap<>();
+            vm.put("error", "Name must not be empty");
+            vm.put("title", "Sign in to Play!");
+            vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
+            return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
+        }
         else if(playerLobby.contains(name)){
             Map<String, Object> vm = new HashMap<>();
             vm.put("error", "Name taken, try another name");
@@ -79,7 +86,7 @@ public class PostSignInRoute implements Route {
             return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
         }
         else{
-            // goes back to sign in page
+            // goes back to home page
             final Session session = request.session();
 
             final Player player = playerLobby.playerSignin(name);
@@ -87,7 +94,7 @@ public class PostSignInRoute implements Route {
             //
             LOG.finer("Player " +player.getName()+" signed in");
             response.redirect(WebServer.HOME_URL);
-            halt();
+            //halt();
             return null;
         }
     }
