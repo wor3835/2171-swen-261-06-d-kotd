@@ -41,4 +41,9 @@ public abstract class Piece {
     {
         return color;
     }
+
+    @Override
+    public boolean equals(Object other){
+        return this.getType() == ((Piece) other).getType();
+    }
 }
