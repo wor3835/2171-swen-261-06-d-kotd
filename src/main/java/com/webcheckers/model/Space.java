@@ -67,5 +67,9 @@ public class Space{
         }
         return m1;
     }
+
+    public void setPiece(Piece p) {
+        piece = p;
+    }
 }
 

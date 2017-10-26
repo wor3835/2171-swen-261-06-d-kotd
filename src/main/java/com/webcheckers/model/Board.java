@@ -29,7 +29,10 @@ public class Board {
         init();
     }
 
-    public void makeMove() {}
+    public void makeMove(int row, int col, Piece p) {
+        Space s = board[row][col];
+        s.setPiece(p);
+    }
 
     /**
      * Initializes the board
