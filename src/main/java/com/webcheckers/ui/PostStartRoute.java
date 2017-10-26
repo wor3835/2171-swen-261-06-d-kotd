@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Board;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Game;
 import spark.ModelAndView;
@@ -77,11 +78,6 @@ public class PostStartRoute implements Route {
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
         vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
 
-        if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
-            httpSession.attribute(BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.RED));
-        }
-        vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
-
         httpSession.attribute(VIEW_MODE, MasterEnum.ViewMode.PLAY);
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
 
@@ -93,10 +89,17 @@ public class PostStartRoute implements Route {
 
         Player opponent = playerLobby.pullByName(request.queryParams(OPPONENT_ATTR));
         if(!opponent.isInGame()) {
+            if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
+                httpSession.attribute(BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.RED));
+            }
+            vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
+
             httpSession.attribute(WHITE_PLAYER, opponent);
             vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
             Game game = new Game();
-            game.Game(httpSession.attribute(RED_PLAYER), httpSession.attribute(WHITE_PLAYER));
+            game.applyBoard(((BoardView)httpSession.attribute(BOARD_VIEW_KEY)).getBoard(),
+                    new Board(MasterEnum.Color.WHITE));
+            game.applyGame(httpSession.attribute(RED_PLAYER), httpSession.attribute(WHITE_PLAYER));
             httpSession.attribute(GetGameRoute.GAME_ATTR, game);
             gameLobby.addGame(game);
         } else {
