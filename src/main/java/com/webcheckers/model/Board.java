@@ -34,9 +34,9 @@ public class Board {
         for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 if((i+j)%2==1 && i < 3){
-                    board[i][j] = new Space(j, false, new Piece(opponentColor, MasterEnum.PieceType.SINGLE));
+                    board[i][j] = new Space(j, false, new Pawn(opponentColor, MasterEnum.PieceType.SINGLE));
                 } else if ((i+j)%2==1 && i >= 5) {
-                    board[i][j] = new Space(j, false, new Piece(playerColor, MasterEnum.PieceType.SINGLE));
+                    board[i][j] = new Space(j, false, new Pawn(playerColor, MasterEnum.PieceType.SINGLE));
                 } else {
                     board[i][j] = new Space(j, false, null);
                 }
