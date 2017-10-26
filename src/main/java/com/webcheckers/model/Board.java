@@ -2,6 +2,8 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.MasterEnum;
 
+import java.util.ArrayList;
+
 /**
  * Created by arthu on 10/15/2017.
  */
@@ -44,7 +46,6 @@ public class Board {
         }
     }
 
-
     /**
      * Gets the piece at a specified space
      * @param i
@@ -55,6 +56,8 @@ public class Board {
     {
         return board[i][j].getPiece();
     }
+
+    public Space getSpaceAt(int i, int j) { return board[i][j];}
 
     /**
      * Checks to see if a piece is on the board

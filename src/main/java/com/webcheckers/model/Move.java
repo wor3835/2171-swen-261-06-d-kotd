@@ -18,4 +18,9 @@ public class Move {
     public Position getEnd(){
         return end;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

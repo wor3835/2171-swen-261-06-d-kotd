@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.MasterEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +53,19 @@ public class Space{
         return piece;
     }
 
-
+    public ArrayList<Move> validMoves(Board b, int row, int col) {
+        ArrayList<Move> m1 = new ArrayList<>();
+        if (b.hasPiece(row, col)) {
+            Piece curr = b.getPieceAt(row, col);
+            if (curr.getType().equals(MasterEnum.PieceType.SINGLE)) {
+                if(row - 1 > 0 && col + 1 < BoardView.BOARD_LENGTH) {
+                    if(!(b.hasPiece(row, col))) {
+                        m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
+                    }
+                }
+            }
+        }
+        return m1;
+    }
 }
+
