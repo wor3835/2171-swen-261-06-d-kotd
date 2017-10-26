@@ -14,10 +14,9 @@ public class King extends Piece {
      * Sets color and type of piece
      *
      * @param color red or black
-     * @param type  normal or king
      */
-    public King(MasterEnum.Color color, MasterEnum.PieceType type) {
-        super(color, type);
+    public King(MasterEnum.Color color) {
+        super(color, MasterEnum.PieceType.KING);
         range = 7;
     }
 }
