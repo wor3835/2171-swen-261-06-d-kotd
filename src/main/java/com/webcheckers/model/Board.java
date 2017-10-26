@@ -57,6 +57,8 @@ public class Board {
         return board[i][j].getPiece();
     }
 
+    public Space getSpaceAt(int i, int j) { return board[i][j];}
+
     /**
      * Checks to see if a piece is on the board
      * @param i
