@@ -82,3 +82,6 @@ public class GetHomeRouteTest {
 
 
 }
+
+
+// If the player playing (player 2) is in a game it will return null ---- check nonRender

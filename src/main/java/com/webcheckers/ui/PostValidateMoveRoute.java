@@ -17,14 +17,12 @@ public class PostValidateMoveRoute implements Route {
     private final Position start;
     private final Position end;
     private final Board board;
-    private final Gson gson;
     private final Game game;
 
-    public PostValidateMoveRoute(Position start, Position end, Board board, Gson gson, Game game) {
+    public PostValidateMoveRoute(Position start, Position end, Board board, Game game) {
         this.start = start;
         this.end = end;
         this.board = board;
-        this.gson = gson;
         this.game = game;
     }
 
@@ -34,6 +32,7 @@ public class PostValidateMoveRoute implements Route {
         int startRow = start.getRow();
         int endCol = end.getCol();
         int endRow = end.getRow();
+        Gson gson = new Gson();
         Space s = board.getSpaceAt(startRow, startCol);
         ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
         if(moves.contains(new Move(start, end))) {
