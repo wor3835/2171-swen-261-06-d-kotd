@@ -18,13 +18,13 @@ public class Game {
      */
 
     //The player who initiated the game
-    Player p1;
-    Board b1;
+    private Player p1;
+    private Board b1;
     //The player who got challenged to a game
-    Player p2;
-    Board b2;
+    private Player p2;
+    private Board b2;
     //A list of spectators for a game
-    List<Player> spectators;
+    private List<Player> spectators;
     //A list move moves that houses all the moves in a game
     public List<Move> movesList = new ArrayList<>();
 
@@ -73,5 +73,10 @@ public class Game {
 
     public MasterEnum.Color getP2color(){
         return MasterEnum.Color.WHITE;
+    }
+
+    public List<Move> getMovesList()
+    {
+        return movesList;
     }
 }

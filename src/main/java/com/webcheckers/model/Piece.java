@@ -47,3 +47,9 @@ public abstract class Piece {
         return this.getType() == ((Piece) other).getType();
     }
 }
+
+
+/*
+    Piece - getting the type of the piece works, getting the color of the piece works
+            take 2 pieces I know are the same and see if equals works and 2 pieces I know are different and see if equals works
+ */
