@@ -52,17 +52,13 @@ public class PlayerLobby {
      * @return player removed
      */
     public Player removePlayer(Player p){
-        int i = 0;
-        for(i = 0; i < playerList.size(); i++){
+        Player player;
+        for(int i = 0; i < playerList.size(); i++){
             if(playerList.get(i).equals(p)){
-                playerList.remove(i);
-                break;
+                return playerList.remove(i);
             }
         }
-        if(i == playerList.size())
-            return null;
-        else
-            return p;
+        return null;
     }
 
     /**
