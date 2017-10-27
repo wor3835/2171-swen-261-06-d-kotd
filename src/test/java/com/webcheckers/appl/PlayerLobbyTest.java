@@ -1,9 +1,13 @@
-package com.webcheckers.model;
+package com.webcheckers.appl;
 
 import static org.junit.Assert.*;
+
+import com.webcheckers.model.Player;
 import org.junit.Test;
 
 import com.webcheckers.appl.PlayerLobby;
+
+import java.util.Iterator;
 
 
 /**
@@ -11,9 +15,7 @@ import com.webcheckers.appl.PlayerLobby;
  */
 public class PlayerLobbyTest {
 
-
-
-
+    @Test
     public void test_add_remove_player(){
         final PlayerLobby CuT = new PlayerLobby();
 
@@ -35,6 +37,7 @@ public class PlayerLobbyTest {
         assertEquals(0, CuT.getPlayerCount());
     }
 
+    @Test
     public void test_signin_player(){
         final PlayerLobby CuT = new PlayerLobby();
 
@@ -50,6 +53,7 @@ public class PlayerLobbyTest {
         assertTrue(player.getName().equals(NAME));
     }
 
+    @Test
     public void test_player_count(){
         final PlayerLobby CuT = new PlayerLobby();
         final String[] names1 = {"name", "name2", "name3"};
@@ -65,7 +69,8 @@ public class PlayerLobbyTest {
         assertEquals(names1.length, CuT.getPlayerCount());
     }
 
-    public void pullByName(){
+    @Test
+    public void test_pull_by_name(){
         final PlayerLobby CuT = new PlayerLobby();
         final Player player = new Player("name");
 
@@ -76,5 +81,19 @@ public class PlayerLobbyTest {
         //Analyze results
         //See if player pulled is the same as the original player
         assertTrue(p2.equals(player));
+    }
+
+    @Test
+    public void test_iterator(){
+        final PlayerLobby CuT = new PlayerLobby();
+        final String NAME = "name";
+
+        //Invoke test
+        CuT.playerSignin(NAME);
+        Iterator<Player> iterator= CuT.iterator();
+
+        //Analyze results
+        //Assert iterator returned is nonnull
+        assertNotNull(iterator);
     }
 }
