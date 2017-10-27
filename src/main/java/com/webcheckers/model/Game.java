@@ -26,7 +26,7 @@ public class Game {
     //A list of spectators for a game
     List<Player> spectators;
     //A list move moves that houses all the moves in a game
-    List<Move> movesList = new ArrayList<>();
+    public List<Move> movesList = new ArrayList<>();
 
     /**
      * Assigns the players to the game

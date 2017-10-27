@@ -21,18 +21,21 @@ public class PostSubmitTurn implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        int startRow = move.getStart().getRow();
-        int startCol = move.getEnd().getCol();
-        int endRow = move.getEnd().getRow();
-        int endCol = move.getEnd().getCol();
-        Board b1 = game.getB1();
-        Board b2 = game.getB2();
-        b1.makeMove(endRow, endCol, piece);
-        b2.makeMove(endRow, endCol, piece);
-        Piece p1 = b1.getPieceAt(startRow, startCol);
-        Piece p2 = b2.getPieceAt(startRow, startCol);
-        p1 = null;
-        p2 = null;
+        if(game.movesList.contains(move)) {
+            int startRow = move.getStart().getRow();
+            int startCol = move.getEnd().getCol();
+            int endRow = move.getEnd().getRow();
+            int endCol = move.getEnd().getCol();
+            Board b1 = game.getB1();
+            Board b2 = game.getB2();
+            b1.makeMove(endRow, endCol, piece);
+            b2.makeMove(endRow, endCol, piece);
+            Piece p1 = b1.getPieceAt(startRow, startCol);
+            Piece p2 = b2.getPieceAt(startRow, startCol);
+            p1 = null;
+            p2 = null;
+            return null;
+        }
         return null;
     }
 }
