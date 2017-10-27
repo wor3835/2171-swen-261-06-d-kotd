@@ -35,6 +35,8 @@ public class PlayerLobbyTest {
         assertNotNull(CuT.removePlayer(player));
         //Checks that no players are signed in
         assertEquals(0, CuT.getPlayerCount());
+        //Check that player can't be removed when not there
+        assertNull(CuT.removePlayer(player));
     }
 
     @Test
