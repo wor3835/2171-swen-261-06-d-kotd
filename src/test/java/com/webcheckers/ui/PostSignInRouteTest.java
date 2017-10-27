@@ -1,20 +1,14 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 
 import spark.*;
 
 import static org.junit.Assert.*;
-import static spark.Spark.exception;
 import static spark.Spark.halt;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 import java.util.logging.Logger;
 
 
@@ -78,9 +72,9 @@ public class PostSignInRouteTest {
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Name must be alphanumeric, try another name", vm.get("error"));
-        assertEquals(Boolean.FALSE, vm.get(GetSignInRoute.PLAYER_NAME_USED_ATTR));
+        assertEquals(Boolean.FALSE, vm.get(GetSignInRouteTest.PLAYER_NAME_USED_ATTR));
         //   * test view name
-        assertEquals(GetSignInRoute.VIEW_NAME, myModelView.viewName);
+        assertEquals(GetSignInRouteTest.VIEW_NAME, myModelView.viewName);
     }
 
     //Tests for a name containing nothing
@@ -101,9 +95,9 @@ public class PostSignInRouteTest {
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Name must not be empty", vm.get("error"));
-        assertEquals(Boolean.FALSE, vm.get(GetSignInRoute.PLAYER_NAME_USED_ATTR));
+        assertEquals(Boolean.FALSE, vm.get(GetSignInRouteTest.PLAYER_NAME_USED_ATTR));
         //   * test view name
-        assertEquals(GetSignInRoute.VIEW_NAME, myModelView.viewName);
+        assertEquals(GetSignInRouteTest.VIEW_NAME, myModelView.viewName);
     }
 
     //Tests for a valid name
