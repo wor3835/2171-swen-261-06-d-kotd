@@ -1,15 +1,18 @@
 # PROJECT Home
 
-Welcome to the PROJECT Project!
+Welcome to the WebCheckers Project!
 
 ## Team
 
-* MEMBER1
-* MEMBER2
+* AJ Nagashima
+* Robert Kurdziel
+* William Raffaelle
+* George Pinal
+* Kerri Zalba
 
 ## [Design Documentation](DesignDoc)
 
-Click above for details of the PROJECT design documentation.
+Click above for details of the Webcheckers design documentation.
 
 ## [Setup Guide](SetupGuide)
 
