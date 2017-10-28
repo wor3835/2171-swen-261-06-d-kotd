@@ -3,44 +3,52 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> The following template provides the headings for your Design Documentation.  As you edit each section make sure you remove these commentary 'blockquotes'; the lines that start with a > character.
 
 # Team Information
-* Team name: TEAMNAME
+* Team name: KOTD (Team d)
 * Team members
-    * MEMBER1
-    * MEMBER2
-    * MEMBER3
+    * Robert Kurdziel
+    * AJ Nagashima
+    * William Raffaelle
+    * George Pinal
+    * Kerri Zalba
 
 ## Executive Summary
 
 This is a summary of the project.
 
 ### Purpose
-> Provide a very brief statement about the project and most important user group and user goals.
+Create an online checkers game.
 
 ### Glossary and Acronyms
-> Provide a table of terms and acronyms.
+
 
 | Term | Definition |
+
 |------|------------|
+
 | VO | Value Object |
+
+| MVP | Minimum Viable Product |
 
 
 ## Requirements
 
 This section describes the features of the application.
 
-> In this section you do not need to be exhaustive and list every story.  Focus on top-level features from the Vision document and maybe Epics and critical Stories.
 
 ### Definition of MVP
-> Provide a simple description of the Minimum Viable Product.
+A game of checkers can be played by the official American rule set between two people
 
 ### MVP Features
-> Provide a list of top-level Epics and/or Stories of the MVP.
+* Sign-in: Players must be able to sign into the checkers site
+* Game start: Players must be able to start a game with another person
+* Gameplay: Players must be able to play a game that follows the American checkers rule set
+* Resignation: Players must be able to resign from a game they no longer wish to play
 
 ### Roadmap of Enhancements
-> Provide a list of top-level features in the order you plan to consider them.
+* Spectate: Players must be able to watch an ongoing game between two other players
+* Replay: Players must be able to save previous matches and watch it again
 
 
 ## Application Domain
@@ -48,7 +56,7 @@ This section describes the features of the application.
 This section describes the application domain.
 
 ### Overview of Major Domain Areas
-> Provide a high-level overview of the 
+```//TODO```
 
 ### Details of each Domain Area
 > If necessary, high-light certain areas of the Domain model that have a focused purpose.  Create textual narrative that describes the purpose and how that relates to the associated domain model.
