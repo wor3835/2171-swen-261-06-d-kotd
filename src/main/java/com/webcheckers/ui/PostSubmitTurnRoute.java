@@ -12,7 +12,7 @@ import spark.Session;
 /**
  * Created by wor3835 on 10/25/2017.
  */
-public class PostSubmitTurn implements Route {
+public class PostSubmitTurnRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
@@ -31,7 +31,8 @@ public class PostSubmitTurn implements Route {
         }
         game.movesList.add(move);
 
-        Message msg;
+        Message msg = new Message("turn processed", MasterEnum.MessageType.info);
+        // Needs to return error. I asked on the discussion board what error should be checked.
         Gson gson = new Gson();
 
         return gson.toJson(msg);
