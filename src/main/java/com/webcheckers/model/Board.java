@@ -29,9 +29,24 @@ public class Board {
         init();
     }
 
-    public void makeMove(int row, int col, Piece p) {
-        Space s = board[row][col];
-        s.setPiece(p);
+    public void makeMove(Move move) {
+        Position start = move.getStart();
+        Position end = move.getEnd();
+        Space s = new Space(end.getCol(), true, board[start.getRow()][start.getCol()].getPiece());
+        board[end.getRow()][end.getCol()] = s;
+        board[start.getRow()][start.getCol()] = new Space(start.getCol(), true, null);
+    }
+
+    public void inverseMove(Move move){
+        Position start = move.getStart();
+        Position end = move.getEnd();
+        int endCol = BoardView.BOARD_LENGTH-end.getCol();
+        int endRow = BoardView.BOARD_LENGTH-end.getRow();
+        int startCol = BoardView.BOARD_LENGTH-start.getCol();
+        int startRow = BoardView.BOARD_LENGTH-start.getRow();
+        Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
+        board[endRow][endCol] = s;
+        board[startRow][startCol] = new Space(startCol, true, null);
     }
 
     /**

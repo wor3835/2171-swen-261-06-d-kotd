@@ -1,4 +1,4 @@
-# PROJECT Home
+# WebCheckers Home
 
 Welcome to the WebCheckers Project!
 
