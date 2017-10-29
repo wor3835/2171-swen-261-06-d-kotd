@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.MasterEnum;
+import com.webcheckers.appl.Message;
 import com.webcheckers.model.*;
 import spark.Request;
 import spark.Response;
@@ -30,6 +31,9 @@ public class PostSubmitTurn implements Route {
         }
         game.movesList.add(move);
 
-        return null;
+        Message msg;
+        Gson gson = new Gson();
+
+        return gson.toJson(msg);
     }
 }
