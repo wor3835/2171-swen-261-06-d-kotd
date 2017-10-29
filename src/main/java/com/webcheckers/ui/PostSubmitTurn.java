@@ -15,23 +15,21 @@ public class PostSubmitTurn implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        String body = request.body();
-        Gson g = new Gson();
-        Move move = g.fromJson(body, Move.class);
-
         Session session = request.session();
+
+        Move move = session.attribute(PostValidateMoveRoute.MOVE_ATTR);
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
-        if(game.movesList.contains(move)) {
-            Board b1 = game.getB1();
-            Board b2 = game.getB2();
-            if(session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED) {
-                b1.makeMove(move);
-                b2.inverseMove(move);
-            } else {
-                b1.inverseMove(move);
-                b2.makeMove(move);
-            }
+        Board b1 = game.getB1();
+        Board b2 = game.getB2();
+        if(session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED) {
+            b1.makeMove(move);
+            b2.inverseMove(move);
+        } else {
+            b1.inverseMove(move);
+            b2.makeMove(move);
         }
+        game.movesList.add(move);
+
         return null;
     }
 }

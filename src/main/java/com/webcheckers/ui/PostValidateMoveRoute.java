@@ -7,6 +7,7 @@ import com.webcheckers.model.*;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.Session;
 
 import java.util.ArrayList;
 
@@ -14,42 +15,38 @@ import java.util.ArrayList;
  * Created by wor3835 on 10/25/2017.
  */
 public class PostValidateMoveRoute implements Route {
-    private final Position start;
-    private final Position end;
-    private final Board board;
-    private final Game game;
 
-    public PostValidateMoveRoute(Position start, Position end, Board board, Game game) {
-        this.start = start;
-        this.end = end;
-        this.board = board;
-        this.game = game;
-    }
+    static final String MOVE_ATTR = "move";
+
+    private Message msg;
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        int startCol = start.getCol();
-        int startRow = start.getRow();
-        int endCol = end.getCol();
-        int endRow = end.getRow();
+        String body = request.body();
+        Gson g = new Gson();
+        Move move = g.fromJson(body, Move.class);
+
+        Session session = request.session();
+
         Gson gson = new Gson();
+
+        BoardView boardView = session.attribute(GetGameRoute.BOARD_VIEW_KEY);
+        Board board = boardView.getBoard();
+
+        int startRow = move.getStart().getRow();
+        int startCol = move.getStart().getCol();
+
         Space s = board.getSpaceAt(startRow, startCol);
         ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
-        if(moves.contains(new Move(start, end))) {
-            Move make = new Move(start, end);
-            game.addMove(make);
+        if(moves.contains(move)) {
+            session.attribute(MOVE_ATTR, move);
             //String moveString = gson.toJson(make);
             //moveString = request.body();
-            Message tru = new Message("the move is valid", MasterEnum.MessageType.info);
-            String ms = gson.toJson(make);
-            ms = request.body(); // request body
-            String mess = gson.toJson(tru);
-            mess = response.body();
+            msg = new Message("the move is valid", MasterEnum.MessageType.info);
         } else {
-            Message fal = new Message("the move is invalid", MasterEnum.MessageType.info);
-            String fals = gson.toJson(fal);
-            fals = response.body();
+            msg = new Message("the move is invalid", MasterEnum.MessageType.info);
         }
-        return gson.toJson(new Move(start, end));
+
+        return gson.toJson(msg);
     }
 }
