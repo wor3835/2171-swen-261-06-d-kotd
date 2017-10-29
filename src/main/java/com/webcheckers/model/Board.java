@@ -86,6 +86,6 @@ public class Board {
      * @return true or false if the piece is on the board
      */
     public boolean hasPiece(int i, int j){
-        return board[i][j] != null;
+        return board[i][j].getPiece() != null;
     }
 }

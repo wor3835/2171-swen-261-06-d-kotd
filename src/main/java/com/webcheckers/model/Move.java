@@ -23,4 +23,15 @@ public class Move {
     public String toString() {
         return super.toString();
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Move){
+            if(((Move)o).getStart().equals(this.getStart()) &&
+                    ((Move)o).getStart().equals(this.getStart()))
+                return true;
+        }
+        return false;
+    }
+
 }

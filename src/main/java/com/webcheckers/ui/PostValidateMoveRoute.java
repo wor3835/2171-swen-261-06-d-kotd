@@ -8,13 +8,18 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.Session;
+import sun.reflect.generics.reflectiveObjects.LazyReflectiveObjectGenerator;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Created by wor3835 on 10/25/2017.
  */
 public class PostValidateMoveRoute implements Route {
+
+    private static final Logger LOG = Logger.getLogger(PostValidateMoveRoute.class.getName());
 
     static final String MOVE_ATTR = "move";
 
@@ -28,8 +33,6 @@ public class PostValidateMoveRoute implements Route {
 
         Session session = request.session();
 
-        Gson gson = new Gson();
-
         BoardView boardView = session.attribute(GetGameRoute.BOARD_VIEW_KEY);
         Board board = boardView.getBoard();
 
@@ -38,7 +41,17 @@ public class PostValidateMoveRoute implements Route {
 
         Space s = board.getSpaceAt(startRow, startCol);
         ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
-        if(moves.contains(move)) {
+
+        boolean hasMove = false;
+        for(Move m: moves){
+            if(m.equals(move)) {
+                hasMove = true;
+                LOG.finer("CONTAINS MOVE");
+                break;
+            }
+        }
+
+        if(hasMove) {
             session.attribute(MOVE_ATTR, move);
             //String moveString = gson.toJson(make);
             //moveString = request.body();
@@ -46,6 +59,8 @@ public class PostValidateMoveRoute implements Route {
         } else {
             msg = new Message("the move is invalid", MasterEnum.MessageType.info);
         }
+
+        Gson gson = new Gson();
 
         return gson.toJson(msg);
     }
