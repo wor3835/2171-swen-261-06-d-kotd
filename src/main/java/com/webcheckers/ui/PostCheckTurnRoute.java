@@ -5,25 +5,36 @@ import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
 import com.webcheckers.model.Game;
+import com.webcheckers.model.Player;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.Session;
 
 /**
  * Created by wor3835 on 10/23/2017.
  */
 public class PostCheckTurnRoute implements Route {
-    Game game;
-
-    public PostCheckTurnRoute(Game game) {
-        this.game = game;
-    }
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        Session session = request.session();
+        Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+
+        String text;
+
+        if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
+                && session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED)
+                || currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
+                && session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.WHITE){
+            text = "true";
+        }else {
+            text = "false";
+        }
+
+        Message msg = new Message(text, MasterEnum.MessageType.info);
+
         Gson gson = new Gson();
-        Message t = new Message("true", MasterEnum.MessageType.info);
-        Message f = new Message("false", MasterEnum.MessageType.info);
-        return null;
+        return gson.toJson(msg);
     }
 }

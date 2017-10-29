@@ -23,16 +23,18 @@ public class PostSubmitTurnRoute implements Route {
         Board b1 = game.getB1();
         Board b2 = game.getB2();
         if(session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED) {
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
             b1.makeMove(move);
             b2.inverseMove(move);
         } else {
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
             b1.inverseMove(move);
             b2.makeMove(move);
         }
         game.movesList.add(move);
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);
-        // Needs to return error. I asked on the discussion board what error should be checked.
+        //FIXME: Needs to return error. I asked on the discussion board what error should be checked.
         Gson gson = new Gson();
 
         return gson.toJson(msg);
