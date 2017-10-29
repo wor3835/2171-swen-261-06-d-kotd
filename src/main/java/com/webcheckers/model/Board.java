@@ -40,10 +40,10 @@ public class Board {
     public void inverseMove(Move move){
         Position start = move.getStart();
         Position end = move.getEnd();
-        int endCol = BoardView.BOARD_LENGTH-end.getCol();
-        int endRow = BoardView.BOARD_LENGTH-end.getRow();
-        int startCol = BoardView.BOARD_LENGTH-start.getCol();
-        int startRow = BoardView.BOARD_LENGTH-start.getRow();
+        int endCol = BoardView.BOARD_LENGTH-end.getCol()-1;
+        int endRow = BoardView.BOARD_LENGTH-end.getRow()-1;
+        int startCol = BoardView.BOARD_LENGTH-start.getCol()-1;
+        int startRow = BoardView.BOARD_LENGTH-start.getRow()-1;
         Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
