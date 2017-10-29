@@ -20,13 +20,15 @@ public class PostCheckTurnRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();
         Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+        Game game = session.attribute(GetGameRoute.GAME_ATTR);
 
         String text;
 
         if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
-                && session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED)
+                && game.getActiveColor() == MasterEnum.Color.RED)
                 || currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
-                && session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.WHITE){
+                && game.getActiveColor() == MasterEnum.Color.WHITE){
+            session.attribute(GetGameRoute.ACTIVE_COLOR, game.activeColor);
             text = "true";
         }else {
             text = "false";

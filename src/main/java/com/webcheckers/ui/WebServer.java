@@ -199,6 +199,13 @@ public class WebServer {
 
     post(START_URL, new PostStartRoute(templateEngine, playerLobby, gameLobby));
 
+    post(CHECKTURN_URL, new PostCheckTurnRoute());
+
+    post(VALID_URL, new PostValidateMoveRoute());
+
+    post(SUBMIT_URL, new PostSubmitTurnRoute());
+
+    post(BACKUP_URL, new PostSubmitTurnRoute());
     //FIXME: add posts for an subsequent route classes specified by URL's
     //
     LOG.config("WebServer is initialized.");

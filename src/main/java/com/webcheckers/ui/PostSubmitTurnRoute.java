@@ -32,6 +32,7 @@ public class PostSubmitTurnRoute implements Route {
             b2.makeMove(move);
         }
         game.movesList.add(move);
+        game.switchActive();
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);
         //FIXME: Needs to return error. I asked on the discussion board what error should be checked.

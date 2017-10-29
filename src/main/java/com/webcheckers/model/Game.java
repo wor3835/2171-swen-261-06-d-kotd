@@ -28,6 +28,8 @@ public class Game {
     //A list move moves that houses all the moves in a game
     public List<Move> movesList = new ArrayList<>();
 
+    public MasterEnum.Color activeColor;
+
     /**
      * Assigns the players to the game
      * @param p1
@@ -42,6 +44,9 @@ public class Game {
         this.p2 = p2;
         p1.assignGame(this);
         p2.assignGame(this);
+
+        activeColor = MasterEnum.Color.RED;
+
         return true;
     }
 
@@ -49,6 +54,22 @@ public class Game {
         this.b1 = b1;
         this.b2 = b2;
     }
+
+    public void switchActive(){
+        switch(activeColor){
+            case RED:
+                activeColor = MasterEnum.Color.WHITE;
+                break;
+            case WHITE:
+                activeColor = MasterEnum.Color.WHITE;
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public MasterEnum.Color getActiveColor() {return activeColor;}
 
     public Player getP1()
     {
