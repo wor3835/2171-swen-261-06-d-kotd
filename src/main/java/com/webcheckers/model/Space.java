@@ -63,6 +63,32 @@ public class Space{
                         m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
                     }
                 }
+                if(row - 1 > 0 && col - 1 >= 0) {
+                    if(!(b.hasPiece(row, col))) {
+                        m1.add(new Move(new Position(row, col), new Position(row -1, col - 1)));
+                    }
+                }
+            } else if (curr.getType().equals(MasterEnum.PieceType.KING)) {
+                if(row - 1 > 0 && col + 1 < BoardView.BOARD_LENGTH) {
+                    if(!(b.hasPiece(row, col))) {
+                        m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
+                    }
+                }
+                if(row - 1 > 0 && col - 1 >= 0) {
+                    if(!(b.hasPiece(row, col))) {
+                        m1.add(new Move(new Position(row, col), new Position(row -1, col - 1)));
+                    }
+                }
+                if(row + 1 < BoardView.BOARD_LENGTH && col + 1 < BoardView.BOARD_LENGTH) {
+                    if(!(b.hasPiece(row, col))) {
+                        m1.add(new Move(new Position(row, col), new Position(row + 1, col + 1)));
+                    }
+                }
+                if(row + 1 < BoardView.BOARD_LENGTH && col - 1 >= 0) {
+                    if(!(b.hasPiece(row, col))) {
+                        m1.add(new Move(new Position(row, col), new Position(row + 1, col + 1)));
+                    }
+                }
             }
         }
         return m1;
