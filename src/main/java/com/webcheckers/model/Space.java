@@ -59,33 +59,33 @@ public class Space{
             Piece curr = b.getPieceAt(row, col);
             if (curr.getType().equals(MasterEnum.PieceType.SINGLE)) {
                 if(row - 1 > 0 && col + 1 < BoardView.BOARD_LENGTH) {
-                    if(!(b.hasPiece(row, col))) {
+                    if(!(b.hasPiece(row - 1, col + 1))) {
                         m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
                     }
                 }
                 if(row - 1 > 0 && col - 1 >= 0) {
-                    if(!(b.hasPiece(row, col))) {
+                    if(!(b.hasPiece(row - 1, col - 1))) {
                         m1.add(new Move(new Position(row, col), new Position(row -1, col - 1)));
                     }
                 }
             } else if (curr.getType().equals(MasterEnum.PieceType.KING)) {
                 if(row - 1 > 0 && col + 1 < BoardView.BOARD_LENGTH) {
-                    if(!(b.hasPiece(row, col))) {
+                    if(!(b.hasPiece(row - 1, col + 1))) {
                         m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
                     }
                 }
                 if(row - 1 > 0 && col - 1 >= 0) {
-                    if(!(b.hasPiece(row, col))) {
+                    if(!(b.hasPiece(row - 1, col - 1))) {
                         m1.add(new Move(new Position(row, col), new Position(row -1, col - 1)));
                     }
                 }
                 if(row + 1 < BoardView.BOARD_LENGTH && col + 1 < BoardView.BOARD_LENGTH) {
-                    if(!(b.hasPiece(row, col))) {
+                    if(!(b.hasPiece(row + 1, col + 1))) {
                         m1.add(new Move(new Position(row, col), new Position(row + 1, col + 1)));
                     }
                 }
                 if(row + 1 < BoardView.BOARD_LENGTH && col - 1 >= 0) {
-                    if(!(b.hasPiece(row, col))) {
+                    if(!(b.hasPiece(row + 1, col - 1))) {
                         m1.add(new Move(new Position(row, col), new Position(row + 1, col + 1)));
                     }
                 }
