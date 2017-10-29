@@ -56,7 +56,7 @@ A game of checkers can be played by the official American rule set between two p
 This section describes the application domain.
 
 ### Overview of Major Domain Areas
-```//TODO```
+> Provide a high-level overview of the 
 
 ### Details of each Domain Area
 > If necessary, high-light certain areas of the Domain model that have a focused purpose.  Create textual narrative that describes the purpose and how that relates to the associated domain model.
