@@ -27,8 +27,8 @@ public class Move {
     @Override
     public boolean equals(Object o){
         if(o instanceof Move){
-            if(((Move)o).getStart().equals(this.getStart()) &&
-                    ((Move)o).getStart().equals(this.getStart()))
+            if(((Move)o).getEnd().equals(this.getEnd()) &&
+                    ((Move)o).getEnd().equals(this.getEnd()))
                 return true;
         }
         return false;
