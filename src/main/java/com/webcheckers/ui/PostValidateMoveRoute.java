@@ -57,7 +57,7 @@ public class PostValidateMoveRoute implements Route {
             //moveString = request.body();
             msg = new Message("the move is valid", MasterEnum.MessageType.info);
         } else {
-            msg = new Message("the move is invalid", MasterEnum.MessageType.info);
+            msg = new Message("the move is invalid", MasterEnum.MessageType.error);
         }
 
         Gson gson = new Gson();
