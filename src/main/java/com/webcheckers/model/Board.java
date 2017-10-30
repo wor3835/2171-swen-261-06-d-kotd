@@ -32,9 +32,21 @@ public class Board {
     public void makeMove(Move move) {
         Position start = move.getStart();
         Position end = move.getEnd();
-        Space s = new Space(end.getCol(), true, board[start.getRow()][start.getCol()].getPiece());
-        board[end.getRow()][end.getCol()] = s;
-        board[start.getRow()][start.getCol()] = new Space(start.getCol(), true, null);
+        int endCol = end.getCol();
+        int endRow = end.getRow();
+        int startCol = start.getCol();
+        int startRow = start.getRow();
+        if(Math.abs(startCol-endCol) == 2){
+            board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
+                    new Space(startCol+(endCol-startCol)/2, true, null);
+        }
+        Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
+        if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
+                endRow == BoardView.BOARD_LENGTH-1){
+            s.kingMe();
+        }
+        board[endRow][endCol] = s;
+        board[startRow][startCol] = new Space(startCol, true, null);
     }
 
     public void inverseMove(Move move){
@@ -44,7 +56,15 @@ public class Board {
         int endRow = BoardView.BOARD_LENGTH-end.getRow()-1;
         int startCol = BoardView.BOARD_LENGTH-start.getCol()-1;
         int startRow = BoardView.BOARD_LENGTH-start.getRow()-1;
+        if(Math.abs(startCol-endCol) == 2){
+            board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
+                    new Space(startCol+(endCol-startCol)/2, true, null);
+        }
         Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
+        if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
+                endRow == 0){
+            s.kingMe();
+        }
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
     }

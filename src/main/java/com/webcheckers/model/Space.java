@@ -53,6 +53,10 @@ public class Space{
         return piece;
     }
 
+    public void kingMe(){
+        piece = new King(piece);
+    }
+
     public ArrayList<Move> validMoves(Board b, int row, int col) {
         ArrayList<Move> m1 = new ArrayList<>();
         if (b.hasPiece(row, col)) {
