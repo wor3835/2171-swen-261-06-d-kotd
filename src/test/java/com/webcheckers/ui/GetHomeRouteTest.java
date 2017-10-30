@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -16,12 +14,7 @@ import static spark.Spark.halt;
 
 import org.junit.Before;
 import org.junit.Test;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.Session;
-import spark.TemplateEngine;
+import spark.*;
 
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
@@ -78,6 +71,23 @@ public class GetHomeRouteTest {
         //assertEquals("", vm.get(GetHomeRoute.GAME_STATS_MSG_ATTR));
         assertEquals(GetHomeRoute.VIEW_NAME, myModelView.viewName);
         verify(session).attribute(eq("playerLobby"), any(PlayerLobby.class));
+    }
+
+    @Test
+    public void old_session(){
+        // Arrange the test scenario: There is an existing session without a game.
+        when(session.isNew()).thenReturn(false);
+        final Response response = mock(Response.class);
+
+        // Invoke the test
+        try {
+            CuT.handle(request, response);
+        } catch (Exception e) {
+            // expected
+        }
+        // Analyze the results:
+        response.redirect("/");
+        verify(response).redirect(WebServer.HOME_URL);
     }
 
 
