@@ -19,4 +19,14 @@ public class King extends Piece {
         super(color, MasterEnum.PieceType.KING);
         range = 7;
     }
+
+    public MasterEnum.Color getColor()
+    {
+        return super.getColor();
+    }
+
+    public MasterEnum.PieceType getType()
+    {
+        return super.getType();
+    }
 }
