@@ -19,7 +19,7 @@ import spark.Session;
 import com.webcheckers.model.Player;
 
 /**
- * The UI Controller to GET the Home page.
+ * The UI Controller to GET the Game page.
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */

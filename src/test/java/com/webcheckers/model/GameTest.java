@@ -1,7 +1,13 @@
 package com.webcheckers.model;
 import com.webcheckers.appl.MasterEnum;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
 import org.junit.Test;
+import spark.Request;
+import spark.Session;
 
 /**
  * The unit test suite for the {@link Game} component.
@@ -10,12 +16,29 @@ import org.junit.Test;
  */
 
 public class GameTest {
+
+    private Game CuT;
+
+    private Request request;
+    private Session session;
+    private boolean inGame;
+    private Game game;
+
+    @Before
+    public void setup() {
+        request = mock(Request.class);
+        session = mock(Session.class);
+        when(request.session()).thenReturn(session);
+        inGame = false;
+        game = mock(Game.class);
+        CuT = new Game();
+    }
     @Test
     /**
      * Tests to make sure an empty game can be initialized
      */
     public void createGame() {
-        final Game CuT = new Game();
+        //final Game CuT = new Game();
 
         final Player player1 = new Player("player1");
         final Player player2 = new Player("player2");
@@ -39,7 +62,7 @@ public class GameTest {
      * Makes sure boards can be set for each player
      */
     public void setBoards() {
-        final Game CuT = new Game();
+        //final Game CuT = new Game();
 
         final Player player1 = new Player("player1");
         final Player player2 = new Player("player2");
@@ -61,7 +84,7 @@ public class GameTest {
      * Makes sure you can choose the active color
      */
     public void activeColor() {
-        final Game CuT = new Game();
+        //final Game CuT = new Game();
 
         final Player player1 = new Player("player1");
         final Player player2 = new Player("player2");
