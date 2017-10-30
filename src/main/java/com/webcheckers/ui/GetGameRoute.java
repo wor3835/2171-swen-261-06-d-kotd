@@ -90,6 +90,12 @@ public class GetGameRoute implements Route {
         /*if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
             httpSession.attribute(BOARD_VIEW_KEY, new BoardView());
         }*/
+
+//        Game game = httpSession.attribute(GAME_ATTR);
+//        BoardView boardView = new BoardView(null,
+//                httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR).equals(httpSession.attribute(RED_PLAYER)) ?
+//                        game.getB1() : game.getB2());
+//        httpSession.attribute(BOARD_VIEW_KEY, boardView);
         vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
         vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));

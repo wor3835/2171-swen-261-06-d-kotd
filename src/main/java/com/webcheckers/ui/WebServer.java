@@ -76,7 +76,7 @@ public class WebServer {
   /**
    * The URL pattern to request the CheckTurn page.
    */
-  public static final String CHECKTURN_URL = "/checkturn";
+  public static final String CHECKTURN_URL = "/checkTurn";
   /**
    * The URL pattern to request the ValidateMove page.
    */
@@ -206,6 +206,8 @@ public class WebServer {
     post(SUBMIT_URL, new PostSubmitTurnRoute());
 
     post(BACKUP_URL, new PostSubmitTurnRoute());
+
+    post(RESIGN_URL, new PostResignGameRoute());
     //FIXME: add posts for an subsequent route classes specified by URL's
     //
     LOG.config("WebServer is initialized.");

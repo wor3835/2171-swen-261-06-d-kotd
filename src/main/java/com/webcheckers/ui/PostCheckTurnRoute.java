@@ -26,8 +26,8 @@ public class PostCheckTurnRoute implements Route {
 
         if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.RED)
-                || currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
-                && game.getActiveColor() == MasterEnum.Color.WHITE){
+                || (currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
+                && game.getActiveColor() == MasterEnum.Color.WHITE)){
             session.attribute(GetGameRoute.ACTIVE_COLOR, game.activeColor);
             text = "true";
         }else {

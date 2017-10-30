@@ -61,7 +61,7 @@ public class Game {
                 activeColor = MasterEnum.Color.WHITE;
                 break;
             case WHITE:
-                activeColor = MasterEnum.Color.WHITE;
+                activeColor = MasterEnum.Color.RED;
                 break;
             default:
                 break;
