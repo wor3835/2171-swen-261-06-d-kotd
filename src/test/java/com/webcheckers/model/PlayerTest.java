@@ -11,10 +11,7 @@ import static org.junit.Assert.*;
 import static spark.Spark.exception;
 import static spark.Spark.halt;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -82,11 +79,32 @@ public class PlayerTest {
 
     //tests if a player can be assigned a game
     @Test
-    public void assign_game(){
+    public void game_test(){
         CuT.setName(NAME_FOR_TEST);
         assertNotNull(CuT.getName());
         assertEquals(Boolean.FALSE, CuT.isInGame());
         CuT.assignGame(game);
         assertEquals(Boolean.TRUE, CuT.isInGame());
+        assertNotNull(CuT.getGame());
+        CuT.leaveGame();
+        assertFalse(CuT.isInGame());
+        assertNull(CuT.getGame());
+    }
+
+    //tests the equals method
+    @Test
+    public void equals_test(){
+        CuT.setName(NAME_FOR_TEST);
+        assertNotNull(CuT);
+        ArrayList<String> TEST_LIST = new ArrayList();
+        assertFalse(CuT.equals(TEST_LIST));
+        assertTrue(CuT.equals(CuT));
+    }
+
+    //tests if toString returns what it is supposed to
+    @Test
+    public void toString_test(){
+        CuT.setName(NAME_FOR_TEST);
+        assertEquals("<a href='/game' onclick=\"playerLobby.pullByHashCode("+CuT.hashCode()+")\">" +CuT.getName() + "</a>" + "\n", CuT.toString());
     }
 }

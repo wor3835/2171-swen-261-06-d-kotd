@@ -56,14 +56,14 @@ public class Player {
 
     public void assignGame(Game game){
         this.game = game;
-        inGame = true;
+        setInGame();
     }
 
 
     /**
      * Sets the player to be in the game
      */
-    public void setInGame()
+    private void setInGame()
     {
         this.inGame = true;
     }
@@ -73,7 +73,14 @@ public class Player {
      */
     public void leaveGame(){
         this.inGame = false;
+        this.game = null;
     }
+
+    /**
+     * returns the game object this player is in (for testing purposes)
+     * @return Game
+     */
+    public Game getGame(){return this.game;}
 
     @Override
     /**
