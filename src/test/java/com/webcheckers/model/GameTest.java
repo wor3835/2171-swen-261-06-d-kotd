@@ -45,6 +45,10 @@ public class GameTest {
 
         CuT.applyGame(player1, player2); // assigns the players to the game
 
+        assertEquals(MasterEnum.Color.RED, CuT.getP1color());
+        assertEquals(MasterEnum.Color.WHITE, CuT.getP2color());
+
+
         // checks if names are assigned to players in game
         assertTrue(CuT.getP1().getName().equals(player1.getName()));
         assertTrue(CuT.getP2().getName().equals(player2.getName()));
@@ -55,6 +59,20 @@ public class GameTest {
         // makes sure boards are empty
         assertNull(CuT.getB1());
         assertNull(CuT.getB2());
+
+        /**
+         * Heres an example of a failed game. Player 3 is already in a game.
+         */
+
+        final Player player3 = new Player("player3");
+        final Player player4 = new Player("player4");
+        final Player player5 = new Player("player5");
+
+        final Game test = new Game();
+        test.applyGame(player3, player5);
+        assertEquals(true, player5.isInGame());
+
+        assertEquals(false, CuT.applyGame(player4, player5));
     }
 
     @Test
@@ -77,6 +95,10 @@ public class GameTest {
         // makes sure boards are not null
         assertNotNull(CuT.getB1());
         assertNotNull(CuT.getB2());
+
+        // make a move
+        CuT.addMove(new Move(new Position(0,0), new Position(1, 2)));
+        assertNotNull(CuT.getMovesList());
     }
 
     @Test
@@ -96,5 +118,9 @@ public class GameTest {
         CuT.switchActive(); // switch active color
 
         assertEquals(MasterEnum.Color.WHITE, CuT.getActiveColor());
+
+        CuT.switchActive();
+
+        assertEquals(MasterEnum.Color.RED, CuT.getActiveColor());
     }
 }
