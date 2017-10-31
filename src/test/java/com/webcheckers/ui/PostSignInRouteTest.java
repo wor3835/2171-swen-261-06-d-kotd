@@ -119,4 +119,28 @@ public class PostSignInRouteTest {
 
         assertEquals(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR), player);
     }
+
+    //Tests for when a duplicate name is entered
+    @Test
+    public void dublicate_name(){
+        final Response response = mock(Response.class);
+        when(playerLobby.contains(VALID_NAME)).thenReturn(Boolean.TRUE);
+        when(playerLobby.playerSignin(VALID_NAME)).thenReturn(new Player(VALID_NAME));
+        when(request.queryParams(eq(PostSignInRoute.NAME))).thenReturn(VALID_NAME);
+
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        CuT.handle(request, response);
+
+
+        final Object model = myModelView.model;
+        assertNotNull(model);
+        assertTrue(model instanceof Map);
+        //   * model contains all necessary View-Model data
+        @SuppressWarnings("unchecked")
+        final Map<String, Object> vm = (Map<String, Object>) model;
+
+        assertEquals("Name taken, try another name", vm.get("error"));
+    }
 }
