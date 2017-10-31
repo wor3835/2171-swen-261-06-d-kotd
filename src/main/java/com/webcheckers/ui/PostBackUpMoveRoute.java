@@ -13,10 +13,8 @@ import spark.Session;
  * Created by wor3835 on 10/26/2017.
  */
 public class PostBackUpMoveRoute implements Route {
-    private final Game game;
 
-    public PostBackUpMoveRoute(Game game) {
-        this.game = game;
+    public PostBackUpMoveRoute() {
     }
 
     @Override

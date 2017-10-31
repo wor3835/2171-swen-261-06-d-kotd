@@ -205,7 +205,7 @@ public class WebServer {
 
     post(SUBMIT_URL, new PostSubmitTurnRoute());
 
-    post(BACKUP_URL, new PostSubmitTurnRoute());
+    post(BACKUP_URL, new PostBackUpMoveRoute());
 
     post(RESIGN_URL, new PostResignGameRoute());
     //FIXME: add posts for an subsequent route classes specified by URL's
