@@ -42,7 +42,7 @@ public class Board {
         }
         Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
-                endRow == BoardView.BOARD_LENGTH-1){
+                endRow == 0){
             s.kingMe();
         }
         board[endRow][endCol] = s;
@@ -62,7 +62,7 @@ public class Board {
         }
         Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
-                endRow == 0){
+                endRow == BoardView.BOARD_LENGTH-1){
             s.kingMe();
         }
         board[endRow][endCol] = s;
