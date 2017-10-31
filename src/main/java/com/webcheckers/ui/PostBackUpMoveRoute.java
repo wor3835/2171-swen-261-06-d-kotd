@@ -7,6 +7,7 @@ import com.webcheckers.model.Game;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.Session;
 
 /**
  * Created by wor3835 on 10/26/2017.
@@ -21,17 +22,15 @@ public class PostBackUpMoveRoute implements Route {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Gson gson = new Gson();
-        if(!game.movesList.isEmpty()) {
-            game.movesList.remove(0); // remove last validated move
-            Message t = new Message("back up move successful", MasterEnum.MessageType.info);
-            String tru = gson.toJson(t);
-            tru = response.body();
-        } else {
-            Message f = new Message("error: move was not removed", MasterEnum.MessageType.info);
-            String fal = gson.toJson(f);
-            fal = response.body();
+        Message t;
+        Session session = request.session();
+        if (session.attribute(PostValidateMoveRoute.MOVE_ATTR) == null)
+            t = new Message("back up move failure", MasterEnum.MessageType.error);
+        else {
+            session.attribute(PostValidateMoveRoute.MOVE_ATTR, null);
+            t = new Message("back up move successful", MasterEnum.MessageType.info);
         }
 
-        return null;
+        return gson.toJson(t);
     }
 }
