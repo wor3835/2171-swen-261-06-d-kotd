@@ -13,7 +13,6 @@ public abstract class Piece {
 
     private MasterEnum.PieceType type;
     private MasterEnum.Color color;
-    public int range;
 
     /**
      * Sets color and type of piece

@@ -13,7 +13,6 @@ public class Pawn extends Piece{
      */
     public Pawn(MasterEnum.Color color) {
         super(color, MasterEnum.PieceType.SINGLE);
-        range = 1;
     }
 
     public MasterEnum.Color getColor()

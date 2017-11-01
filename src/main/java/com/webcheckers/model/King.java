@@ -17,12 +17,10 @@ public class King extends Piece {
      */
     public King(MasterEnum.Color color) {
         super(color, MasterEnum.PieceType.KING);
-        range = 7;
     }
 
     public King(Piece p){
         super(p.getColor(), MasterEnum.PieceType.KING);
-        range = 7;
     }
 
     public MasterEnum.Color getColor()
