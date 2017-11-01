@@ -55,6 +55,10 @@ public class Space{
     }
 
     public void kingMe(){
+        if(piece == null)
+            throw new RuntimeException("no piece to king");
+        else if(piece.getType() == MasterEnum.PieceType.KING)
+            throw new RuntimeException("piece is already a king");
         piece = new King(piece);
     }
 
