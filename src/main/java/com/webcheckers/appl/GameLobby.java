@@ -19,9 +19,13 @@ public class GameLobby {
         gamesList.remove(game);
     }
 
+    public ArrayList<Game> getGamesList() {
+        return gamesList;
+    }
+
     public Game inGame(Player p){
         for(int i = 0; i < gamesList.size(); i++){
-            if(p.equals(gamesList.get(i).getP2()) || p.equals(gamesList.get(i).getP2()))
+            if(p.equals(gamesList.get(i).getP1()) || p.equals(gamesList.get(i).getP2()))
                 return gamesList.get(i);
         }
         return null;
