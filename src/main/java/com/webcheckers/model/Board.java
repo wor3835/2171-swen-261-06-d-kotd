@@ -47,6 +47,8 @@ public class Board {
         }
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
+        if(move.getMove() != null )
+            makeMove(move.getMove());
     }
 
     public void inverseMove(Move move){
@@ -67,6 +69,8 @@ public class Board {
         }
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
+        if(move.getMove() != null)
+            inverseMove(move.getMove());
     }
 
     /**
