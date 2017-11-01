@@ -29,6 +29,23 @@ public class Board {
         init();
     }
 
+    /**
+     * Initializes the board
+     */
+    private void init(){
+        for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
+            for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
+                if((i+j)%2==1 && i < 3){
+                    board[i][j] = new Space(j, false, new Pawn(opponentColor));
+                } else if ((i+j)%2==1 && i >= 5) {
+                    board[i][j] = new Space(j, false, new Pawn(playerColor));
+                } else {
+                    board[i][j] = new Space(j, (i+j)%2==1, null);
+                }
+            }
+        }
+    }
+
     public void makeMove(Move move) {
         Position start = move.getStart();
         Position end = move.getEnd();
@@ -40,7 +57,7 @@ public class Board {
             board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
                     new Space(startCol+(endCol-startCol)/2, true, null);
         }
-        Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
+        Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
                 endRow == 0){
             s.kingMe();
@@ -62,7 +79,7 @@ public class Board {
             board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
                     new Space(startCol+(endCol-startCol)/2, true, null);
         }
-        Space s = new Space(endCol, true, board[startRow][startCol].getPiece());
+        Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
                 endRow == BoardView.BOARD_LENGTH-1){
             s.kingMe();
@@ -71,23 +88,6 @@ public class Board {
         board[startRow][startCol] = new Space(startCol, true, null);
         if(move.getMove() != null)
             inverseMove(move.getMove());
-    }
-
-    /**
-     * Initializes the board
-     */
-    private void init(){
-        for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
-            for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
-                if((i+j)%2==1 && i < 3){
-                    board[i][j] = new Space(j, false, new Pawn(opponentColor));
-                } else if ((i+j)%2==1 && i >= 5) {
-                    board[i][j] = new Space(j, false, new Pawn(playerColor));
-                } else {
-                    board[i][j] = new Space(j, (i+j)%2==1, null);
-                }
-            }
-        }
     }
 
     /**
