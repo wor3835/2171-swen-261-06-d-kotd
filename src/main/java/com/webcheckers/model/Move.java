@@ -28,6 +28,13 @@ public class Move {
         return end;
     }
 
+    public Position getFinal(){
+        if(move == null)
+            return getEnd();
+        return move.getFinal();
+    }
+
+
     @Override
     public String toString() {
         return super.toString();
@@ -37,7 +44,7 @@ public class Move {
     public boolean equals(Object o){
         if(o instanceof Move){
             if(((Move)o).getStart().equals(this.getStart()) &&
-                    ((Move)o).getEnd().equals(this.getEnd()))
+                    ((Move)o).getFinal().equals(this.getFinal()))
                 return true;
         }
         return false;

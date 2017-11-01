@@ -2,6 +2,7 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.MasterEnum;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,14 +87,18 @@ public class Space {
                     (row - 2 >= 0 && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row - 2, col + 2)))) {
                 if(noJumps) {noJumps = false; moves.clear();}
 
-                moves.add(new Move(new Position(row, col), new Position(row - 2, col + 2)));
+                Move temp = new Move(new Position(row, col), new Position(row - 2, col + 2));
+
+                moves.add(temp);
             }
         }
         if (row - 1 >= 0 && col - 1 >= 0) {
             if (b.hasPiece(row - 1, col - 1) &&  (row - 2 >= 0 && col - 2 >= 0 && !(b.hasPiece(row - 2, col - 2)))) {
                 if(noJumps) {noJumps = false; moves.clear();}
 
-                moves.add(new Move(new Position(row, col), new Position(row - 2, col - 2)));
+                Move temp = new Move(new Position(row, col), new Position(row - 2, col - 2));
+
+                moves.add(temp);
             }
         }
         if (piece.getType().equals(MasterEnum.PieceType.KING)) {
@@ -102,7 +107,9 @@ public class Space {
                         (row + 2 < BoardView.BOARD_LENGTH && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row + 2, col + 2)))) {
                     if(noJumps) {noJumps = false; moves.clear();}
 
-                    moves.add(new Move(new Position(row, col), new Position(row + 2, col + 2)));
+                    Move temp = new Move(new Position(row, col), new Position(row + 2, col + 2));
+
+                    moves.add(temp);
                 }
             }
             if (row + 1 < BoardView.BOARD_LENGTH && col - 1 >= 0) {
@@ -110,7 +117,9 @@ public class Space {
                         (row + 2 < BoardView.BOARD_LENGTH && col - 2 >= 0 && !(b.hasPiece(row + 2, col - 2)))) {
                     if(noJumps) {noJumps = false; moves.clear();}
 
-                    moves.add(new Move(new Position(row, col), new Position(row + 2, col - 2)));
+                    Move temp = new Move(new Position(row, col), new Position(row + 2, col - 2));
+
+                    moves.add(temp);
                 }
             }
         }
