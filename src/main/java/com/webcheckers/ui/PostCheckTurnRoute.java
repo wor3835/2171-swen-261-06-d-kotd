@@ -11,10 +11,13 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 
+import java.util.logging.Logger;
+
 /**
  * Created by wor3835 on 10/23/2017.
  */
 public class PostCheckTurnRoute implements Route {
+    private static final Logger LOG = Logger.getLogger(PostCheckTurnRoute.class.getName());
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
@@ -23,6 +26,8 @@ public class PostCheckTurnRoute implements Route {
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
 
         String text;
+
+        if(currentPlayer == null)LOG.fine("Current player = null");
 
         if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.RED)

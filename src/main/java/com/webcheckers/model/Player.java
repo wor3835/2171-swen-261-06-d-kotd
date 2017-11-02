@@ -92,11 +92,12 @@ public class Player {
         return false;
     }
 
-    public Position removePiece(Position p) {
+    public void removePiece(Position p) {
         for (int i = 0; i < posList.size(); i++)
-            if (p.equals(posList.get(i)))
-                return posList.remove(i);
-        return null;
+            if (posList.get(i).equals(p)) {
+                posList.remove(i);
+                break;
+            }
     }
 
     /**
