@@ -80,7 +80,6 @@ public class Board {
                     new Space(startCol+(endCol-startCol)/2, true, null);
             Position piecepos = new Position(startRow+(endRow-startRow)/2,
                     startCol+(endCol-startCol)/2);
-            p.removePiece(piecepos);
         }
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&

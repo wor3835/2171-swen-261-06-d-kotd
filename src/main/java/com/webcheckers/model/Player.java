@@ -86,7 +86,7 @@ public class Player {
         for(int i = 0; i < posList.size(); i++)
             if(posList.get(i).equals(m.getStart())) {
                 posList.remove(i);
-                posList.add(new Position(m.getEnd().getRow(), m.getEnd().getCol()));
+                posList.add(m.getEnd());
                 return true;
             }
         return false;
