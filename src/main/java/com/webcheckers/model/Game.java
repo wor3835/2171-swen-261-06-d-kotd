@@ -52,7 +52,9 @@ public class Game {
 
     public void applyBoard(Board b1, Board b2) {
         this.b1 = b1;
+        p1.assignPos(b1, MasterEnum.Color.RED);
         this.b2 = b2;
+        p2.assignPos(b2, MasterEnum.Color.WHITE);
     }
 
     public void switchActive(){

@@ -22,14 +22,15 @@ public class PostSubmitTurnRoute implements Route {
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
         Board b1 = game.getB1();
         Board b2 = game.getB2();
+        Player opponent = session.attribute(GetGameRoute.OPPONENT_ATTR);
         if(session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED) {
             session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
-            b1.makeMove(move);
-            b2.inverseMove(move);
+            b1.makeMove(move, opponent);
+            b2.inverseMove(move, opponent);
         } else {
             session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
-            b1.inverseMove(move);
-            b2.makeMove(move);
+            b1.inverseMove(move, opponent);
+            b2.makeMove(move, opponent);
         }
         game.movesList.add(move);
         game.switchActive();

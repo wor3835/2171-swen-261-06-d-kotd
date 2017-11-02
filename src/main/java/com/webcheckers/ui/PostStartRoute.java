@@ -87,19 +87,21 @@ public class PostStartRoute implements Route {
         httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         vm.put(RED_PLAYER, httpSession.attribute(RED_PLAYER));
 
+
         Player opponent = playerLobby.pullByName(request.queryParams(OPPONENT_ATTR));
         if(!opponent.isInGame()) {
-            if(httpSession.attribute(BOARD_VIEW_KEY)==null) {
-                httpSession.attribute(BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.RED));
-            }
+            httpSession.attribute(BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.RED));
+
             vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
 
             httpSession.attribute(WHITE_PLAYER, opponent);
             vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
+            httpSession.attribute(OPPONENT_ATTR, httpSession.attribute(WHITE_PLAYER));
             Game game = new Game();
+            game.applyGame(httpSession.attribute(RED_PLAYER), httpSession.attribute(WHITE_PLAYER));
+
             game.applyBoard(((BoardView)httpSession.attribute(BOARD_VIEW_KEY)).getBoard(),
                     new Board(MasterEnum.Color.WHITE));
-            game.applyGame(httpSession.attribute(RED_PLAYER), httpSession.attribute(WHITE_PLAYER));
             httpSession.attribute(GetGameRoute.GAME_ATTR, game);
             gameLobby.addGame(game);
         } else {

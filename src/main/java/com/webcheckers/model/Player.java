@@ -1,5 +1,10 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.MasterEnum;
+
+import java.util.ArrayList;
+
+
 /**
  * Holds the unique player name.
  *
@@ -16,6 +21,8 @@ public class Player {
     private String name;
     private Game game;
 
+    //A list of all the players piece positions
+    private ArrayList<Position> posList;
     /**
      * Creates the player
      * @param name
@@ -59,6 +66,38 @@ public class Player {
         setInGame();
     }
 
+    public void assignPos(Board b, MasterEnum.Color color){
+        if(posList == null)
+            posList = new ArrayList<>();
+        for(int i = 0; i < b.board.length; i++){
+            for(int j = 0; j < b.board[0].length; j++){
+                if(b.board[i][j].getPiece() != null &&
+                    b.board[i][j].getPiece().getColor() == color)
+                    posList.add(new Position(i, j));
+            }
+        }
+    }
+
+    public ArrayList<Position> getPosList(){
+        return posList;
+    }
+
+    public boolean movePiece(Move m){
+        for(int i = 0; i < posList.size(); i++)
+            if(posList.get(i).equals(m.getStart())) {
+                posList.remove(i);
+                posList.add(new Position(m.getEnd().getRow(), m.getEnd().getCol()));
+                return true;
+            }
+        return false;
+    }
+
+    public Position removePiece(Position p) {
+        for (int i = 0; i < posList.size(); i++)
+            if (p.equals(posList.get(i)))
+                return posList.remove(i);
+        return null;
+    }
 
     /**
      * Sets the player to be in the game
@@ -98,13 +137,5 @@ public class Player {
      */
     public int hashCode(){
         return this.getName().hashCode();
-    }
-
-    @Override
-    /**
-     * toString of the players name
-     */
-    public String toString(){
-        return "<a href='/game' onclick=\"playerLobby.pullByHashCode("+hashCode()+")\">" +getName() + "</a>" + "\n";
     }
 }

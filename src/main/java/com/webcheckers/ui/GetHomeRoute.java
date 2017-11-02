@@ -111,6 +111,7 @@ public class GetHomeRoute implements Route {
 
       //assign the white player (current player)
       httpSession.attribute(GetGameRoute.WHITE_PLAYER, httpSession.attribute(CUR_PLAYER_ATTR));
+      httpSession.attribute(GetGameRoute.OPPONENT_ATTR, httpSession.attribute(GetGameRoute.RED_PLAYER));
 
       //assign the game
       httpSession.attribute(GetGameRoute.GAME_ATTR, game);

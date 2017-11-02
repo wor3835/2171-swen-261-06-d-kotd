@@ -3,6 +3,8 @@ package com.webcheckers.model;
 import com.webcheckers.appl.MasterEnum;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by arthu on 10/15/2017.
@@ -46,7 +48,27 @@ public class Board {
         }
     }
 
-    public void makeMove(Move move) {
+    public ArrayList<Move> getMoves(List<Position> posList){
+        ArrayList<Move> moves = new ArrayList<>();
+        for(int i = 0; i < posList.size(); i++){
+            Position pos = posList.get(i);
+            Space s = board[pos.getRow()][pos.getCol()];
+            moves.addAll(s.validJumps(this, pos, playerColor));
+        }
+
+        if(moves.size() <= 0) {
+            for (int i = 0; i < posList.size(); i++) {
+                Position pos = posList.get(i);
+                Space s = board[pos.getRow()][pos.getCol()];
+                moves.addAll(s.validMoves(this, pos));
+            }
+        }
+
+
+        return moves;
+    }
+
+    public void makeMove(Move move, Player p) {
         Position start = move.getStart();
         Position end = move.getEnd();
         int endCol = end.getCol();
@@ -56,6 +78,9 @@ public class Board {
         if(Math.abs(startCol-endCol) == 2){
             board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
                     new Space(startCol+(endCol-startCol)/2, true, null);
+            Position piecepos = new Position(startRow+(endRow-startRow)/2,
+                    startCol+(endCol-startCol)/2);
+            p.removePiece(piecepos);
         }
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
@@ -64,11 +89,12 @@ public class Board {
         }
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
+        p.movePiece(move);
         if(move.getMove() != null )
-            makeMove(move.getMove());
+            makeMove(move.getMove(), p);
     }
 
-    public void inverseMove(Move move){
+    public void inverseMove(Move move, Player p){
         Position start = move.getStart();
         Position end = move.getEnd();
         int endCol = BoardView.BOARD_LENGTH-end.getCol()-1;
@@ -78,6 +104,9 @@ public class Board {
         if(Math.abs(startCol-endCol) == 2){
             board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
                     new Space(startCol+(endCol-startCol)/2, true, null);
+            Position piecepos = new Position(start.getRow()+(end.getRow()-start.getRow())/2,
+                    start.getCol()+(end.getCol()-start.getCol())/2);
+            p.removePiece(piecepos);
         }
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
@@ -87,7 +116,7 @@ public class Board {
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
         if(move.getMove() != null)
-            inverseMove(move.getMove());
+            inverseMove(move.getMove(), p);
     }
 
     /**

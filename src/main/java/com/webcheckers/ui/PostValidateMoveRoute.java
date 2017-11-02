@@ -40,7 +40,11 @@ public class PostValidateMoveRoute implements Route {
         int startCol = move.getStart().getCol();
 
         Space s = board.getSpaceAt(startRow, startCol);
-        ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
+        //ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
+
+        Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+
+        ArrayList<Move> moves = board.getMoves(p.getPosList());
 
         boolean hasMove = false;
         for(Move m: moves){
