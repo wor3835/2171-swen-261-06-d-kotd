@@ -69,15 +69,21 @@ public class Board {
     }
 
     public void makeMove(Move move, Player p) {
+        //Set everything to easy to use variables
         Position start = move.getStart();
         Position end = move.getEnd();
         int endCol = end.getCol();
         int endRow = end.getRow();
         int startCol = start.getCol();
         int startRow = start.getRow();
+
+        //If the start is two spaces apart it must be a jump
         if(Math.abs(startCol-endCol) == 2){
-            board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
-                    new Space(startCol+(endCol-startCol)/2, true, null);
+            //row and col for piece to be removed
+            int r = startRow+(endRow-startRow)/2;
+            int c = startCol+(endCol-startCol)/2;
+            //set the space it used to be in as null
+            board[r][c] = new Space(c, true, null);
         }
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
@@ -86,7 +92,9 @@ public class Board {
         }
         board[endRow][endCol] = s;
         board[startRow][startCol] = new Space(startCol, true, null);
+        //moves position from start to end in p.poslist
         p.movePiece(move);
+        //if there are move moves, loop again
         if(move.getMove() != null )
             makeMove(move.getMove(), p);
     }
@@ -99,14 +107,11 @@ public class Board {
         int startCol = BoardView.BOARD_LENGTH-start.getCol()-1;
         int startRow = BoardView.BOARD_LENGTH-start.getRow()-1;
         if(Math.abs(startCol-endCol) == 2){
-            board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
-                    new Space(startCol+(endCol-startCol)/2, true, null);
-
-            //Col and Row switch
-            Position piecepos = new Position(
-                    start.getCol()+(end.getCol()-start.getCol())/2,
-                    start.getRow()+(end.getRow()-start.getRow())/2);
-            p.removePiece(piecepos);
+            int r = startRow+(endRow-startRow)/2;
+            int c = startCol+(endCol-startCol)/2;
+            board[r][c] =
+                    new Space(c, true, null);
+            p.removePiece(new Position(r,c));
         }
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&

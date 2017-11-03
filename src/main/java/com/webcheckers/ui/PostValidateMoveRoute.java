@@ -46,6 +46,10 @@ public class PostValidateMoveRoute implements Route {
 
         ArrayList<Move> moves = board.getMoves(p.getPosList());
 
+        if(moves.size() == 0){
+            System.err.println("No moves left for Player:" +p.getName());
+        }
+
         boolean hasMove = false;
         for(Move m: moves){
             if(m.equals(move)) {

@@ -16,10 +16,16 @@ public class PostSubmitTurnRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        //Get the current HttpSession
         Session session = request.session();
 
+        //Move is pulled down from the session
         Move move = session.attribute(PostValidateMoveRoute.MOVE_ATTR);
+
+        //Game is pulled down from the session
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
+
+        //Get each board
         Board b1 = game.getB1();
         Board b2 = game.getB2();
         if(session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED) {

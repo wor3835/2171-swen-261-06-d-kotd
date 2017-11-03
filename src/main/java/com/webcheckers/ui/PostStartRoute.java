@@ -71,32 +71,22 @@ public class PostStartRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();
 
-        Map<String, Object> vm = new HashMap<>();
-
-        vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
-
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
-        vm.put(GetHomeRoute.PLAYER_LOBBY_KEY, httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY));
-
-        httpSession.attribute(VIEW_MODE, MasterEnum.ViewMode.PLAY);
-        vm.put(VIEW_MODE, httpSession.attribute(VIEW_MODE));
-
-        httpSession.attribute(ACTIVE_COLOR, MasterEnum.Color.RED);
-        vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
-
-        httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
-        vm.put(RED_PLAYER, httpSession.attribute(RED_PLAYER));
-
 
         Player opponent = playerLobby.pullByName(request.queryParams(OPPONENT_ATTR));
         if(!opponent.isInGame()) {
+            httpSession.attribute(VIEW_MODE, MasterEnum.ViewMode.PLAY);
+
+            httpSession.attribute(ACTIVE_COLOR, MasterEnum.Color.RED);
+
+            httpSession.attribute(RED_PLAYER, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
+
             httpSession.attribute(BOARD_VIEW_KEY, new BoardView(MasterEnum.Color.RED));
 
-            vm.put(BOARD_VIEW_KEY, httpSession.attribute(BOARD_VIEW_KEY));
-
             httpSession.attribute(WHITE_PLAYER, opponent);
-            vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
+
             httpSession.attribute(OPPONENT_ATTR, httpSession.attribute(WHITE_PLAYER));
+
             Game game = new Game();
             game.applyGame(httpSession.attribute(RED_PLAYER), httpSession.attribute(WHITE_PLAYER));
 
