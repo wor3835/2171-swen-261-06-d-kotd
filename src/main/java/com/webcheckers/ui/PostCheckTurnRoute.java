@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by wor3835 on 10/23/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostCheckTurnRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostCheckTurnRoute.class.getName());

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Bobby on 10/25/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class King extends Piece {
 

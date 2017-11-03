@@ -1,7 +1,7 @@
 package com.webcheckers.model;
 
 /**
- * Created by arthu on 10/24/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class Move {
     //Start and end position

@@ -10,6 +10,7 @@ import java.util.Iterator;
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 
 /**

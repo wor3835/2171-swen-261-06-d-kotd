@@ -2,7 +2,7 @@ package com.webcheckers.model;
 
 
 /**
- * Created by arthu on 10/24/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class Position {
     private int row, cell;
@@ -15,6 +15,7 @@ public class Position {
 
     public int getCol(){return cell;}
 
+    @Override
     public boolean equals(Object o){
         if(o instanceof Position){
             if(((Position)o).getRow() == this.getRow() &&

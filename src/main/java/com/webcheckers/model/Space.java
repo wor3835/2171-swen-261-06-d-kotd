@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by kzalb on 10/15/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  * Represents a space on the board
  */
 public class Space{

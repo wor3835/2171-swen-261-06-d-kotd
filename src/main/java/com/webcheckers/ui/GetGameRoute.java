@@ -22,6 +22,7 @@ import com.webcheckers.model.Player;
  * The UI Controller to GET the Game page.
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class GetGameRoute implements Route {
 

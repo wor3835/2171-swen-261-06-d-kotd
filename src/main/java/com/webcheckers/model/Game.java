@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 /**
- * Created by arthu on 10/14/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class Game {
 

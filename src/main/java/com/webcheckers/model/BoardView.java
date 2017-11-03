@@ -7,8 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by arthu on 10/15/2017.
  * Shows the board view for the current player.
+ *
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class BoardView {
     static final int BOARD_LENGTH = 8;
