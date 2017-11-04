@@ -12,8 +12,11 @@ import java.util.List;
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class BoardView {
+    //The board length
     static final int BOARD_LENGTH = 8;
+    //The color of the player using the boardView
     private final MasterEnum.Color color;
+    //A board object used by the current player
     private Board board;
 
     public BoardView(MasterEnum.Color color){
@@ -21,15 +24,20 @@ public class BoardView {
         board = new Board(color);
     }
 
-    public BoardView(MasterEnum.Color color, Board board){
-        this.color = color;
+    /**
+     * Takes a board reference at sets this.board = the reference
+     * @param board the board reference
+     */
+    public BoardView(Board board){
+        color = null;
         this.board = board;
     }
 
+    //Returns the board object
     public Board getBoard() {return board;}
 
     /**
-     * Adds rows to board.
+     * Adds rows from board.
      * @return iterator
      */
     public Iterator<Row> iterator(){

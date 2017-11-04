@@ -1,4 +1,5 @@
 package com.webcheckers.model;
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -54,7 +55,7 @@ public class GameTest {
         assertTrue(CuT.getP2().getName().equals(player2.getName()));
 
         // makes sure moves list is empty
-        assertEquals(0, CuT.movesList.size());
+        assertEquals(0, CuT.getMovesList().size());
 
         // makes sure boards are empty
         assertNull(CuT.getB1());

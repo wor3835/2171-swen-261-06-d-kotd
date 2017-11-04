@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 
 import java.util.ArrayList;
@@ -15,19 +16,17 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    /**
-     * Variables to keep track of the name, is the player is in the game, and the game
-     */
+    //Variables to keep track of the name, is the player is in the game, and the game
     private boolean inGame;
     private String name;
     private Game game;
 
     //A list of all the players piece positions
     private ArrayList<Position> posList;
+
     /**
      * Creates the player
-     * @param name
-        *Name value
+     * @param name Name value
      */
     public Player(String name) {
         this.name = name;
@@ -37,8 +36,7 @@ public class Player {
 
     /**
      * Sets the player name
-     * @param name
-     *  Player name
+     * @param name Player name
      */
     public void setName(String name)
     {
@@ -62,18 +60,30 @@ public class Player {
         return this.inGame;
     }
 
+    /**
+     * Assigns player to game and calls setInGame()
+     * @param game the game player is assigned to
+     */
     public void assignGame(Game game){
         this.game = game;
         setInGame();
     }
 
+    /**
+     * Create a position list of all players pieces
+     * @param b The board used to create positions from
+     * @param color The color of pieces being looked for
+     */
     public void assignPos(Board b, MasterEnum.Color color){
+        //Initialize the arraylist if it doesn't exist
         if(posList == null)
             posList = new ArrayList<>();
-        for(int i = 0; i < b.board.length; i++){
-            for(int j = 0; j < b.board[0].length; j++){
-                if(b.board[i][j].getPiece() != null &&
-                    b.board[i][j].getPiece().getColor() == color)
+
+        //Find all pieces with matching color and add their positions to the posList
+        for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
+            for(int j = 0; j < BoardView.BOARD_LENGTH; j++){
+                if(b.getPieceAt(i,j) != null &&
+                    b.getPieceAt(i,j).getColor() == color)
                     posList.add(new Position(i, j));
             }
         }
@@ -83,9 +93,16 @@ public class Player {
         return posList;
     }
 
+    /**
+     * Moves a position based on a specified move
+     * @param m The move that specifies the position change
+     * @return If the position was found and changed
+     */
     public boolean movePiece(Move m){
+        //Find the position in posList that is equal to m.start
         for(int i = 0; i < posList.size(); i++)
             if(posList.get(i).equals(m.getStart())) {
+                //Replace the position found with m.end
                 posList.remove(i);
                 posList.add(m.getEnd());
                 return true;
@@ -93,9 +110,15 @@ public class Player {
         return false;
     }
 
+    /**
+     * Removes a given position
+     * @param p The position to be removed
+     */
     public void removePiece(Position p) {
+        //Find the position in posLis with the same values as p
         for (int i = 0; i < posList.size(); i++)
             if (posList.get(i).equals(p)) {
+                //remove the position when found
                 posList.remove(i);
                 break;
             }

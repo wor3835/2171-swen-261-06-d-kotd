@@ -12,7 +12,7 @@ public class King extends Piece {
 
 
     /**
-     * Sets color and type of piece
+     * Sets color and type of piece to king
      *
      * @param color red or black
      */
@@ -20,6 +20,10 @@ public class King extends Piece {
         super(color, MasterEnum.PieceType.KING);
     }
 
+    /**
+     * Copy constuctor, creates a king from an existing piece color
+     * @param p The piece to be copied
+     */
     public King(Piece p){
         super(p.getColor(), MasterEnum.PieceType.KING);
     }

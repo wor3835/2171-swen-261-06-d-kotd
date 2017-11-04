@@ -1,10 +1,9 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
-import com.webcheckers.model.Game;
+import com.webcheckers.appl.Game;
 import com.webcheckers.model.Player;
 import spark.Request;
 import spark.Response;
@@ -34,7 +33,7 @@ public class PostCheckTurnRoute implements Route {
                 && game.getActiveColor() == MasterEnum.Color.RED)
                 || (currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.WHITE)){
-            session.attribute(GetGameRoute.ACTIVE_COLOR, game.activeColor);
+            session.attribute(GetGameRoute.ACTIVE_COLOR, game.getActiveColor());
             text = "true";
         }else {
             text = "false";

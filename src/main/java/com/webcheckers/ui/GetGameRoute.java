@@ -7,16 +7,12 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.BoardView;
-import com.webcheckers.model.Game;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
 import spark.Session;
-
-import com.webcheckers.model.Player;
 
 /**
  * The UI Controller to GET the Game page.

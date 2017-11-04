@@ -3,7 +3,6 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
-import com.webcheckers.model.Game;
 import spark.Request;
 import spark.Response;
 import spark.Route;

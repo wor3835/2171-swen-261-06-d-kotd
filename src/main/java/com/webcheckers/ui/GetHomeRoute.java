@@ -9,16 +9,13 @@ import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.BoardView;
-import com.webcheckers.model.Game;
-import com.webcheckers.model.Piece;
+import com.webcheckers.appl.Game;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
 import spark.Session;
-
-import com.webcheckers.model.Player;
 
 import static spark.Spark.halt;
 
@@ -97,7 +94,7 @@ public class GetHomeRoute implements Route {
       Game game = gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR));
 
       //Create a board based on the current gameboard
-      BoardView boardView = new BoardView(MasterEnum.Color.WHITE, game.getB2());
+      BoardView boardView = new BoardView(game.getB2());
       httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, boardView);
 
       //The view mode of the current player (autoAssigned to PLAY)

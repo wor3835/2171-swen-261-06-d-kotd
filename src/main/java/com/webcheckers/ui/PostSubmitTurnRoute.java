@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
 import com.webcheckers.model.*;
@@ -38,7 +39,7 @@ public class PostSubmitTurnRoute implements Route {
             b1.inverseMove(move, session.attribute(GetGameRoute.OPPONENT_ATTR));
             b2.makeMove(move, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         }
-        game.movesList.add(move);
+        game.getMovesList().add(move);
         game.switchActive();
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);

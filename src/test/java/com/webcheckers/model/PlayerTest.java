@@ -1,18 +1,13 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.GameLobby;
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Game;
-import com.webcheckers.model.Player;
+import com.webcheckers.appl.Game;
 
 import spark.*;
 
 import static org.junit.Assert.*;
-import static spark.Spark.exception;
 import static spark.Spark.halt;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 
 import static org.mockito.ArgumentMatchers.any;
