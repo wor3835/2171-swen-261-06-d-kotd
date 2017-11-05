@@ -23,7 +23,7 @@ public class PostSubmitTurnRoute implements Route {
 
         //Move is pulled down from the session
         Move move = session.attribute(PostValidateMoveRoute.MOVE_ATTR);
-
+        session.attribute(PostValidateMoveRoute.MOVE_ATTR, null);
         //Game is pulled down from the session
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
 

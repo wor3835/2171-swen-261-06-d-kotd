@@ -12,6 +12,8 @@ import spark.Session;
 
 import java.util.logging.Logger;
 
+import static spark.Spark.halt;
+
 /**
  * Created by wor3835 on 10/23/2017.
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
@@ -28,6 +30,15 @@ public class PostCheckTurnRoute implements Route {
         String text;
 
         if(currentPlayer == null)LOG.fine("Current player = null");
+
+        if(game.isGameOver()){
+            String name = currentPlayer.getName();
+            session.attribute(GetEndGameRoute.WINNER_ATTR, name);
+
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
+        }
 
         if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.RED)
