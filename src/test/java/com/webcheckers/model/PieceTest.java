@@ -19,10 +19,6 @@ import static org.mockito.Mockito.when;
  */
 public class PieceTest {
 
-    /*
-    Piece - getting the type of the piece works, getting the color of the piece works
-            take 2 pieces I know are the same and see if equals works and 2 pieces I know are different and see if equals works
- */
     private Piece CuT;
 
     private Pawn Piece_to_test;
@@ -33,7 +29,6 @@ public class PieceTest {
 
     @Before
     public void setup() {
-        //names to test the set name functionality
         Piece_to_test = new Pawn(MasterEnum.Color.RED);
         Other_Piece_to_test = new King(MasterEnum.Color.WHITE);
 
