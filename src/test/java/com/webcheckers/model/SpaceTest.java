@@ -33,7 +33,8 @@ public class SpaceTest {
 
 
         // create a unique CuT for each test
-        CuT = new Space(0, false, null);
+        Pawn piece = new Pawn(null);
+        CuT = new Space(0, false,  piece);
     }
 
     @Test
@@ -49,12 +50,27 @@ public class SpaceTest {
     {
         assertNotNull(CuT.isValid());
         assertEquals(false, CuT.isValid());
+        assertEquals(true, !CuT.isValid());
     }
 
     @Test
     public void TestGetPiece()
     {
-        //assertNotNull(CuT.getPiece());
-        assertEquals(null, CuT.getPiece());
+        Pawn piece = new Pawn(null);
+        assertNotNull(CuT.getPiece());
+        assertEquals(piece, CuT.getPiece());
     }
+
+    @Test
+    public void TestKingMe()
+    {
+        final Pawn piece = new Pawn(null);
+        final King king = new King(piece);
+        CuT.kingMe();
+        final Space space = new Space(0, false, CuT.getPiece());
+        assertEquals(space, CuT);
+    }
+
+
+
 }
