@@ -3,25 +3,29 @@ package com.webcheckers.model;
 import com.webcheckers.appl.MasterEnum;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * Created by arthu on 10/15/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class Board {
 
-    /**
-     * Creates the board
-     */
-    Space board[][] = new Space[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
+    //Creates board with definition outlined in boardView
+    private Space board[][] = new Space[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
+    //Colors of the first player using the board and opponent of the player
     private final MasterEnum.Color playerColor, opponentColor;
 
 
     /**
-     * Constructor for the board
+     * Constructor for board
+     * @param color The color of the player viewing/using this board
      */
     public Board(MasterEnum.Color color)
     {
+        //Set player to color
         playerColor = color;
+        //Set opponent to the other color specified in MasterEnum.Color
         if(color == MasterEnum.Color.RED)
             opponentColor = MasterEnum.Color.WHITE;
         else
@@ -30,86 +34,181 @@ public class Board {
     }
 
     /**
-     * Initializes the board
+     * Initializes board by adding spaces to the board at all locations
      */
     private void init(){
         for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
+                // (i+j)%2 = 1 when on a black space and 0 on white
+                //Whites are invalid
                 if((i+j)%2==1 && i < 3){
+                    //Add in Opponent spaces on top
                     board[i][j] = new Space(j, false, new Pawn(opponentColor));
                 } else if ((i+j)%2==1 && i >= 5) {
+                    //Add in CurPlayer spaces on bottom
                     board[i][j] = new Space(j, false, new Pawn(playerColor));
                 } else {
+                    //Add Empty spaces everywhere else
                     board[i][j] = new Space(j, (i+j)%2==1, null);
                 }
             }
         }
     }
 
-    public void makeMove(Move move) {
+    /**
+     * Creates a list of moves for that player
+     * @param posList The list of piece positions from the player
+     * @return a full list of moves for a player
+     */
+    public ArrayList<Move> getMoves(List<Position> posList){
+        //Moves list to be returned
+        ArrayList<Move> moves = new ArrayList<>();
+
+        for(int i = 0; i < posList.size(); i++){
+            //create a position, and fetch the space from that position on board
+            Position pos = posList.get(i);
+            Space s = board[pos.getRow()][pos.getCol()];
+
+            //Add all the moves created from that spaces validJumps method
+            moves.addAll(s.validJumps(this, pos, playerColor));
+        }
+
+        //Only go through this loop if there are no valid jumps
+        if(moves.size() <= 0) {
+            for (int i = 0; i < posList.size(); i++) {
+                //create a position, and fetch the space from that position on board
+                Position pos = posList.get(i);
+                Space s = board[pos.getRow()][pos.getCol()];
+
+                //Add all the moves created from that spaces validMoves method
+                moves.addAll(s.validMoves(this, pos));
+            }
+        }
+
+        return moves;
+    }
+
+    /**
+     * Moves a players piece on board, updates the player's posList
+     * @param move The move to be applied to the board
+     * @param p The player who is making the move
+     */
+    public void makeMove(Move move, Player p) {
+        //Set everything to easy to use variables
         Position start = move.getStart();
         Position end = move.getEnd();
         int endCol = end.getCol();
         int endRow = end.getRow();
         int startCol = start.getCol();
         int startRow = start.getRow();
+
+        //If the start is two spaces apart it must be a jump
         if(Math.abs(startCol-endCol) == 2){
-            board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
-                    new Space(startCol+(endCol-startCol)/2, true, null);
+            //row and col for piece to be removed
+            int r = startRow+(endRow-startRow)/2;
+            int c = startCol+(endCol-startCol)/2;
+
+            //set the space it used to be in as null
+            board[r][c] = new Space(c, true, null);
         }
+
+        //Create a space that has the properties of the previously occupied space
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
+
+        //Check to see if the space is at the end of the board and a SINGLE. If so make it a king
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
                 endRow == 0){
             s.kingMe();
         }
+        //Change the end location in board to the temp space created
         board[endRow][endCol] = s;
+
+        //Change the start space to empty
         board[startRow][startCol] = new Space(startCol, true, null);
+
+        //moves position from start to end in p.posList
+        p.movePiece(move);
+
+        //if there are move moves, loop again
         if(move.getMove() != null )
-            makeMove(move.getMove());
+            makeMove(move.getMove(), p);
     }
 
-    public void inverseMove(Move move){
+    /**
+     * Makes a move on an inverted board, the inversion is a reflection about the origin
+     * This is done because each player has their own board so moves need to be done seperately
+     * @param move The move to be made (must be inversed before being used)
+     * @param p The player that the move is being done on
+     */
+    public void inverseMove(Move move, Player p){
+        //Set everything to easy to use variables
         Position start = move.getStart();
         Position end = move.getEnd();
+        //Inverts the board move to allow a move on the other players board
         int endCol = BoardView.BOARD_LENGTH-end.getCol()-1;
         int endRow = BoardView.BOARD_LENGTH-end.getRow()-1;
         int startCol = BoardView.BOARD_LENGTH-start.getCol()-1;
         int startRow = BoardView.BOARD_LENGTH-start.getRow()-1;
+
+        //If the start is two spaces apart it must be a jump
         if(Math.abs(startCol-endCol) == 2){
-            board[startRow+(endRow-startRow)/2][startCol+(endCol-startCol)/2] =
-                    new Space(startCol+(endCol-startCol)/2, true, null);
+            //row and col for piece to be removed
+            int r = startRow+(endRow-startRow)/2;
+            int c = startCol+(endCol-startCol)/2;
+
+            //set the space of the piece being jumped to empty
+            board[r][c] = new Space(c, true, null);
+
+            //remove that piece from the posList in player
+            p.removePiece(new Position(r,c));
         }
+
+        //Create a space with the properties of the previously occupied space
         Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
+
+        //Check to see if the piece is at the end of the board and a SINGLE. If so make it a king
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
                 endRow == BoardView.BOARD_LENGTH-1){
             s.kingMe();
         }
+
+        //Change end to temp space created
         board[endRow][endCol] = s;
+
+        //Change start to empty space
         board[startRow][startCol] = new Space(startCol, true, null);
+
+        //If move has a move then loop but with move's move
         if(move.getMove() != null)
-            inverseMove(move.getMove());
+            inverseMove(move.getMove(), p);
     }
 
     /**
      * Gets the piece at a specified space
-     * @param i
-     * @param j
-     * @return
+     * @param row The row the piece is located at
+     * @param col The col the piece is located at
+     * @return the piece at board[row][col]
      */
-    public Piece getPieceAt(int i, int j)
+    public Piece getPieceAt(int row, int col)
     {
-        return board[i][j].getPiece();
+        return board[row][col].getPiece();
     }
 
-    public Space getSpaceAt(int i, int j) { return board[i][j];}
+    /**
+     * Gets the space at a specified row,col
+     * @param row The row the space is located at
+     * @param col The col the space is located at
+     * @return The space at board[row][col]
+     */
+    public Space getSpaceAt(int row, int col) { return board[row][col];}
 
     /**
      * Checks to see if a piece is on the board
-     * @param i
-     * @param j
-     * @return true or false if the piece is on the board
+     * @param row The row the piece is located at
+     * @param col The col the piece is located at
+     * @return true or false if the piece is on the board at board[row][col]
      */
-    public boolean hasPiece(int i, int j){
-        return board[i][j].getPiece() != null;
+    public boolean hasPiece(int row, int col){
+        return board[row][col].getPiece() != null;
     }
 }

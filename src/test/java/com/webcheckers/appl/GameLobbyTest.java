@@ -1,6 +1,5 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import org.junit.Before;
 import org.junit.Test;

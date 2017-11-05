@@ -1,25 +1,32 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.Game;
+import com.webcheckers.appl.MasterEnum;
+
+import java.util.ArrayList;
+
+
 /**
  * Holds the unique player name.
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class Player {
 
-    /**
-     * Variables to keep track of the name, is the player is in the game, and the game
-     */
+    //Variables to keep track of the name, is the player is in the game, and the game
     private boolean inGame;
     private String name;
     private Game game;
 
+    //A list of all the players piece positions
+    private ArrayList<Position> posList;
+
     /**
      * Creates the player
-     * @param name
-        *Name value
+     * @param name Name value
      */
     public Player(String name) {
         this.name = name;
@@ -29,8 +36,7 @@ public class Player {
 
     /**
      * Sets the player name
-     * @param name
-     *  Player name
+     * @param name Player name
      */
     public void setName(String name)
     {
@@ -54,11 +60,69 @@ public class Player {
         return this.inGame;
     }
 
+    /**
+     * Assigns player to game and calls setInGame()
+     * @param game the game player is assigned to
+     */
     public void assignGame(Game game){
         this.game = game;
         setInGame();
     }
 
+    /**
+     * Create a position list of all players pieces
+     * @param b The board used to create positions from
+     * @param color The color of pieces being looked for
+     */
+    public void assignPos(Board b, MasterEnum.Color color){
+        //Initialize the arraylist if it doesn't exist
+        if(posList == null)
+            posList = new ArrayList<>();
+
+        //Find all pieces with matching color and add their positions to the posList
+        for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
+            for(int j = 0; j < BoardView.BOARD_LENGTH; j++){
+                if(b.getPieceAt(i,j) != null &&
+                    b.getPieceAt(i,j).getColor() == color)
+                    posList.add(new Position(i, j));
+            }
+        }
+    }
+
+    public ArrayList<Position> getPosList(){
+        return posList;
+    }
+
+    /**
+     * Moves a position based on a specified move
+     * @param m The move that specifies the position change
+     * @return If the position was found and changed
+     */
+    public boolean movePiece(Move m){
+        //Find the position in posList that is equal to m.start
+        for(int i = 0; i < posList.size(); i++)
+            if(posList.get(i).equals(m.getStart())) {
+                //Replace the position found with m.end
+                posList.remove(i);
+                posList.add(m.getEnd());
+                return true;
+            }
+        return false;
+    }
+
+    /**
+     * Removes a given position
+     * @param p The position to be removed
+     */
+    public void removePiece(Position p) {
+        //Find the position in posLis with the same values as p
+        for (int i = 0; i < posList.size(); i++)
+            if (posList.get(i).equals(p)) {
+                //remove the position when found
+                posList.remove(i);
+                break;
+            }
+    }
 
     /**
      * Sets the player to be in the game
@@ -98,13 +162,5 @@ public class Player {
      */
     public int hashCode(){
         return this.getName().hashCode();
-    }
-
-    @Override
-    /**
-     * toString of the players name
-     */
-    public String toString(){
-        return "<a href='/game' onclick=\"playerLobby.pullByHashCode("+hashCode()+")\">" +getName() + "</a>" + "\n";
     }
 }

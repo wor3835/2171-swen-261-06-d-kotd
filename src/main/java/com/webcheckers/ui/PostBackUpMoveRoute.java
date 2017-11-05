@@ -3,7 +3,6 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
-import com.webcheckers.model.Game;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -11,6 +10,7 @@ import spark.Session;
 
 /**
  * Created by wor3835 on 10/26/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostBackUpMoveRoute implements Route {
 
