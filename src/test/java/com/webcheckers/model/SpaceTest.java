@@ -70,6 +70,22 @@ public class SpaceTest {
         assertEquals(king.getType(), CuT.getPiece().getType());
     }
 
+    @Test
+    public void TestValidMoves()
+    {
+        final Board b = new Board(MasterEnum.Color.RED);
+        final Position start = new Position(0, 0);
+        final Pawn piece = new Pawn(MasterEnum.Color.RED);
+        final Space space = new Space(0, false, piece);
+        assertEquals(space.validMoves(b, start), CuT.validMoves(b, start));
+    }
+
+    @Test
+    public void TestValidJumps()
+    {
+
+    }
+
 
 
 }
