@@ -95,11 +95,4 @@ public class PlayerTest {
         assertFalse(CuT.equals(TEST_LIST));
         assertTrue(CuT.equals(CuT));
     }
-
-    //tests if toString returns what it is supposed to
-    @Test
-    public void toString_test(){
-        CuT.setName(NAME_FOR_TEST);
-        assertEquals("<a href='/game' onclick=\"playerLobby.pullByHashCode("+CuT.hashCode()+")\">" +CuT.getName() + "</a>" + "\n", CuT.toString());
-    }
 }

@@ -13,7 +13,7 @@ public class Message {
     }
 
     public String getText() {
-        return null;
+        return text;
     }
 
     public MasterEnum.MessageType getType(){
