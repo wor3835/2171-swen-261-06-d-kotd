@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 
 /**
  * Created by wor3835 on 10/25/2017.
+ *
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostValidateMoveRoute implements Route {
 
@@ -40,7 +42,15 @@ public class PostValidateMoveRoute implements Route {
         int startCol = move.getStart().getCol();
 
         Space s = board.getSpaceAt(startRow, startCol);
-        ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
+        //ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
+
+        Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+
+        ArrayList<Move> moves = board.getMoves(p.getPosList());
+
+        if(moves.size() == 0){
+            System.err.println("No moves left for Player:" +p.getName());
+        }
 
         boolean hasMove = false;
         for(Move m: moves){

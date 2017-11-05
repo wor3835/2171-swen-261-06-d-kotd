@@ -1,20 +1,23 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
-import com.webcheckers.model.Game;
+import com.webcheckers.appl.Game;
 import com.webcheckers.model.Player;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.Session;
 
+import java.util.logging.Logger;
+
 /**
  * Created by wor3835 on 10/23/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostCheckTurnRoute implements Route {
+    private static final Logger LOG = Logger.getLogger(PostCheckTurnRoute.class.getName());
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
@@ -24,11 +27,13 @@ public class PostCheckTurnRoute implements Route {
 
         String text;
 
+        if(currentPlayer == null)LOG.fine("Current player = null");
+
         if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.RED)
                 || (currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.WHITE)){
-            session.attribute(GetGameRoute.ACTIVE_COLOR, game.activeColor);
+            session.attribute(GetGameRoute.ACTIVE_COLOR, game.getActiveColor());
             text = "true";
         }else {
             text = "false";

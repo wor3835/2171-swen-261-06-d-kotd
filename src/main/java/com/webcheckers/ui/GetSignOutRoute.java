@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  * Created by wor3835 on 10/11/2017.
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class GetSignOutRoute implements Route {
 

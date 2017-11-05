@@ -1,9 +1,14 @@
-package com.webcheckers.model;
+package com.webcheckers.appl;
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.webcheckers.model.Board;
+import com.webcheckers.model.Move;
+import com.webcheckers.model.Player;
+import com.webcheckers.model.Position;
 import org.junit.Before;
 import org.junit.Test;
 import spark.Request;
@@ -54,7 +59,7 @@ public class GameTest {
         assertTrue(CuT.getP2().getName().equals(player2.getName()));
 
         // makes sure moves list is empty
-        assertEquals(0, CuT.movesList.size());
+        assertEquals(0, CuT.getMovesList().size());
 
         // makes sure boards are empty
         assertNull(CuT.getB1());

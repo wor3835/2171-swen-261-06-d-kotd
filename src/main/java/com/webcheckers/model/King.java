@@ -6,12 +6,13 @@ import java.util.ArrayList;
 
 /**
  * Created by Bobby on 10/25/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class King extends Piece {
 
 
     /**
-     * Sets color and type of piece
+     * Sets color and type of piece to king
      *
      * @param color red or black
      */
@@ -19,6 +20,10 @@ public class King extends Piece {
         super(color, MasterEnum.PieceType.KING);
     }
 
+    /**
+     * Copy constuctor, creates a king from an existing piece color
+     * @param p The piece to be copied
+     */
     public King(Piece p){
         super(p.getColor(), MasterEnum.PieceType.KING);
     }

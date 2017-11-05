@@ -1,18 +1,13 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.GameLobby;
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Game;
-import com.webcheckers.model.Player;
+import com.webcheckers.appl.Game;
 
 import spark.*;
 
 import static org.junit.Assert.*;
-import static spark.Spark.exception;
 import static spark.Spark.halt;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 
 import static org.mockito.ArgumentMatchers.any;
@@ -99,12 +94,5 @@ public class PlayerTest {
         ArrayList<String> TEST_LIST = new ArrayList();
         assertFalse(CuT.equals(TEST_LIST));
         assertTrue(CuT.equals(CuT));
-    }
-
-    //tests if toString returns what it is supposed to
-    @Test
-    public void toString_test(){
-        CuT.setName(NAME_FOR_TEST);
-        assertEquals("<a href='/game' onclick=\"playerLobby.pullByHashCode("+CuT.hashCode()+")\">" +CuT.getName() + "</a>" + "\n", CuT.toString());
     }
 }

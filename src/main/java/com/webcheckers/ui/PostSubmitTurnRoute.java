@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
 import com.webcheckers.model.*;
@@ -11,27 +12,34 @@ import spark.Session;
 
 /**
  * Created by wor3835 on 10/25/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostSubmitTurnRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        //Get the current HttpSession
         Session session = request.session();
 
+        //Move is pulled down from the session
         Move move = session.attribute(PostValidateMoveRoute.MOVE_ATTR);
+
+        //Game is pulled down from the session
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
+
+        //Get each board
         Board b1 = game.getB1();
         Board b2 = game.getB2();
         if(session.attribute(GetGameRoute.ACTIVE_COLOR) == MasterEnum.Color.RED) {
             session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
-            b1.makeMove(move);
-            b2.inverseMove(move);
+            b1.makeMove(move, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
+            b2.inverseMove(move, session.attribute(GetGameRoute.OPPONENT_ATTR));
         } else {
             session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
-            b1.inverseMove(move);
-            b2.makeMove(move);
+            b1.inverseMove(move, session.attribute(GetGameRoute.OPPONENT_ATTR));
+            b2.makeMove(move, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         }
-        game.movesList.add(move);
+        game.getMovesList().add(move);
         game.switchActive();
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);
