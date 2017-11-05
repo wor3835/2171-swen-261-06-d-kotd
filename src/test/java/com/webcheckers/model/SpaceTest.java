@@ -67,8 +67,7 @@ public class SpaceTest {
         final Pawn piece = new Pawn(null);
         final King king = new King(piece);
         CuT.kingMe();
-        final Space space = new Space(0, false, CuT.getPiece());
-        assertEquals(space, CuT);
+        assertEquals(king.getType(), CuT.getPiece().getType());
     }
 
 
