@@ -36,6 +36,8 @@ public class Game {
     //A list move moves that houses all the moves in a game
     private List<Move> movesList = new ArrayList<>();
 
+    private boolean gameOver;
+
     //The active color
     private MasterEnum.Color activeColor;
 
@@ -47,6 +49,7 @@ public class Game {
      */
     public boolean applyGame(Player p1, Player p2){
         //Check to see if p2 is in a game
+        gameOver = false;
         if(p2.isInGame()) {
             return false;
         }
@@ -95,6 +98,12 @@ public class Game {
 
     }
 
+    public void endGame(){
+        p1.leaveGame();
+        p2.leaveGame();
+        gameOver = true;
+    }
+
     public MasterEnum.Color getActiveColor() {return activeColor;}
 
     public Player getP1()
@@ -125,5 +134,16 @@ public class Game {
     public List<Move> getMovesList()
     {
         return movesList;
+    }
+
+    public boolean isGameOver() {return gameOver;}
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o instanceof Game){
+            return ((Game)o).getP1().equals(this.p1) && ((Game)o).getP2().equals(this.p2);
+        }
+        return false;
     }
 }

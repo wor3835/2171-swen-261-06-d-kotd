@@ -1,6 +1,8 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.Game;
+import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
 import com.webcheckers.model.*;
@@ -14,6 +16,8 @@ import sun.rmi.runtime.Log;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import static spark.Spark.halt;
+
 /**
  * Created by wor3835 on 10/25/2017.
  *
@@ -22,6 +26,7 @@ import java.util.logging.Logger;
 public class PostValidateMoveRoute implements Route {
 
     private static final Logger LOG = Logger.getLogger(PostValidateMoveRoute.class.getName());
+
 
     static final String MOVE_ATTR = "move";
 
@@ -46,23 +51,17 @@ public class PostValidateMoveRoute implements Route {
 
         Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
 
-        ArrayList<Move> moves = board.getMoves(p.getPosList());
+        ArrayList<Move> moves = board.getMoves();
 
-        if(moves.size() == 0){
-            System.err.println("No moves left for Player:" +p.getName());
-        }
-
-        boolean hasMove = false;
         for(Move m: moves){
             if(m.equals(move)) {
-                hasMove = true;
-                LOG.finer("CONTAINS MOVE");
+                session.attribute(MOVE_ATTR, m);
                 break;
             }
         }
 
-        if(hasMove) {
-            session.attribute(MOVE_ATTR, move);
+        if(session.attribute(MOVE_ATTR) != null){
+
             //String moveString = gson.toJson(make);
             //moveString = request.body();
             msg = new Message("the move is valid", MasterEnum.MessageType.info);
