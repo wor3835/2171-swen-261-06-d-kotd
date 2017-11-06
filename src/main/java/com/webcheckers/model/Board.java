@@ -91,7 +91,9 @@ public class Board {
         return movesList;
     }
 
-    public ArrayList<Move> getMoves(){
+    public ArrayList<Move> getMoves(ArrayList<Position> posList){
+        if(movesList == null)
+            updateMovesList(posList);
         return movesList;
     }
 

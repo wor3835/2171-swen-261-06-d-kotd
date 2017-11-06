@@ -51,7 +51,7 @@ public class PostValidateMoveRoute implements Route {
 
         Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
 
-        ArrayList<Move> moves = board.getMoves();
+        ArrayList<Move> moves = board.getMoves(p.getPosList());
 
         for(Move m: moves){
             if(m.equals(move)) {
