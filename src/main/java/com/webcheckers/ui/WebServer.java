@@ -215,8 +215,7 @@ public class WebServer {
     post(RESIGN_URL, new PostResignGameRoute());
 
     get(ENDGAME_URL, new GetEndGameRoute(templateEngine, gameLobby));
-    //FIXME: add posts for an subsequent route classes specified by URL's
-    //
+
     LOG.config("WebServer is initialized.");
   }
 
