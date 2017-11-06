@@ -142,10 +142,7 @@ public class Space{
                 }
             }
         }
-        //TODO: create a recursive call so that it can make double jump moves
-        //if(noJumps)
         return moves;
-        //recurse?
     }
 
 }

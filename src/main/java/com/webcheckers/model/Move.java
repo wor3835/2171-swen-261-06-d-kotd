@@ -19,6 +19,12 @@ public class Move {
         this.end = end;
     }
 
+    public Move(Position start, Position end, Move move){
+        this.start = start;
+        this.end = end;
+        this.move = move;
+    }
+
     /**
      * Sets the linked move
      * @param move the next move to be linked
