@@ -41,7 +41,7 @@ public class GetEndGameRoute implements Route{
         this.templateEngine = templateEngine;
         this.gameLobby = gameLobby;
         //
-        LOG.config("GetHomeRoute is initialized.");
+        LOG.config("GetEndGameRoute is initialized.");
     }
 
     @Override
