@@ -67,6 +67,8 @@ public class PostSubmitTurnRoute implements Route {
             String name = ((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
             session.attribute(GetEndGameRoute.WINNER_ATTR, name);
 
+            game.endGame();
+
             gameLobby.removeGame(game);
 
             response.redirect(WebServer.ENDGAME_URL);
