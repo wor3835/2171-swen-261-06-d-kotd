@@ -32,7 +32,7 @@ public class PostCheckTurnRoute implements Route {
         if(currentPlayer == null)LOG.fine("Current player = null");
 
         if(game.isGameOver()){
-            String name = currentPlayer.getName();
+            String name = ((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             session.attribute(GetEndGameRoute.WINNER_ATTR, name);
 
             response.redirect(WebServer.ENDGAME_URL);
@@ -44,6 +44,8 @@ public class PostCheckTurnRoute implements Route {
                 && game.getActiveColor() == MasterEnum.Color.RED)
                 || (currentPlayer.equals(session.attribute(GetGameRoute.WHITE_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.WHITE)){
+
+
             session.attribute(GetGameRoute.ACTIVE_COLOR, game.getActiveColor());
             text = "true";
         }else {

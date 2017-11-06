@@ -27,15 +27,10 @@ public class PostValidateMoveRoute implements Route {
 
     private static final Logger LOG = Logger.getLogger(PostValidateMoveRoute.class.getName());
 
-    private final GameLobby gameLobby;
 
     static final String MOVE_ATTR = "move";
 
     private Message msg;
-
-    public PostValidateMoveRoute(GameLobby gameLobby){
-        this.gameLobby = gameLobby;
-    }
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
@@ -56,24 +51,11 @@ public class PostValidateMoveRoute implements Route {
 
         Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
 
-        ArrayList<Move> moves = board.getMoves(p.getPosList());
+        ArrayList<Move> moves = board.getMoves();
 
-        if(moves.size() == 0){
-            System.err.println("No moves left for Player:" +p.getName());
-
-            String name = ((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
-            session.attribute(GetEndGameRoute.WINNER_ATTR, name);
-
-            Game game = ((Game)session.attribute(GetGameRoute.GAME_ATTR));
-            gameLobby.removeGame(game);
-
-            response.redirect(WebServer.ENDGAME_URL);
-            halt();
-            return null;
-        }
         for(Move m: moves){
             if(m.equals(move)) {
-                session.attribute(MOVE_ATTR, move);
+                session.attribute(MOVE_ATTR, m);
                 break;
             }
         }

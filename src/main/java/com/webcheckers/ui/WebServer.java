@@ -208,7 +208,7 @@ public class WebServer {
 
     post(VALID_URL, new PostValidateMoveRoute());
 
-    post(SUBMIT_URL, new PostSubmitTurnRoute());
+    post(SUBMIT_URL, new PostSubmitTurnRoute(gameLobby));
 
     post(BACKUP_URL, new PostBackUpMoveRoute());
 
