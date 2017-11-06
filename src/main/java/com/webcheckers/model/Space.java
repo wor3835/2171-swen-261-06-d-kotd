@@ -68,7 +68,7 @@ public class Space{
         int col = start.getCol();
 
         ArrayList<Move> m1 = new ArrayList<>();
-        Piece curr = b.getPieceAt(start.getRow(), start.getCol());
+        //Piece curr = b.getPieceAt(start.getRow(), start.getCol());
         if (row - 1 >= 0 && col + 1 < BoardView.BOARD_LENGTH) {
             if (!(b.hasPiece(row - 1, col + 1)))
                 m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
@@ -77,7 +77,7 @@ public class Space{
             if (!(b.hasPiece(row - 1, col - 1)))
                 m1.add(new Move(new Position(row, col), new Position(row - 1, col - 1)));
         }
-        if (curr.getType().equals(MasterEnum.PieceType.KING)) {
+        if (piece.getType().equals(MasterEnum.PieceType.KING)) {
             if (row + 1 < BoardView.BOARD_LENGTH && col + 1 < BoardView.BOARD_LENGTH) {
                 if (!(b.hasPiece(row + 1, col + 1)))
                     m1.add(new Move(new Position(row, col), new Position(row + 1, col + 1)));
@@ -120,7 +120,7 @@ public class Space{
                 }
             }
         }
-        if (curr.getType().equals(MasterEnum.PieceType.KING)) {
+        if (piece.getType().equals(MasterEnum.PieceType.KING)) {
             if (row + 1 < BoardView.BOARD_LENGTH && col + 1 < BoardView.BOARD_LENGTH) {
                 if (b.hasPiece(row + 1, col + 1) &&
                         (row + 2 < BoardView.BOARD_LENGTH && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row + 2, col + 2)))) {
