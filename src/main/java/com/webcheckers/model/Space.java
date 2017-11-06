@@ -68,7 +68,6 @@ public class Space{
         int col = start.getCol();
 
         ArrayList<Move> m1 = new ArrayList<>();
-        //Piece curr = b.getPieceAt(start.getRow(), start.getCol());
         if (row - 1 >= 0 && col + 1 < BoardView.BOARD_LENGTH) {
             if (!(b.hasPiece(row - 1, col + 1)))
                 m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
@@ -97,14 +96,16 @@ public class Space{
 
         ArrayList<Move> moves = new ArrayList<>();
 
-        Piece curr = b.getPieceAt(start.getRow(), start.getCol());
         if (row - 1 >= 0 && col + 1 < BoardView.BOARD_LENGTH) {
             if (b.hasPiece(row - 1, col + 1) &&
                     (row - 2 >= 0 && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row - 2, col + 2)))) {
                 if(b.getPieceAt(row-1, col+1).getColor() != color) {
-                    Move temp = new Move(new Position(row, col), new Position(row - 2, col + 2));
-
-                    moves.add(temp);
+                    Position pos = new Position(row-2, col+2);
+                    for(Move m: validJumps(b, pos, color)){
+                        Move temp = new Move(new Position(row, col), pos, m);
+                        moves.add(temp);
+                    }
+                    moves.add(new Move(start, pos));
                 }
 
 
@@ -114,9 +115,12 @@ public class Space{
             if (b.hasPiece(row - 1, col - 1)
                     && (row - 2 >= 0 && col - 2 >= 0 && !(b.hasPiece(row - 2, col - 2)))) {
                 if(b.getPieceAt(row-1, col-1).getColor() != color) {
-                    Move temp = new Move(new Position(row, col), new Position(row - 2, col - 2));
-
-                    moves.add(temp);
+                    Position pos = new Position(row-2, col-2);
+                    for(Move m: validJumps(b, pos, color)){
+                        Move temp = new Move(new Position(row, col), pos, m);
+                        moves.add(temp);
+                    }
+                    moves.add(new Move(start, pos));
                 }
             }
         }
@@ -125,9 +129,12 @@ public class Space{
                 if (b.hasPiece(row + 1, col + 1) &&
                         (row + 2 < BoardView.BOARD_LENGTH && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row + 2, col + 2)))) {
                     if(b.getPieceAt(row+1, col+1).getColor() != color) {
-                        Move temp = new Move(new Position(row, col), new Position(row + 2, col + 2));
-
-                        moves.add(temp);
+                        Position pos = new Position(row+2, col+2);
+                        for(Move m: validJumps(b, pos, color)){
+                            Move temp = new Move(new Position(row, col), pos, m);
+                            moves.add(temp);
+                        }
+                        moves.add(new Move(start, pos));
                     }
                 }
             }
@@ -135,13 +142,17 @@ public class Space{
                 if (b.hasPiece(row + 1, col - 1) &&
                         (row + 2 < BoardView.BOARD_LENGTH && col - 2 >= 0 && !(b.hasPiece(row + 2, col - 2)))) {
                     if(b.getPieceAt(row+1, col-1).getColor() != color) {
-                        Move temp = new Move(new Position(row, col), new Position(row + 2, col - 2));
-
-                        moves.add(temp);
+                        Position pos = new Position(row+2, col-2);
+                        for(Move m: validJumps(b, pos, color)){
+                            Move temp = new Move(start, pos, m);
+                            moves.add(temp);
+                        }
+                        moves.add(new Move(start, pos));
                     }
                 }
             }
         }
+
         return moves;
     }
 
