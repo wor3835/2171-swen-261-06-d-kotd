@@ -50,31 +50,16 @@ public class PostSubmitTurnRoute implements Route {
             session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
             b1.makeMove(move, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
             b2.inverseMove(move, session.attribute(GetGameRoute.OPPONENT_ATTR));
-            moves = b2.updateMovesList(((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getPosList());
+            b2.updateMovesList(((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getPosList());
 
         } else {
             session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
             b1.inverseMove(move, session.attribute(GetGameRoute.OPPONENT_ATTR));
             b2.makeMove(move, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
-            moves = b1.updateMovesList(((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getPosList());
+            b1.updateMovesList(((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getPosList());
         }
         game.getMovesList().add(move);
         game.switchActive();
-
-
-        if(moves.size() == 0){
-
-            String name = ((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
-            session.attribute(GetEndGameRoute.WINNER_ATTR, name);
-
-            game.endGame();
-
-            gameLobby.removeGame(game);
-
-            response.redirect(WebServer.ENDGAME_URL);
-            halt();
-            return null;
-        }
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);
 

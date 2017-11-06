@@ -1,18 +1,23 @@
 package com.webcheckers.ui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.GameLobby;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.*;
+import com.webcheckers.model.BoardView;
+import com.webcheckers.model.Move;
+import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
 import spark.Session;
+
+import static spark.Spark.halt;
 
 /**
  * The UI Controller to GET the Game page.
@@ -78,6 +83,32 @@ public class GetGameRoute implements Route {
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
+
+        Game game = httpSession.attribute(GAME_ATTR);
+
+        ArrayList<Move> moves = ((BoardView)httpSession.attribute(BOARD_VIEW_KEY)).getBoard().getMoves(
+                ((Player)httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getPosList());
+        if(moves.size() == 0){
+
+            String name = ((Player)httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
+            httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
+
+            game.endGame();
+
+            gameLobby.removeGame(game);
+
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
+        } else if(game.isGameOver()){
+            String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+
+            httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
+
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
+        }
 
         vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 

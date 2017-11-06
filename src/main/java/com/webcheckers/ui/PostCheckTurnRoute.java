@@ -31,14 +31,7 @@ public class PostCheckTurnRoute implements Route {
 
         if(currentPlayer == null)LOG.fine("Current player = null");
 
-        if(game.isGameOver()){
-            String name = ((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
-            session.attribute(GetEndGameRoute.WINNER_ATTR, name);
-
-            response.redirect(WebServer.ENDGAME_URL);
-            halt();
-            return null;
-        }
+        Gson gson = new Gson();
 
         if((currentPlayer.equals(session.attribute(GetGameRoute.RED_PLAYER))
                 && game.getActiveColor() == MasterEnum.Color.RED)
@@ -54,7 +47,6 @@ public class PostCheckTurnRoute implements Route {
 
         Message msg = new Message(text, MasterEnum.MessageType.info);
 
-        Gson gson = new Gson();
         return gson.toJson(msg);
     }
 }
