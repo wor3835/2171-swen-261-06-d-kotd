@@ -43,10 +43,10 @@ public class Board {
             for(int j = 0; j < BoardView.BOARD_LENGTH;j++){
                 // (i+j)%2 = 1 when on a black space and 0 on white
                 //Whites are invalid
-                if((i+j)%2==1 && i == 2){
+                if((i+j)%2==1 && i < 3){
                     //Add in Opponent spaces on top
                     board[i][j] = new Space(j, false, new Pawn(opponentColor));
-                } else if ((i+j)%2==1 && i == 5) {
+                } else if ((i+j)%2==1 && i >= 5) {
                     //Add in CurPlayer spaces on bottom
                     board[i][j] = new Space(j, false, new Pawn(playerColor));
                 } else {
