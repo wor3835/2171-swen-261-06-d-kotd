@@ -89,7 +89,10 @@ public class Space{
         return m1;
     }
 
-    public ArrayList<Move> validJumps(Board b, Position start, MasterEnum.Color color) {
+    public ArrayList<Move> validJumps(Board b, Position start, MasterEnum.Color color)
+    {return validJumps(b,start,color,new ArrayList<>());}
+
+    public ArrayList<Move> validJumps(Board b, Position start, MasterEnum.Color color, ArrayList<Position> prev) {
 
         int row = start.getRow();
         int col = start.getCol();
@@ -101,11 +104,17 @@ public class Space{
                     (row - 2 >= 0 && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row - 2, col + 2)))) {
                 if(b.getPieceAt(row-1, col+1).getColor() != color) {
                     Position pos = new Position(row-2, col+2);
-                    for(Move m: validJumps(b, pos, color)){
-                        Move temp = new Move(new Position(row, col), pos, m);
-                        moves.add(temp);
+                    int size = prev.size();
+                    if(!prev.contains(pos)) {
+                        prev.add(pos);
+                        for (Move m : validJumps(b, pos, color, prev)) {
+                            Move temp = new Move(new Position(row, col), pos, m);
+                            moves.add(temp);
+                        }
                     }
                     moves.add(new Move(start, pos));
+                    while(prev.size()!=size)
+                        prev.remove(prev.size()-1);
                 }
 
 
@@ -116,11 +125,17 @@ public class Space{
                     && (row - 2 >= 0 && col - 2 >= 0 && !(b.hasPiece(row - 2, col - 2)))) {
                 if(b.getPieceAt(row-1, col-1).getColor() != color) {
                     Position pos = new Position(row-2, col-2);
-                    for(Move m: validJumps(b, pos, color)){
-                        Move temp = new Move(new Position(row, col), pos, m);
-                        moves.add(temp);
+                    int size = prev.size();
+                    if(!prev.contains(pos)) {
+                        prev.add(pos);
+                        for (Move m : validJumps(b, pos, color, prev)) {
+                            Move temp = new Move(new Position(row, col), pos, m);
+                            moves.add(temp);
+                        }
                     }
                     moves.add(new Move(start, pos));
+                    while(prev.size()!=size)
+                        prev.remove(prev.size()-1);
                 }
             }
         }
@@ -130,11 +145,17 @@ public class Space{
                         (row + 2 < BoardView.BOARD_LENGTH && col + 2 < BoardView.BOARD_LENGTH && !(b.hasPiece(row + 2, col + 2)))) {
                     if(b.getPieceAt(row+1, col+1).getColor() != color) {
                         Position pos = new Position(row+2, col+2);
-                        for(Move m: validJumps(b, pos, color)){
-                            Move temp = new Move(new Position(row, col), pos, m);
-                            moves.add(temp);
+                        int size = prev.size();
+                        if(!prev.contains(pos)) {
+                            prev.add(pos);
+                            for (Move m : validJumps(b, pos, color, prev)) {
+                                Move temp = new Move(new Position(row, col), pos, m);
+                                moves.add(temp);
+                            }
                         }
                         moves.add(new Move(start, pos));
+                        while(prev.size()!=size)
+                            prev.remove(prev.size()-1);
                     }
                 }
             }
@@ -143,11 +164,17 @@ public class Space{
                         (row + 2 < BoardView.BOARD_LENGTH && col - 2 >= 0 && !(b.hasPiece(row + 2, col - 2)))) {
                     if(b.getPieceAt(row+1, col-1).getColor() != color) {
                         Position pos = new Position(row+2, col-2);
-                        for(Move m: validJumps(b, pos, color)){
-                            Move temp = new Move(start, pos, m);
-                            moves.add(temp);
+                        int size = prev.size();
+                        if(!prev.contains(pos)) {
+                            prev.add(pos);
+                            for (Move m : validJumps(b, pos, color, prev)) {
+                                Move temp = new Move(new Position(row, col), pos, m);
+                                moves.add(temp);
+                            }
                         }
                         moves.add(new Move(start, pos));
+                        while(prev.size()!=size)
+                            prev.remove(prev.size()-1);
                     }
                 }
             }
