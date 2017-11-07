@@ -8,6 +8,7 @@ import spark.Session;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -39,19 +40,52 @@ public class BoardTest {
     @Test
     public void TestGetMoves()
     {
+        //create a new player and assign the it to the test board
+        Player playTest = new Player("player1");
+        playTest.assignPos(CuT, MasterEnum.Color.RED);
 
+        //since recreating a full list of moves without using the method would be awful,
+        //this test only makes sure the returned moves list is not null
+        assertNotNull(CuT.getMoves(playTest.getPosList()));
     }
 
     @Test
     public void TestMakeMove()
     {
+        //create the player, move to be applied for testing, and assign player to the test board
+        Player playTest = new Player("player1");
+        playTest.assignPos(CuT, MasterEnum.Color.RED);
+        Move moveTest = new Move(new Position(5,4), new Position(4, 3));
+
+        //make sure that the piece is at the start position and the end position is free
+        assertNotNull(CuT.getPieceAt(5,4));
+        assertNull(CuT.getPieceAt(4,3));
+
+        CuT.makeMove(moveTest, playTest);
+
+        //make sure that the piece is now in the end position and the start position is free
+        assertNull(CuT.getPieceAt(5,4));
+        assertNotNull(CuT.getPieceAt(4,3));
 
     }
 
     @Test
     public void TestInverseMove()
     {
+        //create the player, move to be applied for testing, and assign player to the test board
+        Player playTest = new Player("player1");
+        playTest.assignPos(CuT, MasterEnum.Color.RED);
+        Move moveTest = new Move(new Position(5,4), new Position(4, 3));
 
+        //make sure the start position is occupied and the end position is free
+        assertNotNull(CuT.getPieceAt(2, 3));
+        assertNull(CuT.getPieceAt(3, 4));
+
+        CuT.inverseMove(moveTest, playTest);
+
+        //make sure the piece is now in the end position and the start position is free
+        assertNull(CuT.getPieceAt(2,3));
+        assertNotNull(CuT.getPieceAt(3,4));
     }
 
     @Test

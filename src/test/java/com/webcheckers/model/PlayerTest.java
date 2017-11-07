@@ -51,31 +51,20 @@ public class PlayerTest {
         game = mock(Game.class);
 
         // create a unique CuT for each test
-        CuT = new Player(null);
+        CuT = new Player(NAME_FOR_TEST);
     }
 
     //tests whether an unnamed player can be assigned a name
     @Test
     public void set_new_name(){
-        CuT.setName(NAME_FOR_TEST);
         assertNotNull(CuT.getName());
         assertEquals(NAME_FOR_TEST, CuT.getName());
         assertEquals(Boolean.FALSE, CuT.isInGame());
     }
 
-    //tests if attempting to name a named player throws an exception
-    @Test(expected = RuntimeException.class)
-    public void set_name_on_named_player(){
-        CuT.setName(NAME_FOR_TEST);
-        assertNotNull(CuT.getName());
-        assertEquals(Boolean.FALSE, CuT.isInGame());
-        CuT.setName(OTHER_NAME_FOR_TEST);
-    }
-
     //tests if a player can be assigned a game
     @Test
     public void game_test(){
-        CuT.setName(NAME_FOR_TEST);
         assertNotNull(CuT.getName());
         assertEquals(Boolean.FALSE, CuT.isInGame());
         CuT.assignGame(game);
@@ -89,7 +78,6 @@ public class PlayerTest {
     //tests the equals method
     @Test
     public void equals_test(){
-        CuT.setName(NAME_FOR_TEST);
         assertNotNull(CuT);
         ArrayList<String> TEST_LIST = new ArrayList();
         assertFalse(CuT.equals(TEST_LIST));

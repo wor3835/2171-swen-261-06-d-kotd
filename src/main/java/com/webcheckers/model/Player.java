@@ -31,6 +31,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.inGame = false;
+        this.posList = new ArrayList<>();
     }
 
     /**
@@ -65,9 +66,6 @@ public class Player {
      * @param color The color of pieces being looked for
      */
     public void assignPos(Board b, MasterEnum.Color color){
-        //Initialize the arraylist if it doesn't exist
-        if(posList == null)
-            posList = new ArrayList<>();
 
         //Find all pieces with matching color and add their positions to the posList
         for(int i = 0; i < BoardView.BOARD_LENGTH; i++){
