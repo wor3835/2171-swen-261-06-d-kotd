@@ -25,12 +25,6 @@ public class Move {
         this.move = move;
     }
 
-    /**
-     * Sets the linked move
-     * @param move the next move to be linked
-     */
-    public void setMove(Move move){this.move = move;}
-
     public Move getMove(){return move;}
 
     public Position getStart(){
