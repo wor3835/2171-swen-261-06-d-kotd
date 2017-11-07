@@ -61,6 +61,7 @@ public class SpaceTest {
         assertEquals(piece, CuT.getPiece());
     }
 
+    //Need to finish
     @Test
     public void TestKingMe()
     {
@@ -70,6 +71,7 @@ public class SpaceTest {
         assertEquals(king.getType(), CuT.getPiece().getType());
     }
 
+    /*
     @Test
     public void TestValidMoves()
     {
@@ -85,7 +87,7 @@ public class SpaceTest {
     {
 
     }
-
+    */
 
 
 }

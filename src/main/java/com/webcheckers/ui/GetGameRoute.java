@@ -96,14 +96,22 @@ public class GetGameRoute implements Route {
             response.redirect(WebServer.ENDGAME_URL);
             halt();
             return null;
-        } else if(moves.size() == 0){
+        } else if(moves.size() == 0) {
 
-            String name = ((Player)httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
+            String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
 
             game.endGame();
 
             gameLobby.removeGame(game);
+
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
+        }else if (game.getP1().getPosList().isEmpty() || game.getP2().getPosList().isEmpty()){
+            String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+
+            httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
 
             response.redirect(WebServer.ENDGAME_URL);
             halt();
