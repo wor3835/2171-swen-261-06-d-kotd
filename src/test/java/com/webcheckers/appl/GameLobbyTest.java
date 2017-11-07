@@ -6,9 +6,7 @@ import org.junit.Test;
 import spark.Request;
 import spark.Session;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -44,9 +42,20 @@ public class GameLobbyTest {
     public void removeGame() {
         final Game g = new Game();
 
+        Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
+
+        g.applyGame(player1, player2);
+
+        assertFalse(CuT.getGamesList().contains(g));
+
         CuT.addGame(g);
+
+        assertTrue(CuT.getGamesList().contains(g));
+
         CuT.removeGame(g);
-        assertEquals(0, CuT.getGamesList().size());
+
+        assertFalse(CuT.getGamesList().contains(g));
     }
 
     @Test
