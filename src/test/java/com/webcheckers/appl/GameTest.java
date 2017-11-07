@@ -14,6 +14,8 @@ import org.junit.Test;
 import spark.Request;
 import spark.Session;
 
+import java.util.ArrayList;
+
 /**
  * The unit test suite for the {@link Game} component.
  *
@@ -127,5 +129,35 @@ public class GameTest {
         CuT.switchActive();
 
         assertEquals(MasterEnum.Color.RED, CuT.getActiveColor());
+    }
+
+    @Test
+    public void endingGame(){
+        final Player player1 = new Player("player1");
+        final Player player2 = new Player("player2");
+
+        CuT.applyGame(player1, player2);
+
+        assertNotNull(player1.getGame());
+        assertNotNull(player2.getGame());
+
+        CuT.endGame();
+
+        assertNull(player1.getGame());
+        assertNull(player2.getGame());
+
+        assertTrue(CuT.isGameOver());
+    }
+
+    @Test
+    public void equalTest(){
+        final Player player1 = new Player("player1");
+        final Player player2 = new Player("player2");
+
+        CuT.applyGame(player1, player2);
+
+        assertTrue(CuT.equals(CuT));
+
+        assertFalse(CuT.equals(new ArrayList<>()));
     }
 }
