@@ -337,4 +337,9 @@ public class Board {
     public boolean hasPiece(int row, int col){
         return board[row][col].getPiece() != null;
     }
+        
+    public Space[][] getBoard()
+    {
+        return this.board;
+    }
 }
