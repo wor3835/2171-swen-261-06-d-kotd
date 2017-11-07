@@ -17,7 +17,7 @@ import java.util.Iterator;
  * Keeps track of the players logged in using an ArrayList.
  */
 public class PlayerLobby {
-    ArrayList<Player> playerList = new ArrayList<Player>();
+    private ArrayList<Player> playerList = new ArrayList<Player>();
 
     /**
      * Signs a player in to play.

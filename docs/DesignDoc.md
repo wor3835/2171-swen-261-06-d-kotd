@@ -80,7 +80,7 @@ domain, which in this case is the game board, its spaces, and the spaces pieces.
 
 ### Overview of User Interface
 
-The program begins by making a GET to the game page. The player signs in which invokes a POST sign in. If successful, 
+The program begins by making a GET to the home page. The player signs in which invokes a POST sign in. If successful,
 the player can then choose another signed in player to play against and a GET is made to the game page. Here the player
 can make a move. First, there is a POST to validate the move, then there is a POST to submit the move.
 
