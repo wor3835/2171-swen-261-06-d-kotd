@@ -35,6 +35,15 @@ public class Board {
         init();
     }
 
+    public Board(){
+        playerColor = null;
+        opponentColor = null;
+    }
+
+    public void addPiece(Piece p, int r, int c){
+        board[r][c] = new Space(c, false, p);
+    }
+
     /**
      * Initializes board by adding spaces to the board at all locations
      */
@@ -336,10 +345,5 @@ public class Board {
      */
     public boolean hasPiece(int row, int col){
         return board[row][col].getPiece() != null;
-    }
-        
-    public Space[][] getBoard()
-    {
-        return this.board;
     }
 }
