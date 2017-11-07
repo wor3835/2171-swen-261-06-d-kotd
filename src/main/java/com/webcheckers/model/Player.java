@@ -19,7 +19,7 @@ public class Player {
     //Variables to keep track of the name, is the player is in the game, and the game
     private boolean inGame;
     private String name;
-    private Game game;
+    private Game game = null;
 
     //A list of all the players piece positions
     private ArrayList<Position> posList;
@@ -52,7 +52,7 @@ public class Player {
      * @param game the game player is assigned to
      */
     public void assignGame(Game game){
-        if(game == null) {
+        if(this.game == null) {
             this.game = game;
             setInGame();
         } else

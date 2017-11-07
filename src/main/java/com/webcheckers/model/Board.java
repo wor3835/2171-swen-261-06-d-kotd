@@ -69,10 +69,8 @@ public class Board {
         for(int i = 0; i < posList.size(); i++){
             //create a position, and fetch the space from that position on board
             Position pos = posList.get(i);
-            Space s = board[pos.getRow()][pos.getCol()];
-
             //Add all the moves created from that spaces validJumps method
-            moves.addAll(s.validJumps(this, pos, playerColor));
+            moves.addAll(validJumps(this, pos, playerColor));
         }
 
         //Only go through this loop if there are no valid jumps
@@ -80,10 +78,8 @@ public class Board {
             for (int i = 0; i < posList.size(); i++) {
                 //create a position, and fetch the space from that position on board
                 Position pos = posList.get(i);
-                Space s = board[pos.getRow()][pos.getCol()];
-
                 //Add all the moves created from that spaces validMoves method
-                moves.addAll(s.validMoves(this, pos));
+                moves.addAll(validMoves(pos));
             }
         }
 
@@ -97,7 +93,126 @@ public class Board {
         return movesList;
     }
 
+    public ArrayList<Move> validMoves(Position start) {
+        int row = start.getRow();
+        int col = start.getCol();
 
+        ArrayList<Move> m1 = new ArrayList<>();
+        if (row - 1 >= 0 && col + 1 < BoardView.BOARD_LENGTH) {
+            if (!(hasPiece(row - 1, col + 1)))
+                m1.add(new Move(new Position(row, col), new Position(row - 1, col + 1)));
+        }
+        if (row - 1 >= 0 && col - 1 >= 0) {
+            if (!(hasPiece(row - 1, col - 1)))
+                m1.add(new Move(new Position(row, col), new Position(row - 1, col - 1)));
+        }
+        if (getPieceAt(row,col).getType().equals(MasterEnum.PieceType.KING)) {
+            if (row + 1 < BoardView.BOARD_LENGTH && col + 1 < BoardView.BOARD_LENGTH) {
+                if (!(hasPiece(row + 1, col + 1)))
+                    m1.add(new Move(new Position(row, col), new Position(row + 1, col + 1)));
+            }
+            if (row + 1 < BoardView.BOARD_LENGTH && col - 1 >= 0) {
+                if (!(hasPiece(row + 1, col - 1)))
+                    m1.add(new Move(new Position(row, col), new Position(row + 1, col - 1)));
+            }
+        }
+        return m1;
+    }
+
+    public ArrayList<Move> validJumps(Board b, Position start, MasterEnum.Color color)
+    {return validJumps(start,color,getPieceAt(start.getRow(),start.getCol()),new ArrayList<>());}
+
+    public ArrayList<Move> validJumps(Position start, MasterEnum.Color color, Piece piece,
+                                      ArrayList<Position> prev) {
+
+        int row = start.getRow();
+        int col = start.getCol();
+
+        ArrayList<Move> moves = new ArrayList<>();
+
+        if (row - 1 >= 0 && col + 1 < BoardView.BOARD_LENGTH) {
+            if (hasPiece(row - 1, col + 1) &&
+                    (row - 2 >= 0 && col + 2 < BoardView.BOARD_LENGTH && !(hasPiece(row - 2, col + 2)))) {
+                if(getPieceAt(row-1, col+1).getColor() != color) {
+                    Position pos = new Position(row-2, col+2);
+                    int size = prev.size();
+                    if(!prev.contains(pos)) {
+                        prev.add(pos);
+                        for (Move m : validJumps(pos, color, piece, prev)) {
+                            Move temp = new Move(new Position(row, col), pos, m);
+                            moves.add(temp);
+                        }
+                    }
+                    moves.add(new Move(start, pos));
+                    while(prev.size()!=size)
+                        prev.remove(prev.size()-1);
+                }
+
+
+            }
+        }
+        if (row - 1 >= 0 && col - 1 >= 0) {
+            if (hasPiece(row - 1, col - 1)
+                    && (row - 2 >= 0 && col - 2 >= 0 && !(hasPiece(row - 2, col - 2)))) {
+                if(getPieceAt(row-1, col-1).getColor() != color) {
+                    Position pos = new Position(row-2, col-2);
+                    int size = prev.size();
+                    if(!prev.contains(pos)) {
+                        prev.add(pos);
+                        for (Move m : validJumps(pos, color, piece, prev)) {
+                            Move temp = new Move(new Position(row, col), pos, m);
+                            moves.add(temp);
+                        }
+                    }
+                    moves.add(new Move(start, pos));
+                    while(prev.size()!=size)
+                        prev.remove(prev.size()-1);
+                }
+            }
+        }
+        if (piece.getType().equals(MasterEnum.PieceType.KING)) {
+            if (row + 1 < BoardView.BOARD_LENGTH && col + 1 < BoardView.BOARD_LENGTH) {
+                if (hasPiece(row + 1, col + 1) &&
+                        (row + 2 < BoardView.BOARD_LENGTH && col + 2 < BoardView.BOARD_LENGTH && !(hasPiece(row + 2, col + 2)))) {
+                    if(getPieceAt(row+1, col+1).getColor() != color) {
+                        Position pos = new Position(row+2, col+2);
+                        int size = prev.size();
+                        if(!prev.contains(pos)) {
+                            prev.add(pos);
+                            for (Move m : validJumps(pos, color, piece, prev)) {
+                                Move temp = new Move(new Position(row, col), pos, m);
+                                moves.add(temp);
+                            }
+                        }
+                        moves.add(new Move(start, pos));
+                        while(prev.size()!=size)
+                            prev.remove(prev.size()-1);
+                    }
+                }
+            }
+            if (row + 1 < BoardView.BOARD_LENGTH && col - 1 >= 0) {
+                if (hasPiece(row + 1, col - 1) &&
+                        (row + 2 < BoardView.BOARD_LENGTH && col - 2 >= 0 && !(hasPiece(row + 2, col - 2)))) {
+                    if(getPieceAt(row+1, col-1).getColor() != color) {
+                        Position pos = new Position(row+2, col-2);
+                        int size = prev.size();
+                        if(!prev.contains(pos)) {
+                            prev.add(pos);
+                            for (Move m : validJumps(pos, color, piece, prev)) {
+                                Move temp = new Move(new Position(row, col), pos, m);
+                                moves.add(temp);
+                            }
+                        }
+                        moves.add(new Move(start, pos));
+                        while(prev.size()!=size)
+                            prev.remove(prev.size()-1);
+                    }
+                }
+            }
+        }
+
+        return moves;
+    }
 
     /**
      * Moves a players piece on board, updates the player's posList
