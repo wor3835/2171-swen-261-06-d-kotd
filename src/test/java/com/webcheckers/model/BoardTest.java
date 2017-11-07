@@ -90,6 +90,57 @@ public class BoardTest {
     }
 
     @Test
+    public void TestJumpMoves(){
+        //create the player, move to be applied for testing, and assign player to the test board
+        Player playTest = new Player("player1");
+        playTest.assignPos(CuT, MasterEnum.Color.RED);
+        Move moveTest = new Move(new Position(5,4), new Position(3, 2));
+
+        //for the purpose of this test, the end position is guaranteed to be null,
+        // even though a normal board could have a piece in that position
+        playTest.removePiece(new Position(3, 2));
+
+        //make sure that the piece is at the start position and the end position is free
+        assertNotNull(CuT.getPieceAt(5,4));
+        assertNull(CuT.getPieceAt(3,2));
+
+
+        CuT.makeMove(moveTest, playTest);
+
+        //make sure that the piece is now in the end position and the start position is free, and the position between them is also free
+        assertNull(CuT.getPieceAt(5,4));
+        assertNull(CuT.getPieceAt(4,3));
+        assertNotNull(CuT.getPieceAt(3,2));
+
+        //tests that movepiece returns false if a piece that doesn't exist is given to move
+        assertFalse(playTest.movePiece(moveTest));
+
+    }
+
+    @Test
+    public void TestInverseJumpMoves(){
+        //create the player, move to be applied for testing, and assign player to the test board
+        Player playTest = new Player("player1");
+        playTest.assignPos(CuT, MasterEnum.Color.RED);
+        Move moveTest = new Move(new Position(5,4), new Position(3, 2));
+
+        //for the purpose of this test, the end position is guaranteed to be null,
+        // even though a normal board could have a piece in that position
+        playTest.removePiece(new Position(3,2));
+
+        //make sure the start position is occupied and the end position is free
+        assertNotNull(CuT.getPieceAt(2, 3));
+        assertNull(CuT.getPieceAt(3, 2));
+
+        CuT.inverseMove(moveTest, playTest);
+
+        //make sure the piece is now in the end position and the start position is free, and the position between them is also free
+        assertNull(CuT.getPieceAt(2,3));
+        assertNull(CuT.getPieceAt(4,3));
+        assertNotNull(CuT.getPieceAt(4,5));
+    }
+
+    @Test
     public void TestGetPieceAt()
     {
         //red piece only created to make sure get piece returns what we expect it to
