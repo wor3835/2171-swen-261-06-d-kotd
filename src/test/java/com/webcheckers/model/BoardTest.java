@@ -6,9 +6,7 @@ import org.junit.Test;
 import spark.Request;
 import spark.Session;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -66,6 +64,9 @@ public class BoardTest {
         //make sure that the piece is now in the end position and the start position is free
         assertNull(CuT.getPieceAt(5,4));
         assertNotNull(CuT.getPieceAt(4,3));
+
+        //tests that movepiece returns false if a piece that doesn't exist is given to move
+        assertFalse(playTest.movePiece(moveTest));
 
     }
 

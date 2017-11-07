@@ -64,7 +64,7 @@ public class PlayerTest {
     }
 
     //tests if a player can be assigned a game
-    @Test
+    @Test(expected = RuntimeException.class)
     public void game_test(){
         assertNotNull(CuT.getName());
         assertEquals(Boolean.FALSE, CuT.isInGame());
@@ -74,6 +74,10 @@ public class PlayerTest {
         CuT.leaveGame();
         assertFalse(CuT.isInGame());
         assertNull(CuT.getGame());
+
+        //tests whether the program allows a player to be assigned to multiple games at once
+        CuT.assignGame(game);
+        CuT.assignGame(game);
     }
 
     //tests the equals method
@@ -98,7 +102,12 @@ public class PlayerTest {
         //remove the piece
         CuT.removePiece(new Position(5, 4));
 
+        int x = CuT.getPosList().size();
         //make sure the player's board no longer contains the piece
         assertFalse(CuT.getPosList().contains(new Position(5,4)));
+
+        //makes sure nothing happens if remove piece is called on an empty position
+        CuT.removePiece(new Position(5,4));
+        assertTrue(x == CuT.getPosList().size());
     }
 }
