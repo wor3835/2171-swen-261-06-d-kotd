@@ -138,6 +138,7 @@ public class Player {
     public void leaveGame(){
         this.inGame = false;
         this.game = null;
+        posList.clear();
     }
 
     /**

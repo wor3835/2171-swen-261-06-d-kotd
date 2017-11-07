@@ -94,6 +94,10 @@ public class WebServer {
    * The URL pattern to request the Resign page.
    */
   public static final String RESIGN_URL = "/resignGame";
+  /**
+   * The URL pattern to request the EndGame page
+   */
+  public static final String ENDGAME_URL = "/endGame";
 
 
   //
@@ -204,13 +208,14 @@ public class WebServer {
 
     post(VALID_URL, new PostValidateMoveRoute());
 
-    post(SUBMIT_URL, new PostSubmitTurnRoute());
+    post(SUBMIT_URL, new PostSubmitTurnRoute(gameLobby));
 
     post(BACKUP_URL, new PostBackUpMoveRoute());
 
     post(RESIGN_URL, new PostResignGameRoute());
-    //FIXME: add posts for an subsequent route classes specified by URL's
-    //
+
+    get(ENDGAME_URL, new GetEndGameRoute(templateEngine, gameLobby));
+
     LOG.config("WebServer is initialized.");
   }
 

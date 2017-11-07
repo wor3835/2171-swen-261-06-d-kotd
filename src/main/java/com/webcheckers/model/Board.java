@@ -16,6 +16,8 @@ public class Board {
     //Colors of the first player using the board and opponent of the player
     private final MasterEnum.Color playerColor, opponentColor;
 
+    private ArrayList<Move> movesList;
+
 
     /**
      * Constructor for board
@@ -60,7 +62,7 @@ public class Board {
      * @param posList The list of piece positions from the player
      * @return a full list of moves for a player
      */
-    public ArrayList<Move> getMoves(List<Position> posList){
+    public ArrayList<Move> updateMovesList(List<Position> posList){
         //Moves list to be returned
         ArrayList<Move> moves = new ArrayList<>();
 
@@ -85,8 +87,17 @@ public class Board {
             }
         }
 
-        return moves;
+        movesList = moves;
+        return movesList;
     }
+
+    public ArrayList<Move> getMoves(ArrayList<Position> posList){
+        if(movesList == null)
+            updateMovesList(posList);
+        return movesList;
+    }
+
+
 
     /**
      * Moves a players piece on board, updates the player's posList

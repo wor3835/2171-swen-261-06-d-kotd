@@ -78,8 +78,8 @@ public class SpaceTest {
         final Board b = new Board(MasterEnum.Color.RED);
         final Position start = new Position(0, 0);
         final Pawn piece = new Pawn(MasterEnum.Color.RED);
-        final Space space = new Space(0, false, piece);
-        assertEquals(space.validMoves(b, start), CuT.validMoves(b, start));
+        final Space space = new Space(0, true, piece);
+        assertNotNull(space.validMoves(b, start));
     }
 
     @Test
