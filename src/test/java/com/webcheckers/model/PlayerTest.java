@@ -2,6 +2,7 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.Game;
 
+import com.webcheckers.appl.MasterEnum;
 import spark.*;
 
 import static org.junit.Assert.*;
@@ -82,5 +83,22 @@ public class PlayerTest {
         ArrayList<String> TEST_LIST = new ArrayList();
         assertFalse(CuT.equals(TEST_LIST));
         assertTrue(CuT.equals(CuT));
+    }
+
+    //test if a piece is removed from a player's list
+    @Test
+    public void remove_piece_test(){
+        //create board and assign player to it
+        Board boardTest = new Board(MasterEnum.Color.RED);
+        CuT.assignPos(boardTest, MasterEnum.Color.RED);
+
+        //make sure the player's board contains a piece at 5,4
+        assertTrue(CuT.getPosList().contains(new Position(5, 4)));
+
+        //remove the piece
+        CuT.removePiece(new Position(5, 4));
+
+        //make sure the player's board no longer contains the piece
+        assertFalse(CuT.getPosList().contains(new Position(5,4)));
     }
 }
