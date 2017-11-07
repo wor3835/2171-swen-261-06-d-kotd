@@ -33,19 +33,6 @@ public class Player {
         this.inGame = false;
     }
 
-
-    /**
-     * Sets the player name
-     * @param name Player name
-     */
-    public void setName(String name)
-    {
-        if(this.name == null)
-            this.name = name;
-        else
-            throw new RuntimeException("Player already has name");
-    }
-
     /**
      * Returns the player name
      * @return String of the name
@@ -65,8 +52,11 @@ public class Player {
      * @param game the game player is assigned to
      */
     public void assignGame(Game game){
-        this.game = game;
-        setInGame();
+        if(game == null) {
+            this.game = game;
+            setInGame();
+        } else
+            throw new RuntimeException("player already in a game");
     }
 
     /**
