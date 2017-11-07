@@ -27,6 +27,7 @@ public class PlayerLobbyTest {
         //Analyze Results
         //Returns that the player is in PlayerLobby
         assertTrue(CuT.contains(player.getName()));
+        assertFalse(CuT.contains("NO_NAME"));
         //Checks that there is now a player signed in as well
         assertEquals(1, CuT.getPlayerCount());
 
@@ -71,7 +72,7 @@ public class PlayerLobbyTest {
         assertEquals(names1.length, CuT.getPlayerCount());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_pull_by_name(){
         final PlayerLobby CuT = new PlayerLobby();
         final Player player = new Player("name");
@@ -83,6 +84,8 @@ public class PlayerLobbyTest {
         //Analyze results
         //See if player pulled is the same as the original player
         assertTrue(p2.equals(player));
+
+        Player test = CuT.pullByName("NO_NAME");
     }
 
     @Test
