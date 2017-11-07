@@ -212,8 +212,6 @@ public class WebServer {
 
     post(BACKUP_URL, new PostBackUpMoveRoute());
 
-    post(RESIGN_URL, new PostResignGameRoute());
-
     get(ENDGAME_URL, new GetEndGameRoute(templateEngine, gameLobby));
 
     LOG.config("WebServer is initialized.");
