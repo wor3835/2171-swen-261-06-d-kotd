@@ -37,12 +37,6 @@ public class BoardTest {
     }
 
     @Test
-    public void TestInit()
-    {
-
-    }
-
-    @Test
     public void TestGetMoves()
     {
 
@@ -63,21 +57,30 @@ public class BoardTest {
     @Test
     public void TestGetPieceAt()
     {
-        final Pawn piece = new Pawn(null);
+        //red piece only created to make sure get piece returns what we expect it to
+        final Pawn piece = new Pawn(MasterEnum.Color.RED);
+
+        //make sure board is not null
         assertNotNull(CuT);
-        assertEquals(piece, CuT.getPieceAt(0, 0));
+
+        //5,4 is a position in board where we expect a red piece to be
+        assertEquals(piece, CuT.getPieceAt(5, 4));
     }
 
     @Test
     public void TestGetSpaceAt()
     {
+        //this space is located at 5,4, it at the start of a game it shouldn't be valid, it's piece should be a red pawn
+        Space test = new Space(4, false, new Pawn(MasterEnum.Color.RED));
 
-    }
+        //make sure board is not null
+        assertNotNull(CuT);
 
-    @Test
-    public void TestHasSpace()
-    {
+        //make sure the space we are looking for exists
+        assertNotNull(CuT.getSpaceAt(5, 4));
 
+        //we expect our test space to be the same as the space returned by this getSpaceAt call
+        assertEquals(test, CuT.getSpaceAt(5,4));
     }
 
 }

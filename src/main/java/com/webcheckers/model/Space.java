@@ -183,5 +183,10 @@ public class Space{
         return moves;
     }
 
+    //for testing
+    @Override
+    public boolean equals(Object o){
+        return (this.isValid() == ((Space) o).isValid() && this.cellIdx == ((Space) o).cellIdx && this.getPiece().equals(((Space) o).getPiece()));
+    }
 }
 
