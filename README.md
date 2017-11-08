@@ -6,7 +6,7 @@ microframework.
 
 ## Team
 
-- AJ Nagshima
+- AJ Nagashima
 
 - Kerri Zalba
 
