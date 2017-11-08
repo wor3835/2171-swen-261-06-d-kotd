@@ -68,12 +68,29 @@ The application has a Board and a BoardView. The Board is of type Space and the 
 the Board for the current player. Each Space object on the Board can contain a Piece if it is a white Piece. Piece is
 an abstract class; the two types of Pieces are type Pawn and type King. Each Piece has a Position so that we can figure out where
 it is located on the Board and what Space it is in, and it also has an equals function in it that allows you to see if two Pieces
-are at the same Position. Player holds a Position list of all the Player's Pieces
+are at the same Position. Player holds a Position list of all the Player's Pieces on the board. The Row holds the Spaces per the
+size of the Board.
 
 ### Details of each Domain Area
 
-It is important to note that Space has its own validMoves method. This returns the validMoves a Piece can move from
-that space. The method determines whether the piece is of type Pawn or King and carries out the respective move checking.
+Space has a function validSpace that returns whether or not that Space is one that can be moved onto. It also holds the kingMe
+function that returns when the Piece gets to the end of the Board it can become a King.The Row holds the amount of Spaces and
+uses what the dimensions of the Board that is passed into the constructor to see how many Spaces need to be added. The Position
+class helps us to determine where Pieces are located on the Board so that we can determine if the Space is valid to move onto or
+not. The Player class assigns the Players to a game and can tell whether or not the Player is in a game so that another Player
+can't try to start a game with them. It also assigns the Postition of the Piece when the Player makes a move and keeps a list
+of the moves that were made. It also allows the Player to remove a Piece if they want to retract a move and it allows them to
+leave a game which then deletes all the moves they made in that game. Piece sets up the Pieces with their colors and the type
+of Piece (ie King or Pawn). It also has an equals() function that is used to see if there is a Piece already on a Space so that
+it can help in checking if the Space is valid or not. It is also an Abstract class so that Pawn and King can pull from it.
+Pawn is a child of Piece and it is used to determine the functionality of how it can move vs Piece's other child class, King,
+which can move differently than a Pawn can. Move keeps the Position start and ends and what happens in between so it is easy to
+backtrack through the move list and figure out what has been done. BoardView is for the HTML, it changes the Board display for
+each player so that they can each see it like they are the red player. This is for the user because it makes the game and the view
+of the game a little bit friendlier for them. Board initializes the Board for the Players and is made up of Spaces. This allows
+there to be Pieces added on the Spaces. It also contains a validMoves function that returns a list of the moves that can be made
+and it has a validJumps function as well that determines whether a jump is valid. It also has a makeMove function which allows a
+move to be made and also an inverseMove which allows the move that was made to be backtracked.
 
 ## Architecture
 
