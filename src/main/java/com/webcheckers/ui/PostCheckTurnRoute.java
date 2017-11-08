@@ -22,7 +22,7 @@ public class PostCheckTurnRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostCheckTurnRoute.class.getName());
 
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response) {
         Session session = request.session();
         Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
