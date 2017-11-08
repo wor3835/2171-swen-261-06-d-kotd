@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by kzalb on 10/15/2017.
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
  * Represents a space on the board
  */
 public class Space{
