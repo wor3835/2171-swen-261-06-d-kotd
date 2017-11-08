@@ -64,7 +64,7 @@ public class PostStartRoute implements Route {
      * @return
      * @throws Exception
      */
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response) {
         final Session httpSession = request.session();
 
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY_KEY, playerLobby);
