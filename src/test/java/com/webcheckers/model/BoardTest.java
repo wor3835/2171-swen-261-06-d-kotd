@@ -6,6 +6,8 @@ import org.junit.Test;
 import spark.Request;
 import spark.Session;
 
+import javax.swing.text.DefaultEditorKit;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,6 +40,8 @@ public class BoardTest {
     @Test
     public void TestGetMoves()
     {
+        Board b = new Board();
+        b.addPiece(new Pawn(MasterEnum.Color.RED), 0,0);
         //create a new player and assign the it to the test board
         Player playTest = new Player("player1");
         playTest.assignPos(CuT, MasterEnum.Color.RED);
@@ -45,6 +49,14 @@ public class BoardTest {
         //since recreating a full list of moves without using the method would be awful,
         //this test only makes sure the returned moves list is not null
         assertNotNull(CuT.getMoves(playTest.getPosList()));
+
+        b.addPiece(new King(MasterEnum.Color.RED), 1, 1);
+        assertNotNull(b.validMoves(new Position(1,1)));
+        assertNotNull(b.validJumps(b, new Position(1,1), MasterEnum.Color.RED));
+        assertNotNull(b.validJumps(new Position(0, 0), MasterEnum.Color.RED, new Pawn(MasterEnum.Color.RED),
+                null));
+        assertNotNull(b.validJumps(new Position(1, 1), MasterEnum.Color.RED, new King(MasterEnum.Color.RED),
+                null));
     }
 
     @Test
@@ -95,6 +107,7 @@ public class BoardTest {
         Player playTest = new Player("player1");
         playTest.assignPos(CuT, MasterEnum.Color.RED);
         Move moveTest = new Move(new Position(5,4), new Position(3, 2));
+        assertNotNull(CuT.validMoves(new Position(5,4)));
 
         //for the purpose of this test, the end position is guaranteed to be null,
         // even though a normal board could have a piece in that position
@@ -167,6 +180,20 @@ public class BoardTest {
 
         //we expect our test space to be the same as the space returned by this getSpaceAt call
         assertEquals(test, CuT.getSpaceAt(5,4));
+    }
+
+    @Test
+    public void TestJumpMoves2() {
+        CuT.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 3);
+        assertNotNull(CuT.validJumps(CuT, new Position(5, 2), MasterEnum.Color.RED));
+        CuT.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 3);
+        assertNotNull(CuT.validJumps(CuT, new Position(5, 4), MasterEnum.Color.RED));
+        CuT.addPiece(new King(MasterEnum.Color.WHITE), 4, 5);
+        CuT.getSpaceAt(6,7).removePiece();
+        assertNotNull(CuT.validJumps(CuT, new Position(4, 5), MasterEnum.Color.WHITE));
+        CuT.addPiece(new King(MasterEnum.Color.WHITE), 4, 5);
+        CuT.getSpaceAt(6,3).removePiece();
+        assertNotNull(CuT.validJumps(CuT, new Position(4, 5), MasterEnum.Color.WHITE));
     }
 
 }
