@@ -68,7 +68,7 @@ The application has a Board and a BoardView. The Board is of type Space and the 
 the Board for the current player. Each Space object on the Board can contain a Piece if it is a white Piece. Piece is
 an abstract class; the two types of Pieces are type Pawn and type King. Each Piece has a Position so that we can figure out where
 it is located on the Board and what Space it is in, and it also has an equals function in it that allows you to see if two Pieces
-are at the same Position. 
+are at the same Position. Player holds a Position list of all the Player's Pieces
 
 ### Details of each Domain Area
 

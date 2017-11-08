@@ -60,7 +60,7 @@ public class PostCheckTurnRouteTest {
         Gson gson = new Gson();
         Player player = new Player("player1");
         when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
-        when(session.attribute("currentPlayer")).thenReturn(player);
+        when(session.attribute("currentPlayer")).thenReturn(new Player("player1"));
         when(session.attribute(GetGameRoute.RED_PLAYER)).thenReturn(player);
         when(((Game)session.attribute(GetGameRoute.GAME_ATTR)).getActiveColor()).thenReturn(MasterEnum.Color.RED);
 
