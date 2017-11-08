@@ -100,7 +100,7 @@ public class PlayerLobbyTest {
 
     @Test
     /**
-     * tests the iterator method 
+     * tests the iterator method
      */
     public void test_iterator(){
         final PlayerLobby CuT = new PlayerLobby();
