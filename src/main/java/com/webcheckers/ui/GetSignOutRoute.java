@@ -22,7 +22,7 @@ public class GetSignOutRoute implements Route {
     /**
      * Global variables to keep track of the players, routes, and templates
      */
-    private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(GetSignOutRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
     //private final Player player;
@@ -62,7 +62,6 @@ public class GetSignOutRoute implements Route {
         
         session.invalidate();
         response.redirect(WebServer.HOME_URL);
-        halt();
         return null;
 
     }
