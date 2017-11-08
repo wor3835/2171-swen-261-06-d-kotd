@@ -22,6 +22,9 @@ import static org.mockito.Mockito.when;
  */
 public class PieceTest {
 
+    /**
+     * Variables
+     */
     private Piece CuT;
 
     private Pawn Piece_to_test;
@@ -30,6 +33,9 @@ public class PieceTest {
     private Session session;
     //private Piece piece;
 
+    /**
+     * Sets up the mock objects and the CuT
+     */
     @Before
     public void setup() {
         Piece_to_test = new Pawn(MasterEnum.Color.RED);
@@ -45,6 +51,9 @@ public class PieceTest {
         CuT = new Pawn(MasterEnum.Color.RED);
     }
 
+    /**
+     * Test for the getColor() function
+     */
     @Test
     public void check_color(){
         CuT.getColor();
@@ -52,6 +61,9 @@ public class PieceTest {
         assertEquals(Piece_to_test.getColor(), CuT.getColor());
     }
 
+    /**
+     * Test for the getType() function
+     */
     @Test
     public void check_type(){
         CuT.getType();
@@ -59,6 +71,9 @@ public class PieceTest {
         assertEquals(Piece_to_test.getType(), CuT.getType());
     }
 
+    /**
+     * Test for the equals() function
+     */
     @Test
     public void check_equals(){
         assertEquals(false, CuT.equals(Other_Piece_to_test));

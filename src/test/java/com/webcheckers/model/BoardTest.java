@@ -17,6 +17,9 @@ import static org.mockito.Mockito.when;
  */
 public class BoardTest {
 
+    /**
+     * Global variables
+     */
     private Board CuT;
 
     private Board Board_to_test;
@@ -24,6 +27,9 @@ public class BoardTest {
     private Request request;
     private Session session;
 
+    /**
+     * Sets up all of the mock objects and the CuT
+     */
     @Before
     public void setup() {
 
@@ -37,6 +43,9 @@ public class BoardTest {
         CuT = new Board(MasterEnum.Color.RED);
     }
 
+    /**
+     * Test for the GetMoves function
+     */
     @Test
     public void TestGetMoves()
     {
@@ -59,6 +68,9 @@ public class BoardTest {
                 null));
     }
 
+    /**
+     * Test for the MakeMove() function
+     */
     @Test
     public void TestMakeMove()
     {
@@ -82,6 +94,9 @@ public class BoardTest {
 
     }
 
+    /**
+     * Test for the InverseMove() function
+     */
     @Test
     public void TestInverseMove()
     {
@@ -101,6 +116,9 @@ public class BoardTest {
         assertNotNull(CuT.getPieceAt(3,4));
     }
 
+    /**
+     * Test for the JumpMoves() function
+     */
     @Test
     public void TestJumpMoves(){
         //create the player, move to be applied for testing, and assign player to the test board
@@ -130,6 +148,9 @@ public class BoardTest {
 
     }
 
+    /**
+     * Test for the InverseJumpMoves() function
+     */
     @Test
     public void TestInverseJumpMoves(){
         //create the player, move to be applied for testing, and assign player to the test board
@@ -153,6 +174,9 @@ public class BoardTest {
         assertNotNull(CuT.getPieceAt(4,5));
     }
 
+    /**
+     * Test for the GetPieceAt function
+     */
     @Test
     public void TestGetPieceAt()
     {
@@ -166,6 +190,10 @@ public class BoardTest {
         assertEquals(piece, CuT.getPieceAt(5, 4));
     }
 
+
+    /**
+     * Test for the GetSpaceAt() function
+     */
     @Test
     public void TestGetSpaceAt()
     {
@@ -182,6 +210,9 @@ public class BoardTest {
         assertEquals(test, CuT.getSpaceAt(5,4));
     }
 
+    /**
+     * 2nd Test for the JumpMoves() function
+     */
     @Test
     public void TestJumpMoves2() {
         CuT.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 3);

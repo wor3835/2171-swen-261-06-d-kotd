@@ -18,6 +18,9 @@ import static org.mockito.Mockito.when;
  * Created by arthu on 11/7/2017.
  */
 public class MoveTest {
+    /**
+     * Variables
+     */
     private Move CuT;
 
     private Move m2;
@@ -26,6 +29,9 @@ public class MoveTest {
     private Position p2;
     private Position p3;
 
+    /**
+     * Sets up objects
+     */
     @Before
     public void set_up(){
         p1 = new Position(0,0);
@@ -36,6 +42,9 @@ public class MoveTest {
         m3 = new Move(p1,p3);
     }
 
+    /**
+     * Test for the makeMove() function
+     */
     @Test
     public void make_move(){
         CuT = new Move(p1,p2);
@@ -44,6 +53,9 @@ public class MoveTest {
         assertEquals(p2, CuT.getEnd());
     }
 
+    /**
+     * Test for the equals function
+     */
     @Test
     public void test_equals(){
         CuT = new Move(p1,p2, m2);
@@ -55,6 +67,9 @@ public class MoveTest {
         assertFalse(CuT.equals(new ArrayList<>()));
     }
 
+    /**
+     * Test for the getFinalMove() function
+     */
     @Test
     public void get_final_test(){
         CuT = new Move(p1,p2);
@@ -63,6 +78,9 @@ public class MoveTest {
         assertEquals(CuT.getFinal(), p3);
     }
 
+    /**
+     * Test for the getMove() function
+     */
     @Test
     public void get_move_test() {
         CuT = new Move(p1,p2,m2);
