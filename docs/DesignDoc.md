@@ -59,16 +59,20 @@ A game of checkers can be played by the official American rule set between two p
 The application domain has a GameLobby that keeps track of all the games server wide and a PlayerLobby that keeps track of
 all the players server wide and a Game that keep track of the game and the players playing the game. There is also a MasterEnum
 to keep track of all the enumerations in one place and a Message to give an error message or an info message to the player.
+The Game assigns the players to a specific game and gives them an opponent to play against and assigns them their colors.
+It also holds the moves that each player can use and if the game is over or not.
 
 ### Overview of Major Domain Areas
 
-The application has a Board and a BoardView. The board is of type Space and the board view is used to show
-the board for the current player. Each Space object on the board can contain a Piece if it is a white piece. Piece is
-an abstract class; the two types of pieces are type Pawn and type King. 
+The application has a Board and a BoardView. The Board is of type Space and the BoardView is used to show
+the Board for the current player. Each Space object on the Board can contain a Piece if it is a white Piece. Piece is
+an abstract class; the two types of Pieces are type Pawn and type King. Each Piece has a Position so that we can figure out where
+it is located on the Board and what Space it is in, and it also has an equals function in it that allows you to see if two Pieces
+are at the same Position. 
 
 ### Details of each Domain Area
 
-It is important to note that Space has its own validMoves method. This returns the valid moves a Piece can move from
+It is important to note that Space has its own validMoves method. This returns the validMoves a Piece can move from
 that space. The method determines whether the piece is of type Pawn or King and carries out the respective move checking.
 
 ## Architecture
