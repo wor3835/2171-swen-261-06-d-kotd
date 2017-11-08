@@ -1,8 +1,12 @@
 package com.webcheckers.ui;
 
+import com.google.gson.Gson;
+import com.webcheckers.appl.MasterEnum;
+import com.webcheckers.appl.Message;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import org.junit.Before;
+import org.junit.Test;
 import spark.Request;
 import spark.Response;
 import spark.Session;
@@ -10,9 +14,15 @@ import spark.TemplateEngine;
 
 import java.util.logging.Logger;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * The unit test suite for the {@link PostSignInRoute} component.
+ *
+ * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
+ */
 public class PostValidateMoveRouteTest {
 
     private PostValidateMoveRoute CuT;
@@ -40,4 +50,17 @@ public class PostValidateMoveRouteTest {
         // create a unique CuT for each test
         CuT = new PostValidateMoveRoute();
     }
+
+    @Test
+    public void valid(){
+        Gson gson = new Gson();
+        assertEquals(gson.toJson(new Message("the move is valid", MasterEnum.MessageType.info)), CuT.handle(request, response));
+    }
+
+    @Test
+    public void invalid(){
+        Gson gson = new Gson();
+        assertEquals(gson.toJson(new Message("the move is invalid", MasterEnum.MessageType.error)), CuT.handle(request, response));
+    }
+
 }
