@@ -5,7 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import spark.Request;
 import spark.Session;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -47,6 +51,8 @@ public class MoveTest {
 
         CuT = new Move(p2, p3);
         assertEquals(CuT, m2);
+
+        assertFalse(CuT.equals(new ArrayList<>()));
     }
 
     @Test
@@ -62,4 +68,5 @@ public class MoveTest {
         CuT = new Move(p1,p2,m2);
         assertEquals(m2, CuT.getMove());
     }
+
 }
