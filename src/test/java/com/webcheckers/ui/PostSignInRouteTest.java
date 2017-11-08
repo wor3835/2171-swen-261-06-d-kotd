@@ -68,7 +68,7 @@ public class PostSignInRouteTest {
         final Object model = myModelView.model;
         assertNotNull(model);
         assertTrue(model instanceof Map);
-        //   * model contains all necessary View-Model data
+        //   * com.webcheckers.model contains all necessary View-Model data
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Name must be alphanumeric, try another name", vm.get("error"));
@@ -91,7 +91,7 @@ public class PostSignInRouteTest {
         final Object model = myModelView.model;
         assertNotNull(model);
         assertTrue(model instanceof Map);
-        //   * model contains all necessary View-Model data
+        //   * com.webcheckers.model contains all necessary View-Model data
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Name must not be empty", vm.get("error"));
@@ -113,9 +113,9 @@ public class PostSignInRouteTest {
         CuT.handle(request, response);
 
         final Object model = myModelView.model;
-        //model is null because a valid name causes a redirect to home, nothing is returned to MyModelView
+        //com.webcheckers.model is null because a valid name causes a redirect to home, nothing is returned to MyModelView
         assertNull(model);
-        //   * model cannot contain anything because it is null
+        //   * com.webcheckers.model cannot contain anything because it is null
 
         assertEquals(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR), player);
     }
@@ -137,7 +137,7 @@ public class PostSignInRouteTest {
         final Object model = myModelView.model;
         assertNotNull(model);
         assertTrue(model instanceof Map);
-        //   * model contains all necessary View-Model data
+        //   * com.webcheckers.model contains all necessary View-Model data
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
 

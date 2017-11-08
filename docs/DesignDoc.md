@@ -98,8 +98,8 @@ This section describes the application architecture.
 
 ### Summary
 
-The application of the program spans three tiers: appl, model, ui. Users interact with the UI by moving 
-pieces on the board. The application tier holds the logic that allows moves to be valid. The model holds the core 
+The application of the program spans three tiers: appl, com.webcheckers.model, com.webcheckers.ui. Users interact with the UI by moving 
+pieces on the board. The application tier holds the logic that allows moves to be valid. The com.webcheckers.model holds the core 
 domain, which in this case is the game board, its spaces, and the spaces pieces. 
 
 ![](board.png)
@@ -118,9 +118,9 @@ can make a move. First, there is a POST to validate the move, then there is a PO
 The UI tier allows the player to sign in, play games, make moves, and resign. GET routes handle getting the different
 pages (Home, SignIn, Game). POST routes allow the player to sign in, make moves and resign.
 
-### Tier model
+### Tier com.webcheckers.model
 
-The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object 
+The com.webcheckers.model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object 
 on them. The King and Pawn classes make sure that the proper move functionality in used.
 
 ### Tier appl
