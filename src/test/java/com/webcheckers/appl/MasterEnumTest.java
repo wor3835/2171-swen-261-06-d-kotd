@@ -26,4 +26,10 @@ public class MasterEnumTest {
         MasterEnum.PieceType type = MasterEnum.PieceType.SINGLE;
         assertNotNull(type);
     }
+
+    @Test
+    public void viewMode(){
+        MasterEnum.ViewMode view = MasterEnum.ViewMode.PLAY;
+        assertNotNull(view);
+    }
 }

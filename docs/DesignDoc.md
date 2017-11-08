@@ -34,7 +34,11 @@ Create an online checkers game.
 
 ## Requirements
 
-This section describes the features of the application.
+The features we have in our application include, creating an alphanumeric username that is not already taken, challenge a player
+to a game when they are both not already in one in which case it pulls both players into a game page together, when one player
+is already in a game it makes the other player wait to play a game with them, allows the players to take turns moving their
+pieces, allows players to capture each others pieces, allows pieces to become king when the end of the board is reached,
+allows players to win or lose a game, and allows players to log out.
 
 
 ### Definition of MVP
