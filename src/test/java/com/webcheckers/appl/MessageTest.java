@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by wor3835 on 11/5/2017.
+ * Tests to make sure right messages are returned
  */
 public class MessageTest {
     private Message CuT;
@@ -19,6 +20,9 @@ public class MessageTest {
     private Session session;
 
     @Before
+    /**
+     * sets up testing environment
+     */
     public void setup() {
         request = mock(Request.class);
         session = mock(Session.class);

@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 /**
  * Created by arthu on 10/26/2017.
+ * Tests to see if playerLobby can be created
  */
 public class PlayerLobbyTest {
 
@@ -41,6 +42,9 @@ public class PlayerLobbyTest {
     }
 
     @Test
+    /**
+     * tests that player can sign in and join lobby
+     */
     public void test_signin_player(){
         final PlayerLobby CuT = new PlayerLobby();
 
@@ -57,6 +61,9 @@ public class PlayerLobbyTest {
     }
 
     @Test
+    /**
+     * tests that playerLobby count goes up after player joins
+     */
     public void test_player_count(){
         final PlayerLobby CuT = new PlayerLobby();
         final String[] names1 = {"name", "name2", "name3"};
@@ -73,6 +80,9 @@ public class PlayerLobbyTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * tests pulling a player by name in the lobby
+     */
     public void test_pull_by_name(){
         final PlayerLobby CuT = new PlayerLobby();
         final Player player = new Player("name");
@@ -89,6 +99,9 @@ public class PlayerLobbyTest {
     }
 
     @Test
+    /**
+     * tests the iterator method 
+     */
     public void test_iterator(){
         final PlayerLobby CuT = new PlayerLobby();
         final String NAME = "name";

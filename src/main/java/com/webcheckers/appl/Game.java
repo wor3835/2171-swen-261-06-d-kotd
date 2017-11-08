@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * Thus p2 is ALWAYS the challenged player
  *
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */
 public class Game {
 
@@ -98,46 +99,86 @@ public class Game {
 
     }
 
+    /**
+     * ends the game by making each player leave
+     */
     public void endGame(){
         p1.leaveGame();
         p2.leaveGame();
         gameOver = true;
     }
 
+    /**
+     * gest the active player's color
+     * @return active color
+     */
     public MasterEnum.Color getActiveColor() {return activeColor;}
 
+    /**
+     * @return player 1
+     */
     public Player getP1()
     {
         return p1;
     }
 
+    /**
+     * @return player 2
+     */
     public Player getP2(){
         return p2;
     }
 
+    /**
+     * @return board 1
+     */
     public Board getB1() {return b1;}
 
+    /**
+     * @return board 2
+     */
     public Board getB2() {return b2;}
 
+    /**
+     * Add move to Game's moveList
+     * @param m move to add
+     */
     public void addMove(Move m) {
         movesList.add(m);
     }
 
+    /**
+     * @return player 1 color
+     */
     public MasterEnum.Color getP1color(){
         return MasterEnum.Color.RED;
     }
 
+    /**
+     * @return player 2 color
+     */
     public MasterEnum.Color getP2color(){
         return MasterEnum.Color.WHITE;
     }
 
+    /**
+     * @return movesList
+     */
     public List<Move> getMovesList()
     {
         return movesList;
     }
 
+    /**
+     * checks to see if gave is over
+     */
     public boolean isGameOver() {return gameOver;}
 
+    /**
+     * compares two players
+     * @param o player to compare
+     * @return true if they're the same, false otherwise
+     */
     @Override
     public boolean equals(Object o)
     {

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by wor3835 on 11/7/2017.
+ * Tests the enums to make sure they return right information.
  */
 public class MasterEnumTest {
 
