@@ -140,5 +140,7 @@ These components provide a game page for the user to view and interact with.
 ### Static models
 
 ![Board UML](board.png)
+![Board UML](chart.png)
+
 
 ### Dynamic models
