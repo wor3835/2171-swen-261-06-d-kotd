@@ -50,7 +50,4 @@ public class WebServerTest {
     public void servernotNull() {
         assertNotNull(new WebServer(templateEngine, gson, playerLobby, gameLobby));
     }
-
-    @Test
-    public void
 }
