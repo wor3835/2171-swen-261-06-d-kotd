@@ -1,10 +1,14 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.Message;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Board;
+import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
+import com.webcheckers.model.Position;
 import org.junit.Before;
 import org.junit.Test;
 import spark.Request;
@@ -27,8 +31,6 @@ public class PostValidateMoveRouteTest {
 
     private PostValidateMoveRoute CuT;
 
-
-    private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     private Player player;
     private TemplateEngine engine;
     private PlayerLobby playerLobby;
@@ -52,8 +54,33 @@ public class PostValidateMoveRouteTest {
     }
 
     @Test
-    public void valid(){
+    public void valid() throws Exception {
+
         Gson gson = new Gson();
+        Game game = new Game();
+        Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
+        game.applyGame(player1, player2);
+        Board board1 = new Board(MasterEnum.Color.RED);
+        Board board2 = new Board(MasterEnum.Color.WHITE);
+        game.applyBoard(board1, board2);
+        when(session.attribute(PostValidateMoveRoute.MOVE_ATTR)).thenReturn(new Move(new Position(5,4), new Position(4,3)));
+        Move m = new Move(new Position(5,4), new Position(4,3));
+
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(player1);
+        when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(player2);
+        when(session.attribute(GetGameRoute.ACTIVE_COLOR)).thenReturn(MasterEnum.Color.RED);
+        when(session.attribute(PostValidateMoveRoute.MOVE_ATTR)).thenReturn(new Move(new Position(5,4), new Position(4,3)));
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+
+        //assertEquals(gson.toJson(new Message("the move is valid", MasterEnum.MessageType.info)), CuT.handle(request, response));
+
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(player2);
+        when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(player1);
+        when(session.attribute(GetGameRoute.ACTIVE_COLOR)).thenReturn(MasterEnum.Color.WHITE);
+        when(session.attribute(PostValidateMoveRoute.MOVE_ATTR)).thenReturn(new Move(new Position(5,4), new Position(4,3)));
+
+        //assertEquals(gson.toJson(new Message("the move is valid", MasterEnum.MessageType.info)), CuT.handle(request, response));
     }
 
     @Test
