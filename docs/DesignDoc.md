@@ -78,7 +78,7 @@ function that returns when the Piece gets to the end of the Board it can become 
 uses what the dimensions of the Board that is passed into the constructor to see how many Spaces need to be added. The Position
 class helps us to determine where Pieces are located on the Board so that we can determine if the Space is valid to move onto or
 not. The Player class assigns the Players to a game and can tell whether or not the Player is in a game so that another Player
-can't try to start a game with them. It also assigns the Postition of the Piece when the Player makes a move and keeps a list
+can't try to start a game with them. It also assigns the Position of the Piece when the Player makes a move and keeps a list
 of the moves that were made. It also allows the Player to remove a Piece if they want to retract a move and it allows them to
 leave a game which then deletes all the moves they made in that game. Piece sets up the Pieces with their colors and the type
 of Piece (ie King or Pawn). It also has an equals() function that is used to see if there is a Piece already on a Space so that
