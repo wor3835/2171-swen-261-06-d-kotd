@@ -61,33 +61,15 @@ public class SpaceTest {
         assertEquals(piece, CuT.getPiece());
     }
 
-    //Need to finish
-    @Test
-    public void TestKingMe()
-    {
-        final Pawn piece = new Pawn(null);
-        final King king = new King(piece);
+    @Test(expected = RuntimeException.class)
+    public void TestKingMe() {
+        CuT = new Space(0,false,null);
         CuT.kingMe();
-        assertEquals(king.getType(), CuT.getPiece().getType());
+        final Pawn piece = new Pawn(null);
+        CuT = new Space(0, false, piece);
+        CuT.kingMe();
+        assertEquals(MasterEnum.PieceType.KING, CuT.getPiece().getType());
+        CuT.kingMe();
+        assertEquals(MasterEnum.PieceType.KING, CuT.getPiece().getType());
     }
-
-    /*
-    @Test
-    public void TestValidMoves()
-    {
-        final Board b = new Board(MasterEnum.Color.RED);
-        final Position start = new Position(0, 0);
-        final Pawn piece = new Pawn(MasterEnum.Color.RED);
-        final Space space = new Space(0, true, piece);
-        assertNotNull(space.validMoves(b, start));
-    }
-
-    @Test
-    public void TestValidJumps()
-    {
-
-    }
-    */
-
-
 }

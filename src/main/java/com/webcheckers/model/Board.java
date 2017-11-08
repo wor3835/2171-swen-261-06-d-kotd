@@ -36,6 +36,9 @@ public class Board {
     }
 
     public Board(){
+        for(int i = 0; i < BoardView.BOARD_LENGTH; i++)
+            for(int j = 0; j < BoardView.BOARD_LENGTH; j++)
+                board[i][j] = new Space(j, true, null);
         playerColor = null;
         opponentColor = null;
     }
