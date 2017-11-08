@@ -48,7 +48,6 @@ A game of checkers can be played by the official American rule set between two p
 * Sign-in: Players must be able to sign into the checkers site
 * Game start: Players must be able to start a game with another person
 * Gameplay: Players must be able to play a game that follows the American checkers rule set
-* Resignation: Players must be able to resign from a game they no longer wish to play
 
 ### Roadmap of Enhancements
 * Spectate: Players must be able to watch an ongoing game between two other players
@@ -57,7 +56,9 @@ A game of checkers can be played by the official American rule set between two p
 
 ## Application Domain
 
-This section describes the application domain.
+The application domain has a GameLobby that keeps track of all the games server wide and a PlayerLobby that keeps track of
+all the players server wide and a Game that keep track of the game and the players playing the game. There is also a MasterEnum
+to keep track of all the enumerations in one place and a Message to give an error message or an info message to the player.
 
 ### Overview of Major Domain Areas
 

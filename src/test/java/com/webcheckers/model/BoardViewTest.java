@@ -39,11 +39,18 @@ public class BoardViewTest {
     public void makeView() {
         BoardView bv = new BoardView(MasterEnum.Color.RED);
         assertNotNull(bv);
+        BoardView bv2 = new BoardView(bv.getBoard());
+        assertNotNull(bv2);
     }
 
     @Test
     public void getBoard() {
         Board b = CuT.getBoard();
         assertNotNull(b);
+    }
+
+    @Test
+    public void iterator_test(){
+        assertNotNull(CuT.iterator());
     }
 }
