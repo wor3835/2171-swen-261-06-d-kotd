@@ -68,6 +68,7 @@ public class GetHomeRouteTest {
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Welcome!", vm.get("title"));
+        //assertEquals("", vm.get(GetHomeRoute.GAME_STATS_MSG_ATTR));
         assertEquals(GetHomeRoute.VIEW_NAME, myModelView.viewName);
         verify(session).attribute(eq("playerLobby"), any(PlayerLobby.class));
     }
@@ -89,12 +90,8 @@ public class GetHomeRouteTest {
         verify(response).redirect(WebServer.HOME_URL);
     }
 
-    @Test
-    public void TestNonRender()
-    {
-        final Response response = mock(Response.class);
-        CuT.handle(request, response);
-        assertNull();
-    }
 
 }
+
+
+// If the player playing (player 2) is in a game it will return null ---- check nonRender
