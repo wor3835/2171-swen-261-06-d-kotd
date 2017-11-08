@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  */
 public class GameLobby {
     //List of all games going on in the webserver

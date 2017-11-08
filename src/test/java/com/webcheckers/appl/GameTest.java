@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class GameTest {
 
+    // set up Game for all test
     private Game CuT;
 
     private Request request;
@@ -32,6 +33,9 @@ public class GameTest {
     private Game game;
 
     @Before
+    /**
+     * set up test environment
+     */
     public void setup() {
         request = mock(Request.class);
         session = mock(Session.class);
@@ -132,6 +136,9 @@ public class GameTest {
     }
 
     @Test
+    /**
+     * tests to make sure games actually end
+     */
     public void endingGame(){
         final Player player1 = new Player("player1");
         final Player player2 = new Player("player2");
@@ -150,6 +157,9 @@ public class GameTest {
     }
 
     @Test
+    /**
+     * tests if two Games can be compared to eachother
+     */
     public void equalTest(){
         final Player player1 = new Player("player1");
         final Player player2 = new Player("player2");

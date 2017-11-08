@@ -44,6 +44,12 @@ public class Board {
         opponentColor = null;
     }
 
+    /**
+     * add a piece to the specified location
+     * @param p - the piece to be added
+     * @param r - the row of the location
+     * @param c - the column of the location
+     */
     public void addPiece(Piece p, int r, int c){
         board[r][c] = new Space(c, false, p);
     }
@@ -100,12 +106,22 @@ public class Board {
         return movesList;
     }
 
+    /**
+     * returns the list of moves on the board and (if necessary) updates that list
+     * @param posList - list of positions where there are pieces
+     * @return list of moves
+     */
     public ArrayList<Move> getMoves(ArrayList<Position> posList){
         if(movesList == null)
             updateMovesList(posList);
         return movesList;
     }
 
+    /**
+     * find valid moves for the given position
+     * @param start - the position
+     * @return list of valid moves for the provided position
+     */
     public ArrayList<Move> validMoves(Position start) {
         int row = start.getRow();
         int col = start.getCol();
@@ -132,10 +148,25 @@ public class Board {
         return m1;
     }
 
+    /**
+     * finds valid jump moves for the provided position
+     * @param b - the board
+     * @param start - the position jump moves are being found for
+     * @param color - the color of the piece at the provided position
+     * @return a list of valid jump moves for the provided position
+     */
     public ArrayList<Move> validJumps(Board b, Position start, MasterEnum.Color color)
     {return validJumps(start,color,getPieceAt(start.getRow(),start.getCol()),new ArrayList<>());}
 
-    public ArrayList<Move> validJumps(Position start, MasterEnum.Color color, Piece piece,
+    /**
+     * finds valid jump moves for the provided position
+     * @param start - the position jump moves are being found for
+     * @param color -
+     * @param piece - the color of the piece at the provided position
+     * @param prev - all previously found jump moves for the provided position
+     * @return a list of valid jump moves for the provided position
+     */
+    private ArrayList<Move> validJumps(Position start, MasterEnum.Color color, Piece piece,
                                       ArrayList<Position> prev) {
 
         int row = start.getRow();
@@ -328,10 +359,7 @@ public class Board {
      * @param col The col the piece is located at
      * @return the piece at board[row][col]
      */
-    public Piece getPieceAt(int row, int col)
-    {
-        return board[row][col].getPiece();
-    }
+    public Piece getPieceAt(int row, int col) {return board[row][col].getPiece();}
 
     /**
      * Gets the space at a specified row,col
@@ -347,7 +375,5 @@ public class Board {
      * @param col The col the piece is located at
      * @return true or false if the piece is on the board at board[row][col]
      */
-    public boolean hasPiece(int row, int col){
-        return board[row][col].getPiece() != null;
-    }
+    public boolean hasPiece(int row, int col){return board[row][col].getPiece() != null;}
 }

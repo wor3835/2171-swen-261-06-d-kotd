@@ -12,9 +12,11 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by wor3835 on 11/1/2017.
+ * Tests GameLobby
  */
 public class GameLobbyTest {
 
+    // set up GameLobby for all tests
     private GameLobby CuT;
 
     private Request request;
@@ -22,6 +24,9 @@ public class GameLobbyTest {
     private GameLobby game;
 
     @Before
+    /**
+     * sets up testing environment
+     */
     public void setup() {
         request = mock(Request.class);
         session = mock(Session.class);
@@ -31,6 +36,9 @@ public class GameLobbyTest {
     }
 
     @Test
+    /**
+     * checks to see if lobby gets added to gamesList
+     */
     public void createLobby() {
         final Game g = new Game();
 
@@ -39,6 +47,9 @@ public class GameLobbyTest {
     }
 
     @Test
+    /**
+     * removes player from game and checks removed name in gamesList
+     */
     public void removeGame() {
         final Game g = new Game();
 
@@ -59,6 +70,9 @@ public class GameLobbyTest {
     }
 
     @Test
+    /**
+     * checks if player is in a game
+     */
     public void inGame() {
         final Game g = new Game();
         final Player p1 = new Player("player1");
