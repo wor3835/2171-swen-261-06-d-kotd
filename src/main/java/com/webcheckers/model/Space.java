@@ -14,6 +14,9 @@ import java.util.List;
  */
 public class Space{
 
+    /**
+     * Global variables
+     */
     private int cellIdx;
     private boolean validSpace;
     private Piece piece;
