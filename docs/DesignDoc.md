@@ -83,6 +83,9 @@ domain, which in this case is the game board, its spaces, and the spaces pieces.
 
 ![](board.png)
 
+
+![](game.png)
+
 ### Overview of User Interface
 
 The program begins by making a GET to the home page. The player signs in which invokes a POST sign in. If successful,
