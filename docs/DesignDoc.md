@@ -34,7 +34,11 @@ Create an online checkers game.
 
 ## Requirements
 
-This section describes the features of the application.
+The features we have in our application include, creating an alphanumeric username that is not already taken, challenge a player
+to a game when they are both not already in one in which case it pulls both players into a game page together, when one player
+is already in a game it makes the other player wait to play a game with them, allows the players to take turns moving their
+pieces, allows players to capture each others pieces, allows pieces to become king when the end of the board is reached,
+allows players to win or lose a game, and allows players to log out.
 
 
 ### Definition of MVP
@@ -44,7 +48,6 @@ A game of checkers can be played by the official American rule set between two p
 * Sign-in: Players must be able to sign into the checkers site
 * Game start: Players must be able to start a game with another person
 * Gameplay: Players must be able to play a game that follows the American checkers rule set
-* Resignation: Players must be able to resign from a game they no longer wish to play
 
 ### Roadmap of Enhancements
 * Spectate: Players must be able to watch an ongoing game between two other players
@@ -53,7 +56,9 @@ A game of checkers can be played by the official American rule set between two p
 
 ## Application Domain
 
-This section describes the application domain.
+The application domain has a GameLobby that keeps track of all the games server wide and a PlayerLobby that keeps track of
+all the players server wide and a Game that keep track of the game and the players playing the game. There is also a MasterEnum
+to keep track of all the enumerations in one place and a Message to give an error message or an info message to the player.
 
 ### Overview of Major Domain Areas
 
@@ -77,6 +82,9 @@ pieces on the board. The application tier holds the logic that allows moves to b
 domain, which in this case is the game board, its spaces, and the spaces pieces. 
 
 ![](board.png)
+
+
+![](game.png)
 
 ### Overview of User Interface
 
