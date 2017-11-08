@@ -47,13 +47,6 @@ public class Move {
         return move.getFinal();
     }
 
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-
     @Override
     public boolean equals(Object o){
         //If the object is of type move then check if its start is the same as this start

@@ -50,4 +50,12 @@ public class KingTest {
     public void getType() {
         assertEquals(MasterEnum.PieceType.KING, CuT.getType());
     }
+
+    @Test
+    public void makeKingOutOfPawn(){
+        Piece p = new Pawn(MasterEnum.Color.RED);
+        Piece k = new King(p);
+
+        assertNotNull(k);
+    }
 }

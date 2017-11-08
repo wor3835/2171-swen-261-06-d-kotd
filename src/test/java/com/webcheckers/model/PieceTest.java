@@ -9,7 +9,10 @@ import spark.Session;
 import javax.print.attribute.standard.MediaSize;
 import javax.swing.text.DefaultEditorKit;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -59,5 +62,6 @@ public class PieceTest {
     @Test
     public void check_equals(){
         assertEquals(false, CuT.equals(Other_Piece_to_test));
+        assertFalse(CuT.equals(new ArrayList<>()));
     }
 }
