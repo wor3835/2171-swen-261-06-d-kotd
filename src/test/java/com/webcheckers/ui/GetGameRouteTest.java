@@ -116,28 +116,26 @@ public class GetGameRouteTest {
 
     @Test(expected = HaltException.class)
     public void is_pos_list_empty() {
-        {
-            final Response response = mock(Response.class);
-            final MyModelAndView myModelView = new MyModelAndView();
-            when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+        final Response response = mock(Response.class);
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-            when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
-            when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
-            when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
-            when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
+        when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
 
-            board.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 4);
-            p.assignPos(board, MasterEnum.Color.WHITE);
+        board.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 4);
+        p.assignPos(board, MasterEnum.Color.WHITE);
 
-            game.applyGame(p, o);
+        game.applyGame(p, o);
 
-            assertFalse(game.isGameOver());
+        assertFalse(game.isGameOver());
 
-            assertNull(CuT.handle(request, response));
+        assertNull(CuT.handle(request, response));
 
-            assertTrue(game.isGameOver());
-            assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
-        }
+        assertTrue(game.isGameOver());
+        assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
     }
 
     @Test
