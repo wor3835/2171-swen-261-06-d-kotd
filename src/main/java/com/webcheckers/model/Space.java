@@ -55,6 +55,10 @@ public class Space{
         return piece;
     }
 
+    public void removePiece(){
+        piece = null;
+    }
+
     public void kingMe(){
         if(piece == null)
             throw new RuntimeException("no piece to king");

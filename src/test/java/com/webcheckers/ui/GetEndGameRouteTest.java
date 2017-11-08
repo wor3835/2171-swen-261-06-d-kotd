@@ -9,6 +9,7 @@ import spark.*;
 
 import java.util.Map;
 
+import static com.webcheckers.ui.GetEndGameRoute.WINNER_ATTR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -35,8 +36,8 @@ public class GetEndGameRouteTest {
     public void set_up(){
         request = mock(Request.class);
         engine = mock(TemplateEngine.class);
-        when(request.session()).thenReturn(session);
         session = mock(Session.class);
+        when(request.session()).thenReturn(session);
 
         gameLobby = mock(GameLobby.class);
 
@@ -53,8 +54,8 @@ public class GetEndGameRouteTest {
         when(engine.render(any(ModelAndView.class))).
                 thenAnswer(MyModelAndView.makeAnswer(myModelAndView));
 
-        session.attribute(GetEndGameRoute.WINNER_ATTR, WINNER);
-        session.attribute(GetHomeRoute.CUR_PLAYER_ATTR, p1);
+        when(session.attribute(WINNER_ATTR)).thenReturn(WINNER);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p1);
         CuT.handle(request,response);
 
         final Object model = myModelAndView.model;
@@ -65,12 +66,31 @@ public class GetEndGameRouteTest {
         Map<String, Object> vm = (Map<String, Object>) model;
 
         assertEquals(String.format(GetEndGameRoute.WIN_MSG, p1.getName()), vm.get(GetEndGameRoute.GAME_OVER_ATTR));
+    }
 
+    @Test
+    public void test_lose_msg(){
+        Player p1 = new Player(WINNER);
+        final MyModelAndView myModelAndView = new MyModelAndView();
+        final Response response = mock(Response.class);
+
+        when(engine.render(any(ModelAndView.class))).
+                thenAnswer(MyModelAndView.makeAnswer(myModelAndView));
+
+        when(session.attribute(WINNER_ATTR)).thenReturn(WINNER);
         Player p2 = new Player("Loser");
 
-        session.attribute(GetHomeRoute.CUR_PLAYER_ATTR, p2);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p2);
 
         CuT.handle(request,response);
+
+        final Object model = myModelAndView.model;
+        assertNotNull(model);
+        assertTrue(model instanceof Map);
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> vm = (Map<String, Object>) model;
+
         vm = (Map<String, Object>) model;
 
         assertEquals(String.format(GetEndGameRoute.LOSE_MSG, p1.getName()), vm.get(GetEndGameRoute.GAME_OVER_ATTR));
