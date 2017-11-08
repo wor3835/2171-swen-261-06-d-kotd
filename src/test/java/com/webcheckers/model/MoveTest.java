@@ -54,7 +54,7 @@ public class MoveTest {
         CuT = new Move(p1,p2);
         assertEquals(CuT.getFinal(), p2);
         CuT = new Move(p1,p2, m2);
-        assertEquals(CuT.getFinal(), p2);
+        assertEquals(CuT.getFinal(), p3);
     }
 
     @Test
