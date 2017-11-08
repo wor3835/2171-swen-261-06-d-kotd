@@ -83,7 +83,7 @@ public class GetSignInRouteTest {
         final Object model = myModelAndView.model;
         assertNotNull(model);
         assertTrue(model instanceof Map);
-        //   * model contains all necessary View-Model data
+        //   * com.webcheckers.model contains all necessary View-Model data
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         //Assert title equals Sign in to play!

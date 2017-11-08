@@ -38,7 +38,7 @@ public class WebServerTest {
         when(request.session()).thenReturn(session);
 
         templateEngine = mock(TemplateEngine.class);
-        gson = mock(Gson.class);
+        gson = new Gson();
         playerLobby = mock(PlayerLobby.class);
         gameLobby = mock(GameLobby.class);
 
@@ -48,6 +48,9 @@ public class WebServerTest {
 
     @Test
     public void servernotNull() {
-        assertNotNull(new WebServer(templateEngine, gson, playerLobby, gameLobby));
+        assertNotNull(CuT);
     }
+
+    @Test
+    public void init(){CuT.initialize();}
 }
