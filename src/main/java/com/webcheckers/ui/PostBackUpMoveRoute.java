@@ -18,7 +18,7 @@ public class PostBackUpMoveRoute implements Route {
     }
 
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response) {
         Gson gson = new Gson();
         Message t;
         Session session = request.session();
