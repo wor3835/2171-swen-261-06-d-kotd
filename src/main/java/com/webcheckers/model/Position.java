@@ -12,8 +12,16 @@ public class Position {
         this.cell = cell;
     }
 
+    /**
+     *
+     * @return the row of the board
+     */
     public int getRow(){return row;}
 
+    /**
+     *
+     * @return the column of the board
+     */
     public int getCol(){return cell;}
 
     /**

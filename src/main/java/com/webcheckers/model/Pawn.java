@@ -15,11 +15,19 @@ public class Pawn extends Piece{
         super(color, MasterEnum.PieceType.SINGLE);
     }
 
+    /**
+     *
+     * @return the color of the piece
+     */
     public MasterEnum.Color getColor()
     {
         return super.getColor();
     }
 
+    /**
+     *
+     * @return the type of the piece
+     */
     public MasterEnum.PieceType getType()
     {
         return super.getType();
