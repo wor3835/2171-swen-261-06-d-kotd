@@ -61,6 +61,7 @@ public class PostCheckTurnRouteTest {
         Player player2 = new Player("player2");
         game.applyGame(player, player2);
         when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(session.attribute("currentPlayer")).thenReturn(new Player("player1"));
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(player);
         when(session.attribute(GetGameRoute.RED_PLAYER)).thenReturn(player);
         when(session.attribute(GetGameRoute.WHITE_PLAYER)).thenReturn(player2);
