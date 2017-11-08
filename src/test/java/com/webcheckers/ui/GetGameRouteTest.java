@@ -1,6 +1,9 @@
 package com.webcheckers.ui;
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameLobby;
+import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import spark.*;
@@ -9,6 +12,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -24,10 +28,16 @@ public class GetGameRouteTest {
 
     private PlayerLobby playerLobby;
     private GameLobby gameLobby;
+    private Game game;
 
     private Request request;
     private Session session;
-    private TemplateEngine templateEngine;
+    private TemplateEngine engine;
+
+    private Player p;
+    private Player o;
+    private BoardView boardView;
+    private Board board;
 
     static final String VIEW_NAME = "game.ftl";
 
@@ -39,64 +49,97 @@ public class GetGameRouteTest {
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
-        templateEngine = mock(TemplateEngine.class);
+        engine = mock(TemplateEngine.class);
 
+        board = new Board();
+        boardView = new BoardView(board);
+
+        p = new Player("current");
+        o = new Player("opponent");
+        p.assignPos(board, MasterEnum.Color.WHITE);
+
+        game = new Game();
         gameLobby = new GameLobby();
         playerLobby = new PlayerLobby();
-        CuT = new GetGameRoute(templateEngine, playerLobby, gameLobby);
+        CuT = new GetGameRoute(engine, playerLobby, gameLobby);
     }
 
-    @Test
+    @Test (expected = HaltException.class)
     /**
-     * Tests to see if the view name is correct
+     * Tests to see if the moves list is zero
      */
-    public void viewName() {
+    public void moves_list_equals_0() {
         final Response response = mock(Response.class);
-        final MyModelAndView myModelAndView = new MyModelAndView();
-        when(templateEngine.render(any(ModelAndView.class))).
-                thenAnswer(MyModelAndView.makeAnswer(myModelAndView));
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
+        when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+
+        game.applyGame(p,o);
+
+        assertFalse(game.isGameOver());
 
         CuT.handle(request, response);
 
-        final Object model = myModelAndView.model;
 
-        assertEquals(VIEW_NAME, myModelAndView.viewName);
-        assertTrue(model instanceof Map);
+        assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
+        final Object model = myModelView.model;
+        assertNull(model);
+        assertTrue(game.isGameOver());
+
     }
 
-    @Test
-    /**
-     * Tests to see if the title is correct
-     */
-    public void checkTitle() {
+    @Test (expected = HaltException.class)
+    public void is_game_over() {
         final Response response = mock(Response.class);
-        final MyModelAndView myModelAndView = new MyModelAndView();
-        when(templateEngine.render(any(ModelAndView.class))).
-                thenAnswer(MyModelAndView.makeAnswer(myModelAndView));
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
+        when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+
+        game.applyGame(p, o);
+        game.endGame();
+
+        assertTrue(game.isGameOver());
 
         CuT.handle(request, response);
 
-        final Object model = myModelAndView.model;
-
-        final Map<String, Object> vm = (Map<String, Object>) model;
-        assertEquals("Welcome!", vm.get("title"));
+        assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
+        final Object model = myModelView.model;
+        assertNull(model);
     }
 
-    @Test
-    /**
-     * Tests to see if the lobby is empty
-     */
-    public void emptyLobby() {
-        final Response response = mock(Response.class);
-        final MyModelAndView myModelAndView = new MyModelAndView();
-        when(templateEngine.render(any(ModelAndView.class))).
-                thenAnswer(MyModelAndView.makeAnswer(myModelAndView));
+    @Test (expected = HaltException.class)
+    public void is_pos_list_empty(){
+        {
+            final Response response = mock(Response.class);
+            final MyModelAndView myModelView = new MyModelAndView();
+            when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-        CuT.handle(request, response);
+            when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+            when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
+            when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
+            when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
 
-        final Object model = myModelAndView.model;
+            board.addPiece(new Pawn(MasterEnum.Color.WHITE), 4,4);
+            p.assignPos(board, MasterEnum.Color.WHITE);
 
-        final Map<String, Object> vm = (Map<String, Object>) model;
-        assertNull(vm.get(playerLobby.getPlayerCount()));
+            game.applyGame(p, o);
+
+            assertFalse(game.isGameOver());
+
+            CuT.handle(request, response);
+
+            assertTrue(game.isGameOver());
+            assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
+            final Object model = myModelView.model;
+            assertNull(model);
+        }
     }
 }
