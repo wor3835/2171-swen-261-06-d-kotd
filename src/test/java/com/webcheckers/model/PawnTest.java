@@ -15,12 +15,18 @@ import static org.mockito.Mockito.when;
  * Created by wor3835 on 11/7/2017.
  */
 public class PawnTest {
+    /**
+     * Variables
+     */
     private Pawn CuT;
 
     private Pawn pawn;
     private Request request;
     private Session session;
 
+    /**
+     * Sets up the mock objects and the CuT
+     */
     @Before
     public void setup() {
         pawn = new Pawn(MasterEnum.Color.RED);
@@ -35,17 +41,26 @@ public class PawnTest {
         CuT = new Pawn(MasterEnum.Color.RED);
     }
 
+    /**
+     * Test for the makePawn() function
+     */
     @Test
     public void makePawn() {
         Pawn p = new Pawn(MasterEnum.Color.WHITE);
         assertNotNull(p);
     }
 
+    /**
+     * Test for the getColor() function
+     */
     @Test
     public void getColor() {
         assertEquals(MasterEnum.Color.RED, CuT.getColor());
     }
 
+    /**
+     * Test for the getType() function
+     */
     @Test
     public void getType() {
         assertEquals(MasterEnum.PieceType.SINGLE, CuT.getType());

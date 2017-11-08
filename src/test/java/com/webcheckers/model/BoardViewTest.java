@@ -15,6 +15,9 @@ import static org.mockito.Mockito.when;
  */
 public class BoardViewTest {
 
+    /**
+     * Variables
+     */
     private BoardView CuT;
 
     private Board board;
@@ -22,6 +25,9 @@ public class BoardViewTest {
     private Request request;
     private Session session;
 
+    /**
+     * Sets up the mock objects and the CuT
+     */
     @Before
     public void setup() {
 
@@ -35,6 +41,9 @@ public class BoardViewTest {
         CuT = new BoardView(MasterEnum.Color.RED);
     }
 
+    /**
+     * Test for the makeView() function
+     */
     @Test
     public void makeView() {
         BoardView bv = new BoardView(MasterEnum.Color.RED);
@@ -43,12 +52,18 @@ public class BoardViewTest {
         assertNotNull(bv2);
     }
 
+    /**
+     * Test for the getBoard() function
+     */
     @Test
     public void getBoard() {
         Board b = CuT.getBoard();
         assertNotNull(b);
     }
 
+    /**
+     * Test for the Iterator
+     */
     @Test
     public void iterator_test(){
         assertNotNull(CuT.iterator());

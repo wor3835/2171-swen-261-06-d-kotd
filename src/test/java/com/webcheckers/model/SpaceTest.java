@@ -16,6 +16,9 @@ import static org.mockito.Mockito.when;
  */
 public class SpaceTest {
 
+    /**
+     * Variables
+     */
     private Space CuT;
 
     private Space Space_to_test;
@@ -23,6 +26,9 @@ public class SpaceTest {
     private Request request;
     private Session session;
 
+    /**
+     * Sets up the mock objects and the CuT
+     */
     @Before
     public void setup() {
 
@@ -37,6 +43,9 @@ public class SpaceTest {
         CuT = new Space(0, false,  piece);
     }
 
+    /**
+     * Test for the getCellIdx() function
+     */
     @Test
     public void TestGetCellIdx()
     {
@@ -45,6 +54,9 @@ public class SpaceTest {
         assertEquals(0, CuT.getCellIdx());
     }
 
+    /**
+     * Test for the isValid() function
+     */
     @Test
     public void TestIsValid()
     {
@@ -53,6 +65,9 @@ public class SpaceTest {
         assertEquals(true, !CuT.isValid());
     }
 
+    /**
+     * Test for getPiece() function
+     */
     @Test
     public void TestGetPiece()
     {
@@ -61,6 +76,9 @@ public class SpaceTest {
         assertEquals(piece, CuT.getPiece());
     }
 
+    /**
+     * test for kingMe()
+     */
     @Test(expected = RuntimeException.class)
     public void TestKingMe() {
         final Pawn piece = new Pawn(null);
@@ -72,6 +90,9 @@ public class SpaceTest {
         CuT.kingMe();
     }
 
+    /**
+     * Test for king the king
+     */
     @Test(expected = RuntimeException.class)
     public void TestKingKing(){
         CuT.kingMe();

@@ -16,12 +16,18 @@ import static org.mockito.Mockito.when;
  */
 public class RowTest {
 
+    /**
+     * Variables
+     */
     private int index;
 
     private Row CuT;
 
     private Board board;
 
+    /***
+     * Sets up the mock objects
+     */
     @Before
     public void setup() {
         index = 0;
@@ -33,11 +39,17 @@ public class RowTest {
         CuT = new Row(0, board);
     }
 
+    /**
+     * Test for the getIndex function
+     */
     @Test
     public void indexTest(){
         assertEquals(0, CuT.getIndex());
     }
 
+    /**
+     * Test for the iterator
+     */
     @Test
     public void iteratorTest(){
         assertNotNull(CuT.iterator());

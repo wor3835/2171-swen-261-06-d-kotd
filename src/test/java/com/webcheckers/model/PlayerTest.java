@@ -29,6 +29,9 @@ import org.junit.Test;
 
 public class PlayerTest {
 
+    /**
+     * Variables
+     */
     private Player CuT;
 
     private String NAME_FOR_TEST;
@@ -38,6 +41,9 @@ public class PlayerTest {
     private boolean inGame;
     private Game game;
 
+    /**
+     * Sets up the mock objects and the CuT
+     */
     @Before
     public void setup() {
         //names to test the set name functionality

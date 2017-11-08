@@ -14,12 +14,18 @@ import static org.mockito.Mockito.when;
  * Created by wor3835 on 11/6/2017.
  */
 public class PositionTest {
+    /**
+     * Variables
+     */
     private Position CuT;
 
     private Position position;
     private Request request;
     private Session session;
 
+    /**
+     * Sets up the mock objects and the CuT
+     */
     @Before
     public void setup() {
         position = new Position(0,0);
@@ -34,18 +40,27 @@ public class PositionTest {
         CuT = new Position(0,0);
     }
 
+    /**
+     * Test for the GetRow() function
+     */
     @Test
     public void GetRow() {
         int row = CuT.getRow();
         assertEquals(0, row);
     }
 
+    /**
+     * Test for the GetCol() function
+     */
     @Test
     public void GetCol() {
         int col = CuT.getCol();
         assertEquals(0, col);
     }
 
+    /**
+     * Test for the equals function
+     */
     @Test
     public void testEquals() {
          Position p = new Position(0,0);
