@@ -27,7 +27,7 @@ import org.junit.Test;
  */
 public class PostSignInRouteTest {
 
-    private static final String VALID_NAME = "Bobby";
+    private static final String VALID_NAME = "Robert";
     private static final String EMPTY_NAME = "";
     private static final String INVALID_NAME = "_!''";
 
