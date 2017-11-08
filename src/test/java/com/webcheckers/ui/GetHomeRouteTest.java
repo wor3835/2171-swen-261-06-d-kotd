@@ -12,6 +12,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static spark.Spark.halt;
 
+import com.webcheckers.appl.Game;
+import com.webcheckers.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 import spark.*;
@@ -90,7 +92,51 @@ public class GetHomeRouteTest {
         verify(response).redirect(WebServer.HOME_URL);
     }
 
+    @Test (expected = HaltException.class)
+    public void redirect(){
+        final Response response = mock(Response.class);
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
+        Player player = new Player("player");
+        Player opp = new Player("opp");
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(player);
+        Game game  = new Game();
+        game.applyGame(player, opp);
+        assertFalse(game.isGameOver());
+
+        gameLobby.addGame(game);
+        assertTrue(gameLobby.getGamesList().size()==1);
+
+        CuT.handle(request, response);
+
+        final Object model = myModelView.model;
+        assertNull(model);
+
+        response.redirect(WebServer.GAME_URL);
+        verify(response).redirect(WebServer.GAME_URL);
+
+    }
+
+    @Test
+    public void player_already_inGame(){
+        final Response response = mock(Response.class);
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        when(session.attribute("err")).thenReturn("Player selected is already in a game, choose another player.");
+
+        CuT.handle(request, response);
+
+        final Object model = myModelView.model;
+        assertNotNull(model);
+        assertTrue(model instanceof Map);
+        //   * com.webcheckers.model contains all necessary View-Model data
+        @SuppressWarnings("unchecked")
+        final Map<String, Object> vm = (Map<String, Object>) model;
+
+        assertEquals(vm.get("error"), "Player selected is already in a game, please choose another player or wait until they have finished their game.");
+    }
 }
 
 
