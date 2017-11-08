@@ -47,10 +47,14 @@ public class Move {
         return move.getFinal();
     }
 
+    /**
+     *
+     * @param o : the object being compared
+     * @return If the object is of type move then check if its start is the same as this start
+                Also check if o's end is the same as this.getFinal()
+     */
     @Override
     public boolean equals(Object o){
-        //If the object is of type move then check if its start is the same as this start
-        //Also check if o's end is the same as this.getFinal()
         if(o instanceof Move){
             if(((Move)o).getStart().equals(this.getStart()) &&
                     ((Move)o).getFinal().equals(this.getFinal()))

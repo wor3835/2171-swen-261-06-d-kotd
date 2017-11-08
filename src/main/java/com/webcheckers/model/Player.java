@@ -77,6 +77,10 @@ public class Player {
         }
     }
 
+    /**
+     *
+     * @return the position list
+     */
     public ArrayList<Position> getPosList(){
         return posList;
     }
