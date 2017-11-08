@@ -64,7 +64,7 @@ public class GetHomeRouteTest {
         final Object model = myModelView.model;
         assertNotNull(model);
         assertTrue(model instanceof Map);
-        //   * model contains all necessary View-Model data
+        //   * com.webcheckers.model contains all necessary View-Model data
         @SuppressWarnings("unchecked")
         final Map<String, Object> vm = (Map<String, Object>) model;
         assertEquals("Welcome!", vm.get("title"));
