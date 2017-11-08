@@ -63,13 +63,19 @@ public class SpaceTest {
 
     @Test(expected = RuntimeException.class)
     public void TestKingMe() {
-        CuT = new Space(0,false,null);
-        CuT.kingMe();
         final Pawn piece = new Pawn(null);
         CuT = new Space(0, false, piece);
         CuT.kingMe();
         assertEquals(MasterEnum.PieceType.KING, CuT.getPiece().getType());
+
+        CuT = new Space(0,false,null);
+        CuT.kingMe();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void TestKingKing(){
         CuT.kingMe();
         assertEquals(MasterEnum.PieceType.KING, CuT.getPiece().getType());
+        CuT.kingMe();
     }
 }
