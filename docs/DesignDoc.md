@@ -116,7 +116,7 @@ can make a move. First, there is a POST to validate the move, then there is a PO
 ### Tier UI
 
 The UI tier allows the player to sign in, play games, make moves, and resign. GET routes handle getting the different
-pages (Home, SignIn, Game). POST routes allow the player to sign in, make moves and resign.
+pages (Home, SignIn, Game). POST routes allow the player to sign in, make moves, backup moves, and resign.
 
 ### Tier com.webcheckers.model
 
