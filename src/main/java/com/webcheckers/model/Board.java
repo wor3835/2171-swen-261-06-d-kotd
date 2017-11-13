@@ -13,7 +13,7 @@ import java.util.List;
 public class Board {
 
     //Creates board with definition outlined in boardView
-    private Space board[][] = new Space[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
+    public Space board[][] = new Space[BoardView.BOARD_LENGTH][BoardView.BOARD_LENGTH];
     //Colors of the first player using the board and opponent of the player
     private final MasterEnum.Color playerColor, opponentColor;
 
@@ -34,6 +34,10 @@ public class Board {
         else
             opponentColor = MasterEnum.Color.RED;
         init();
+    }
+
+    public void setBoard(Space[][] board) {
+        this.board = board;
     }
 
     public Board(){
