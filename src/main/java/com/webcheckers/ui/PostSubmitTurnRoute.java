@@ -22,10 +22,6 @@ import static spark.Spark.halt;
  */
 public class PostSubmitTurnRoute implements Route {
 
-    private final GameLobby gameLobby;
-
-    public PostSubmitTurnRoute(GameLobby gameLobby){this.gameLobby = gameLobby;}
-
     @Override
     public Object handle(Request request, Response response) {
         //Get the current HttpSession

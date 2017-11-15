@@ -16,9 +16,6 @@ import static com.webcheckers.ui.PostStartRoute.VALIDATED;
  */
 public class PostBackUpMoveRoute implements Route {
 
-    public PostBackUpMoveRoute() {
-    }
-
     @Override
     public Object handle(Request request, Response response) {
         Gson gson = new Gson();
