@@ -16,6 +16,7 @@ import sun.rmi.runtime.Log;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 import static spark.Spark.halt;
 
 /**
@@ -40,36 +41,42 @@ public class PostValidateMoveRoute implements Route {
 
         Session session = request.session();
 
-        BoardView boardView = session.attribute(GetGameRoute.BOARD_VIEW_KEY);
-        Board board = boardView.getBoard();
+        if (session.attribute(VALIDATED) == Boolean.TRUE) {
+            msg = new Message("the move is invalid", MasterEnum.MessageType.error);
+        } else {
 
-        int startRow = move.getStart().getRow();
-        int startCol = move.getStart().getCol();
+            BoardView boardView = session.attribute(GetGameRoute.BOARD_VIEW_KEY);
+            Board board = boardView.getBoard();
 
-        //Space s = board.getSpaceAt(startRow, startCol);
-        //ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
+            int startRow = move.getStart().getRow();
+            int startCol = move.getStart().getCol();
 
-        Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+            //Space s = board.getSpaceAt(startRow, startCol);
+            //ArrayList<Move> moves = s.validMoves(board, startRow, startCol); // get possible moves at the space
 
-        ArrayList<Move> moves = board.getMoves(p.getPosList());
+            Player p = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
 
-        for(Move m: moves){
-            if(m.equals(move)) {
-                session.attribute(MOVE_ATTR, m);
-                break;
+            ArrayList<Move> moves = board.getMoves(p.getPosList());
+
+            for (Move m : moves) {
+                if (m.equals(move)) {
+                    session.attribute(MOVE_ATTR, m);
+                    break;
+                }
+            }
+
+            if (session.attribute(MOVE_ATTR) != null) {
+
+                //String moveString = gson.toJson(make);
+                //moveString = request.body();
+                msg = new Message("the move is valid", MasterEnum.MessageType.info);
+            } else {
+                msg = new Message("the move is invalid", MasterEnum.MessageType.error);
             }
         }
 
-        if(session.attribute(MOVE_ATTR) != null){
-
-            //String moveString = gson.toJson(make);
-            //moveString = request.body();
-            msg = new Message("the move is valid", MasterEnum.MessageType.info);
-        } else {
-            msg = new Message("the move is invalid", MasterEnum.MessageType.error);
-        }
-
         Gson gson = new Gson();
+        session.attribute(VALIDATED, Boolean.TRUE);
 
         return gson.toJson(msg);
     }

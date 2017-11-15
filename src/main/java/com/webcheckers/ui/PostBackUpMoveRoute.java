@@ -8,6 +8,8 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 
+import static com.webcheckers.ui.PostStartRoute.VALIDATED;
+
 /**
  * Created by wor3835 on 10/26/2017.
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
@@ -29,6 +31,7 @@ public class PostBackUpMoveRoute implements Route {
             t = new Message("back up move successful", MasterEnum.MessageType.info);
         }
 
+        session.attribute(VALIDATED, Boolean.FALSE);
         return gson.toJson(t);
     }
 }

@@ -13,6 +13,7 @@ import spark.Session;
 
 import java.util.ArrayList;
 
+import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 import static spark.Spark.halt;
 
 /**
@@ -62,6 +63,7 @@ public class PostSubmitTurnRoute implements Route {
         game.switchActive();
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);
+        session.attribute(VALIDATED, Boolean.FALSE);
 
         return gson.toJson(msg);
     }
