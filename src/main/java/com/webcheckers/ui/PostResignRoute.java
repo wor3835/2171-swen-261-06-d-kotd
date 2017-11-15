@@ -36,8 +36,10 @@ public class PostResignRoute {
         if(game == null)
             return gson.toJson(new Message("game is null", MasterEnum.MessageType.error));
 
+        game.endGame();
 
-        Message msg = new Message("turn processed", MasterEnum.MessageType.info);
+        Message msg = new Message("game ended", MasterEnum.MessageType.info);
+        response.redirect(WebServer.ENDGAME_URL);
 
         return gson.toJson(msg);
     }
