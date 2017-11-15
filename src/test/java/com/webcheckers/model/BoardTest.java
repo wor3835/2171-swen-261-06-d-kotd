@@ -62,10 +62,8 @@ public class BoardTest {
         b.addPiece(new King(MasterEnum.Color.RED), 1, 1);
         assertNotNull(b.validMoves(new Position(1,1)));
         assertNotNull(b.validJumps(b, new Position(1,1), MasterEnum.Color.RED));
-        assertNotNull(b.validJumps(new Position(0, 0), MasterEnum.Color.RED, new Pawn(MasterEnum.Color.RED),
-                null));
-        assertNotNull(b.validJumps(new Position(1, 1), MasterEnum.Color.RED, new King(MasterEnum.Color.RED),
-                null));
+        assertNotNull(b.validJumps(b, new Position(0, 0), MasterEnum.Color.RED));
+        assertNotNull(b.validJumps(b, new Position(1, 1), MasterEnum.Color.RED));
     }
 
     /**
