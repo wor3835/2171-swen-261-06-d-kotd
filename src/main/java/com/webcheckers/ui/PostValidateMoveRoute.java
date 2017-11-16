@@ -70,13 +70,14 @@ public class PostValidateMoveRoute implements Route {
                 //String moveString = gson.toJson(make);
                 //moveString = request.body();
                 msg = new Message("the move is valid", MasterEnum.MessageType.info);
+                session.attribute(VALIDATED, Boolean.TRUE);
             } else {
                 msg = new Message("the move is invalid", MasterEnum.MessageType.error);
             }
         }
 
         Gson gson = new Gson();
-        session.attribute(VALIDATED, Boolean.TRUE);
+
 
         return gson.toJson(msg);
     }
