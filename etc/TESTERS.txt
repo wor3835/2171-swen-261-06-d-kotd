@@ -1,0 +1,18 @@
+			-----   TESTERS.txt   -----
+
+To build and start webCheckers:
+	type "mvn compile exec:java" into command line
+
+To access the application and connect to server:
+	goto localhost:4567 in any browser search bar
+
+To play against someone:
+	open an incognito/private browsing window and
+	goto localhost:4567
+
+Additional instructions:
+	to play a game you must go to the signin page
+	and enter a name
+	Only alphanumerics allowed (no spaces or _)
+	Then you will be redirected to home where you 
+	can challenge any other signed in player
