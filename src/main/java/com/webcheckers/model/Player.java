@@ -30,6 +30,9 @@ public class Player {
     //A map of the games a player has played
     private Map<String, ArrayList> games;
 
+    private int wins = 0;
+    private int gamesPlayed = 0;
+
     /**
      * Creates the player
      * @param name Name value
@@ -138,6 +141,7 @@ public class Player {
         this.inGame = false;
         this.game = null;
         posList.clear();
+        gamesPlayed++;
     }
 
     /**
@@ -162,6 +166,8 @@ public class Player {
         games.put(name, moves);
         return games.get(name);
     }
+
+    public int gamesSaved(){return games.size();}
 
     public Iterator<String> gameIterator(){
         return games.keySet().iterator();

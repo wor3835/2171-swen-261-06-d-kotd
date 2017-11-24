@@ -8,7 +8,7 @@
 <body>
   <div class="page">
 
-    <h1>Web Checkers</h1>
+    <h1>Game Over</h1>
 
     <div class="navigation">
           <a href="/">my home</a>
@@ -17,6 +17,7 @@
                 <#else>
                       <a href="/signin">sign in</a>
                 </#if>
+          <a href="/stats">my stats</a>
     </div>
 
     <div class="body">
