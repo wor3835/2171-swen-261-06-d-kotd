@@ -55,12 +55,14 @@ public class GetStatsRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) {
-        LOG.finer("GetSignInRoute is invoked.");
-        //
+        LOG.finer("GetStatsRoute is invoked.");
+
+        //get the session
         Session session = request.session();
 
+        //set up the vm map
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "My Stats");
+        vm.put("title", "My Stats"); // add title and current player
         vm.put(GetHomeRoute.CUR_PLAYER_ATTR, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
     }

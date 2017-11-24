@@ -160,15 +160,40 @@ public class Player {
         return o.hashCode() == this.hashCode();
     }
 
+    /**
+     * Saves a game that is passed by the parameters
+     * Should be changed in the future if another data type is used
+     * @param name the name of the saved game
+     *             (if null is given then assign it as "Game (moves.size()+1)" )
+     * @param moves The moves of the game
+     * @return the saved game from the collection type
+     */
     public ArrayList<Move> saveGame(String name, ArrayList<Move> moves){
-        if(games.get(name) != null)
+        //if name is null then give a default name
+        if(name == null) {
+            String temp = "Game " + (games.size() + 1);
+            games.put(temp, moves);
+            return games.get(temp);
+        }
+        //if the game is name is already assigned return null
+        else if(games.get(name) != null)
             return null;
+        //just add default name is name is not null and not already in use
         games.put(name, moves);
         return games.get(name);
     }
 
+    /**
+     * returns the number of saved games
+     * This is different then the number of games won
+     * @return number of games saved
+     */
     public int gamesSaved(){return games.size();}
 
+    /**
+     * Returns iterator or the games keys, this allows the writing out of games
+     * @return the names of all the players saved games
+     */
     public Iterator<String> gameIterator(){
         return games.keySet().iterator();
     }
