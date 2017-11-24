@@ -26,8 +26,12 @@
       </h2>
 
       <form action="/savegame" method="POST">
+        <#if error??>
+            <i><font color=red>${error}</font></i>
+        </#if>
         <p>Would you like to save the game you just played</p>
         <br/>
+        Name: <input name = "gamename"/>
         <button type="submit" style=border-radius:4px>Yes</button>
       </form>
 

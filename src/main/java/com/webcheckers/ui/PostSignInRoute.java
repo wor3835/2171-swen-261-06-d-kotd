@@ -31,6 +31,9 @@ public class PostSignInRoute implements Route {
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
 
+    static final String BAD_CHAR = "Name must be alphanumeric, try another name";
+    static final String NAME_USED = "Name taken, try another name";
+
     /**
      * Creates the route
      * @param templateEngine
@@ -67,7 +70,7 @@ public class PostSignInRoute implements Route {
         if(!name.matches("[A-Za-z0-9]*") && name.length() > 0)
         {
             Map<String, Object> vm = new HashMap<>();
-            vm.put("error", "Name must be alphanumeric, try another name");
+            vm.put("error", BAD_CHAR);
             vm.put("title", "Sign in to Play!");
             vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
             return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));
@@ -81,7 +84,7 @@ public class PostSignInRoute implements Route {
         }
         else if(playerLobby.contains(name)){
             Map<String, Object> vm = new HashMap<>();
-            vm.put("error", "Name taken, try another name");
+            vm.put("error", NAME_USED);
             vm.put("title", "Sign in to Play!");
             vm.put(GetSignInRoute.PLAYER_NAME_USED_ATTR, false);
             return templateEngine.render(new ModelAndView(vm, GetSignInRoute.VIEW_NAME));

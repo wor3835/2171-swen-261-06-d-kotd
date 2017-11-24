@@ -106,6 +106,8 @@ public class Game {
         p1.leaveGame();
         p2.leaveGame();
         gameOver = true;
+        b1 = null;
+        b2 = null;
     }
 
     /**

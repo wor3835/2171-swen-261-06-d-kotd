@@ -90,40 +90,46 @@ public class GetHomeRoute implements Route {
 
     if(gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR))!=null)
     {
-      //Get the game that the current player was just assigned to
-      Game game = gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR));
-
-      //Create a board based on the current gameboard
-      BoardView boardView = new BoardView(game.getB2());
-      httpSession.attribute(GetGameRoute.BOARD_VIEW_KEY, boardView);
-
-      //The view mode of the current player (autoAssigned to PLAY)
-      httpSession.attribute(GetGameRoute.VIEW_MODE, MasterEnum.ViewMode.PLAY);
-
-      //Assign the active color to Red to start game
-      httpSession.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
-
-      //assign the red player (player 1)
-      httpSession.attribute(GetGameRoute.RED_PLAYER, game.getP1());
-
-      //assign the white player (current player)
-      httpSession.attribute(GetGameRoute.WHITE_PLAYER, game.getP2());
-      httpSession.attribute(GetGameRoute.OPPONENT_ATTR, httpSession.attribute(GetGameRoute.RED_PLAYER));
-
-      //assign the game
-      httpSession.attribute(GetGameRoute.GAME_ATTR, game);
-
+      setUpGame(httpSession);
       //redirect
       response.redirect(WebServer.GAME_URL);
       halt();
         return null;
     }
 
+    if(httpSession.attribute(GetGameRoute.GAME_ATTR)!=null)
+      httpSession.attribute(GetGameRoute.GAME_ATTR, null);
+
 
     LOG.finer("GetHomeRoute is invoked.");
     //
 
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
+  }
+
+  private void setUpGame(Session session){
+    //Get the game that the current player was just assigned to
+    Game game = gameLobby.inGame(session.attribute(CUR_PLAYER_ATTR));
+
+    //Create a board based on the current gameboard
+    BoardView boardView = new BoardView(game.getB2());
+    session.attribute(GetGameRoute.BOARD_VIEW_KEY, boardView);
+
+    //The view mode of the current player (autoAssigned to PLAY)
+    session.attribute(GetGameRoute.VIEW_MODE, MasterEnum.ViewMode.PLAY);
+
+    //Assign the active color to Red to start game
+    session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
+
+    //assign the red player (player 1)
+    session.attribute(GetGameRoute.RED_PLAYER, game.getP1());
+
+    //assign the white player (current player)
+    session.attribute(GetGameRoute.WHITE_PLAYER, game.getP2());
+    session.attribute(GetGameRoute.OPPONENT_ATTR, session.attribute(GetGameRoute.RED_PLAYER));
+
+    //assign the game
+    session.attribute(GetGameRoute.GAME_ATTR, game);
   }
 
 }

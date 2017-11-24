@@ -28,7 +28,7 @@ public class Player {
     private ArrayList<Position> posList;
 
     //A map of the games a player has played
-    private Map<String, ArrayList> games;
+    private Map<String, Game> games;
 
     private int wins = 0;
     private int gamesPlayed = 0;
@@ -165,21 +165,21 @@ public class Player {
      * Should be changed in the future if another data type is used
      * @param name the name of the saved game
      *             (if null is given then assign it as "Game (moves.size()+1)" )
-     * @param moves The moves of the game
+     * @param game the game being saved
      * @return the saved game from the collection type
      */
-    public ArrayList<Move> saveGame(String name, ArrayList<Move> moves){
+    public Game saveGame(String name, Game game){
         //if name is null then give a default name
         if(name == null) {
             String temp = "Game " + (games.size() + 1);
-            games.put(temp, moves);
+            games.put(temp, game);
             return games.get(temp);
         }
         //if the game is name is already assigned return null
         else if(games.get(name) != null)
             return null;
         //just add default name is name is not null and not already in use
-        games.put(name, moves);
+        games.put(name, game);
         return games.get(name);
     }
 
