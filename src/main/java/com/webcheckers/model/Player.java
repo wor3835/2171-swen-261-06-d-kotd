@@ -4,6 +4,9 @@ import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 /**
@@ -24,6 +27,9 @@ public class Player {
     //A list of all the players piece positions
     private ArrayList<Position> posList;
 
+    //A map of the games a player has played
+    private Map<String, ArrayList> games;
+
     /**
      * Creates the player
      * @param name Name value
@@ -32,6 +38,7 @@ public class Player {
         this.name = name;
         this.inGame = false;
         this.posList = new ArrayList<>();
+        this.games = new HashMap<>();
     }
 
     /**
@@ -147,6 +154,17 @@ public class Player {
         if(!(o instanceof Player))
             return false;
         return o.hashCode() == this.hashCode();
+    }
+
+    public ArrayList<Move> saveGame(String name, ArrayList<Move> moves){
+        if(games.get(name) != null)
+            return null;
+        games.put(name, moves);
+        return games.get(name);
+    }
+
+    public Iterator<String> gameIterator(){
+        return games.keySet().iterator();
     }
 
     @Override

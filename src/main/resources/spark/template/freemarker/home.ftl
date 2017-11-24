@@ -18,7 +18,7 @@
                       <a href="/signin">sign in</a>
                 </#if>
     </div>
-    
+    <i><font color=blue>${message}</font></i>
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
       <i><font color=red>${error}</font></i>

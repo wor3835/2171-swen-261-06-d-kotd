@@ -24,6 +24,15 @@
         ${message}
       </h2>
 
+      <form action="/savegame" method="POST">
+        <p>Would you like to save the game you just played</p>
+        <br/>
+        <button type="submit" style=border-radius:4px>Yes</button>
+      </form>
+
+      <br/>
+      <a href="/">Return to main page</a>
+
     </div>
 
   </div>
