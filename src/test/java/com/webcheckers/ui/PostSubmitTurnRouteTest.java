@@ -44,7 +44,7 @@ public class PostSubmitTurnRouteTest {
         playerLobby = mock(PlayerLobby.class);
 
         // create a unique CuT for each test
-        CuT = new PostSubmitTurnRoute(gameLobby);
+        CuT = new PostSubmitTurnRoute();
     }
 
     @Test

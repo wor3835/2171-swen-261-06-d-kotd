@@ -20,9 +20,9 @@
     </div>
 
     <div class="body">
-      <p>
+      <h2>
         ${message}
-      </p>
+      </h2>
 
     </div>
 
