@@ -10,16 +10,18 @@ import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 import spark.Request;
 import spark.Response;
+import spark.Route;
 import spark.Session;
 
 import java.util.ArrayList;
 
 import static com.webcheckers.ui.GetGameRoute.GAME_ATTR;
+import static spark.Spark.halt;
 
 /**
  * Created by wor3835 on 11/14/2017.
  */
-public class PostResignRoute {
+public class PostResignRoute implements Route{
 
     private final GameLobby gameLobby;
 
@@ -38,8 +40,12 @@ public class PostResignRoute {
 
         game.endGame();
 
+        Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+        session.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, currentPlayer.getName());
+
         Message msg = new Message("game ended", MasterEnum.MessageType.info);
-        response.redirect(WebServer.ENDGAME_URL);
+        //response.redirect(WebServer.ENDGAME_URL);
+        //halt();
 
         return gson.toJson(msg);
     }

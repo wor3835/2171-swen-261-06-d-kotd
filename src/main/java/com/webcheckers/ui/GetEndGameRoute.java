@@ -26,10 +26,14 @@ public class GetEndGameRoute implements Route{
     private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
     static final String WINNER_ATTR = "winner";
+    static final String RESIGN_GUY_ATTR = "resigner";
     static final String VIEW_NAME = "endgame.ftl";
 
     static final String WIN_MSG = "CONGRATULATIONS %s \n\n YOU WIN";
     static final String LOSE_MSG = "Sorry, but %s won";
+    static final String I_RESIGN_MSG = "You Resigned";
+    static final String YOU_RESIGN_MSG = "%s Resigned";
+
 
     static final String GAME_OVER_ATTR = "message";
 
@@ -51,6 +55,7 @@ public class GetEndGameRoute implements Route{
 
         Session session = request.session();
         String name = session.attribute(WINNER_ATTR);
+        String resigner = session.attribute(RESIGN_GUY_ATTR);
 
         session.attribute(GetGameRoute.OPPONENT_ATTR, null);
         session.attribute(GetGameRoute.BOARD_VIEW_KEY, null);
@@ -60,7 +65,12 @@ public class GetEndGameRoute implements Route{
         session.attribute(GetGameRoute.ACTIVE_COLOR, null);
         session.attribute(GetGameRoute.VIEW_MODE, null);
 
-        if(name.equals(((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
+        if(resigner!=null){
+            if(resigner.equals(((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
+                vm.put(GAME_OVER_ATTR, I_RESIGN_MSG);
+            else
+                vm.put(GAME_OVER_ATTR, String.format(YOU_RESIGN_MSG, resigner));
+        } else if(name.equals(((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
             vm.put(GAME_OVER_ATTR, String.format(WIN_MSG, name));
         else
             vm.put(GAME_OVER_ATTR, String.format(LOSE_MSG, name));

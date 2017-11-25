@@ -208,11 +208,13 @@ public class WebServer {
 
     post(VALID_URL, new PostValidateMoveRoute());
 
-    post(SUBMIT_URL, new PostSubmitTurnRoute(gameLobby));
+    post(SUBMIT_URL, new PostSubmitTurnRoute());
 
     post(BACKUP_URL, new PostBackUpMoveRoute());
 
     get(ENDGAME_URL, new GetEndGameRoute(templateEngine, gameLobby));
+
+    post(RESIGN_URL, new PostResignRoute(gameLobby));
 
     LOG.config("WebServer is initialized.");
   }
