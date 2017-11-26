@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameLobby;
+import com.webcheckers.appl.GameLobbyTest;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import org.junit.Before;
@@ -23,6 +24,7 @@ public class GetSignOutRouteTest {
 
     private final TemplateEngine templateEngine = mock(TemplateEngine.class);
     private final PlayerLobby playerLobby = mock(PlayerLobby.class);
+    private final GameLobby gameLobby = mock(GameLobby.class);
     private Request request;
     private Response response;
     private Session session;
@@ -40,7 +42,7 @@ public class GetSignOutRouteTest {
 
         // create a unique CuT for each test
 
-        CuT = new GetSignOutRoute(templateEngine, playerLobby);
+        CuT = new GetSignOutRoute(templateEngine, playerLobby, gameLobby);
     }
 
     @Test
