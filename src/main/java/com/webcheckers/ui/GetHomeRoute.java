@@ -88,7 +88,7 @@ public class GetHomeRoute implements Route {
     httpSession.attribute(PLAYER_LOBBY_KEY, playerLobby);
     vm.put(PLAYER_LOBBY_KEY, httpSession.attribute(PLAYER_LOBBY_KEY));
 
-    if(gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR))!=null)
+    if(httpSession.attribute(CUR_PLAYER_ATTR)!=null && gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR))!=null)
     {
       //Get the game that the current player was just assigned to
       Game game = gameLobby.inGame(httpSession.attribute(CUR_PLAYER_ATTR));

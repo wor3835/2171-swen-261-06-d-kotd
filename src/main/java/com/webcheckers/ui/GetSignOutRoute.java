@@ -1,5 +1,8 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.Game;
+import com.webcheckers.appl.GameLobby;
+import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.*;
@@ -26,6 +29,7 @@ public class GetSignOutRoute implements Route {
     private final TemplateEngine templateEngine;
     private final PlayerLobby playerLobby;
     //private final Player player;
+    private final GameLobby gameLobby;
 
     static final String PLAYER_NAME_USED_ATTR = "playerExists";
     static final String VIEW_NAME = "signin.ftl";
@@ -35,12 +39,13 @@ public class GetSignOutRoute implements Route {
      * @param templateEngine
      * @param playerLobby
      */
-    public GetSignOutRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+    public GetSignOutRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         //
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
+        this.gameLobby = gameLobby;
         //this.player = player;
 
         LOG.config("GetSignOutRoute is initialized.");
@@ -58,7 +63,13 @@ public class GetSignOutRoute implements Route {
         final Session session = request.session();
         LOG.finer("GetSignOutRoute is invoked.");
 
-        playerLobby.removePlayer(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
+        Player player = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+        if(player.isInGame()){
+            Game game = gameLobby.inGame(player);
+            game.endGame(MasterEnum.GameStatus.SIGNOUT);
+        }
+
+        playerLobby.removePlayer(player);
         
         session.invalidate();
         response.redirect(WebServer.HOME_URL);

@@ -38,20 +38,21 @@ public class PostResignRoute implements Route{
         if(game == null)
             return gson.toJson(new Message("game is null", MasterEnum.MessageType.error));
 
-        game.endGame();
+        game.endGame(MasterEnum.GameStatus.RESIGN);
 
         Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
-        //Player currentOpponent = session.attribute(GetGameRoute.OPPONENT_ATTR);
+        //Player opponent = session.attribute(GetGameRoute.OPPONENT_ATTR);
         session.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, currentPlayer.getName());
 
-        Game currGame = gameLobby.inGame(currentPlayer);
-        if (currGame.getP1().equals(currentPlayer)){
-            Player currentOpponent = currGame.getP2();
-            session.attribute(GetEndGameRoute.WINNER_ATTR, currentOpponent.getName());
-        } else {
-            Player currentOpponent = currGame.getP1();
-            session.attribute(GetEndGameRoute.WINNER_ATTR, currentOpponent.getName());
-        }
+
+//        Game currGame = gameLobby.inGame(currentPlayer);
+//        if (currGame.getP1().equals(currentPlayer)){
+//            Player currentOpponent = currGame.getP2();
+//            session.attribute(GetEndGameRoute.WINNER_ATTR, currentOpponent.getName());
+//        } else {
+//            Player currentOpponent = currGame.getP1();
+//            session.attribute(GetEndGameRoute.WINNER_ATTR, currentOpponent.getName());
+//        }
 
         Message msg = new Message("game ended", MasterEnum.MessageType.info);
         //response.redirect(WebServer.ENDGAME_URL);
