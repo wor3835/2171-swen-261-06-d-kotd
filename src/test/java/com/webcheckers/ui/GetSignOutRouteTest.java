@@ -23,7 +23,7 @@ import spark.*;
 public class GetSignOutRouteTest {
 
     private final TemplateEngine templateEngine = mock(TemplateEngine.class);
-    private final PlayerLobby playerLobby = mock(PlayerLobby.class);
+    private final PlayerLobby playerLobby = new PlayerLobby();
     private final GameLobby gameLobby = mock(GameLobby.class);
     private Request request;
     private Response response;
@@ -45,14 +45,17 @@ public class GetSignOutRouteTest {
         CuT = new GetSignOutRoute(templateEngine, playerLobby, gameLobby);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void thetest(){
-        Player player = playerLobby.playerSignin("player1");
-        session.attribute(GetHomeRoute.CUR_PLAYER_ATTR, player);
+        String name = "player";
+        playerLobby.playerSignin(name);
+
+        Player player = playerLobby.pullByName(name);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(player);
 
         CuT.handle(request, response);
 
-        assertNull(playerLobby.pullByName("player1"));
+        assertNull(playerLobby.pullByName(name));
         assertTrue(session.attributes().isEmpty());
     }
 }
