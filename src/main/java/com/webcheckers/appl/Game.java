@@ -95,8 +95,6 @@ public class Game {
             case WHITE:
                 activeColor = MasterEnum.Color.RED;
                 break;
-            default:
-                break;
         }
 
     }
