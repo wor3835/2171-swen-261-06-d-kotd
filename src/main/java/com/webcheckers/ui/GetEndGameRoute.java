@@ -75,7 +75,7 @@ public class GetEndGameRoute implements Route{
         else
             vm.put(GAME_OVER_ATTR, String.format(LOSE_MSG, name));
 
-
+        vm.put(GetHomeRoute.CUR_PLAYER_ATTR, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
 }

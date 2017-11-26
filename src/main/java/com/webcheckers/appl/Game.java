@@ -173,7 +173,6 @@ public class Game {
      * checks to see if gave is over
      */
     public boolean isGameOver() {return gameOver;}
-
     /**
      * compares two players
      * @param o player to compare
