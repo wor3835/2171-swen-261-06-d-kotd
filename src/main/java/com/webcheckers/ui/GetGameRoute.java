@@ -88,15 +88,8 @@ public class GetGameRoute implements Route {
 
         ArrayList<Move> moves = ((BoardView)httpSession.attribute(BOARD_VIEW_KEY)).getBoard().getMoves(
                 ((Player)httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getPosList());
-        if(game.isGameOver()){
-            String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
 
-            httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
-
-            response.redirect(WebServer.ENDGAME_URL);
-            halt();
-            return null;
-        } else if(moves.size() == 0) {
+        if(moves.size() == 0) {
 
             String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
@@ -109,6 +102,18 @@ public class GetGameRoute implements Route {
             halt();
             return null;
         }else if (game.getP1().getPosList().isEmpty() || game.getP2().getPosList().isEmpty()){
+            String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+
+            httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
+
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
+        } else if(game.isGameOver()){
+            if(!game.getP1().getPosList().isEmpty() && !game.getP2().getPosList().isEmpty()){
+                String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
+                httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, name);
+            }
             String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
 
             httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);

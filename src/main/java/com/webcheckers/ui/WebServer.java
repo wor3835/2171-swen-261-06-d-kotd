@@ -214,6 +214,8 @@ public class WebServer {
 
     get(ENDGAME_URL, new GetEndGameRoute(templateEngine, gameLobby));
 
+    post(RESIGN_URL, new PostResignRoute(gameLobby));
+
     LOG.config("WebServer is initialized.");
   }
 
