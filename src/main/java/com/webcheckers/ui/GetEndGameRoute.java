@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
@@ -56,6 +57,8 @@ public class GetEndGameRoute implements Route{
         Session session = request.session();
         String name = session.attribute(WINNER_ATTR);
         String resigner = session.attribute(RESIGN_GUY_ATTR);
+        Game game = session.attribute(GetGameRoute.GAME_ATTR);
+        gameLobby.removeGame(game);
 
         session.attribute(GetGameRoute.OPPONENT_ATTR, null);
         session.attribute(GetGameRoute.BOARD_VIEW_KEY, null);

@@ -96,8 +96,6 @@ public class GetGameRoute implements Route {
 
             game.endGame();
 
-            gameLobby.removeGame(game);
-
             response.redirect(WebServer.ENDGAME_URL);
             halt();
             return null;
@@ -109,15 +107,15 @@ public class GetGameRoute implements Route {
             response.redirect(WebServer.ENDGAME_URL);
             halt();
             return null;
-        } else if(game.isGameOver()){
-            if(!game.getP1().getPosList().isEmpty() && !game.getP2().getPosList().isEmpty()){
+        } else if(game.getStatus() !=null){
+            if(game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT){
                 String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
                 httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, name);
+            } else {
+                String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+
+                httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
             }
-            String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
-
-            httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
-
             response.redirect(WebServer.ENDGAME_URL);
             halt();
             return null;

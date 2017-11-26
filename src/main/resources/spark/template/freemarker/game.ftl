@@ -21,11 +21,8 @@
     
     <div class="navigation">
     <#if currentPlayer??>
-      <!-- commenting this out because attempting to sign out or go to the home screen
-       in the middle of a game causes a crash
       <a href="/">my home</a> |
       <a href="/signout">sign out [${currentPlayer.name}]</a>
-      -->
     <#else>
       <a href="/signin">sign in</a>
     </#if>

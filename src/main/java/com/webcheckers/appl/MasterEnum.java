@@ -27,4 +27,8 @@ public class MasterEnum {
     public enum ViewMode {
         PLAY, SPECTATOR, REPLAY
     }
+
+    public enum GameStatus{
+        OVER, RESIGN, SIGNOUT
+    }
 }

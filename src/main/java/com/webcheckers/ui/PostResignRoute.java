@@ -38,7 +38,7 @@ public class PostResignRoute implements Route{
         if(game == null)
             return gson.toJson(new Message("game is null", MasterEnum.MessageType.error));
 
-        game.endGame();
+        game.endGame(MasterEnum.GameStatus.RESIGN);
 
         Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
         //Player opponent = session.attribute(GetGameRoute.OPPONENT_ATTR);
