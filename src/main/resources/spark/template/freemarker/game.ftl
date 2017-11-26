@@ -4,7 +4,7 @@
   <#if (currentPlayer.equals(redPlayer) && activeColor == "RED") ||
        (currentPlayer.equals(whitePlayer) && activeColor == "WHITE") >
   <#else>
-    <meta http-equiv="refresh" content="5">
+    <meta http-equiv="refresh" content="15">
   </#if>
   <title>${title} | Web Checkers</title>
   <link rel="stylesheet" href="/css/style.css">
