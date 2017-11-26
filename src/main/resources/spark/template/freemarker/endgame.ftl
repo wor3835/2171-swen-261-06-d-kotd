@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="5">
     <title>${title} | Web Checkers</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -25,7 +24,7 @@
         ${message}
       </h2>
 
-      <form action="/savegame" method="POST">
+      <form action="/saveGame" method="POST">
         <#if error??>
             <i><font color=red>${error}</font></i>
         </#if>
