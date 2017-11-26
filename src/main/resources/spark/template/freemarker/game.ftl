@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+  <#if (currentPlayer.equals(redPlayer) && activeColor == "RED") ||
+       (currentPlayer.equals(whitePlayer) && activeColor == "WHITE") >
+  <#else>
+    <meta http-equiv="refresh" content="5">
+  </#if>
   <title>${title} | Web Checkers</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/game.css">
@@ -21,11 +26,8 @@
     
     <div class="navigation">
     <#if currentPlayer??>
-      <!-- commenting this out because attempting to sign out or go to the home screen
-       in the middle of a game causes a crash
       <a href="/">my home</a> |
       <a href="/signout">sign out [${currentPlayer.name}]</a>
-      -->
     <#else>
       <a href="/signin">sign in</a>
     </#if>

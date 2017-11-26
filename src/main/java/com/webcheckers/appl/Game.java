@@ -39,6 +39,8 @@ public class Game {
 
     private boolean gameOver;
 
+    private MasterEnum.GameStatus status;
+
     //The active color
     private MasterEnum.Color activeColor;
 
@@ -108,6 +110,16 @@ public class Game {
         gameOver = true;
         b1 = null;
         b2 = null;
+        status = MasterEnum.GameStatus.OVER;
+    }
+
+    public void endGame(MasterEnum.GameStatus status){
+        p1.leaveGame();
+        p2.leaveGame();
+        b1 = null;
+        b2 = null;
+        gameOver = true;
+        this.status = status;
     }
 
     /**
@@ -177,11 +189,15 @@ public class Game {
     public boolean isGameOver() {return gameOver;}
 
     /**
+     * returns the gamestatus
+     */
+    public MasterEnum.GameStatus getStatus(){return status;}
+
+    /**
      * compares two players
      * @param o player to compare
      * @return true if they're the same, false otherwise
      */
-    @Override
     public boolean equals(Object o)
     {
         if(o instanceof Game){

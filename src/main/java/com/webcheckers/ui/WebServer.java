@@ -205,7 +205,7 @@ public class WebServer {
     post(SIGN_URL,  new PostSignInRoute(templateEngine, playerLobby));
 
     // Shows the Checkers game Home page.
-    get(SIGN_OUT_URL, new GetSignOutRoute(templateEngine, playerLobby));
+    get(SIGN_OUT_URL, new GetSignOutRoute(templateEngine, playerLobby, gameLobby));
 
     // Shows the game page
     get(GAME_URL, new GetGameRoute(templateEngine, playerLobby,gameLobby));
@@ -225,6 +225,8 @@ public class WebServer {
     get(STATS_URL, new GetStatsRoute(templateEngine));
 
     post(SAVEGAME_URL, new PostSaveGameRoute(templateEngine));
+
+    post(RESIGN_URL, new PostResignRoute(gameLobby));
 
     LOG.config("WebServer is initialized.");
   }
