@@ -31,13 +31,11 @@ public class PostSaveGameRoute implements Route {
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
 
         if(!name.matches("[A-Za-z0-9]*")){
-            Map<String, Object> vm = new HashMap<>();
-            vm.put("error", PostSignInRoute.BAD_CHAR);
-            vm.put("title", request.queryParams("title"));
-            vm.put("message", request.queryParams("message"));
-            return templateEngine.render(new ModelAndView(vm, GetEndGameRoute.VIEW_NAME));
+            session.attribute("error", PostSignInRoute.BAD_CHAR);
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
         }else if(currentPlayer.saveGame(name, game)==null){
-            Map<String, Object> vm = new HashMap<>();
             session.attribute("error", PostSignInRoute.NAME_USED);
             response.redirect(WebServer.ENDGAME_URL);
             halt();
