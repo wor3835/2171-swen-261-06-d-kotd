@@ -191,6 +191,8 @@ public class Game {
         return movesList;
     }
 
+    public int movesListSize(){return movesList.size();}
+
     /**
      * checks to see if gave is over
      */
