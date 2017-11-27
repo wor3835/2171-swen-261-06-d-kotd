@@ -150,6 +150,15 @@ public class Player {
      */
     public Game getGame(){return this.game;}
 
+    public Game getGame(String name){
+        return games.get(name);
+    }
+
+    public boolean won(String name){
+        Objects.requireNonNull(games.get(name));
+        return games.get(name).getWinner().equals(getName());
+    }
+
     @Override
     /**
      * Checks of the players are the same

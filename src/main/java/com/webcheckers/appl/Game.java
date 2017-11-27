@@ -39,6 +39,8 @@ public class Game {
 
     private boolean gameOver;
 
+    private String winner;
+
     private MasterEnum.GameStatus status;
 
     //The active color
@@ -173,6 +175,14 @@ public class Game {
         return MasterEnum.Color.WHITE;
     }
 
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String player){
+        this.winner = player;
+    }
+
     /**
      * @return movesList
      */
@@ -180,6 +190,8 @@ public class Game {
     {
         return movesList;
     }
+
+    public int movesListSize(){return movesList.size();}
 
     /**
      * checks to see if gave is over
