@@ -165,4 +165,28 @@ public class GetGameRouteTest {
         assertNotNull(model);
         assertTrue(model instanceof Map);
     }
+
+    @Test
+    public void test_capture_final_piece() {
+        final Response response = mock(Response.class);
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
+        when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+
+        board.addPiece(new Pawn(MasterEnum.Color.WHITE), 3, 2);
+        p.assignPos(board, MasterEnum.Color.WHITE);
+        board.addPiece(new Pawn(MasterEnum.Color.RED), 4, 1);
+        o.assignPos(board, MasterEnum.Color.RED);
+
+        game.applyGame(p, o);
+        assertFalse(game.isGameOver());
+
+        game.addMove(new Move(new Position(4,1), new Position(2,3)));
+
+        assertTrue(game.isGameOver());
+    }
 }
