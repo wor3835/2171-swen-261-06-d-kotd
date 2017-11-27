@@ -26,12 +26,12 @@
                 <h2>No stats to display</h2>
             <#else>
                 <#list currentPlayer.gameIterator() as game>
-                   <h3>${game} : <#if currentPlayer.won(game)>
+                   <h3>
+                        ${game} : <#if currentPlayer.won(game)>
                         (win)
                         <#else>
                         (loss)
-                        </#if> in ${currentPlayer.getGame(game).movesListSize()} moves
-
+                        </#if> in ${currentPlayer.getGame(game).movesListSize()} moves </h3>
                       <form action="/replay" method="POST">
                           <button type="submit" name="savegame" value="${game}" style=border-radius:4px>
                                 Replay
@@ -42,8 +42,7 @@
                              Delete
                           </button>
                       </form>
-                   </h3>
-
+                   <h3></h3>
                 </#list>
             </#if>
         <#else>

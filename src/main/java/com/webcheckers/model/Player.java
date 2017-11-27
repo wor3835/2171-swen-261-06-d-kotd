@@ -155,7 +155,6 @@ public class Player {
     }
 
     public boolean won(String name){
-        Objects.requireNonNull(games.get(name));
         return games.get(name).getWinner().equals(getName());
     }
 
