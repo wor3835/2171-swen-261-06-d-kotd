@@ -3,10 +3,7 @@ package com.webcheckers.model;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -149,6 +146,15 @@ public class Player {
      * @return Game
      */
     public Game getGame(){return this.game;}
+
+    public Game getGame(String name){
+        return games.get(name);
+    }
+
+    public boolean won(String name){
+        Objects.requireNonNull(games.get(name));
+        return games.get(name).getWinner().equals(getName());
+    }
 
     @Override
     /**

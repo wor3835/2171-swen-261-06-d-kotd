@@ -26,7 +26,11 @@
                 <h2>No stats to display</h2>
             <#else>
                 <#list currentPlayer.gameIterator() as game>
-                   <h3>${game} :
+                   <h3>${game} : <#if currentPlayer.won(game)>
+                        (win)
+                        <#else>
+                        (loss)
+                        </#if>
                       <form action="/replay" method="POST">
                           <button type="submit" name="savegame" value="${game}" style=border-radius:4px>
                                 Replay
