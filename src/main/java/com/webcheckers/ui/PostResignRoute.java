@@ -14,6 +14,7 @@ import spark.Route;
 import spark.Session;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import static com.webcheckers.ui.GetGameRoute.GAME_ATTR;
 import static spark.Spark.halt;
@@ -22,6 +23,9 @@ import static spark.Spark.halt;
  * Created by wor3835 on 11/14/2017.
  */
 public class PostResignRoute implements Route{
+    private static final Logger LOG = Logger.getLogger(PostResignRoute.class.getName());
+
+
 
     private final GameLobby gameLobby;
 
@@ -39,11 +43,10 @@ public class PostResignRoute implements Route{
             return gson.toJson(new Message("game is null", MasterEnum.MessageType.error));
 
         game.endGame(MasterEnum.GameStatus.RESIGN);
+        game.switchActive();
 
         Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
-        //Player opponent = session.attribute(GetGameRoute.OPPONENT_ATTR);
         session.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, currentPlayer.getName());
-
 
 //        Game currGame = gameLobby.inGame(currentPlayer);
 //        if (currGame.getP1().equals(currentPlayer)){
