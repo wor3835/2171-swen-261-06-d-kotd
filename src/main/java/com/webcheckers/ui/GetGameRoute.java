@@ -86,6 +86,7 @@ public class GetGameRoute implements Route {
 
         Game game = httpSession.attribute(GAME_ATTR);
 
+
         if(game.getStatus() !=null){
             String winner;
             if(game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT){
@@ -103,7 +104,6 @@ public class GetGameRoute implements Route {
             halt();
             return null;
         }
-        
         ArrayList<Move> moves = ((BoardView)httpSession.attribute(BOARD_VIEW_KEY)).getBoard().getMoves(
                 ((Player)httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getPosList());
 

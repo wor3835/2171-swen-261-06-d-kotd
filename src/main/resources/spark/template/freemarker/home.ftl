@@ -17,8 +17,11 @@
                 <#else>
                       <a href="/signin">sign in</a>
                 </#if>
+          <a href="/stats">my stats</a>
     </div>
-    
+    <#if message??>
+        <i><font color=blue>${message}</font></i>
+    </#if>
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
       <i><font color=red>${error}</font></i>

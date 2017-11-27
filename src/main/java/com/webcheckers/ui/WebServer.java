@@ -98,6 +98,14 @@ public class WebServer {
    * The URL pattern to request the EndGame page
    */
   public static final String ENDGAME_URL = "/endGame";
+  /**
+   * The URL pattern to request the stats page
+   */
+  public static final String STATS_URL = "/stats";
+  /**
+   * The URL pattern to request the saveGame page
+   */
+  public static final String SAVEGAME_URL = "/saveGame";
 
 
   //
@@ -213,6 +221,10 @@ public class WebServer {
     post(BACKUP_URL, new PostBackUpMoveRoute());
 
     get(ENDGAME_URL, new GetEndGameRoute(templateEngine, gameLobby));
+
+    get(STATS_URL, new GetStatsRoute(templateEngine));
+
+    post(SAVEGAME_URL, new PostSaveGameRoute(templateEngine));
 
     post(RESIGN_URL, new PostResignRoute(gameLobby));
 

@@ -4,6 +4,9 @@ import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 /**
@@ -24,6 +27,12 @@ public class Player {
     //A list of all the players piece positions
     private ArrayList<Position> posList;
 
+    //A map of the games a player has played
+    private Map<String, Game> games;
+
+    private int wins = 0;
+    private int gamesPlayed = 0;
+
     /**
      * Creates the player
      * @param name Name value
@@ -32,6 +41,7 @@ public class Player {
         this.name = name;
         this.inGame = false;
         this.posList = new ArrayList<>();
+        this.games = new HashMap<>();
     }
 
     /**
@@ -131,6 +141,7 @@ public class Player {
         this.inGame = false;
         this.game = null;
         posList.clear();
+        gamesPlayed++;
     }
 
     /**
@@ -147,6 +158,44 @@ public class Player {
         if(!(o instanceof Player))
             return false;
         return o.hashCode() == this.hashCode();
+    }
+
+    /**
+     * Saves a game that is passed by the parameters
+     * Should be changed in the future if another data type is used
+     * @param name the name of the saved game
+     *             (if null is given then assign it as "Game (moves.size()+1)" )
+     * @param game the game being saved
+     * @return the saved game from the collection type
+     */
+    public Game saveGame(String name, Game game){
+        //if name is null then give a default name
+        if(name == null) {
+            String temp = "Game " + (games.size() + 1);
+            games.put(temp, game);
+            return games.get(temp);
+        }
+        //if the game is name is already assigned return null
+        else if(games.get(name) != null)
+            return null;
+        //just add default name is name is not null and not already in use
+        games.put(name, game);
+        return games.get(name);
+    }
+
+    /**
+     * returns the number of saved games
+     * This is different then the number of games won
+     * @return number of games saved
+     */
+    public int gamesSaved(){return games.size();}
+
+    /**
+     * Returns iterator or the games keys, this allows the writing out of games
+     * @return the names of all the players saved games
+     */
+    public Iterator<String> gameIterator(){
+        return games.keySet().iterator();
     }
 
     @Override

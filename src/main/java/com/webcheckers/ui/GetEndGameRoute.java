@@ -64,7 +64,6 @@ public class GetEndGameRoute implements Route{
         session.attribute(GetGameRoute.BOARD_VIEW_KEY, null);
         session.attribute(GetGameRoute.WHITE_PLAYER, null);
         session.attribute(GetGameRoute.RED_PLAYER, null);
-        session.attribute(GetGameRoute.GAME_ATTR, null);
         session.attribute(GetGameRoute.ACTIVE_COLOR, null);
         session.attribute(GetGameRoute.VIEW_MODE, null);
 
