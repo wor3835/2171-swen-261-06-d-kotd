@@ -3,7 +3,10 @@ package com.webcheckers.model;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.MasterEnum;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 /**

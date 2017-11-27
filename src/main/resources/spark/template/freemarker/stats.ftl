@@ -31,6 +31,7 @@
                         <#else>
                         (loss)
                         </#if> in ${currentPlayer.getGame(game).movesListSize()} moves
+
                       <form action="/replay" method="POST">
                           <button type="submit" name="savegame" value="${game}" style=border-radius:4px>
                                 Replay
