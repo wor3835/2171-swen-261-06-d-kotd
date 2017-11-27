@@ -24,7 +24,7 @@ public class GetEndGameRoute implements Route{
     private final TemplateEngine templateEngine;
     private final GameLobby gameLobby;
 
-    private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(GetEndGameRoute.class.getName());
 
     static final String WINNER_ATTR = "winner";
     static final String RESIGN_GUY_ATTR = "resigner";

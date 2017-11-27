@@ -88,8 +88,10 @@ public class GetGameRoute implements Route {
 
         if(game.getStatus() !=null){
             if(game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT){
-                String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
-                httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, name);
+                if(httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR)==null){
+                    String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
+                    httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, name);
+                }
             } else {
                 String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
 
