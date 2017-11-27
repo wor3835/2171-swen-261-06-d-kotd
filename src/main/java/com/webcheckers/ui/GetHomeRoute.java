@@ -96,6 +96,10 @@ public class GetHomeRoute implements Route {
       halt();
         return null;
     }
+    if(httpSession.attribute(CUR_PLAYER_ATTR)!=null&& httpSession.attribute(GetGameRoute.GAME_ATTR) !=null){
+        Game game = httpSession.attribute(GetGameRoute.GAME_ATTR);
+        game.removeSpecator(httpSession.attribute(CUR_PLAYER_ATTR));
+    }
 
     if(httpSession.attribute(GetGameRoute.GAME_ATTR)!=null)
       httpSession.attribute(GetGameRoute.GAME_ATTR, null);

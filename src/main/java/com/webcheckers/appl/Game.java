@@ -33,7 +33,7 @@ public class Game {
     //The board for p2
     private Board b2;
     //A list of spectators for a game
-    private List<Player> spectators;
+    private List<Player> spectators = new ArrayList<>();
     //A list move moves that houses all the moves in a game
     private List<Move> movesList = new ArrayList<>();
 
@@ -84,6 +84,18 @@ public class Game {
         this.b2 = b2;
         //Create p2's posList
         p2.assignPos(b2, MasterEnum.Color.WHITE);
+    }
+
+    public void addSpectator(Player p){
+        spectators.add(p);
+    }
+
+    public void removeSpecator(Player p){
+        spectators.remove(p);
+    }
+
+    public boolean spectating(Player p){
+        return spectators.contains(p);
     }
 
     /**

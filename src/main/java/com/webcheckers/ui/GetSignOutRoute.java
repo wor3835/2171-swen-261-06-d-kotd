@@ -69,6 +69,11 @@ public class GetSignOutRoute implements Route {
             game.endGame(MasterEnum.GameStatus.SIGNOUT);
         }
 
+        Game game = session.attribute(GetGameRoute.GAME_ATTR);
+        if(game!=null){
+            game.removeSpecator(player);
+        }
+
         playerLobby.removePlayer(player);
         
         session.invalidate();

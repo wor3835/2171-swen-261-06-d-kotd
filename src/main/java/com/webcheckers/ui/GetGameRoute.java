@@ -88,6 +88,13 @@ public class GetGameRoute implements Route {
 
 
         if(game.getStatus() !=null){
+            if(game.spectating(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR))){
+                game.removeSpecator(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
+                response.redirect(WebServer.HOME_URL);
+                halt();
+                return null;
+            }
+
             String winner;
             if(game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT){
                 if(httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR)==null){
