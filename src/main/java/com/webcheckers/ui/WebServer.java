@@ -114,6 +114,10 @@ public class WebServer {
    * The URL pattern to request the spectate page
    */
   public static final String SPECTATE_URL = "/spectate";
+  /**
+   * The URL pattern to request the checkChange page
+   */
+  public static final String CHECK_CHANGE_URL = "/checkChange";
 
 
   //
@@ -239,6 +243,8 @@ public class WebServer {
     post(DELETE_URL, new PostDeleteRoute());
 
     post(SPECTATE_URL, new PostSpectateRoute(playerLobby, gameLobby));
+
+    post(CHECK_CHANGE_URL, new PostCheckChangeRoute());
 
     LOG.config("WebServer is initialized.");
   }

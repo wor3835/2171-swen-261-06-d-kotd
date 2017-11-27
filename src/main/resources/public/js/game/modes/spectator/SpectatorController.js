@@ -13,6 +13,8 @@ define(function(require){
   
   // SPECTATOR mode states
   var SpectatorModeStartState = require('./SpectatorModeStartState');
+  var CheckChangeState = require('./CheckChangeState');
+  var WaitingForChangeState = require('./WaitingForChangeState');
 
   /**
    * Constructor function.
@@ -24,10 +26,14 @@ define(function(require){
     // create states and a lookup map
     this.addStateDefinition(SpectatorModeConstants.SPECTATOR_MODE_STARTING,
             new SpectatorModeStartState(this));
-    
+
+    this.addStateDefinition(SpectatorModeConstants.CHECKING_FOR_CHANGE,
+            new CheckChangeState(this));
+    this.addStateDefinition(SpectatorModeConstants.WAITING_FOR_CHANGE,
+            new WaitingForChangeState(this));
+
     // Add the ModeControls mixin
     ControlsToolbarMixin.call(this);
-    // TODO: create mode control buttons
 
     // Public (internal) methods
 

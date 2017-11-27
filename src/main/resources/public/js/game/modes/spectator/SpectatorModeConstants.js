@@ -10,8 +10,9 @@ define(function(){
      */
     return {
       
-      SPECTATOR_MODE_STARTING: 'SPECTATOR_MODE_STARTING',
-      // TODO more State constants
+      SPECTATOR_MODE_STARTING: 'SPECTATOR_MODE_STARTING'
+      ,WAITING_FOR_CHANGE: 'Waiting for change'
+      ,CHECKING_FOR_CHANGE: 'Checking for a change'
 
     };
 });

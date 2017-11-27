@@ -21,6 +21,8 @@ public class PostSpectateRoute implements Route {
     private final GameLobby gameLobby;
     private final PlayerLobby playerLobby;
 
+    final static String WATCHING_ATTR = "watching";
+
     public PostSpectateRoute(PlayerLobby playerLobby, GameLobby gameLobby){
         this.gameLobby = gameLobby;
         this.playerLobby = playerLobby;

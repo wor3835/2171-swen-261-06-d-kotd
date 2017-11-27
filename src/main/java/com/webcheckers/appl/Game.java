@@ -94,6 +94,10 @@ public class Game {
         spectators.remove(p);
     }
 
+    public boolean spectating(Player p){
+        return spectators.contains(p);
+    }
+
     /**
      * Switch the active color of the game
      */
