@@ -170,7 +170,7 @@ public class Player {
      */
     public Game saveGame(String name, Game game){
         //if name is null then give a default name
-        if(name == null) {
+        if(name == null || name.length()==0) {
             String temp = "Game " + (games.size() + 1);
             games.put(temp, game);
             return games.get(temp);
@@ -181,6 +181,10 @@ public class Player {
         //just add default name is name is not null and not already in use
         games.put(name, game);
         return games.get(name);
+    }
+
+    public Game deleteGame(String name){
+        return games.remove(name);
     }
 
     /**

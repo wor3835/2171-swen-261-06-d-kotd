@@ -14,6 +14,7 @@ import static spark.Spark.halt;
  */
 public class PostSaveGameRoute implements Route {
     private final String NAME = "gamename";
+    static final String SAVEGAME_ATTR = "savegame";
 
     private final TemplateEngine templateEngine;
 
@@ -37,10 +38,10 @@ public class PostSaveGameRoute implements Route {
             return templateEngine.render(new ModelAndView(vm, GetEndGameRoute.VIEW_NAME));
         }else if(currentPlayer.saveGame(name, game)==null){
             Map<String, Object> vm = new HashMap<>();
-            vm.put("error", PostSignInRoute.NAME_USED);
-            vm.put("title", request.queryParams("title"));
-            vm.put("message", request.queryParams("message"));
-            return templateEngine.render(new ModelAndView(vm, GetEndGameRoute.VIEW_NAME));
+            session.attribute("error", PostSignInRoute.NAME_USED);
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
         }
         response.redirect(WebServer.HOME_URL);
         halt();

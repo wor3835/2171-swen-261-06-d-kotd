@@ -106,6 +106,10 @@ public class WebServer {
    * The URL pattern to request the saveGame page
    */
   public static final String SAVEGAME_URL = "/saveGame";
+  /**
+   * The URL pattern to request the saveGame page
+   */
+  public static final String DELETE_URL = "/delete";
 
 
   //
@@ -227,6 +231,8 @@ public class WebServer {
     post(SAVEGAME_URL, new PostSaveGameRoute(templateEngine));
 
     post(RESIGN_URL, new PostResignRoute(gameLobby));
+
+    post(DELETE_URL, new PostDeleteRoute());
 
     LOG.config("WebServer is initialized.");
   }
