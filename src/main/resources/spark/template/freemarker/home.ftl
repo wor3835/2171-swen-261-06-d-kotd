@@ -28,7 +28,7 @@
       <br/><br/>
 
       <#if currentPlayer??>
-                  <u>List of Players:<u/>
+                  <u>List of Players:</u>
                   </br>
 
                   <#list playerLobby.iterator() as player>

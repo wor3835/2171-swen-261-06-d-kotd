@@ -26,14 +26,19 @@
                 <h2>No stats to display</h2>
             <#else>
                 <#list currentPlayer.gameIterator() as game>
+                   <h3>${game} :
                       <form action="/replay" method="POST">
-                         <h3>${game} :
-                            <button type="submit" name="savegame" value="${game}" style=border-radius:4px>
+                          <button type="submit" name="savegame" value="${game}" style=border-radius:4px>
                                 Replay
-                            </button>
-                         </h3>
-                         </br>
+                          </button>
                       </form>
+                      <form action="/delete" method="POST">
+                          <button type="submit" name="savegame" value="${game}" style=border-radius:4px>
+                             Delete
+                          </button>
+                      </form>
+                   </h3>
+
                 </#list>
             </#if>
         <#else>
