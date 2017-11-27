@@ -33,13 +33,24 @@
 
                   <#list playerLobby.iterator() as player>
                      <#if !player.equals(currentPlayer)>
-                     <form action="/start" method="POST">
-                        <button type="submit" name="opponent" value="${player.getName()}" style=border-radius:4px>
-                            ${player.getName()}
-                        </button>
+                     <h4>${player.getName()}:
+                     <#if player.isInGame()>
+                        <form action="/spectate" method="POST">
+                            <button type="submit" name="opponent" value="${player.getName()}" style=border-radius:4px>
+                                Spectate
+                            </button>
+                            </br>
+                        </form>
 
-                        </br>
-                     </form>
+                     <#else>
+                        <form action="/start" method="POST">
+                            <button type="submit" name="opponent" value="${player.getName()}" style=border-radius:4px>
+                                Challenge
+                            </button>
+                            </br>
+                        </form>
+                     </#if>
+                     </h4>
                      </#if>
                   </#list>
             <#else>

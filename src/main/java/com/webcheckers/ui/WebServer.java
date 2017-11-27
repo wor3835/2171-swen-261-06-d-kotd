@@ -110,6 +110,10 @@ public class WebServer {
    * The URL pattern to request the saveGame page
    */
   public static final String DELETE_URL = "/delete";
+  /**
+   * The URL pattern to request the spectate page
+   */
+  public static final String SPECTATE_URL = "/spectate";
 
 
   //
@@ -233,6 +237,8 @@ public class WebServer {
     post(RESIGN_URL, new PostResignRoute(gameLobby));
 
     post(DELETE_URL, new PostDeleteRoute());
+
+    post(SPECTATE_URL, new PostSpectateRoute(playerLobby, gameLobby));
 
     LOG.config("WebServer is initialized.");
   }
