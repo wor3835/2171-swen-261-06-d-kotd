@@ -58,6 +58,7 @@ public class GetEndGameRoute implements Route{
         String name = session.attribute(WINNER_ATTR);
         String resigner = session.attribute(RESIGN_GUY_ATTR);
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
+        game.setWinner(session.attribute(WINNER_ATTR));
         gameLobby.removeGame(game);
 
         session.attribute(GetGameRoute.OPPONENT_ATTR, null);

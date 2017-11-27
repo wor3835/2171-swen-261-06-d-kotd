@@ -39,6 +39,8 @@ public class Game {
 
     private boolean gameOver;
 
+    private String winner;
+
     private MasterEnum.GameStatus status;
 
     //The active color
@@ -171,6 +173,14 @@ public class Game {
      */
     public MasterEnum.Color getP2color(){
         return MasterEnum.Color.WHITE;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String player){
+        this.winner = player;
     }
 
     /**
