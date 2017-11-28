@@ -13,6 +13,7 @@ import spark.Session;
 
 import java.util.ArrayList;
 
+import static com.webcheckers.ui.GetGameRoute.GAME_ATTR;
 import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 import static spark.Spark.halt;
 
@@ -31,12 +32,18 @@ public class PostSubmitTurnRoute implements Route {
         Move move = session.attribute(PostValidateMoveRoute.MOVE_ATTR);
 
         Gson gson = new Gson();
+
+        if (((Game)session.attribute(GetGameRoute.GAME_ATTR)).isGameOver()){
+            return gson.toJson(new Message("Game is over", MasterEnum.MessageType.info));
+        }
+
+
         if(move == null)
             return gson.toJson(new Message("move is null", MasterEnum.MessageType.error));
 
         session.attribute(PostValidateMoveRoute.MOVE_ATTR, null);
         //Game is pulled down from the session
-        Game game = session.attribute(GetGameRoute.GAME_ATTR);
+        Game game = session.attribute(GAME_ATTR);
 
         //Get each board
         Board b1 = game.getB1();
