@@ -21,7 +21,7 @@ import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 /**
  * Created by arthu on 11/5/2017.
  */
-public class GetEndGameRoute implements Route{
+public class GetEndGameRoute implements Route {
 
     private final TemplateEngine templateEngine;
     private final GameLobby gameLobby;
@@ -60,7 +60,9 @@ public class GetEndGameRoute implements Route{
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
         String resigner = game.getResigner();
 
-        game.setWinner(session.attribute(WINNER_ATTR));
+        if (game.getWinner() == null)
+            game.setWinner(session.attribute(WINNER_ATTR));
+
         gameLobby.removeGame(game);
 
         session.attribute(GetGameRoute.OPPONENT_ATTR, null);
@@ -71,12 +73,12 @@ public class GetEndGameRoute implements Route{
         session.attribute(GetGameRoute.VIEW_MODE, null);
         session.attribute(PostStartRoute.VALIDATED, null);
 
-        if(resigner!=null){
-            if(resigner.equals(((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
+        if (resigner != null) {
+            if (resigner.equals(((Player) session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
                 vm.put(GAME_OVER_ATTR, I_RESIGN_MSG);
             else
                 vm.put(GAME_OVER_ATTR, String.format(YOU_RESIGN_MSG, resigner));
-        } else if(name.equals(((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
+        } else if (name.equals(((Player) session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
             vm.put(GAME_OVER_ATTR, String.format(WIN_MSG, name));
         else
             vm.put(GAME_OVER_ATTR, String.format(LOSE_MSG, name));
