@@ -41,7 +41,7 @@ define(function(require){
    * Build and begin the Replay view mode.
    */
   ReplayModeStartState.prototype.onEntry = function onEntry() {
-    alert('View mode not yet implemented: REPLAY');
+    this._controller.setState(ReplayModeConstants.EMPTY_TURN);
   };
   
   // export class constructor
