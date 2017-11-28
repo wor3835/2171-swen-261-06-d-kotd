@@ -18,7 +18,7 @@ import spark.template.freemarker.FreeMarkerEngine;
  * The entry point for the WebCheckers web application.
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
- * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ *
  */
 public final class Application {
   private static final Logger LOG = Logger.getLogger(Application.class.getName());

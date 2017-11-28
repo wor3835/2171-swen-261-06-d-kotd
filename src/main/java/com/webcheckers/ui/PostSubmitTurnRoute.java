@@ -18,7 +18,7 @@ import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 import static spark.Spark.halt;
 
 /**
- * Created by wor3835 on 10/25/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostSubmitTurnRoute implements Route {

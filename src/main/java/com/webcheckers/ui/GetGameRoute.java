@@ -24,6 +24,7 @@ import static spark.Spark.halt;
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class GetGameRoute implements Route {
 

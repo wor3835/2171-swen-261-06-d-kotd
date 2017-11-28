@@ -1,7 +1,7 @@
 package com.webcheckers.appl;
 
 /**
- * Created by Bobby on 10/25/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  *
  * This class manages all the enums used in the WebCheckers application
  */

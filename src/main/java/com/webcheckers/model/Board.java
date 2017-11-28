@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class Board {
 
