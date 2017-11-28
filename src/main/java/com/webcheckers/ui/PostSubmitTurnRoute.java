@@ -62,7 +62,7 @@ public class PostSubmitTurnRoute implements Route {
             b2.makeMove(move, session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
             b1.updateMovesList(((Player)session.attribute(GetGameRoute.OPPONENT_ATTR)).getPosList());
         }
-        game.getMovesList().add(move);
+        game.addMove(move);
         game.switchActive();
 
         Message msg = new Message("turn processed", MasterEnum.MessageType.info);

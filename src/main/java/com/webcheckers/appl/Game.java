@@ -36,15 +36,12 @@ public class Game {
     private List<Player> spectators = new ArrayList<>();
     //A list move moves that houses all the moves in a game
     private List<Move> movesList = new ArrayList<>();
-
+    //The player who resigned
     private String resigner;
-
-    private boolean gameOver;
-
+    //The player who won
     private String winner;
-
+    //The status of the game either OVER, RESIGN or SIGNOUT when over or PLAYING when not
     private MasterEnum.GameStatus status;
-
     //The active color
     private MasterEnum.Color activeColor;
 
@@ -56,7 +53,7 @@ public class Game {
      */
     public boolean applyGame(Player p1, Player p2){
         //Check to see if p2 is in a game
-        gameOver = false;
+        status = MasterEnum.GameStatus.PLAYING;
         if(p2.isInGame()) {
             return false;
         }
@@ -88,12 +85,24 @@ public class Game {
         p2.assignPos(b2, MasterEnum.Color.WHITE);
     }
 
+    /**
+     * Assigns only a single board
+     * @param b the board to be assigned
+     */
     public void applyBoard(Board b){this.b1 = b;}
 
+    /**
+     * Adds a spectator to the game
+     * @param p The player to be added as a spectator
+     */
     public void addSpectator(Player p){
         spectators.add(p);
     }
 
+    /**
+     * Removes a spectator from the game
+     * @param p The player to be removed
+     */
     public void removeSpecator(Player p){
         spectators.remove(p);
     }
@@ -116,22 +125,18 @@ public class Game {
     /**
      * ends the game by making each player leave
      */
-    public void endGame(){
-        p1.leaveGame();
-        p2.leaveGame();
-        gameOver = true;
-        b1 = null;
-        b2 = null;
-        status = MasterEnum.GameStatus.OVER;
-    }
-
     public void endGame(MasterEnum.GameStatus status, String name){
+        if(status!= MasterEnum.GameStatus.PLAYING)
+            throw new RuntimeException("Game already over");
+        //Forces players to leave game
         p1.leaveGame();
         p2.leaveGame();
+        //Makes boards null
         b1 = null;
         b2 = null;
-        gameOver = true;
+        //Assign the status
         this.status = status;
+        //Assign the name of the resigner(if no resign then null)
         this.resigner = name;
     }
 
@@ -144,17 +149,12 @@ public class Game {
     /**
      * @return player 1
      */
-    public Player getP1()
-    {
-        return p1;
-    }
+    public Player getP1() {return p1;}
 
     /**
      * @return player 2
      */
-    public Player getP2(){
-        return p2;
-    }
+    public Player getP2(){return p2;}
 
     /**
      * @return board 1
@@ -172,56 +172,60 @@ public class Game {
      * Add move to Game's moveList
      * @param m move to add
      */
-    public void addMove(Move m) {
-        movesList.add(m);
-    }
+    public void addMove(Move m) {movesList.add(m);}
 
-    public Move getMove(int i){
-        return movesList.get(i);
-    }
+    /**
+     * Get a move at location i
+     * @param i The index for the move to get
+     * @return The move at location i
+     */
+    public Move getMove(int i){return movesList.get(i);}
 
     /**
      * @return player 1 color
      */
-    public MasterEnum.Color getP1color(){
-        return MasterEnum.Color.RED;
-    }
+    public MasterEnum.Color getP1color(){return MasterEnum.Color.RED;}
 
     /**
      * @return player 2 color
      */
-    public MasterEnum.Color getP2color(){
-        return MasterEnum.Color.WHITE;
-    }
+    public MasterEnum.Color getP2color(){return MasterEnum.Color.WHITE;}
 
-    public String getWinner() {
-        return winner;
-    }
+    /**
+     * Gets the name of the winner
+     * @return The winner's name
+     */
+    public String getWinner() {return winner;}
 
+    /**
+     * Set the winner to a name
+     */
     public void setWinner(String player){
+        if(winner!=null)
+            throw new RuntimeException("Winner already assigned");
         this.winner = player;
     }
 
     /**
-     * @return movesList
+     * Gets the number of moves made in a game
+     * @return The size of the moves list
      */
-    public List<Move> getMovesList()
-    {
-        return movesList;
-    }
-
     public int movesListSize(){return movesList.size();}
 
     /**
      * checks to see if gave is over
      */
-    public boolean isGameOver() {return gameOver;}
+    public boolean isGameOver() {return status== MasterEnum.GameStatus.PLAYING;}
 
     /**
-     * returns the gamestatus
+     * returns the game status
      */
     public MasterEnum.GameStatus getStatus(){return status;}
 
+    /**
+     * Gets the name of the player who resigned
+     * @return The resigner's name
+     */
     public String getResigner(){return resigner;}
 
     /**

@@ -28,7 +28,8 @@ public class MasterEnum {
         PLAY, SPECTATOR, REPLAY
     }
 
+    //Game status enums
     public enum GameStatus{
-        OVER, RESIGN, SIGNOUT
+        PLAYING, OVER, RESIGN, SIGNOUT
     }
 }
