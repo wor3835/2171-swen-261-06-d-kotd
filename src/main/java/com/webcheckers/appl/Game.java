@@ -86,6 +86,8 @@ public class Game {
         p2.assignPos(b2, MasterEnum.Color.WHITE);
     }
 
+    public void applyBoard(Board b){this.b1 = b;}
+
     public void addSpectator(Player p){
         spectators.add(p);
     }
@@ -165,12 +167,18 @@ public class Game {
      */
     public Board getB2() {return b2;}
 
+    public Board getB(){return b1;}
+
     /**
      * Add move to Game's moveList
      * @param m move to add
      */
     public void addMove(Move m) {
         movesList.add(m);
+    }
+
+    public Move getMove(int i){
+        return movesList.get(i);
     }
 
     /**
