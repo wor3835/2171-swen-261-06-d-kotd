@@ -65,7 +65,7 @@ public class GameTest {
         assertTrue(CuT.getP2().getName().equals(player2.getName()));
 
         // makes sure moves list is empty
-        assertEquals(0, CuT.getMovesList().size());
+        assertEquals(0, CuT.movesListSize());
 
         // makes sure boards are empty
         assertNull(CuT.getB1());
@@ -109,7 +109,7 @@ public class GameTest {
 
         // make a move
         CuT.addMove(new Move(new Position(0,0), new Position(1, 2)));
-        assertNotNull(CuT.getMovesList());
+        assertNotNull(CuT.getMove(CuT.movesListSize()-1));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class GameTest {
         assertNotNull(player1.getGame());
         assertNotNull(player2.getGame());
 
-        CuT.endGame();
+        CuT.endGame(MasterEnum.GameStatus.OVER, null);
 
         assertNull(player1.getGame());
         assertNull(player2.getGame());
