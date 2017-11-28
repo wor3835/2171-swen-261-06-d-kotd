@@ -52,8 +52,7 @@ public class GetGameRoute implements Route {
      * Create the Spark Route (UI controller) for the
      * {@code GET /} HTTP request.
      *
-     * @param templateEngine
-     *   the HTML template rendering engine
+     * @param templateEngine the HTML template rendering engine
      */
     public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
         // validation
@@ -69,13 +68,9 @@ public class GetGameRoute implements Route {
     /**
      * Render the WebCheckers Home page.
      *
-     * @param request
-     *   the HTTP request
-     * @param response
-     *   the HTTP response
-     *
-     * @return
-     *   the rendered HTML for the Home page
+     * @param request  the HTTP request
+     * @param response the HTTP response
+     * @return the rendered HTML for the Home page
      */
     @Override
     public Object handle(Request request, Response response) {
@@ -87,14 +82,14 @@ public class GetGameRoute implements Route {
         Game game = httpSession.attribute(GAME_ATTR);
 
 
-        if(httpSession.attribute(VIEW_MODE)==MasterEnum.ViewMode.REPLAY){
-            if((int)httpSession.attribute(PostReplayRoute.CURRENT_IDX_ATTR) == game.movesListSize()){
+        if (httpSession.attribute(VIEW_MODE) == MasterEnum.ViewMode.REPLAY) {
+            if ((int) httpSession.attribute(PostReplayRoute.CURRENT_IDX_ATTR) == game.movesListSize()) {
                 response.redirect(WebServer.STATS_URL);
                 halt();
                 return null;
             }
-        } else if(game.getStatus() !=null){
-            if(game.spectating(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR))){
+        } else if (game.getStatus() != null) {
+            if (game.spectating(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR))) {
                 game.removeSpecator(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
                 response.redirect(WebServer.HOME_URL);
                 halt();
@@ -102,12 +97,12 @@ public class GetGameRoute implements Route {
             }
 
             String winner;
-            if(game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT){
-                if(httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR)==null){
+            if (game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT) {
+                if (httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR) == null) {
                     String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
                     httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, name);
                     winner = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
-                }else
+                } else
                     winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             } else {
                 winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
@@ -117,11 +112,11 @@ public class GetGameRoute implements Route {
             halt();
             return null;
         }
-        if(httpSession.attribute(VIEW_MODE)==MasterEnum.ViewMode.PLAY) {
+        if (httpSession.attribute(VIEW_MODE) == MasterEnum.ViewMode.PLAY) {
             ArrayList<Move> moves = ((BoardView) httpSession.attribute(BOARD_VIEW_KEY)).getBoard().getMoves(
                     ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getPosList());
 
-            if(moves.size() == 0) {
+            if (moves.size() == 0) {
 
                 String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
                 httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
@@ -131,16 +126,17 @@ public class GetGameRoute implements Route {
                 response.redirect(WebServer.ENDGAME_URL);
                 halt();
                 return null;
-            }else if (game.getP1().getPosList().isEmpty() || game.getP2().getPosList().isEmpty()){
+            } else if (game.getP1().getPosList().isEmpty() || game.getP2().getPosList().isEmpty()) {
                 String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
 
                 httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
 
-            game.endGame();
+                game.endGame();
 
-            response.redirect(WebServer.ENDGAME_URL);
-            halt();
-            return null;
+                response.redirect(WebServer.ENDGAME_URL);
+                halt();
+                return null;
+            }
         }
         vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 
@@ -165,13 +161,13 @@ public class GetGameRoute implements Route {
         vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
 
         vm.put(WHITE_PLAYER, httpSession.attribute(WHITE_PLAYER));
-        
+
         vm.put(ACTIVE_COLOR, httpSession.attribute(ACTIVE_COLOR));
 
         LOG.finer("GetGameRoute is invoked.");
         //
 
-        return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
+        return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
 
 }
