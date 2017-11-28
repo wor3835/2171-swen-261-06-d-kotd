@@ -4,6 +4,7 @@ import com.webcheckers.appl.MasterEnum;
 
 /**
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class Move {
     //Start and end position

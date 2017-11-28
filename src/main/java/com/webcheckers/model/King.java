@@ -5,7 +5,7 @@ import com.webcheckers.appl.MasterEnum;
 import java.util.ArrayList;
 
 /**
- * Created by Bobby on 10/25/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class King extends Piece {

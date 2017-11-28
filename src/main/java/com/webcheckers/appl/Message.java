@@ -2,6 +2,9 @@ package com.webcheckers.appl;
 
 /**
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
+ *
+ *
  * Creates a message for the user to view. Can be an info message
  * or an error message.
  *

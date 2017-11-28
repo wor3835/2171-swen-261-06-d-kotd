@@ -3,7 +3,7 @@ package com.webcheckers.model;
 import com.webcheckers.appl.MasterEnum;
 
 /**
- * Created by Bobby on 10/25/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class Pawn extends Piece{
     /**

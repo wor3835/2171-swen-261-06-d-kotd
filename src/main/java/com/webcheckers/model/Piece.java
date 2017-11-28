@@ -6,7 +6,7 @@ import com.webcheckers.appl.MasterEnum;
 import java.util.ArrayList;
 
 /**
- * Created by kzalb on 10/15/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  * Represents a piece that goes on game space.
  */

@@ -10,6 +10,7 @@ import java.util.List;
  * Shows the board view for the current player.
  *
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class BoardView {
     //The board length

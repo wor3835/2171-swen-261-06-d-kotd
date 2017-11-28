@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import static spark.Spark.halt;
 
 /**
- * Created by wor3835 on 10/23/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostCheckTurnRoute implements Route {
