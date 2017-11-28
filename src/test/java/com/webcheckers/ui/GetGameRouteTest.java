@@ -183,10 +183,16 @@ public class GetGameRouteTest {
         o.assignPos(board, MasterEnum.Color.RED);
 
         game.applyGame(p, o);
+
+        board.makeMove(new Move(new Position(4,1), new Position(2,3)), o);
+        assertNull(board.getPieceAt(3,2)); // move is made and final piece is captured
+
         assertFalse(game.isGameOver());
 
-        game.addMove(new Move(new Position(4,1), new Position(2,3)));
+        CuT.handle(request, response);
 
-        assertTrue(game.isGameOver());
+        final Object model = myModelView.model;
+        assertNotNull(model);
+        assertTrue(model instanceof Map);
     }
 }
