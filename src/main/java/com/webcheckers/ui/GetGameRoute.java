@@ -110,7 +110,7 @@ public class GetGameRoute implements Route {
                 }else
                     winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             } else {
-                winner = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+                winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             }
             httpSession.attribute(GetEndGameRoute.WINNER_ATTR, winner);
             response.redirect(WebServer.ENDGAME_URL);
@@ -136,10 +136,11 @@ public class GetGameRoute implements Route {
 
                 httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
 
-                response.redirect(WebServer.ENDGAME_URL);
-                halt();
-                return null;
-            }
+            game.endGame();
+
+            response.redirect(WebServer.ENDGAME_URL);
+            halt();
+            return null;
         }
         vm.put(GetHomeRoute.CUR_PLAYER_ATTR, httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 
