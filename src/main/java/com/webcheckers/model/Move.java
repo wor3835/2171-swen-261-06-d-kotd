@@ -25,6 +25,13 @@ public class Move {
         this.end = end;
     }
 
+    /**
+     * Constructor that creates a move that is in a series of jump moves i.e. the second or third
+     * in a series of jumps
+     * @param start The start position of the move
+     * @param end The end position of the move
+     * @param move The move this move is linked to
+     */
     public Move(Position start, Position end, Move move){
         this.start = start;
         this.end = end;
@@ -33,21 +40,25 @@ public class Move {
 
     public Move getMove(){return move;}
 
+    //Sets this move to a 'kinged' move, for replay purposes
     public void kinged(){wasKinged=true;}
 
+    //Returns whether this move was a 'kinged' move or not
     public boolean wasKinged(){return wasKinged;}
 
+    //Sets this move to a 'capture' move, for replay purposes
     public void pieceTaken(Piece p){this.piece = p;}
 
+    //Returns whether this move was a 'capture' move or not
     public Piece pieceTaken(){return piece;}
 
+    //Gets the start position of this move
     public Position getStart(){
         return start;
     }
 
-    public Position getEnd(){
-        return end;
-    }
+    //Gets the end position of this move
+    public Position getEnd(){return end;}
 
     /**
      * Gets the final position, at the end of the linked series of moves
