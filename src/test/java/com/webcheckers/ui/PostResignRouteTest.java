@@ -66,4 +66,32 @@ public class PostResignRouteTest {
         //assertEquals(name, p1.getName());
         assertTrue(game.getStatus()==MasterEnum.GameStatus.RESIGN);
     }
+
+    @Test
+    public void testResign2(){
+        Game game = new Game();
+        Player p1 = new Player("p1");
+        Player p2 = new Player("p2");
+        game.applyGame(p1, p2);
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p1);
+
+        CuT.handle(request,response);
+
+        when(session.attribute(GetEndGameRoute.WINNER_ATTR)).thenReturn(p2.getName());
+        assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p2.getName());
+    }
+
+    @Test
+    public void testNullGame() {
+        Game game = null;
+        Player p1 = new Player("p1");
+        Player p2 = new Player("p2");
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(null);
+
+        when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(null);
+
+        assertNotEquals("game ended", CuT.handle(request,response).toString());
+    }
 }
