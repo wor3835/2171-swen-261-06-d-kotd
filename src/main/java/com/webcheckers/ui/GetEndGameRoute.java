@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import static com.webcheckers.ui.PostStartRoute.VALIDATED;
+
 /**
  * Created by arthu on 11/5/2017.
  */
@@ -67,6 +69,7 @@ public class GetEndGameRoute implements Route{
         session.attribute(GetGameRoute.RED_PLAYER, null);
         session.attribute(GetGameRoute.ACTIVE_COLOR, null);
         session.attribute(GetGameRoute.VIEW_MODE, null);
+        session.attribute(PostStartRoute.VALIDATED, null);
 
         if(resigner!=null){
             if(resigner.equals(((Player)session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))
