@@ -215,7 +215,7 @@ public class Game {
     /**
      * checks to see if gave is over
      */
-    public boolean isGameOver() {return status== MasterEnum.GameStatus.PLAYING;}
+    public boolean isGameOver() {return status!=MasterEnum.GameStatus.PLAYING;}
 
     /**
      * returns the game status

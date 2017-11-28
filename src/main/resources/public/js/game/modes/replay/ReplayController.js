@@ -15,8 +15,6 @@ define(function(require){
   // REPLAY mode states
   var ReplayModeStartState = require('./ReplayModeStartState');
   var EmptyTurnState = require('./EmptyTurnState');
-  var BackState = require('./BackState');
-  var StepState = require('./StepState');
 
   /**
    * Constructor function.
