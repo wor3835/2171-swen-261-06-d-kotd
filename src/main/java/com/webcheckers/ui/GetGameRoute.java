@@ -104,7 +104,7 @@ public class GetGameRoute implements Route {
                 }else
                     winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             } else {
-                winner = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+                winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             }
             httpSession.attribute(GetEndGameRoute.WINNER_ATTR, winner);
             response.redirect(WebServer.ENDGAME_URL);
@@ -128,6 +128,8 @@ public class GetGameRoute implements Route {
             String name = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
 
             httpSession.attribute(GetEndGameRoute.WINNER_ATTR, name);
+
+            game.endGame();
 
             response.redirect(WebServer.ENDGAME_URL);
             halt();
