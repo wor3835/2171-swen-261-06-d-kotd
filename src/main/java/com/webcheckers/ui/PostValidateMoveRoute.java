@@ -20,9 +20,9 @@ import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 import static spark.Spark.halt;
 
 /**
- * Created by wor3835 on 10/25/2017.
- *
- * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
+ * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostValidateMoveRoute implements Route {
 

@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 /**
- * Holds the unique player name.
+ * Holds the unique player and any important information relative to the player
  *
  * @author <a href='mailto:wor3835@rit.edu'>William Raffaelle</a>
  * @author <a href='mailto:gep2494@rit.edu'>George-Edward Pinal</a>
