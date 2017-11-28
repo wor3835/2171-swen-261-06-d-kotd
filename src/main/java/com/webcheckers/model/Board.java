@@ -365,6 +365,7 @@ public class Board {
         int endCol;
         int endRow;
 
+        //if the move was made inversed, reinverse it
         if(inversed) {
             startCol = BoardView.BOARD_LENGTH-end.getCol()-1;
             startRow = BoardView.BOARD_LENGTH-end.getRow()-1;
@@ -377,12 +378,13 @@ public class Board {
             endRow = start.getRow();
         }
 
+        //if the move was a jump, undo the jump
         if(Math.abs(startCol-endCol) == 2){
             //row and col for piece to be removed
             int r = startRow+(endRow-startRow)/2;
             int c = startCol+(endCol-startCol)/2;
 
-            //set the space of the piece being jumped to empty
+            //set the space of the piece being jumped to what was once there
 
             board[r][c] = new Space(c, true, move.pieceTaken());
         }
