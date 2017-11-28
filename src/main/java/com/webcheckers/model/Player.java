@@ -150,10 +150,20 @@ public class Player {
      */
     public Game getGame(){return this.game;}
 
+    /**
+     * returns the desired game object
+     * @param name - the name of the game
+     * @return - game object
+     */
     public Game getGame(String name){
         return games.get(name);
     }
 
+    /**
+     * checks if this player won the game
+     * @param name - the name of the game object
+     * @return - true if this player won, false if they lost
+     */
     public boolean won(String name){
         return games.get(name).getWinner().equals(getName());
     }
@@ -191,6 +201,11 @@ public class Player {
         return games.get(name);
     }
 
+    /**
+     * removes the game from this player
+     * @param name - the name of the game
+     * @return - the removed game object
+     */
     public Game deleteGame(String name){
         return games.remove(name);
     }

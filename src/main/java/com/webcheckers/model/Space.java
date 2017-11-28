@@ -59,10 +59,16 @@ public class Space{
         return piece;
     }
 
+    /**
+     * removes the piece from this space
+     */
     public void removePiece(){
         piece = null;
     }
 
+    /**
+     * turns the piece on this space into a king
+     */
     public void kingMe(){
         if(piece == null)
             throw new RuntimeException("no piece to king");
