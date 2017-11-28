@@ -158,10 +158,12 @@ the state of the board. These methods are called by updateMoveList, which is
 called by getMoves, which is the exit point of the subsystem via proxy of its
 information expert, Board.
 
-### Static models
+### &nbsp;Static models
 
 ![Board UML](board.png)
 
-### Dynamic models
-
-![Sequence Diagram](SQ.png)
+### &nbsp;Dynamic models
+#### &nbsp;&nbsp;State Chart<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![State Diagram](SD.png)
+#### &nbsp;&nbsp;Sequence Diagram<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](SQ.png)
