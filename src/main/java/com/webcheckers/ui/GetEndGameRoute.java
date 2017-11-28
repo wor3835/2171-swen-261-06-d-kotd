@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 
 /**
- * Created by arthu on 11/5/2017.
+ * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class GetEndGameRoute implements Route {
 

@@ -9,7 +9,7 @@ import spark.Session;
 import static spark.Spark.halt;
 
 /**
- * Created by arthu on 11/26/2017.
+ * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostDeleteRoute implements Route {
     @Override
