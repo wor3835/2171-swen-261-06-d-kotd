@@ -277,7 +277,7 @@ public class Board {
             //row and col for piece to be removed
             int r = startRow+(endRow-startRow)/2;
             int c = startCol+(endCol-startCol)/2;
-
+            move.pieceTaken(board[r][c].getPiece());
             //set the space it used to be in as null
             board[r][c] = new Space(c, true, null);
         }
@@ -289,6 +289,7 @@ public class Board {
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
                 endRow == 0){
             s.kingMe();
+            move.kinged();
         }
         //Change the end location in board to the temp space created
         board[endRow][endCol] = s;
@@ -297,7 +298,8 @@ public class Board {
         board[startRow][startCol] = new Space(startCol, true, null);
 
         //moves position from start to end in p.posList
-        p.movePiece(move);
+        if(p!=null)
+            p.movePiece(move);
 
         //if there are move moves, loop again
         if(move.getMove() != null )
@@ -330,7 +332,8 @@ public class Board {
             board[r][c] = new Space(c, true, null);
 
             //remove that piece from the posList in player
-            p.removePiece(new Position(r,c));
+            if(p!=null)
+                p.removePiece(new Position(r,c));
         }
 
         //Create a space with the properties of the previously occupied space
@@ -340,6 +343,7 @@ public class Board {
         if(s.getPiece().getType() == MasterEnum.PieceType.SINGLE &&
                 endRow == BoardView.BOARD_LENGTH-1){
             s.kingMe();
+            move.kinged();
         }
 
         //Change end to temp space created
@@ -351,6 +355,55 @@ public class Board {
         //If move has a move then loop but with move's move
         if(move.getMove() != null)
             inverseMove(move.getMove(), p);
+    }
+
+    public void undoMove(Move move, boolean inversed){
+        //if there are move moves, loop again
+        if(move.getMove() != null )
+            undoMove(move.getMove(), inversed);
+
+        //Set everything to easy to use variables
+        Position start = move.getStart();
+        Position end = move.getEnd();
+        //Inverts the board move to allow a move on the other players board
+
+        int startCol;
+        int startRow;
+        int endCol;
+        int endRow;
+
+        if(inversed) {
+            startCol = BoardView.BOARD_LENGTH-end.getCol()-1;
+            startRow = BoardView.BOARD_LENGTH-end.getRow()-1;
+            endCol = BoardView.BOARD_LENGTH-start.getCol()-1;
+            endRow = BoardView.BOARD_LENGTH-start.getRow()-1;
+        }else{
+            startCol = end.getCol();
+            startRow = end.getRow();
+            endCol = start.getCol();
+            endRow = start.getRow();
+        }
+
+        if(Math.abs(startCol-endCol) == 2){
+            //row and col for piece to be removed
+            int r = startRow+(endRow-startRow)/2;
+            int c = startCol+(endCol-startCol)/2;
+
+            //set the space of the piece being jumped to empty
+
+            board[r][c] = new Space(c, true, move.pieceTaken());
+        }
+
+        Space s = new Space(endCol, false, board[startRow][startCol].getPiece());
+
+        if(move.wasKinged()){
+            s = new Space(endCol, false, new Pawn(board[startRow][startCol].getPiece().getColor()));
+        }
+        //Change the end location in board to the temp space created
+        board[endRow][endCol] = s;
+
+        //Change the start space to empty
+        board[startRow][startCol] = new Space(startCol, true, null);
     }
 
     /**

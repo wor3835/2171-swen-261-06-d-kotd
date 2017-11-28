@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.MasterEnum;
+
 /**
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
@@ -8,6 +10,10 @@ public class Move {
     private Position start, end;
     //The next move, only used for a sequence of captures
     private Move move;
+    //a boolean for whether or not a piece was kinged on this turn
+    private boolean wasKinged=false;
+    //a value to show whether or not a piece was taken on this turn
+    private Piece piece;
 
     /**
      * Constuctor that creates a move with start and end position
@@ -26,6 +32,14 @@ public class Move {
     }
 
     public Move getMove(){return move;}
+
+    public void kinged(){wasKinged=true;}
+
+    public boolean wasKinged(){return wasKinged;}
+
+    public void pieceTaken(Piece p){this.piece = p;}
+
+    public Piece pieceTaken(){return piece;}
 
     public Position getStart(){
         return start;

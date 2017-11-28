@@ -118,6 +118,18 @@ public class WebServer {
    * The URL pattern to request the checkChange page
    */
   public static final String CHECK_CHANGE_URL = "/checkChange";
+  /**
+   * The URL pattern to request the Replay page
+   */
+  public static final String REPLAY_URL = "/replay";
+  /**
+   * The URL pattern to request the step page
+   */
+  public static final String STEP_URL = "/step";
+  /**
+   * The URL pattern to request the Replay page
+   */
+  public static final String BACK_URL = "/back";
 
 
   //
@@ -241,6 +253,12 @@ public class WebServer {
     post(RESIGN_URL, new PostResignRoute(gameLobby));
 
     post(DELETE_URL, new PostDeleteRoute());
+
+    post(REPLAY_URL, new PostReplayRoute());
+
+    post(BACK_URL, new PostBackRoute());
+
+    post(STEP_URL, new PostStepRoute());
 
     post(SPECTATE_URL, new PostSpectateRoute(playerLobby, gameLobby));
 
