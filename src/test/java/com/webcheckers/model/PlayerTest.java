@@ -116,4 +116,22 @@ public class PlayerTest {
         CuT.removePiece(new Position(5,4));
         assertTrue(x == CuT.getPosList().size());
     }
+
+    @Test
+    public void save_game_test() {
+        //create board and assign player to it
+        Board boardTest = new Board(MasterEnum.Color.RED);
+        CuT.assignPos(boardTest, MasterEnum.Color.RED);
+
+        Game g = CuT.getGame();
+        assertEquals(g, CuT.saveGame(null, g));
+
+        assertEquals(g, CuT.saveGame("test", g));
+        assertNull(CuT.saveGame("test", g));
+
+        CuT.deleteGame("test");
+        Game g2 = new Game();
+        CuT.assignGame(g2);
+        assertNotNull(CuT.saveGame("new_test", g2));
+    }
 }
