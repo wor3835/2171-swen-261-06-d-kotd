@@ -187,8 +187,9 @@ public class Board {
                             Move temp = new Move(new Position(row, col), pos, m);
                             moves.add(temp);
                         }
+                        moves.add(new Move(start, pos));
                     }
-                    moves.add(new Move(start, pos));
+
                 }
 
 
@@ -205,8 +206,9 @@ public class Board {
                             Move temp = new Move(new Position(row, col), pos, m);
                             moves.add(temp);
                         }
+                        moves.add(new Move(start, pos));
                     }
-                    moves.add(new Move(start, pos));
+
                 }
             }
         }
@@ -222,8 +224,9 @@ public class Board {
                                 Move temp = new Move(new Position(row, col), pos, m);
                                 moves.add(temp);
                             }
+                            moves.add(new Move(start, pos));
                         }
-                        moves.add(new Move(start, pos));
+
                     }
                 }
             }
