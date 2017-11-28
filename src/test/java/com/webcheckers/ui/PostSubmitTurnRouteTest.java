@@ -51,6 +51,9 @@ public class PostSubmitTurnRouteTest {
     public void null_move(){
         Gson gson = new Gson();
         when(session.attribute(PostValidateMoveRoute.MOVE_ATTR)).thenReturn(null);
+        Game game = mock(Game.class);
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(game.isGameOver()).thenReturn(false);
 
         assertEquals(gson.toJson(new Message("move is null", MasterEnum.MessageType.error)), CuT.handle(request, response));
     }

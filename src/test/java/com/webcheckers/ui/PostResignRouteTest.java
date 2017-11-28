@@ -60,8 +60,8 @@ public class PostResignRouteTest {
 
 
         CuT.handle(request,response);
-
         //String name = session.attribute(GetEndGameRoute.RESIGN_GUY_ATTR);
+        String name = game.getResigner();
         //TODO: find out why this returns false
         //assertEquals(name, p1.getName());
         assertTrue(game.getStatus()==MasterEnum.GameStatus.RESIGN);

@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.MasterEnum;
 import com.webcheckers.model.Player;
@@ -26,6 +27,7 @@ public class GetEndGameRouteTest {
     private TemplateEngine engine;
     private Request request;
     private Session session;
+    private Game game;
 
     private GameLobby gameLobby;
 
@@ -38,7 +40,7 @@ public class GetEndGameRouteTest {
         engine = mock(TemplateEngine.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
-
+        game = mock(Game.class);
         gameLobby = mock(GameLobby.class);
 
         CuT = new GetEndGameRoute(engine, gameLobby);
@@ -56,6 +58,8 @@ public class GetEndGameRouteTest {
 
         when(session.attribute(WINNER_ATTR)).thenReturn(WINNER);
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p1);
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(game.getResigner()).thenReturn(null);
         CuT.handle(request,response);
 
         final Object model = myModelAndView.model;
@@ -81,6 +85,10 @@ public class GetEndGameRouteTest {
         Player p2 = new Player("Loser");
 
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p2);
+
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        when(game.getResigner()).thenReturn(null);
+        CuT.handle(request,response);
 
         CuT.handle(request,response);
 

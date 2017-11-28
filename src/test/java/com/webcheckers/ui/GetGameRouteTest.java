@@ -78,15 +78,17 @@ public class GetGameRouteTest {
         when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
         when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+        when(session.attribute(GetGameRoute.VIEW_MODE)).thenReturn(MasterEnum.ViewMode.PLAY);
 
         game.applyGame(p, o);
+        game.applyBoard(board, board);
 
         assertFalse(game.isGameOver());
 
         assertNull(CuT.handle(request, response));
 
-
         //assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
+        assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
         final Object model = myModelView.model;
         assertNull(model);
         assertTrue(game.isGameOver());
@@ -106,6 +108,7 @@ public class GetGameRouteTest {
 
         game.applyGame(p, o);
         //game.endGame();
+        game.endGame(MasterEnum.GameStatus.OVER, null);
 
         assertTrue(game.isGameOver());
 
@@ -124,6 +127,7 @@ public class GetGameRouteTest {
         when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
         when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+        when(session.attribute(GetGameRoute.VIEW_MODE)).thenReturn(MasterEnum.ViewMode.PLAY);
 
         board.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 4);
         p.assignPos(board, MasterEnum.Color.WHITE);
@@ -149,6 +153,7 @@ public class GetGameRouteTest {
         when(session.attribute(GetGameRoute.BOARD_VIEW_KEY)).thenReturn(boardView);
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
         when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
+        when(session.attribute(GetGameRoute.VIEW_MODE)).thenReturn(MasterEnum.ViewMode.PLAY);
 
         board.addPiece(new Pawn(MasterEnum.Color.WHITE), 4, 4);
         p.assignPos(board, MasterEnum.Color.WHITE);
