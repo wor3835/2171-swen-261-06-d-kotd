@@ -350,6 +350,11 @@ public class Board {
             inverseMove(move.getMove(), p);
     }
 
+    /**
+     * undoes the last move (used in replay mode ONLY)
+     * @param move - the move to be undone
+     * @param inversed - whether this is the player's or their opponent's move
+     */
     public void undoMove(Move move, boolean inversed){
         //if there are move moves, loop again
         if(move.getMove() != null )
