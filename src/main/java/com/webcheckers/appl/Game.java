@@ -37,6 +37,8 @@ public class Game {
     //A list move moves that houses all the moves in a game
     private List<Move> movesList = new ArrayList<>();
 
+    private String resigner;
+
     private boolean gameOver;
 
     private String winner;
@@ -96,10 +98,6 @@ public class Game {
         spectators.remove(p);
     }
 
-    public boolean spectating(Player p){
-        return spectators.contains(p);
-    }
-
     /**
      * Switch the active color of the game
      */
@@ -127,13 +125,14 @@ public class Game {
         status = MasterEnum.GameStatus.OVER;
     }
 
-    public void endGame(MasterEnum.GameStatus status){
+    public void endGame(MasterEnum.GameStatus status, String name){
         p1.leaveGame();
         p2.leaveGame();
         b1 = null;
         b2 = null;
         gameOver = true;
         this.status = status;
+        this.resigner = name;
     }
 
     /**
@@ -222,6 +221,8 @@ public class Game {
      * returns the gamestatus
      */
     public MasterEnum.GameStatus getStatus(){return status;}
+
+    public String getResigner(){return resigner;}
 
     /**
      * compares two players

@@ -66,7 +66,7 @@ public class GetSignOutRoute implements Route {
         Player player = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
         if(player.isInGame()){
             Game game = gameLobby.inGame(player);
-            game.endGame(MasterEnum.GameStatus.SIGNOUT);
+            game.endGame(MasterEnum.GameStatus.SIGNOUT, player.getName());
         }
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);

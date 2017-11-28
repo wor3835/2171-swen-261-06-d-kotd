@@ -29,7 +29,6 @@ public class GetEndGameRoute implements Route{
     private static final Logger LOG = Logger.getLogger(GetEndGameRoute.class.getName());
 
     static final String WINNER_ATTR = "winner";
-    static final String RESIGN_GUY_ATTR = "resigner";
     static final String VIEW_NAME = "endgame.ftl";
 
     static final String WIN_MSG = "CONGRATULATIONS %s \n\n YOU WIN";
@@ -58,8 +57,9 @@ public class GetEndGameRoute implements Route{
 
         Session session = request.session();
         String name = session.attribute(WINNER_ATTR);
-        String resigner = session.attribute(RESIGN_GUY_ATTR);
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
+        String resigner = game.getResigner();
+
         game.setWinner(session.attribute(WINNER_ATTR));
         gameLobby.removeGame(game);
 

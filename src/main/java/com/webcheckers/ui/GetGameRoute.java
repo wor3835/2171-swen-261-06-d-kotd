@@ -89,7 +89,7 @@ public class GetGameRoute implements Route {
                 return null;
             }
         } else if (game.getStatus() != null) {
-            if (game.spectating(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR))) {
+            if (httpSession.attribute(VIEW_MODE)==MasterEnum.ViewMode.SPECTATOR) {
                 game.removeSpecator(httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
                 response.redirect(WebServer.HOME_URL);
                 halt();
@@ -98,12 +98,10 @@ public class GetGameRoute implements Route {
 
             String winner;
             if (game.getStatus() == MasterEnum.GameStatus.RESIGN || game.getStatus() == MasterEnum.GameStatus.SIGNOUT) {
-                if (httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR) == null) {
-                    String name = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
-                    httpSession.attribute(GetEndGameRoute.RESIGN_GUY_ATTR, name);
-                    winner = ((Player) httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
+                if(((Player)httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName().equals(game.getResigner())){
+                    winner = ((Player)httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
                 } else
-                    winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
+                    winner = ((Player)httpSession.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName();
             } else {
                 winner = ((Player) httpSession.attribute(GetGameRoute.OPPONENT_ATTR)).getName();
             }

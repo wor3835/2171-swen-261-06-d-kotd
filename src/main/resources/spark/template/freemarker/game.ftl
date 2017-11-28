@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+  <#if (currentPlayer.getName()==redPlayer.getName() && activeColor == "WHITE") ||
+        (currentPlayer.getName()==whitePlayer.getName() && activeColor == "RED")>
+        <meta http-equiv="refresh" content="20">
+  </#if>
   <title>${title} | Web Checkers</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/game.css">
