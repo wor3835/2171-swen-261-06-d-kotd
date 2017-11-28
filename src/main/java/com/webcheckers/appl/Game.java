@@ -126,7 +126,7 @@ public class Game {
      * ends the game by making each player leave
      */
     public void endGame(MasterEnum.GameStatus status, String name){
-        if(status!= MasterEnum.GameStatus.PLAYING)
+        if(this.status!= MasterEnum.GameStatus.PLAYING)
             throw new RuntimeException("Game already over");
         //Forces players to leave game
         p1.leaveGame();

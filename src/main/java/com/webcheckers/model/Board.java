@@ -163,23 +163,24 @@ public class Board {
      * @param start - the position jump moves are being found for
      * @param color -
      * @param piece - the color of the piece at the provided position
-     * @param prev - all previously found jump moves for the provided position
+     * @param p - all previously found jump moves for the provided position
      * @return a list of valid jump moves for the provided position
      */
     private ArrayList<Move> validJumps(Position start, MasterEnum.Color color, Piece piece,
-                                      ArrayList<Position> prev) {
+                                      ArrayList<Position> p) {
 
         int row = start.getRow();
         int col = start.getCol();
 
         ArrayList<Move> moves = new ArrayList<>();
+        ArrayList<Position> prev = new ArrayList<>();
+        prev.addAll(p);
 
         if (row - 1 >= 0 && col + 1 < BoardView.BOARD_LENGTH) {
             if (hasPiece(row - 1, col + 1) &&
                     (row - 2 >= 0 && col + 2 < BoardView.BOARD_LENGTH && !(hasPiece(row - 2, col + 2)))) {
                 if(getPieceAt(row-1, col+1).getColor() != color) {
                     Position pos = new Position(row-2, col+2);
-                    int size = prev.size();
                     if(!prev.contains(pos)) {
                         prev.add(pos);
                         for (Move m : validJumps(pos, color, piece, prev)) {
@@ -188,8 +189,6 @@ public class Board {
                         }
                     }
                     moves.add(new Move(start, pos));
-                    while(prev.size()!=size)
-                        prev.remove(prev.size()-1);
                 }
 
 
@@ -200,7 +199,6 @@ public class Board {
                     && (row - 2 >= 0 && col - 2 >= 0 && !(hasPiece(row - 2, col - 2)))) {
                 if(getPieceAt(row-1, col-1).getColor() != color) {
                     Position pos = new Position(row-2, col-2);
-                    int size = prev.size();
                     if(!prev.contains(pos)) {
                         prev.add(pos);
                         for (Move m : validJumps(pos, color, piece, prev)) {
@@ -209,8 +207,6 @@ public class Board {
                         }
                     }
                     moves.add(new Move(start, pos));
-                    while(prev.size()!=size)
-                        prev.remove(prev.size()-1);
                 }
             }
         }
@@ -220,7 +216,6 @@ public class Board {
                         (row + 2 < BoardView.BOARD_LENGTH && col + 2 < BoardView.BOARD_LENGTH && !(hasPiece(row + 2, col + 2)))) {
                     if(getPieceAt(row+1, col+1).getColor() != color) {
                         Position pos = new Position(row+2, col+2);
-                        int size = prev.size();
                         if(!prev.contains(pos)) {
                             prev.add(pos);
                             for (Move m : validJumps(pos, color, piece, prev)) {
@@ -229,8 +224,6 @@ public class Board {
                             }
                         }
                         moves.add(new Move(start, pos));
-                        while(prev.size()!=size)
-                            prev.remove(prev.size()-1);
                     }
                 }
             }
@@ -239,7 +232,6 @@ public class Board {
                         (row + 2 < BoardView.BOARD_LENGTH && col - 2 >= 0 && !(hasPiece(row + 2, col - 2)))) {
                     if(getPieceAt(row+1, col-1).getColor() != color) {
                         Position pos = new Position(row+2, col-2);
-                        int size = prev.size();
                         if(!prev.contains(pos)) {
                             prev.add(pos);
                             for (Move m : validJumps(pos, color, piece, prev)) {
@@ -248,8 +240,6 @@ public class Board {
                             }
                         }
                         moves.add(new Move(start, pos));
-                        while(prev.size()!=size)
-                            prev.remove(prev.size()-1);
                     }
                 }
             }
