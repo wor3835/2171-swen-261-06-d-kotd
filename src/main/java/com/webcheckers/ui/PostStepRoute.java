@@ -24,6 +24,7 @@ public class PostStepRoute implements Route {
         int currentIdx = session.attribute(PostReplayRoute.CURRENT_IDX_ATTR);
         currentIdx++;
         if(game.movesListSize()==currentIdx){
+            session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, currentIdx);
             Message msg = new Message("No Moves left", MasterEnum.MessageType.info);
             Gson gson = new Gson();
             return gson.toJson(msg);
@@ -38,6 +39,7 @@ public class PostStepRoute implements Route {
         else
             b.makeMove(move, null);
 
+        session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, currentIdx);
         Message msg = new Message("Success", MasterEnum.MessageType.info);
 
         Gson gson = new Gson();

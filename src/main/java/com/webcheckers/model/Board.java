@@ -358,6 +358,10 @@ public class Board {
     }
 
     public void undoMove(Move move, boolean inversed){
+        //if there are move moves, loop again
+        if(move.getMove() != null )
+            undoMove(move.getMove(), inversed);
+
         //Set everything to easy to use variables
         Position start = move.getStart();
         Position end = move.getEnd();
@@ -400,11 +404,6 @@ public class Board {
 
         //Change the start space to empty
         board[startRow][startCol] = new Space(startCol, true, null);
-
-
-        //if there are move moves, loop again
-        if(move.getMove() != null )
-            undoMove(move.getMove(), inversed);
     }
 
     /**

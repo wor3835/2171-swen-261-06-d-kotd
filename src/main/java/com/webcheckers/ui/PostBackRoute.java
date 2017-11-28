@@ -43,6 +43,8 @@ public class PostBackRoute implements Route {
         else
             b.undoMove(move, false);
 
+        currentIdx--;
+        session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, currentIdx);
 
         Message msg = new Message("Success", MasterEnum.MessageType.info);
 
