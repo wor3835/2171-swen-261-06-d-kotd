@@ -69,5 +69,7 @@ public class PostSpectateRouteTest {
         when(game.getP1()).thenReturn(new Player("opponent"));
 
         CuT.handle(request, response);
+
+        assertEquals(0, game.getSpectators().size());
     }
 }

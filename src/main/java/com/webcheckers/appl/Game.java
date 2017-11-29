@@ -241,4 +241,8 @@ public class Game {
         }
         return false;
     }
+
+    public List<Player> getSpectators(){
+        return spectators;
+    }
 }
