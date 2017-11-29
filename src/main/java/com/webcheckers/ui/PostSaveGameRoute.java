@@ -39,6 +39,7 @@ public class PostSaveGameRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         final String name = request.queryParams(NAME);
         Session session = request.session();
+        session.attribute("error", "");
 
         Player currentPlayer = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
         Game game = session.attribute(GetGameRoute.GAME_ATTR);

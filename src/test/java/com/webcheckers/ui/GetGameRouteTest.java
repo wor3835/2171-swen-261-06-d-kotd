@@ -87,6 +87,7 @@ public class GetGameRouteTest {
 
         assertNull(CuT.handle(request, response));
 
+        //assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
         assertEquals(session.attribute(GetEndGameRoute.WINNER_ATTR), p.getName());
         final Object model = myModelView.model;
         assertNull(model);
@@ -106,6 +107,7 @@ public class GetGameRouteTest {
         when(session.attribute(GetGameRoute.OPPONENT_ATTR)).thenReturn(o);
 
         game.applyGame(p, o);
+        //game.endGame();
         game.endGame(MasterEnum.GameStatus.OVER, null);
 
         assertTrue(game.isGameOver());

@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import static com.webcheckers.ui.PostStartRoute.OPPONENT_ATTR;
 import static com.webcheckers.ui.PostStartRoute.VALIDATED;
 
 /**
@@ -74,8 +75,16 @@ public class GetEndGameRoute implements Route {
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
         String resigner = game.getResigner();
 
-        if (game.getWinner() == null)
-            game.setWinner(session.attribute(WINNER_ATTR));
+        Player player = session.attribute(GetHomeRoute.CUR_PLAYER_ATTR);
+        if (game.getWinner() == null) {
+            if(resigner!=null) {
+                if (player.getName().equals(resigner)) {
+                    game.setWinner(((Player) session.attribute(OPPONENT_ATTR)).getName());
+                } else
+                    game.setWinner(player.getName());
+            }else
+                game.setWinner(name);
+        }
 
         gameLobby.removeGame(game);
 
@@ -86,6 +95,7 @@ public class GetEndGameRoute implements Route {
         session.attribute(GetGameRoute.ACTIVE_COLOR, null);
         session.attribute(GetGameRoute.VIEW_MODE, null);
         session.attribute(PostStartRoute.VALIDATED, null);
+        session.attribute(WINNER_ATTR, null);
 
         if (resigner != null) {
             if (resigner.equals(((Player) session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).getName()))

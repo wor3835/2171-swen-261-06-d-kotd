@@ -45,6 +45,11 @@ public class PostBackRoute implements Route {
             return gson.toJson(msg);
         }
 
+        if(session.attribute(GetGameRoute.ACTIVE_COLOR)== MasterEnum.Color.RED){
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
+        }else
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
+
         Move move = game.getMove(currentIdx);
 
         Board b = game.getB();

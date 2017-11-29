@@ -34,6 +34,12 @@ public class PostStepRoute implements Route {
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
 
+        if(session.attribute(GetGameRoute.ACTIVE_COLOR)== MasterEnum.Color.RED){
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
+        }else
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
+
+
         int currentIdx = session.attribute(PostReplayRoute.CURRENT_IDX_ATTR);
         currentIdx++;
         if(game.movesListSize()==currentIdx){
