@@ -1,6 +1,3 @@
----
-geometry: margin=1in
----
 # PROJECT Design Documentation
 
 
