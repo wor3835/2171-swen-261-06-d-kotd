@@ -21,6 +21,17 @@ import static spark.Spark.halt;
 public class PostCheckTurnRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostCheckTurnRoute.class.getName());
 
+    /**
+     * Checks if it is this player's turn in the current game
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   A message of type info, true if it is this player's turn, false otherwise
+     */
     @Override
     public Object handle(Request request, Response response) {
         Session session = request.session();

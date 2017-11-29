@@ -35,9 +35,12 @@ public class GetSignOutRoute implements Route {
     static final String VIEW_NAME = "signin.ftl";
 
     /**
-     * Creates the route
-     * @param templateEngine
-     * @param playerLobby
+     * Create the Spark Route (UI controller) for the
+     * {@code GET /} HTTP request.
+     *
+     * @param templateEngine the HTML template rendering engine
+     * @param playerLobby the WebCheckers player lobby
+     * @param gameLobby the WebCheckers game lobby
      */
     public GetSignOutRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
         // validation
@@ -52,11 +55,11 @@ public class GetSignOutRoute implements Route {
     }
 
     /**
-     * Render the WebCheckers SignIn page.
+     * Signs the player out of WebCheckers
      *
      * @param request  the HTTP request
      * @param response the HTTP response
-     * @return the rendered HTML for the Home page
+     * @return nothing, the player is redirected to the home screen
      */
     @Override
     public Object handle(Request request, Response response) {

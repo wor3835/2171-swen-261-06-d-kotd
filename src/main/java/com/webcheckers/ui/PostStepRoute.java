@@ -16,11 +16,29 @@ import spark.Session;
  * @author <a href='mailto:ajn3687@rit.edu'>Arthur Nagashima</a>
  */
 public class PostStepRoute implements Route {
+
+    /**
+     * If possible, steps forward a move in replay mode
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   a message of type info, "No moves left" if there are no more moves to step forward to, or "Success" if the step was successful
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
+
+        if(session.attribute(GetGameRoute.ACTIVE_COLOR)== MasterEnum.Color.RED){
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
+        }else
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
+
 
         int currentIdx = session.attribute(PostReplayRoute.CURRENT_IDX_ATTR);
         currentIdx++;

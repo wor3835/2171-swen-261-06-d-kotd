@@ -14,6 +14,18 @@ import spark.Session;
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class PostCheckChangeRoute implements Route {
+
+    /**
+     * Checks if the game that is being spectated has changed active colors
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   A message of type info, false if there has not been a change, true if there has been a change
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();

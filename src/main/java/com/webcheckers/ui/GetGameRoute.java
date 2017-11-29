@@ -54,6 +54,8 @@ public class GetGameRoute implements Route {
      * {@code GET /} HTTP request.
      *
      * @param templateEngine the HTML template rendering engine
+     * @param playerLobby the WebCheckers player lobby
+     * @param gameLobby the WebCheckers game lobby
      */
     public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
         // validation
@@ -67,11 +69,11 @@ public class GetGameRoute implements Route {
     }
 
     /**
-     * Render the WebCheckers Home page.
+     * Render the WebCheckers Game page.
      *
      * @param request  the HTTP request
      * @param response the HTTP response
-     * @return the rendered HTML for the Home page
+     * @return the rendered HTML for the Game page
      */
     @Override
     public Object handle(Request request, Response response) {

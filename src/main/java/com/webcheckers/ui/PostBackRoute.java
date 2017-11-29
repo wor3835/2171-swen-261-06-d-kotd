@@ -18,11 +18,21 @@ import spark.Session;
  */
 public class PostBackRoute implements Route {
 
+
+    /**
+     * If possible, backs up a move in replay mode
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   A message of type error if the move cannot be backed up, of type info if the backup was a success
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();
-
-
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
 
@@ -34,6 +44,11 @@ public class PostBackRoute implements Route {
             Gson gson = new Gson();
             return gson.toJson(msg);
         }
+
+        if(session.attribute(GetGameRoute.ACTIVE_COLOR)== MasterEnum.Color.RED){
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.WHITE);
+        }else
+            session.attribute(GetGameRoute.ACTIVE_COLOR, MasterEnum.Color.RED);
 
         Move move = game.getMove(currentIdx);
 

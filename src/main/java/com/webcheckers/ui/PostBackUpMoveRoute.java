@@ -16,6 +16,17 @@ import static com.webcheckers.ui.PostStartRoute.VALIDATED;
  */
 public class PostBackUpMoveRoute implements Route {
 
+    /**
+     * If possible, undoes a player's last move (before they submit it)
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   A message of type error if the move could not be undone, or of type info if the backup was a success
+     */
     @Override
     public Object handle(Request request, Response response) {
         Gson gson = new Gson();

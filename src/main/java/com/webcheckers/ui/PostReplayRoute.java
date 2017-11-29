@@ -21,6 +21,17 @@ public class PostReplayRoute implements Route {
 
     public final static String CURRENT_IDX_ATTR = "currentIdx";
 
+    /**
+     * Brings the player to a game page where they can view a replay of a previous game
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   the rendered HTML for the Game page
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();

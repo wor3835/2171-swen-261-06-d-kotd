@@ -46,8 +46,9 @@ public class GetHomeRoute implements Route {
    * Create the Spark Route (UI controller) for the
    * {@code GET /} HTTP request.
    *
-   * @param templateEngine
-   *   the HTML template rendering engine
+   * @param templateEngine the HTML template rendering engine
+   * @param playerLobby the WebCheckers player lobby
+   * @param gameLobby the WebCheckers game lobby
    */
   public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby, GameLobby gameLobby) {
     // validation
