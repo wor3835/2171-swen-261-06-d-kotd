@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.google.gson.Gson;
 import com.webcheckers.appl.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,39 +45,48 @@ public class PostCheckChangeRouteTest {
     }
 
     @Test
-    public void back_up_available() {
+    public void change_not_available() {
         final Response response = mock(Response.class);
         final MyModelAndView myModelView = new MyModelAndView();
         when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-        Game g = new Game();
+        Game g = mock(Game.class);
         gameLobby.addGame(g);
 
-        session.attribute(GetGameRoute.GAME_ATTR, gameLobby.getGamesList().get(0));
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(g);
+        when(g.getActiveColor()).thenReturn(MasterEnum.Color.RED);
 
         when(session.attribute(GetGameRoute.ACTIVE_COLOR)).thenReturn(MasterEnum.Color.RED);
 
 
         CuT.handle(request, response);
         assertNotNull(CuT.handle(request, response));
-        assertEquals(new Message("true", MasterEnum.MessageType.info), CuT.handle(request,response));
+        Gson gson = new Gson();
+        Message msg = new Message("false", MasterEnum.MessageType.info);
+        assertEquals(gson.toJson(msg), CuT.handle(request,response));
     }
 
     @Test
-    public void back_up_not_available() {
+    public void change_available() {
         final Response response = mock(Response.class);
         final MyModelAndView myModelView = new MyModelAndView();
         when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-        Game g = new Game();
+        Game g = mock(Game.class);
         gameLobby.addGame(g);
 
-        session.attribute(GetGameRoute.GAME_ATTR, gameLobby.getGamesList().get(0));
+        when(g.getActiveColor()).thenReturn(MasterEnum.Color.RED);
+
+        when(session.attribute(GetGameRoute.ACTIVE_COLOR)).thenReturn(MasterEnum.Color.WHITE);
+
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(g);
 
         //when(session.attribute(GetGameRoute.ACTIVE_COLOR)).thenReturn(MasterEnum.Color.RED);
 
         CuT.handle(request, response);
         assertNotNull(CuT.handle(request, response));
-        assertEquals(new Message("false", MasterEnum.MessageType.info), CuT.handle(request, response));
+        Gson gson = new Gson();
+        Message msg = new Message("true", MasterEnum.MessageType.info);
+        assertEquals(gson.toJson(msg), CuT.handle(request, response));
     }
 }
