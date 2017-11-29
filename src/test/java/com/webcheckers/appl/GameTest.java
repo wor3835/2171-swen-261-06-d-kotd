@@ -147,7 +147,7 @@ public class GameTest {
         assertEquals(MasterEnum.Color.RED, CuT.getActiveColor());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     /**
      * tests to make sure games actually end
      */
@@ -159,11 +159,12 @@ public class GameTest {
 
         assertNotNull(player1.getGame());
         assertNotNull(player2.getGame());
-
+        
         CuT.endGame(MasterEnum.GameStatus.OVER, null);
 
         assertTrue(CuT.getResigner()==null);
         assertTrue(CuT.getStatus()==MasterEnum.GameStatus.OVER);
+
 
         //assertNull(player1.getGame());
         //assertNull(player2.getGame());
