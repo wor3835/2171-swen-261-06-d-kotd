@@ -53,11 +53,21 @@ public class PostSpectateRouteTest {
     public  void handling(){
         Game game = mock(Game.class);
         when(request.session()).thenReturn(session);
-        playerLobby.add(new Player("opponent"));
-        game.applyGame(new Player("opponent"), new Player("p2"));
-        when(request.queryParams(PostStartRoute.OPPONENT_ATTR)).thenReturn("opponent");
-        when(gameLobby.inGame(new Player("jim"))).thenReturn(game);
+
+        Player watching = new Player("watching");
+        Player not = new Player("notwatching");
+
+        when(game.getP1()).thenReturn(watching);
+        when(game.getP2()).thenReturn(not);
+
+        when(request.queryParams(PostStartRoute.OPPONENT_ATTR)).thenReturn("watching");
+
+        when(playerLobby.pullByName("watching")).thenReturn(watching);
+
+        when(gameLobby.inGame(watching)).thenReturn(game);
+
         when(game.getP1()).thenReturn(new Player("opponent"));
+
         CuT.handle(request, response);
     }
 }
