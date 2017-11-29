@@ -115,6 +115,17 @@ public class GameTest {
 
     @Test
     /**
+     * Setting a single board
+     */
+    public void setBoard(){
+        Board b1 = new Board();
+        CuT.applyBoard(b1);
+
+        assertNotNull(CuT.getB());
+    }
+
+    @Test
+    /**
      * Makes sure you can choose the active color
      */
     public void activeColor() {
@@ -149,15 +160,48 @@ public class GameTest {
         assertNotNull(player1.getGame());
         assertNotNull(player2.getGame());
 
-        CuT.endGame(MasterEnum.GameStatus.OVER, "over");
-
         CuT.endGame(MasterEnum.GameStatus.OVER, null);
 
+        assertTrue(CuT.getResigner()==null);
+        assertTrue(CuT.getStatus()==MasterEnum.GameStatus.OVER);
 
         //assertNull(player1.getGame());
         //assertNull(player2.getGame());
 
         assertTrue(CuT.isGameOver());
+    }
+
+    @Test (expected = RuntimeException.class)
+    /**
+     * Test to see if game throws exception when ending and ended game
+     */
+    public void endEndedGame(){
+        CuT.endGame(MasterEnum.GameStatus.OVER, null);
+        assertTrue(CuT.isGameOver());
+        CuT.endGame(MasterEnum.GameStatus.OVER, null);
+    }
+
+    @Test (expected = RuntimeException.class)
+    /**
+     * Test winner setting/getting
+     */
+    public void testWinner(){
+        String winner = "winner";
+        CuT.setWinner(winner);
+        assertEquals(CuT.getWinner(), winner);
+        CuT.setWinner(winner);
+    }
+
+    @Test
+    /**
+     * Test to see spectator functionality
+     */
+    public void spectator(){
+        final Player spec = new Player("spec");
+
+        CuT.addSpectator(spec);
+
+        assertTrue(CuT.removeSpecator(spec));
     }
 
     @Test

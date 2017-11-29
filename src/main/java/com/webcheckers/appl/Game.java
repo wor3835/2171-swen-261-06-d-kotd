@@ -104,8 +104,8 @@ public class Game {
      * Removes a spectator from the game
      * @param p The player to be removed
      */
-    public void removeSpecator(Player p){
-        spectators.remove(p);
+    public boolean removeSpecator(Player p){
+        return spectators.remove(p);
     }
 
     /**
