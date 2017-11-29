@@ -29,7 +29,7 @@ public class PostStepRoute implements Route {
      *   a message of type info, "No moves left" if there are no more moves to step forward to, or "Success" if the step was successful
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response){
         Session session = request.session();
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);

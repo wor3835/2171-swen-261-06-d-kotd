@@ -33,7 +33,7 @@ public class PostReplayRoute implements Route {
      *   the rendered HTML for the Game page
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response) {
         Session session = request.session();
 
         String name = request.queryParams(PostSaveGameRoute.SAVEGAME_ATTR);
