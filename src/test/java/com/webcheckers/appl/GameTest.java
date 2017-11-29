@@ -65,10 +65,7 @@ public class GameTest {
         assertTrue(CuT.getP2().getName().equals(player2.getName()));
 
         // makes sure moves list is empty
-<<<<<<< HEAD
-=======
         assertEquals(0, CuT.movesListSize());
->>>>>>> 0d4df163ffb315bd645cd538e137e667c14ab0a8
 
         // makes sure boards are empty
         assertNull(CuT.getB1());
@@ -112,10 +109,8 @@ public class GameTest {
 
         // make a move
         CuT.addMove(new Move(new Position(0,0), new Position(1, 2)));
-<<<<<<< HEAD
-=======
+
         assertNotNull(CuT.getMove(CuT.movesListSize()-1));
->>>>>>> 0d4df163ffb315bd645cd538e137e667c14ab0a8
     }
 
     @Test
@@ -141,7 +136,7 @@ public class GameTest {
         assertEquals(MasterEnum.Color.RED, CuT.getActiveColor());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     /**
      * tests to make sure games actually end
      */
@@ -154,11 +149,9 @@ public class GameTest {
         assertNotNull(player1.getGame());
         assertNotNull(player2.getGame());
 
-<<<<<<< HEAD
         CuT.endGame(MasterEnum.GameStatus.OVER, "over");
-=======
+
         CuT.endGame(MasterEnum.GameStatus.OVER, null);
->>>>>>> 0d4df163ffb315bd645cd538e137e667c14ab0a8
 
         //assertNull(player1.getGame());
         //assertNull(player2.getGame());
