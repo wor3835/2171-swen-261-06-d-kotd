@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameLobby;
-import com.webcheckers.appl.GameLobbyTest;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import org.junit.Before;

@@ -36,7 +36,7 @@ public class PostSaveGameRoute implements Route {
      *   redirects the player to the home screen
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response){
         final String name = request.queryParams(NAME);
         Session session = request.session();
         session.attribute("error", "");

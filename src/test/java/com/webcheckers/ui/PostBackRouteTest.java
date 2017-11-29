@@ -3,8 +3,12 @@ package com.webcheckers.ui;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
+import com.google.gson.Gson;
+import com.webcheckers.appl.*;
+import com.webcheckers.model.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import spark.*;
 
 import java.util.Map;
@@ -53,7 +57,7 @@ public class PostBackRouteTest {
         final Response response = mock(Response.class);
         final MyModelAndView myModelView = new MyModelAndView();
         when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
-
+        when(session.attribute(PostReplayRoute.CURRENT_IDX_ATTR)).thenReturn(-2);
         Game g = new Game();
         gameLobby.addGame(g);
 
@@ -63,5 +67,37 @@ public class PostBackRouteTest {
         session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, idx);
 
         CuT.handle(request, response);
+        assertNotNull(CuT.handle(request, response));
+    }
+
+    @Test
+    public void normal_backup(){
+        final Response response = mock(Response.class);
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
+        when(session.attribute(GetGameRoute.ACTIVE_COLOR)).thenReturn(MasterEnum.Color.RED);
+
+
+        Game game = mock(Game.class);
+        when(session.attribute(GetGameRoute.GAME_ATTR)).thenReturn(game);
+        Board b = new Board();
+        when(game.getB()).thenReturn(b);
+
+        int num = 4;
+
+        Position start = new Position(0,0);
+        Position end = new Position(1,1);
+        Move move = new Move(start,end);
+        when(game.getMove(num)).thenReturn(move);
+
+        Player p1 = new Player("one");
+        Player p2 = new Player("two");
+
+        when(game.getP1()).thenReturn(p1);
+        when(game.getP2()).thenReturn(p2);
+
+        when(session.attribute(PostReplayRoute.CURRENT_IDX_ATTR)).thenReturn(num);
+        assertNotNull(CuT.handle(request, response));
+        assertEquals(session.attribute(GetGameRoute.ACTIVE_COLOR), MasterEnum.Color.RED);
     }
 }

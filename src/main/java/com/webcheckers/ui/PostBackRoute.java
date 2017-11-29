@@ -31,7 +31,7 @@ public class PostBackRoute implements Route {
      *   A message of type error if the move cannot be backed up, of type info if the backup was a success
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response){
         Session session = request.session();
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);
