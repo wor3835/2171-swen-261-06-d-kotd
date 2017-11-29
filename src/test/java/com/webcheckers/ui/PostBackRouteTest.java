@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameLobby;
 import com.webcheckers.appl.PlayerLobby;
 import org.junit.Before;
@@ -48,16 +49,19 @@ public class PostBackRouteTest {
     }
 
     @Test
-    public void index_error_test() {
+    public void index_error_test() throws Exception {
         final Response response = mock(Response.class);
         final MyModelAndView myModelView = new MyModelAndView();
         when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-        session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, -2);
-        try {
-            CuT.handle(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Game g = new Game();
+        gameLobby.addGame(g);
+
+        int idx = -2;
+
+        session.attribute(GetGameRoute.GAME_ATTR, gameLobby.getGamesList().get(0));
+        session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, idx);
+
+        CuT.handle(request, response);
     }
 }
