@@ -74,7 +74,7 @@ public class PostSpectateRoute implements Route {
         game.addSpectator(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR));
 
         response.redirect(WebServer.GAME_URL);
-        halt();
+        //halt();
         return null;
     }
 }
