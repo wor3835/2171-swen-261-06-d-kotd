@@ -27,7 +27,7 @@ public class PostCheckChangeRoute implements Route {
      *   A message of type info, false if there has not been a change, true if there has been a change
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response){
         Session session = request.session();
 
         Game game = session.attribute(GetGameRoute.GAME_ATTR);

@@ -45,7 +45,7 @@ public class PostValidateMoveRoute implements Route {
      *   a message of type error if the move is invalid, or of type info if the move is valid
      */
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response){
         String body = request.body();
         Gson g = new Gson();
         Move move = g.fromJson(body, Move.class);
