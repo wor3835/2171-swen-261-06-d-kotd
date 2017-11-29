@@ -147,7 +147,7 @@ public class GameTest {
         assertEquals(MasterEnum.Color.RED, CuT.getActiveColor());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     /**
      * tests to make sure games actually end
      */
