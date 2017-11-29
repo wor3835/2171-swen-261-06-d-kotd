@@ -40,7 +40,13 @@ public class GetEndGameRoute implements Route {
 
     static final String GAME_OVER_ATTR = "message";
 
-
+    /**
+     * Create the Spark Route (UI controller) for the
+     * {@code GET /} HTTP request.
+     *
+     * @param templateEngine the HTML template rendering engine
+     * @param gameLobby the WebCheckers game lobby
+     */
     public GetEndGameRoute(final TemplateEngine templateEngine, GameLobby gameLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -51,6 +57,13 @@ public class GetEndGameRoute implements Route {
         LOG.config("GetEndGameRoute is initialized.");
     }
 
+    /**
+     * Render the WebCheckers endGame page.
+     *
+     * @param request  the HTTP request
+     * @param response the HTTP response
+     * @return the rendered HTML for the endGame page
+     */
     @Override
     public Object handle(Request request, Response response) {
         Map<String, Object> vm = new HashMap<>();

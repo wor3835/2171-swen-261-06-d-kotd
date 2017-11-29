@@ -33,6 +33,17 @@ public class PostResignRoute implements Route{
 
     public PostResignRoute(GameLobby gameLobby){this.gameLobby = gameLobby;}
 
+    /**
+     * Resigns this player from the current game, ending the game
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   A message of type error if the game does not exist, or of type info if the game was resigned from successfully
+     */
     public Object handle(Request request, Response response) {
         //Get the current HttpSession
         Session session = request.session();

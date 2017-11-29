@@ -30,6 +30,18 @@ public class PostSpectateRoute implements Route {
         this.playerLobby = playerLobby;
     }
 
+    /**
+     * Sends the player to the game they wish to spectate
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   the rendered HTML for the desired Game page, from the perspective of the player they chose to spectate
+     */
+    @Override
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();
         String name = request.queryParams(PostStartRoute.OPPONENT_ATTR);

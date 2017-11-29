@@ -13,6 +13,18 @@ import static spark.Spark.halt;
  * @author <a href='mailto:rwk8144@rit.edu'>Robert Kurdziel</a>
  */
 public class PostDeleteRoute implements Route {
+
+    /**
+     * Deletes the saved game from the player's stat page
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   doesn't need to return anything
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Session session = request.session();

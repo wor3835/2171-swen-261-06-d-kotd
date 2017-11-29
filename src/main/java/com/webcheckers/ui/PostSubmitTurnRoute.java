@@ -23,6 +23,17 @@ import static spark.Spark.halt;
  */
 public class PostSubmitTurnRoute implements Route {
 
+    /**
+     * Submits the move to the server
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   a message of type error if there is no move to submit, or info if the game has ended/the move was a success
+     */
     @Override
     public Object handle(Request request, Response response) {
         //Get the current HttpSession

@@ -60,11 +60,15 @@ public class PostStartRoute implements Route {
     }
 
     /**
-     * Handles the route request and response
+     * Sets up everything for a game to be started, if both players are available to start one
+     *
      * @param request
+     *   the HTTP request
      * @param response
+     *   the HTTP response
+     *
      * @return
-     * @throws Exception
+     *   redirects to Game page if the start was successful, redirects to home if not
      */
     public Object handle(Request request, Response response) {
         final Session httpSession = request.session();

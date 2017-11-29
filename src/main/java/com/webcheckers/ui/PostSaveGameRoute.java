@@ -24,6 +24,17 @@ public class PostSaveGameRoute implements Route {
         this.templateEngine = templateEngine;
     }
 
+    /**
+     * Saves the game to be available to replay in the stats page
+     *
+     * @param request
+     *   the HTTP request
+     * @param response
+     *   the HTTP response
+     *
+     * @return
+     *   redirects the player to the home screen
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         final String name = request.queryParams(NAME);

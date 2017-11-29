@@ -50,7 +50,7 @@ public class PostSignInRoute implements Route {
     }
 
     /**
-     * Render the WebCheckers SignIn page.
+     * Posts the player's chosen name to the server to get added to the lobby
      *
      * @param request
      *   the HTTP request
@@ -58,7 +58,7 @@ public class PostSignInRoute implements Route {
      *   the HTTP response
      *
      * @return
-     *   the rendered HTML for the Home page
+     *   the rendered HTML for the SignIn page if sign in failed, rediects to home page if successful
      */
     @Override
     public Object handle(Request request, Response response) {

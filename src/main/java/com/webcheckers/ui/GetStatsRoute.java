@@ -51,7 +51,7 @@ public class GetStatsRoute implements Route {
      *   the HTTP response
      *
      * @return
-     *   the rendered HTML for the Home page
+     *   the rendered HTML for the Stats page
      */
     @Override
     public Object handle(Request request, Response response) {
