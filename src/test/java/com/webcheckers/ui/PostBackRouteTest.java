@@ -53,7 +53,9 @@ public class PostBackRouteTest {
         final MyModelAndView myModelView = new MyModelAndView();
         when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-        session.attribute(PostReplayRoute.CURRENT_IDX_ATTR, -2);
+
+
+        when(session.attribute(PostReplayRoute.CURRENT_IDX_ATTR)).thenReturn(-2);
         try {
             CuT.handle(request, response);
         } catch (Exception e) {
