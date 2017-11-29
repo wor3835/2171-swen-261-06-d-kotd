@@ -1,8 +1,7 @@
 package com.webcheckers.ui;
 
-import com.webcheckers.appl.Game;
-import com.webcheckers.appl.GameLobby;
-import com.webcheckers.appl.PlayerLobby;
+import com.google.gson.Gson;
+import com.webcheckers.appl.*;
 import com.webcheckers.model.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +9,7 @@ import spark.*;
 
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -52,16 +49,22 @@ public class PostDeleteRouteTest {
     @Test
     public void delete_game_test() throws Exception {
         final Response response = mock(Response.class);
-        final Request request = mock(Request.class);
+        final MyModelAndView myModelView = new MyModelAndView();
+        when(engine.render(any(ModelAndView.class))).thenAnswer(MyModelAndView.makeAnswer(myModelView));
 
-        Player p = new Player("p");
+        Player p = mock(Player.class);
+        playerLobby.add(p);
 
         when(session.attribute(GetHomeRoute.CUR_PLAYER_ATTR)).thenReturn(p);
 
         String save = "save";
 
-        session.attribute(PostSaveGameRoute.SAVEGAME_ATTR, save);
+        when(session.attribute(PostSaveGameRoute.SAVEGAME_ATTR)).thenReturn(save);
 
-        //CuT.handle(request, response);
+        try {
+            CuT.handle(request, response);
+        } catch (HaltException e) {
+            e.printStackTrace();
+        }
     }
 }
