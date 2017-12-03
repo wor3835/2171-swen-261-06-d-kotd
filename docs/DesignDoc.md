@@ -123,9 +123,9 @@ can make a move. First, there is a POST to validate the move, then there is a PO
 &nbsp;&nbsp;&nbsp;&nbsp;The UI tier allows the player to sign in, play games, make moves, and resign. GET routes handle getting the different
 pages (Home, SignIn, Game). POST routes allow the player to sign in, make moves, backup moves, and resign.
 
-### &nbsp;Tier com.webcheckers.model
+### &nbsp;Tier model
 
-&nbsp;&nbsp;&nbsp;&nbsp;The com.webcheckers.model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object
+&nbsp;&nbsp;&nbsp;&nbsp;The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object
 on them. The King and Pawn classes make sure that the proper move functionality in used.
 
 ### &nbsp;Tier appl
