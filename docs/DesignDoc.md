@@ -103,8 +103,8 @@ to be made and also an inverseMove which allows the move that was made to be bac
 
 ### &nbsp;Summary
 
-&nbsp;&nbsp;&nbsp;&nbsp;The application of the program spans three tiers: appl, com.webcheckers.model, com.webcheckers.ui. Users interact with the UI by moving
-pieces on the board. The application tier holds the logic that allows moves to be valid. The com.webcheckers.model holds the core 
+&nbsp;&nbsp;&nbsp;&nbsp;The application of the program spans three tiers: appl, model, ui. Users interact with the UI by moving
+pieces on the board. The application tier holds the logic that allows moves to be valid. The model holds the core 
 domain, which in this case is the game board, its spaces, and the spaces pieces. 
 
 ![](board.png)
