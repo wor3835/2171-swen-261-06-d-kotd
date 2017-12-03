@@ -43,7 +43,7 @@ Create an online checkers game.
 
 
 ### &nbsp;Definition of MVP
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A game of checkers can be played by the official American rule set between two people
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minimum Viable Product
 
 ### &nbsp;MVP Features
 * Sign-in: Players must be able to sign into the checkers site
