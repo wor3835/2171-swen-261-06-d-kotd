@@ -57,12 +57,22 @@ Create an online checkers game.
 
 ## Application Domain
 
-&nbsp;&nbsp;&nbsp;&nbsp;The application domain has a GameLobby that keeps track of all the games server wide and a PlayerLobby that
+&nbsp;&nbsp;&nbsp;&nbsp;The user interacts with the Client UI. The Client UI is supported by the following frameworks: HTML, 
+CSS, and JavaScript. It runs on any browser and runs on any OS or hardware. Through a network connection, the Client UI communicates
+with the Server UI. The Server UI has a controller and a view template, the later is supported by Spark and FreeMarker. The server communicates
+with the Application tier, which contains a service. The service provides application logic which manages the user's interaction
+with the application. The application tier also provides client-specific services for UI tier. The application runs of the Java platform
+Eclipse Jetty. Lastly, the model contains the entity and a value object. Entity commands include processing user commands, effect changes based on 
+said commands, validate model-tier rules, and maintain the model's state. The value object provides values for entity attributes.
+
+#### move this somewhere else
+The application domain has a GameLobby that keeps track of all the games server wide and a PlayerLobby that
 keeps track of all the players server wide and a Game that keep track of the game and the players playing the
 game. There is also a MasterEnum to keep track of all the enumerations in one place and a Message to give an
 error message or an info message to the player. The Game assigns the players to a specific game and gives them
 an opponent to play against and assigns them their colors. It also holds the moves that each player can use
 and if the game is over or not.
+#### move this somewhere else
 
 ### &nbsp;Overview of Major Domain Areas
 
