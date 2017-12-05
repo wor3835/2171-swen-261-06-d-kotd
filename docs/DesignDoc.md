@@ -12,7 +12,10 @@
 
 ## Executive Summary
 
-This is a summary of the project.
+&nbsp;&nbsp;&nbsp;&nbsp;The application must be a web-based checkers game. The application must allow players to sign in and play checkers with one another. Using his or her browser, the user 
+must play a game by dragging and dropping pieces onto the board. In addition to these features, we want to add the following features: allow users
+ to spectate going games and save matches to watch them later. These additional features are listed in the Roadmap
+ of Enhancements.
 
 ### &nbsp;Purpose
 Create an online checkers game.
