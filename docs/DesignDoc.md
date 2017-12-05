@@ -18,7 +18,7 @@ must play a game by dragging and dropping pieces onto the board. In addition to 
  of Enhancements.
 
 ### &nbsp;Purpose
-Create an online checkers game that users can play in their browsers. The interface should be easy to use
+&nbsp;&nbsp;&nbsp;&nbsp;Create an online checkers game that users can play in their browsers. The interface should be easy to use
 and playing a game should be seamless and simple. Additionally, enhancement features should be added
 to increase user interaction. 
 
@@ -64,55 +64,52 @@ and win games. User story(s): Becoming King (2 point), Player Movement (13 point
 
 ## Application Domain
 
-&nbsp;&nbsp;&nbsp;&nbsp;The user interacts with the Client UI. The Client UI is supported by the following frameworks: HTML, 
-CSS, and JavaScript. It runs on any browser and runs on any OS or hardware. Through a network connection, the Client UI communicates
-with the Server UI. The Server UI has a controller and a view template, the later is supported by Spark and FreeMarker. The server communicates
-with the Application tier, which contains a service. The service provides application logic which manages the user's interaction
-with the application. The application tier also provides client-specific services for UI tier. The application runs of the Java platform
-Eclipse Jetty. Lastly, the model contains the entity and a value object. Entity commands include processing user commands, effect changes based on 
-said commands, validate model-tier rules, and maintain the model's state. The value object provides values for entity attributes.
-
-#### move this somewhere else
-The application domain has a GameLobby that keeps track of all the games server wide and a PlayerLobby that
-keeps track of all the players server wide and a Game that keep track of the game and the players playing the
-game. There is also a MasterEnum to keep track of all the enumerations in one place and a Message to give an
-error message or an info message to the player. The Game assigns the players to a specific game and gives them
-an opponent to play against and assigns them their colors. It also holds the moves that each player can use
-and if the game is over or not.
-#### move this somewhere else
+* The application contains lobby which keeps track of all players. 
+* A player plays a game of checkers. 
+* The applications also contains spectators that can watch games. 
+* All games are contained within a lobby. 
+* Games are played on a board. A game keeps track of all move's the players make. 
+* The board contains the moves that can be made. 
+* Each move contains a position (start and end). 
+* There are spaces located on the board. 
+* Pieces move on these spaces. The two types of pieces are pawns and kings. 
 
 ### &nbsp;Overview of Major Domain Areas
 
-&nbsp;&nbsp;&nbsp;&nbsp;The model has a Board and a BoardView. The Board is of type Space and the BoardView is used to show the Board
-for the current player. Each Space object on the Board can contain a Piece if it is a white Piece. Piece is
-an abstract class; the two types of Pieces are type Pawn and type King. Each Piece has a Position so that we
-can figure out where it is located on the Board and what Space it is in, and it also has an equals function in
-it that allows you to see if two Pieces are at the same Position. Player holds a Position list of all the
-Player's Pieces on the board. The Row holds the Spaces per the size of the Board.
+* Players and spectators: Users can choose to either play a game or spectate and ongoing game. A lobby
+contains all players.
+* Game: Players are taken to a game when they want to face each other. The game must keep track of all
+ moves each player makes so it can determine the winner.
+* Pieces: The player moves the pieces to play a game. A piece is either a pawn or a king.
+* Board: The board is made up of spaces. The player drags and drops the pieces on the board to play. 
 
 ### &nbsp;Details of each Domain Area
 
-&nbsp;&nbsp;&nbsp;&nbsp;Space has a function validSpace that returns whether or not that Space is one that can be moved onto. It also
-holds the kingMe function that returns when the Piece gets to the end of the Board it can become a King. The
-Row holds the amount of Spaces and uses what the dimensions of the Board that is passed into the constructor
-to see how many Spaces need to be added. The Position class helps us to determine where Pieces are located on
-the Board so that we can determine if the Space is valid to move onto or not. The Player class assigns the
-Players to a game and can tell whether or not the Player is in a game so that another Player can't try to
-start a game with them. It also assigns the Position of the Piece when the Player makes a move and keeps a
-list of the moves that were made. It also allows the Player to remove a Piece if they want to retract a move
-and it allows them to leave a game which then deletes all the moves they made in that game. Piece sets up the
-Pieces with their colors and the type of Piece (ie King or Pawn). It also has an equals() function that is
-used to see if there is a Piece already on a Space so that it can help in checking if the Space is valid or
-not. It is also an Abstract class so that Pawn and King can pull from it. Pawn is a child of Piece and it is
-used to determine the functionality of how it can move vs Piece's other child class, King, which can move
-differently than a Pawn can. Move keeps the Position start and ends and what happens in between so it is easy
-to backtrack through the move list and figure out what has been done. BoardView is for the HTML, it changes
-the Board display for each player so that they can each see it like they are the red player. This is for the
-user because it makes the game and the view of the game a little bit friendlier for them. Board initializes
-the Board for the Players and is made up of Spaces. This allows there to be Pieces added on the Spaces. It
-also contains a validMoves function that returns a list of the moves that can be made and it has a validJumps
-function as well that determines whether a jump is valid. It also has a makeMove function which allows a move
-to be made and also an inverseMove which allows the move that was made to be backtracked.
+* Players and spectators:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A lobby contains all the players. It keeps track
+of whether each player is in a game or not. Two players that are not in a game may face each other. 
+Players play games by move the pieces on the game board. Players may resign and leave from games whenever.
+Spectators can watch a game until it is over. They cannot play while spectating.
+
+* Game:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A lobby contains all games that are in progress. It keeps
+track of whether or not the game is over. Games are played by two players that take turns. Each time a player
+makes a move their turn is over. The game keeps track of every move, as well as captures. When a player is out of 
+moves or all of their pieces have been captured, the game is over. 
+
+* Pieces:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A piece is a movable object that the player interacts with. Each player
+moves their own set of pieces to travel on the game board and capture their opponents pieces. Each piece is either a pawn
+or a king. The valid moves a piece can make is determined by its type. 
+
+* Board: 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The board is what the game is played on. The board contains spaces, some of which 
+have pieces. It determines whether or not a certain move can be made. If the player tries to make an invalid move, they must
+try again to make a valid move. 
 
 ## Architecture
 
