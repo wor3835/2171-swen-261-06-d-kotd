@@ -64,6 +64,10 @@ and win games. User story(s): Becoming King (2 point), Player Movement (13 point
 
 ## Application Domain
 
+### &nbsp;Domain Model
+
+![Domain Model](domain_model.png)
+
 * The application contains lobby which keeps track of all players. 
 * A player plays a game of checkers. 
 * The applications also contains spectators that can watch games. 
@@ -73,6 +77,8 @@ and win games. User story(s): Becoming King (2 point), Player Movement (13 point
 * Each move contains a position (start and end). 
 * There are spaces located on the board. 
 * Pieces move on these spaces. The two types of pieces are pawns and kings. 
+
+All of these entities and relationships are shown in the domain model. 
 
 ### &nbsp;Overview of Major Domain Areas
 
