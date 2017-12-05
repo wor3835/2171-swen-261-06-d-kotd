@@ -37,6 +37,7 @@ to increase user interaction.
 ## Requirements
 
 &nbsp;&nbsp;&nbsp;&nbsp;The features we have in our application include:
+
 * Creating an alphanumeric username that is not already taken
 * Challenge a player to a game when they are both not already in one. In which case it pulls both players into a game page together
 * When one player is already in a game it makes the other player wait to play a game with them
@@ -95,7 +96,7 @@ contains all players.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A lobby contains all the players. It keeps track
 of whether each player is in a game or not. Two players that are not in a game may face each other. 
-Players play games by move the pieces on the game board. Players may resign and leave from games whenever.
+Players play games by moving the pieces on the game board. Players may resign and leave from games whenever.
 Spectators can watch a game until it is over. They cannot play while spectating.
 
 * Game:
