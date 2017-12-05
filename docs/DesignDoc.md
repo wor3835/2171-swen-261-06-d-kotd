@@ -18,7 +18,9 @@ must play a game by dragging and dropping pieces onto the board. In addition to 
  of Enhancements.
 
 ### &nbsp;Purpose
-Create an online checkers game.
+Create an online checkers game that users can play in their browsers. The interface should be easy to use
+and playing a game should be seamless and simple. Additionally, enhancement features should be added
+to increase user interaction. 
 
 ### &nbsp;Glossary and Acronyms
 
@@ -49,9 +51,11 @@ Create an online checkers game.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minimum Viable Product
 
 ### &nbsp;MVP Features
-* Sign-in: Players must be able to sign into the checkers site
-* Game start: Players must be able to start a game with another person
-* Gameplay: Players must be able to play a game that follows the American checkers rule set
+* Sign-in: Players must be able to sign into the checkers site using a non-taken alphanumeric username. User story(s): Player Sign-in (8).
+* Game start: Players must be able to start a game with another person, given that both are not already in a game. 
+User story(s): Start a Game (13).
+* Gameplay: Players must be able to play a game that follows the American checkers rules. Players can capture pieces, become kings, and 
+and win games. User story(s): Becoming King (2 point), Player Movement (13 points), Capture a piece (3 points).
 
 ### &nbsp;Roadmap of Enhancements
 * Spectate: Players must be able to watch an ongoing game between two other players
