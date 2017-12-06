@@ -162,14 +162,42 @@ as the red player and the white player. The game route gets the data to set the 
 
 ### &nbsp;Tier Model
 
-&nbsp;&nbsp;&nbsp;&nbsp;The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object
-on them. The King and Pawn classes make sure that the proper move functionality in used.
+&nbsp;&nbsp;&nbsp;&nbsp;The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Space has a function validSpace that returns whether or not that Space is one that can be moved onto. It also
+holds the kingMe function that returns when the Piece gets to the end of the Board it can become a King. The
+Row holds the amount of Spaces and uses what the dimensions of the Board that is passed into the constructor
+to see how many Spaces need to be added. The Position class helps us to determine where Pieces are located on
+the Board so that we can determine if the Space is valid to move onto or not. The Player class assigns the
+Players to a game and can tell whether or not the Player is in a game so that another Player can't try to
+start a game with them. It also assigns the Position of the Piece when the Player makes a move and keeps a
+list of the moves that were made. It also allows the Player to remove a Piece if they want to retract a move
+and it allows them to leave a game which then deletes all the moves they made in that game. Piece sets up the
+Pieces with their colors and the type of Piece (ie King or Pawn). It also has an equals() function that is
+used to see if there is a Piece already on a Space so that it can help in checking if the Space is valid or
+not. It is also an Abstract class so that Pawn and King can pull from it. Pawn is a child of Piece and it is
+used to determine the functionality of how it can move vs Piece's other child class, King, which can move
+differently than a Pawn can. Move keeps the Position start and ends and what happens in between so it is easy
+to backtrack through the move list and figure out what has been done. BoardView is for the HTML, it changes
+the Board display for each player so that they can each see it like they are the red player. This is for the
+user because it makes the game and the view of the game a little bit friendlier for them. Board initializes
+the Board for the Players and is made up of Spaces. This allows there to be Pieces added on the Spaces. It
+also contains a validMoves function that returns a list of the moves that can be made and it has a validJumps
+function as well that determines whether a jump is valid. It also has a makeMove function which allows a move
+to be made and also an inverseMove which allows the move that was made to be backtracked.
 
 ### &nbsp;Tier Application
 
 &nbsp;&nbsp;&nbsp;&nbsp;The application tier manages the games that are created in GameLobby and PlayerLobby. When players sign in they are sent to the
-PlayerLobby. The PlayerLobby must keep track of whether a player is or is not in a game. When challenged, the player is sent to the GameLobby. The GameLobby must assign players to games and also handle
+PlayerLobby. The PlayerLobby must keep track of whether a player is or is not in a game. When challenged, the player is sent to the GameLobby. The GameLobby must assign players to games and also handles
 the case that somebody resigns. 
+
+![UML for Application Tier](game_lobby.png)
+
+The UML above maps out all the classes in the application tier. GameLobby contains a list of Games. It can add games, remove games, or check if a player is 
+playing a game. Game objects contain the two Players currently playing, as well as each player's own board. A Game can make a Game given two players, switch the active player (player whose turn it is), and end. All games
+have Players, and the PlayerLobby contains all Players. The PlayerLobby can sign Players in, get the number of Players, check if Players are signed in and remove them. 
+Lastly, Message objects contain messages for the user. They can be in the form of an info message or an error message. 
 
 ## Sub-systems
 
@@ -189,7 +217,7 @@ clicking out of the game and attempting to reload into the homepage in the middl
 #### &nbsp;&nbsp; Model Board & Subcomponents
 &nbsp;&nbsp;&nbsp;&nbsp;These components interact in their initialization to produce a board suitable to follow movement and jumping logic.
 Board's constructor produces a square matrix of size 8 of unique Space Objects.
-Board's methods validMoves and validJumps work seperately in constructing a list
+Board's methods validMoves and validJumps work separately in constructing a list
 of legal checkers moves using the type of piece held in the Spaces relevant to
 the state of the board. These methods are called by updateMoveList, which is
 called by getMoves, which is the exit point of the subsystem via proxy of its
@@ -201,6 +229,6 @@ information expert, Board.
 
 ### &nbsp;Dynamic models
 #### &nbsp;&nbsp;State Chart<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![State Diagram](SD.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![State Diagram](state_diagram.png)
 #### &nbsp;&nbsp;Sequence Diagram<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](SQ.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](sequence_diagram.png)
