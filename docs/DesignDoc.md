@@ -128,18 +128,26 @@ try again to make a valid move.
 &nbsp;&nbsp;&nbsp;&nbsp;The application of the program spans three tiers: application, model, and ui. Users interact with the ui by moving
 pieces on the board. The model holds the core domain, which in this case is the game board, its spaces, and the space's pieces. 
 
-![](game.png)
+![](state_diagram.png)
 
 ### &nbsp;Overview of User Interface
 
-&nbsp;&nbsp;&nbsp;&nbsp;The program begins by making a GET to the home page. The player signs in which invokes a POST sign in. If successful,
+&nbsp;&nbsp;&nbsp;&nbsp;As shown in the state diagram above, the program begins by making a GET to the home page. The player signs in which invokes a POST sign in. If successful,
 the player can then choose another signed in player to play against and a GET is made to the game page. Here the player
-can make a move. First, there is a POST to validate the move, then there is a POST to submit the move.
+can make a move. First, there is a POST to validate the move, then there is a POST to submit the move. Players can also back up a move after it has been
+validated, which is seen as a POST in the state diagram. After the move has been submitted, there is a POST to translate the board (refer to Switch turn
+state in diagram). Lastly, given that there is a current game and one of the end game conditions is meet, there is a GET to end the game. The end screen rendered
+is determined by whether it was the current player's turn or not, as denoted by the guards in the sequence diagram.
 
 ### &nbsp;Tier UI
 
-&nbsp;&nbsp;&nbsp;&nbsp;The UI tier allows the player to sign in, play games, make moves, and resign. GET routes handle getting the different
-pages (Home, SignIn, Game). POST routes allow the player to sign in, make moves, backup moves, and resign.
+&nbsp;&nbsp;&nbsp;&nbsp;The UI tier allows the player to sign in, sign out, play games, make moves, and to resign. Additionally, they allow users to spectate on going games
+and to play back saved games. GET routes handle getting the different pages (Home, SignIn, Game, EndGame). While on the home page, POST routes allow the player to sign in. While on the game page, POST routes allow the 
+player to make moves, backup moves, and resign. 
+
+Users can also spectate games, which is handled by a POST route to the game page. After a game is finished, users may save a game to watch later which is handled by a POST
+route. In replay mode, a POST route handles stepping forward in the replay, and another POST route handles stepping backwards in the replay. Users can also delete games, handled by 
+a different POST route. 
 
 ### &nbsp;Tier Model
 
