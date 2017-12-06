@@ -77,7 +77,8 @@ and win games. User story(s): Becoming King (2 point), Player Movement (13 point
 * The board contains the moves that can be made. 
 * Each move contains a position (start and end). 
 * There are spaces located on the board. 
-* Pieces move on these spaces. The two types of pieces are pawns and kings. 
+* Pieces move on these spaces. The two types of pieces are pawns and kings.
+* The application tier holds the logic that allows moves to be valid.
 
 All of these entities and relationships are shown in the domain model. 
 
@@ -120,16 +121,12 @@ try again to make a valid move.
 
 ## Architecture
 
-&nbsp;&nbsp;&nbsp;&nbsp;This section describes the webapp's architecture, and lays out the states of its behavior.
+&nbsp;&nbsp;&nbsp;&nbsp;This section describes the application's architecture, and lays out the states of its behavior.
 
 ### &nbsp;Summary
 
-&nbsp;&nbsp;&nbsp;&nbsp;The application of the program spans three tiers: appl, model, ui. Users interact with the UI by moving
-pieces on the board. The application tier holds the logic that allows moves to be valid. The model holds the core 
-domain, which in this case is the game board, its spaces, and the spaces pieces. 
-
-![](board.png)
-
+&nbsp;&nbsp;&nbsp;&nbsp;The application of the program spans three tiers: application, model, and ui. Users interact with the ui by moving
+pieces on the board. The model holds the core domain, which in this case is the game board, its spaces, and the space's pieces. 
 
 ![](game.png)
 
