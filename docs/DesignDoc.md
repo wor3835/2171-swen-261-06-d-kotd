@@ -149,6 +149,12 @@ Users can also spectate games, which is handled by a POST route to the game page
 route. In replay mode, a POST route handles stepping forward in the replay, and another POST route handles stepping backwards in the replay. Users can also delete games, handled by 
 a different POST route. 
 
+![Sequence Diagram for Moving](sq_diagram_move.png)
+
+To make a move, the application starts in PostValidateMoveRoute as seen above. It gets the current player from the session. It also gets the board and goes through
+all the moves, comparing them to the one that must be validated. Once found, it is validated and then sent to PostSubmitTurnRoute. This route gets the current game,
+finds the positions of the move on the board, and makes the move. 
+
 ### &nbsp;Tier Model
 
 &nbsp;&nbsp;&nbsp;&nbsp;The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object
