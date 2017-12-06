@@ -160,6 +160,20 @@ finds the positions of the move on the board, and makes the move.
 To start a game, the WebServer is first created, and then a PostStartRoute is created. WebServer initializes a GetGameRoute. The player lobby is pulled from the session, as well
 as the red player and the white player. The game route gets the data to set the view map, and then the Game object is created.
 
+A major flaw in the UI tier is that there is no helper class. A helper class should be made to save the similar class variables
+and response formats of the Ajax related controllers.
+
+There are also many cases in which UI routes handle logic that should be taken care of in lower tiers. 
+* Name validation for signing in should be taken care of in PlayerLobby or Player rather by a route.
+* Turn submission (including knowledge of how it should be applied to board) and the moves list needs to be handled by 
+the Board class or something in the model tier that has a reference to the Board.
+* Move validation (including knowledge of the board's list of possible moves) should be handled in Board, which has the 
+validMoves method. Doing this validation in the route messes with the cohesion.  
+
+Law of Demeter violations arise in UI classes such as GetGameRoute, which calls methods from Game. For example, checking that
+the first player's position list is empty and doing the same for the second player needs to be handled only by passing a Game object
+to Game and not in the GetGameRoute. 
+
 ### &nbsp;Tier Model
 
 &nbsp;&nbsp;&nbsp;&nbsp;The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object.
@@ -186,6 +200,17 @@ also contains a validMoves function that returns a list of the moves that can be
 function as well that determines whether a jump is valid. It also has a makeMove function which allows a move
 to be made and also an inverseMove which allows the move that was made to be backtracked.
 
+It is important to note that Player violates the open/close principal. The Player class has information about the
+game the Player is associated with. This prevents the addition of a feature that would allow a Player to play multiple
+games. A way to fix this is to get rid of the direct association of Game and Player and instead keep track of Players in
+GameLobby. In GameLobby, players could then be assigned to multiple games. 
+
+In addition, the Pawn and King subclasses do little to reduce coupling elsewhere. A solution would be to handle a piece's behavior
+in the Piece class and get rid of the two subclasses. This way the Client would not have to check the piece type. 
+
+The last notable problem with the model tier is with BoardView. Showing the board view for the current player is something
+that should be handled in the ui tier and not in the model. 
+
 ### &nbsp;Tier Application
 
 &nbsp;&nbsp;&nbsp;&nbsp;The application tier manages the games that are created in GameLobby and PlayerLobby. When players sign in they are sent to the
@@ -197,7 +222,21 @@ the case that somebody resigns.
 The UML above maps out all the classes in the application tier. GameLobby contains a list of Games. It can add games, remove games, or check if a player is 
 playing a game. Game objects contain the two Players currently playing, as well as each player's own board. A Game can make a Game given two players, switch the active player (player whose turn it is), and end. All games
 have Players, and the PlayerLobby contains all Players. The PlayerLobby can sign Players in, get the number of Players, check if Players are signed in and remove them. 
-Lastly, Message objects contain messages for the user. They can be in the form of an info message or an error message. 
+Lastly, Message objects contain messages for the user. They can be in the form of an info message or an error message.
+ 
+It is important to note that Game must be rendered in two different ways (two players, two boards). This is not only makes
+things more complicated but also lowers cohesion. A solution is two reduce the knowledge of the Board and Game classes so that
+only one "Game" needs to be rendered (two players, one board). This can be achieved easily since there is already a BoardView class.
+The post-construction setters also need to be removed and replaced with a single constructor. There is no need for the apply methods since 
+players and boards for a Game never change. 
+
+The Game class also hurts coupling by having interior knowledge of lower level classes (i.e Player). A solution to this would be to add a PlayerLobby
+attribute to Game rather than ones from Player. GameLobby on the other hand should contain a HashMap of Games rather than Players to simplify logic elsewhere.
+
+Although it was not included before, Game is represented in the model as it is a domain concept. 
+
+The last problem with Game is with the equals() method, which compares only the two players. It should be extended to compare any two players 
+so that it still works if the same two players play another game. The hashCode() method would need to be rewritten as well.
 
 ## Sub-systems
 
@@ -232,3 +271,44 @@ information expert, Board.
 &nbsp;&nbsp;&nbsp;&nbsp;![State Diagram](state_diagram.png)
 #### &nbsp;&nbsp;Sequence Diagram<br>
 &nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](sequence_diagram.png)
+
+### &nbsp;Code metrics report 
+
+Chidamber - Kemerer Metrics:
+Everything met the target for this test.
+The average number for Coupling Between Object was 11.31 and this number was very different depending on which class was being tested; there were outliers as low as 3 and as high as 42. The average number for Depth of Inheritance Tree was 1.03 and this number was in the 1-2 range for each class. The average for Lack of Cohesion Methods was 1.27. The average for Number of Children was .03. The average for Response for class was 16.19. The average for Weighted Method Complexity was 5.62. The total number was 433.
+
+Complexity Metrics:
+We have a couple target violations for this test.
+There are 2 violations for design complexity and cyclomatic complexity in the Board class and it is the functions valid jumps and valid moves where we have a 34 and 38 and 10 and 14 respectively. There is also a violation in GetGameRoute.handle in all 3 categories (essential cyclomatic complexity, design complexity, and cyclomatic complexity) - the numbers are 8, 12, and 12. GetHomeRoute.handle has a violation in the design complexity with a 9. PostSignInRoute.handle has a violation in the essential cyclomatic complexity with a 4. PostValidateMoveRoute.handle also has a 4 violation in the essential cyclomatic responsibility category. The averages for the three categories in order are 1.18, 1.56, and 1.66; so it would make sense to have those violations with those outlying numbers. The Game class has a violation in the Weighted Method Complexity category with a 34. The Board class has a violation of Weighted Method Complexity and Average Operation Complexity with a 68 and 4.53. GetEndGameRoute has a violation in Average Operation Complexity with a 4.00, GetGameRoute with a 5.50, PostBackRoute with a 4.00, PostReplayRoute with a 4.00, PostStepRoute with a 4.00, PostSubmitTurnRoute with a 4.00, and PostValidateMoveRoute with a 5.00.	The averages for Weighted Method Complexity and Average Operation Complexity were 5.62 and 1.49. Our package metrics averages were 1.66 for average cyclomatic complexity and 120.50 for total cyclomatic complexity. Our module averages for average cyclomatic and total cyclomatic complexity were 1.66 and 482. And our project average for average cyclomatic and total cyclomatic complexity were 1.66 and 482.
+
+#### Reimplementation Recommendations
+
+* To reduce the complexity of the validMoves method in Board, validMoves should take a Move object rather than a Position. That way, if the move is found to be valid it can 
+be added to the moves list rather than creating two new Positions to create a new Move object. Also, it would be a good idea to return the valid move rather than the movesList (m1)
+because the movesList is not initialized in the method. 
+* validJumps should be improved the same way, but should continue to return the ArrayList of moves it initializes.
+* GetGameRoute's complexity should be reduced by fixing the Law of Demeter errors it contains, which involves removing logic such as checking if a player's position list
+is empty and moving into the Player class instead.
+* PostSignInRoute should not handle validation for signing in. That logic should be removed and added to PlayerLobby.
+* PostValidateMove should not handle the actual validation. That logic should be removed and added to Board.
+* The Weighted Method Complexity of the Game class should be lowered by removing the apply methods and replacing them with a single
+constructor that creates a Game with two Players. This will reduce the lines of code.
+* The same can be done with Board by changing the parameters of validMoves and validJumps. These methods should take in Move objects so that the lines of code and objects
+created within the method can be reduced. 
+* The rest of the routes that have violations should not be changed, such as PostBackRoute and PostStepRoute. These classes must handle complex logic that cannot be handled
+anywhere else in the model. 
+
+Javadoc Coverage Metrics:
+There were no violations for this test.
+Our average method javadoc lines of code was 3.42 with outliers ranging from 11-0. Our average class javadoc field coverage was 10.73 with outliers ranging from 100-0, average for lines of code was 18.29 and average for method coverage was 61.72. Our average packages javadoc class coverage was 93.51, field coverage is 10.73, lines of code is 353.75, and method coverage 61.72. The average module class coverage 93.51, field coverage is 10.73, lines of code is 1,415, and method coverage is 61.72. The average project class coverage is 100, field is 10.73, lines of code is 1,415, and method coverage is 61.72. 
+
+Lines of Code Metrics:
+There were no violations for this test. 
+The package average lines of code was 591.87, the lines of product code was 414.47, and the lines of test code was 177.40. The module metrics for the lines of groovy were 0, lines of HTML was 0, lines of java was 5,719, lines of kotlin was 0, lines of XML was 484, lines of code was 9,244, the lines of product code was 6,217, lines of test code was 2,661, non comment lines of code was 6,870, non comment lines of product code was 4,649, and the non comment lines of test code was 2,112. The average file type metrics were 1,540.67 for the lines of code, and 1,374 for the non comment lines of code. 
+
+Martin Package Metrics:
+There were no violations for this test. 
+The average for abstractness was .01 with the outliers of 0 and .05. The average Afferent Couplings was 17.25 with the outliers of 0 and 25. The average for the Efferent Couplings was 38 with the outliers of 104 and 2. The average for distance from the main sequence was .29 and the outliers were 0 and .64. The average for Instability was .72 and the outliers were 1 and .5.
+
+
