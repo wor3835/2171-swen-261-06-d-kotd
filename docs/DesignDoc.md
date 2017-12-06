@@ -155,7 +155,7 @@ To make a move, the application starts in PostValidateMoveRoute as seen above. I
 all the moves, comparing them to the one that must be validated. Once found, it is validated and then sent to PostSubmitTurnRoute. This route gets the current game,
 finds the positions of the move on the board, and makes the move. 
 
-![Sequence Diagram for Starting Game](sequence_diagram.png)
+![Sequence Diagram for Starting Game](sequence_diagram.jpg)
 
 To start a game, the WebServer is first created, and then a PostStartRoute is created. WebServer initializes a GetGameRoute. The player lobby is pulled from the session, as well
 as the red player and the white player. The game route gets the data to set the view map, and then the Game object is created.
@@ -231,4 +231,4 @@ information expert, Board.
 #### &nbsp;&nbsp;State Chart<br>
 &nbsp;&nbsp;&nbsp;&nbsp;![State Diagram](state_diagram.png)
 #### &nbsp;&nbsp;Sequence Diagram<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](sequence_diagram.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](sequence_diagram.jpg)
