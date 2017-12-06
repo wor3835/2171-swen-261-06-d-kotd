@@ -155,6 +155,11 @@ To make a move, the application starts in PostValidateMoveRoute as seen above. I
 all the moves, comparing them to the one that must be validated. Once found, it is validated and then sent to PostSubmitTurnRoute. This route gets the current game,
 finds the positions of the move on the board, and makes the move. 
 
+![Sequence Diagram for Starting Game](sequence_diagram.png)
+
+To start a game, the WebServer is first created, and then a PostStartRoute is created. WebServer initializes a GetGameRoute. The player lobby is pulled from the session, as well
+as the red player and the white player. The game route gets the data to set the view map, and then the Game object is created.
+
 ### &nbsp;Tier Model
 
 &nbsp;&nbsp;&nbsp;&nbsp;The model tier hold the board object. The board is comprised of Spaces which all have a reference to the Piece object
@@ -162,8 +167,8 @@ on them. The King and Pawn classes make sure that the proper move functionality 
 
 ### &nbsp;Tier Application
 
-&nbsp;&nbsp;&nbsp;&nbsp;The appl tier manages the games that are created in GameLobby and PlayerLobby. When players sign in they are sent to the
-PlayerLobby, and when challenged that are sent to the GameLobby. The GameLobby must assign players to games and also handle
+&nbsp;&nbsp;&nbsp;&nbsp;The application tier manages the games that are created in GameLobby and PlayerLobby. When players sign in they are sent to the
+PlayerLobby. The PlayerLobby must keep track of whether a player is or is not in a game. When challenged, the player is sent to the GameLobby. The GameLobby must assign players to games and also handle
 the case that somebody resigns. 
 
 ## Sub-systems
