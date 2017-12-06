@@ -172,7 +172,7 @@ validMoves method. Doing this validation in the route messes with the cohesion.
 
 Law of Demeter violations arise in UI classes such as GetGameRoute, which calls methods from Game. For example, checking that
 the first player's position list is empty and doing the same for the second player needs to be handled only by passing a Game object
-to Game and not in the GetGameRoute. 
+to Game and not in GetGameRoute. 
 
 ### &nbsp;Tier Model
 
@@ -233,7 +233,7 @@ players and boards for a Game never change.
 The Game class also hurts coupling by having interior knowledge of lower level classes (i.e Player). A solution to this would be to add a PlayerLobby
 attribute to Game rather than ones from Player. GameLobby on the other hand should contain a HashMap of Games rather than Players to simplify logic elsewhere.
 
-Although it was not included before, Game is represented in the model as it is a domain concept. 
+Although it was not included before, Game is now represented in the model as it is a domain concept. 
 
 The last problem with Game is with the equals() method, which compares only the two players. It should be extended to compare any two players 
 so that it still works if the same two players play another game. The hashCode() method would need to be rewritten as well.
@@ -311,6 +311,3 @@ Martin Package Metrics:
 There were no violations for this test. 
 The average for abstractness was .01 with the outliers of 0 and .05. The average Afferent Couplings was 17.25 with the outliers of 0 and 25. The average for the Efferent Couplings was 38 with the outliers of 104 and 2. The average for distance from the main sequence was .29 and the outliers were 0 and .64. The average for Instability was .72 and the outliers were 1 and .5.
 
-
-=======
-&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](sequence_diagram.jpg)
