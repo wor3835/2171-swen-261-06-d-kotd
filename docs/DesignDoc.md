@@ -155,7 +155,7 @@ To make a move, the application starts in PostValidateMoveRoute as seen above. I
 all the moves, comparing them to the one that must be validated. Once found, it is validated and then sent to PostSubmitTurnRoute. This route gets the current game,
 finds the positions of the move on the board, and makes the move. 
 
-![Sequence Diagram for Starting Game](sequence_diagram.png)
+![Sequence Diagram for Starting Game](sequence_diagram.jpg)
 
 To start a game, the WebServer is first created, and then a PostStartRoute is created. WebServer initializes a GetGameRoute. The player lobby is pulled from the session, as well
 as the red player and the white player. The game route gets the data to set the view map, and then the Game object is created.
@@ -312,3 +312,5 @@ There were no violations for this test.
 The average for abstractness was .01 with the outliers of 0 and .05. The average Afferent Couplings was 17.25 with the outliers of 0 and 25. The average for the Efferent Couplings was 38 with the outliers of 104 and 2. The average for distance from the main sequence was .29 and the outliers were 0 and .64. The average for Instability was .72 and the outliers were 1 and .5.
 
 
+=======
+&nbsp;&nbsp;&nbsp;&nbsp;![Sequence Diagram](sequence_diagram.jpg)
